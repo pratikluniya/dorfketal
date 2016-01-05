@@ -26,7 +26,6 @@ $(document).ready(function () {
 });
 
 
-
 // On Page Click Events.
 
 $(document).ready(function () {
