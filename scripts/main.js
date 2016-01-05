@@ -4,7 +4,8 @@
  *
  */
 
- // Left Sidebar Click Events
+ // Left Sidebar Click Events.
+ 
 $(document).ready(function () {
 	$("#place_order_btn" ).on( "click", function() {
 		$('.main_heading').html("Place Order");
@@ -26,7 +27,7 @@ $(document).ready(function () {
 
 
 
-// On Page Click Events
+// On Page Click Events.
 
 $(document).ready(function () {
 	$(".main_body" ).on( "click","#b-verticals", function(e) {
