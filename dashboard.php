@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-4 transition animated bounceInRight">
         <div class="hpanel">
             <div class="panel-body">
                 <div>
@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-4 transition animated bounceInRight">
         <div class="hpanel">
             <div class="panel-body">
                 <div>
@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-4 transition animated bounceInRight">
         <div class="hpanel">
             <div class="panel-body">
                 <form class="prod_form">
@@ -53,7 +53,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-4 transition animated bounceInRight">
         <div class="hpanel">
             <div class="panel-body">
                 <form class="prod_form">
@@ -69,7 +69,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-4 transition animated bounceInRight">
         <div class="hpanel">
             <div class="panel-body">
                 <form class="prod_form">
@@ -85,7 +85,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-4 transition animated bounceInRight">
         <div class="hpanel">
             <div class="panel-body">
                 <form class="prod_form">

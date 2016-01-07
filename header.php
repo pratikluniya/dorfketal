@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION['cust_id']))
+{
+    header('Location: index.php');
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -19,6 +26,7 @@
     <link rel="stylesheet" href="vendor/metisMenu/dist/metisMenu.css" />
     <link rel="stylesheet" href="vendor/animate.css/animate.css" />
     <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="styles/login-style.css">
 
     <!-- App styles -->
     <link rel="stylesheet" href="fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css" />

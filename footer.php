@@ -21,7 +21,6 @@
 <script src="vendor/iCheck/icheck.min.js"></script>
 <script src="vendor/peity/jquery.peity.min.js"></script>
 <script src="vendor/sparkline/index.js"></script>
-
 <!-- <!-- App scripts -->
 <script src="scripts/homer.js"></script>
 <script src="scripts/charts.js"></script>

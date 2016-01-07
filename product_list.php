@@ -19,7 +19,7 @@
                             <span class="label label-default cat-tags">'.$result[$key]['PRODUCT_APPLICATION'].'</span>
                             <span class="label label-default cat-tags">'.$result[$key]['PRODUCT_GROUP'].'</span>
                         </div>
-                        <h3>'.$result[$key]['DESCRIPTION'].'</h3>
+                        <h4>'.$result[$key]['DESCRIPTION'].'</h4>
                     </div>
                     <div class="panel-body">
                         <div class="col-lg-12">

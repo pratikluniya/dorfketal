@@ -67,6 +67,6 @@ select {
 .main_heading{
     padding: 20px;
 }
-.cat-tags{
-    
+.f-cat{
+    border: 5px solid #339849;
 }

@@ -43,7 +43,6 @@ class functions extends db_connect {
         $update=  $this->mysqli->query($sql) or die($this->mysqli->error);
         return $update;
     } 
-	
 }
 
 ?>

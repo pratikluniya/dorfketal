@@ -1,51 +1,40 @@
-<?php
+<?php  
 
-include("header.php");
-include("top_header.php");
-include("side_navigation.php");
-
-
-
-?>
-<div id="wrapper">
-    <div class="normalheader transition animated fadeIn">
-        <div class="hpanel">
-            <div class="panel-body">
-                <a class="small-header-action" href="#"></a>
-                <div id="hbreadcrumb" class="pull-right m-t-lg">
-                    <ol class="hbreadcrumb breadcrumb">
-                        <li><a href="#">Dashboard</a></li>
-                    </ol>
-                </div>
-                <h2 class="font-light m-b-xs main_heading">
-                    Dorf Ketal
-                </h2>
-                <small></small>
-            </div>
-        </div>
+    include('classes/functions.php');
+	
+?>  
+<link rel="shortcut icon" type="image/ico" href="images/favicon.ico" />
+<link rel="stylesheet" href="styles/login-style.css">
+<div class="wrapper">
+    <div class="container">
+        <span>
+            <img src="images/dk-logo.png">
+        </span>
+        <form class="form">
+            <input type="text" id="login_cust_id" placeholder="Customer ID">
+            <input type="password" id="login_cust_pass" placeholder="Password">
+            <lable name="login-error" id="login-error"></lable>
+            <button type="button" id="login-button">Login</button>
+        </form>
     </div>
-    <!-- End of post Header Box  -->
-    <!-- Main body starts -->
-    <div class="content animate-panel">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="hpanel">
-                    <div class="panel-body main_body">
-                        <p>
-                            Lorem Ipsum is simply dummy text of the <strong>printing and typesetting</strong> industry. Lorem Ipsum has been the industry's standard dummy text ever since the
-                            <abbr title="" data-original-title="Sample abbreviation">scrambled it to make</abbr> a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the
-                            scrambled it to make a type specimen book.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <ul class="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
 </div>
-</div>   
-
+<script src="vendor/jquery/dist/jquery.min.js"></script>
+<script src="vendor/jquery-ui/jquery-ui.min.js"></script>
+<script src="scripts/main.js"></script>
 <?php
 
-include("footer.php");
+    include('footer.php');
 
 ?>
