@@ -72,6 +72,10 @@
         echo "No Data Found ";
         exit;
     }    
+}
+if(isset($_REQUEST['cat_prod'])=="2")
+{
+
 } 
 ?>
 

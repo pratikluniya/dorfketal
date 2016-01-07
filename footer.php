@@ -1,11 +1,3 @@
-    <!-- Footer-->
-    <!-- <footer class="footer">
-        <span class="pull-right">
-            Example text
-        </span>
-        Company 2015-2020
-    </footer>
- -->
 </div>
 
 <!-- Vendor scripts -->
@@ -25,72 +17,60 @@
 <script src="scripts/homer.js"></script>
 <script src="scripts/charts.js"></script>
 
-<script>
+<!-- Datatables  Navigation-->
+        <script src="js/datatables/js/jquery.dataTables.js"></script>
+        <script src="js/datatables/tools/js/dataTables.tableTools.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('input.tableflat').iCheck({
+                    checkboxClass: 'icheckbox_flat-green',
+                    radioClass: 'iradio_flat-green'
+                });
+            });
 
-    $(function () {
-
-        /**
-         * Flot charts data and options
-         */
-        var data1 = [ [0, 55], [1, 48], [2, 40], [3, 36], [4, 40], [5, 60], [6, 50], [7, 51] ];
-        var data2 = [ [0, 56], [1, 49], [2, 41], [3, 38], [4, 46], [5, 67], [6, 57], [7, 59] ];
-
-        var chartUsersOptions = {
-            series: {
-                splines: {
-                    show: true,
-                    tension: 0.4,
-                    lineWidth: 1,
-                    fill: 0.4
-                },
-            },
-            grid: {
-                tickColor: "#f0f0f0",
-                borderWidth: 1,
-                borderColor: 'f0f0f0',
-                color: '#6a6c6f'
-            },
-            colors: [ "#62cb31", "#efefef"],
-        };
-
-        $.plot($("#flot-line-chart"), [data1, data2], chartUsersOptions);
-
-        /**
-         * Flot charts 2 data and options
-         */
-        var chartIncomeData = [
-            {
-                label: "line",
-                data: [ [1, 10], [2, 26], [3, 16], [4, 36], [5, 32], [6, 51] ]
-            }
-        ];
-
-        var chartIncomeOptions = {
-            series: {
-                lines: {
-                    show: true,
-                    lineWidth: 0,
-                    fill: true,
-                    fillColor: "#64cc34"
-
-                }
-            },
-            colors: ["#62cb31"],
-            grid: {
-                show: false
-            },
-            legend: {
-                show: false
-            }
-        };
-
-        $.plot($("#flot-income-chart"), chartIncomeData, chartIncomeOptions);
-
-
-
-    });
-
-</script>
+            var asInitVals = new Array();
+            $(document).ready(function () {
+                var oTable = $('#example').dataTable({
+                    "oLanguage": {
+                        "sSearch": "Search all columns:"
+                    },
+                    "aoColumnDefs": [
+                        {
+                            'bSortable': false,
+                            'aTargets': [0]
+                        } //disables sorting for column one
+            ],
+                    'iDisplayLength': 12,
+                    "sPaginationType": "full_numbers",
+                    "dom": 'T<"clear">lfrtip',
+                    "tableTools": {
+                        "sSwfPath": "<?php/* echo base_url('assets2/js/Datatables/tools/swf/copy_csv_xls_pdf.swf');*/ ?>"
+                    }
+                });
+                $("tfoot input").keyup(function () {
+                    /* Filter on the column based on the index of this element's parent <th> */
+                    oTable.fnFilter(this.value, $("tfoot th").index($(this).parent()));
+                });
+                $("tfoot input").each(function (i) {
+                    asInitVals[i] = this.value;
+                });
+                $("tfoot input").focus(function () {
+                    if (this.className == "search_init") {
+                        this.className = "";
+                        this.value = "";
+                    }
+                });
+                $("tfoot input").blur(function (i) {
+                    if (this.value == "") {
+                        this.className = "search_init";
+                        this.value = asInitVals[$("tfoot input").index(this)];
+                    }
+                });
+            });
+        </script> 
+    
+    <!-- icheck -->
+    <script src="js/icheck/icheck.min.js"></script>
 
 </body>
 

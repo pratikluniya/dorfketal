@@ -10,8 +10,10 @@ class db_connect {
     protected $mysqli;
     
     function __construct() {
-                   @$this->mysqli = new mysqli("localhost", "root", "", "commerce");
-		
+        //create Database connection 
+		@$this->mysqli = new mysqli("localhost", "root", "", "commerce");
+      //  @$this->mysqli = new mysqli("localhost", "root", "", "trackingsystem");
+		//@$this->mysqli = new mysqli("localhost", "makemysm_whatsap", "H{RV6M^t+3S2", "makemysm_whatsapp");
         if (mysqli_connect_errno()) {
             printf("Error: Unable To Connect Database");
             exit();
@@ -26,4 +28,5 @@ class db_connect {
         
     }  
 }
-//$obj = new db_conne
+//$obj = new db_connect();
+?>

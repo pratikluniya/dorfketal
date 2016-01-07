@@ -21,8 +21,8 @@
             <li>
                 <a href="#"><span class="nav-label">Logistic Management</span><span class="fa arrow"></span> </a>
                 <ul class="nav nav-second-level">
-                    <li><a href="">Track order</a></li>
-                    <li><a href="">Track Location</a></li>
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">Track URL</a></li>
                 </ul>
             </li>
             <li>

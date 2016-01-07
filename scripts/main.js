@@ -72,7 +72,7 @@ $(document).ready(function () {
 $(document).ready(function () {
 	$("#place_order_btn" ).on( "click", function() {
 		$('.main_heading').html("Place Order");
-		$('.main_body').load('dashboard.php');
+		$('.main_body').load('categories.php');
     });
 });
 $(document).ready(function () {
