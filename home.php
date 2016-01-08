@@ -3,17 +3,21 @@
 include("header.php");
 include("top_header.php");
 include("side_navigation.php");
-
 ?>
 
 <div id="wrapper">
     <div class="normalheader transition animated fadeIn">
         <div class="hpanel">
             <div class="panel-body">
-                <h2 class="font-light m-b-xs main_heading">
-                    Dorf Ketal
-                </h2>
-                <span class="pull-right" id="logout-button"> Log Out </span>
+                <div class="col-lg-6">
+                    <h2 class="font-light m-b-xs main_heading">
+                        Welcome to Dorf Ketal
+                    </h2>
+                </div>
+                <div class="col-lg-6">
+                    <span id="mycart">Cart<span class="badge" id="cart_count"><?php echo $_SESSION['cart_count'];?></span></span>
+                    <span class="pull-right" id="logout-button"> Log Out </span>
+                </div>
             </div>
         </div>
     </div>

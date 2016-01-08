@@ -4,7 +4,9 @@
     </div>
     <div id="logo" class="light-version">
         <span>
-            <img src="images/dk-logo.png">
+            <a href="home.php">
+                <img src="images/dk-logo.png">
+            </a>
         </span>
     </div>
     <nav role="navigation">

@@ -32,6 +32,42 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "updatefcat") ){
 	$result=$con->data_update($sql);
 	echo "Success";
 }
-if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "track_order") ){
-	
+if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "cartonload") ){
+	$sql = "SELECT COUNT(*) FROM customer_cart WHERE CUSTOMER_NUMBER = '".$_SESSION['cust_id']."'";
+	$result=$con->data_select($sql);
+	$_SESSION["cart_count"]=$result[0]['COUNT(*)'];
+	echo $_SESSION['cart_count'];
+}
+if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "insertcart") ){
+	$prod_code = $_REQUEST['prod_code'];
+	$prod_desc = $_REQUEST['prod_desc'];
+	$remark = $_REQUEST['remark'];
+	$qty =	$_REQUEST['qty'];
+	$pkgsize = $_REQUEST['pkgsize'];
+	$cust_id = $_SESSION['cust_id'];
+	$cart_count= $_SESSION['cart_count'];
+	$increment = 1;
+	$sql1= "SELECT CUSTOMER_NUMBER PRODUCT_CODE FROM customer_cart WHERE PRODUCT_CODE =".$prod_code." AND CUSTOMER_NUMBER=".$cust_id;
+	$result1=$con->data_select($sql1);
+	if($result1 != "no")
+	{
+		echo "Product already in the Cart";
+	}
+	else
+	{
+		$sql = "INSERT INTO customer_cart (CUSTOMER_NUMBER, PRODUCT_CODE, ITEM_DESCRIPTION, PACKAGING_SIZE, QUANTITY, REMARK) VALUES ($cust_id,$prod_code,'$prod_desc','$pkgsize',$qty,'$remark')";
+		$result=$con->data_insert($sql);
+		$_SESSION['cart_count'] = ( $cart_count+ $increment) ;
+		echo $_SESSION['cart_count'];
+	}
+}
+if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "removecart") ){
+	$prod_code = $_REQUEST['prod_code'];
+	$cust_id = $_SESSION['cust_id'];
+	$cart_count= $_SESSION['cart_count'];
+	$increment = 1;
+	$sql = "DELETE FROM customer_cart WHERE PRODUCT_CODE =".$prod_code. " AND CUSTOMER_NUMBER =".$cust_id ;
+	$result=$con->data_delete($sql);
+	$_SESSION['cart_count'] = ( $cart_count - $increment) ;
+	echo $_SESSION['cart_count'];
 }
