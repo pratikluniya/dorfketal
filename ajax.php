@@ -32,3 +32,6 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "updatefcat") ){
 	$result=$con->data_update($sql);
 	echo "Success";
 }
+if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "track_order") ){
+	
+}

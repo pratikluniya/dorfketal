@@ -76,6 +76,20 @@ $(document).ready(function () {
     });
 });
 $(document).ready(function () {
+	$("#regular_prod_btn" ).on( "click", function() {
+		$.ajax({
+            type: "POST",
+            url: "product_list.php",
+            data: '&cat_prod=2',
+            
+            success: function( returnedData ){
+        		$('.main_heading').html("Regular Products");
+				$('.main_body').html(returnedData);        
+        	}
+    	});
+    });
+});
+$(document).ready(function () {
 	$("#reset_vertical_btn" ).on( "click", function() {
 		$('.main_heading').html("Reset Your Favorite Verical");
 		$('.main_body').load('reset_fav_vertical.php');
@@ -123,7 +137,23 @@ $(document).ready(function () {
 		
 	});
 });
-
+$(document).ready(function () {
+	$("#track_order_btn" ).on( "click", function() {
+		$.ajax({
+            type: "POST",
+            url: "ajax.php",
+            data: 'action=track_order',
+            success: function( returnedData ){
+	            var fval = returnedData;
+	            $('input[name="cat_name"]').each(function () {
+    					if ($(this).val() == fval) $(this).closest('.hpanel').addClass('f-cat');
+					});
+			}
+		});
+		$('.main_heading').html("Track Order");
+		$('.main_body').load('track_order.php');
+    });
+});
 // On Page Click Events.
 
 $(document).ready(function () {
@@ -139,14 +169,8 @@ $(document).ready(function () {
             success: function( returnedData ){
         		$('.main_heading').html(cat_name);
 				$('.main_body').html(returnedData);        
-        }
-    });
-    });
-});
-$(document).ready(function () {
-	 $(".main_body" ).on( "click","#regular-products", function(e) {
-		$('.main_heading').html("Regular Products");
-		$('.main_body').load('product_list.php');
+        	}
+    	});
     });
 });
 $(document).ready(function () {
