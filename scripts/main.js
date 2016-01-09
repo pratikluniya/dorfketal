@@ -162,7 +162,12 @@ $(document).ready(function () {
 		$('.main_body').load('track_order.php');
     });
 });
-
+$(document).ready(function () {
+	$("#contactus_btn" ).on( "click", function() {
+		$('.main_heading').html("Contact Us");
+		$('.main_body').load('contactus.php');
+    });
+});
 
 
 // On Page Click Events.
@@ -226,8 +231,14 @@ $(document).ready(function () {
             data: 'prod_code=' + prod_code +'&prod_desc='+desc +'&remark='+ remark +'&pkgsize=' + pkgsize +'&qty='+qty +'&action=insertcart',
             
             success: function( returnedData ){
-            		alert("Product Added to Cart");
-            		$("#cart_count").html(returnedData);
+            		if($.isNumeric( returnedData )){ 
+            			alert("Product Added to Cart");
+            			$("#cart_count").html(returnedData);
+            		}
+            		else
+            		{
+            			alert(returnedData);
+            		}
         	}
         });
     });
@@ -253,12 +264,14 @@ $(document).ready(function () {
 		$('.main_body').load('order_form.php'); 
 	});
 });
+
 $(document).ready(function () {
 	$(".main_body" ).on( "click","#continue_shop_btn", function(e) {
 		$('.main_heading').html("Place Order");
 		$('.main_body').load('categories.php');
 	});
 });
+
 $(document).ready(function () {
 	$(".main_body" ).on( "click",".remove_product_btn", function(e) {
 		var prod_code = $(this).parent().find('.prod_id').val();
@@ -276,5 +289,34 @@ $(document).ready(function () {
 	});
 });
 
+$(document).ready(function () {
+	$(".main_body" ).on( "focusin",".cart-input", function(e) {
 
+		$(this).parent().parent().find('.remove_product_btn').hide();
+		$(this).parent().parent().find('.save_product_btn').show();
+	});
+});
+
+$(document).ready(function () {
+	$(".main_body" ).on( "click",".save_product_btn", function(e) {
+		var prod_code = $(this).parent().find('.prod_id').val();
+		var qty = $(this).parent().find('.cart-qty').val();
+		var pkgsize = $(this).parent().find('.cart-pck-size').val();
+		var remark = $(this).parent().find('.cart-remark').val();
+		$.ajax({
+            type: "POST",
+            url: "ajax.php",
+            data: 'prod_code=' + prod_code +'&qty='+ qty +'&pkgsize=' + pkgsize +'&remark='+ remark +'&action=updatecart',
+            
+            success: function( returnedData ){
+    			if(returnedData == "success")
+    			{
+    				alert("Product Information Updated");
+				}
+    		}
+    	});
+    	$(this).parent().parent().find('.remove_product_btn').show();
+		$(this).parent().parent().find('.save_product_btn').hide();
+	});
+});
 

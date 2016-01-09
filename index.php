@@ -3,14 +3,15 @@
     include('classes/functions.php');
 	
 ?>  
+<title>Dorfketal</title>
 <link rel="shortcut icon" type="image/ico" href="images/favicon.ico" />
 <link rel="stylesheet" href="styles/login-style.css">
-<div class="wrapper">
-    <div class="container">
+<div class="loginwrapper">
+    <div class="logincontainer">
         <span>
             <img src="images/dk-logo.png">
         </span>
-        <form class="form">
+        <form class="loginform">
             <input type="text" id="login_cust_id" placeholder="Customer ID">
             <input type="password" id="login_cust_pass" placeholder="Password">
             <lable name="login-error" id="login-error"></lable>

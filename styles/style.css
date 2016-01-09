@@ -1,8 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en);
-@font-face {
-    font-family: myfont;
-    src: url('../fonts/lsansuni.ttf');
-}
+
 /* MARGINS & PADDINGS */
 .p-xxs {
   padding: 5px !important;

@@ -15,7 +15,12 @@ include("side_navigation.php");
                     </h2>
                 </div>
                 <div class="col-lg-6">
-                    <span id="mycart">Cart<span class="badge" id="cart_count"><?php echo $_SESSION['cart_count'];?></span></span>
+                    <span id="mycart">
+                        <img src="images/cart.png" style="height:40px;">
+                        <span class="" id="cart_count">
+                            <?php echo $_SESSION['cart_count'];?>
+                        </span>
+                    </span>
                     <span class="pull-right" id="logout-button"> Log Out </span>
                 </div>
             </div>

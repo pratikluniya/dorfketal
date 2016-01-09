@@ -5,11 +5,7 @@
 if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "getcart") )
 {
 	$sql ="SELECT up.ID, up.PRODUCT_CODE AS  ITEM_CODE, up.DESCRIPTION, up.ATTRIBUTE18 as  PRODUCT_APPLICATION, up.ATTRIBUTE17 as PRODUCT_GROUP, cc.CUSTOMER_NUMBER, cc.QUANTITY, cc.PACKAGING_SIZE, cc.REMARK FROM customer_cart as cc, xxdkapps_unsegregated_products as up WHERE cc.CUSTOMER_NUMBER= '" . $_SESSION['cust_id']."' and cc.PRODUCT_CODE = up.PRODUCT_CODE";
-    // echo $sql; exit;
     $result=$con->data_select($sql);
-    // echo "<pre>";
-    // print_r($result);
-    // exit;
 }
 if($result != "no")
     {
@@ -33,10 +29,10 @@ if($result != "no")
 		        	<td> <?php echo $result[$key]['DESCRIPTION']; ?> </td>
 
 		        	<td>
-		        		<input type="text" class="cart-qty" value=" <?php echo $result[$key]['QUANTITY']; ?> ">
+		        		<input type="number" class="cart-qty cart-input" value=" <?php echo $result[$key]['QUANTITY']; ?> ">
 		        	</td>
 		        	<td>
-		        		<select class="cart-pck-size">
+		        		<select class="cart-pck-size cart-input">
 			        		<option <?php if ($result[$key]['PACKAGING_SIZE'] == "ANY" ) echo 'selected' ; ?> value="ANY">ANY</option>
 	                        <option <?php if ($result[$key]['PACKAGING_SIZE'] == "1" ) echo 'selected' ; ?> value="1">1</option>
 	                        <option <?php if ($result[$key]['PACKAGING_SIZE'] == "5" ) echo 'selected' ; ?> value="5">5</option>
@@ -66,13 +62,19 @@ if($result != "no")
 	                    </select>
 	                </td>
 	                <td>
-	                	<input type="text" class="cart-remark" value=" <?php echo $result[$key]['REMARK']; ?> ">
+	                	<input type="text" class="cart-remark cart-input" value=" <?php echo $result[$key]['REMARK']; ?> ">
 	                	<input type="hidden" class="prod_id" value=" <?php echo $result[$key]['ITEM_CODE']; ?> ">
 	                </td>
 	                <td class="remove_product_btn">
 	                	<span>
 	                		REMOVE <span class="badge" style="background-color:red;"> - </span>
 	                	</span>
+	                </td>
+	                <td class="save_product_btn">
+	                	<span>
+	                		SAVE
+	                	</span>
+	                </td>
 		      	</tr>
 		<?php 
 		}
@@ -81,6 +83,17 @@ if($result != "no")
 		</table>
 		<button type="button" id="continue_shop_btn">Continue Shopping</button>
 		<button type="button" id="checkout_btn" style="float:right;margin-right:10%;">Checkout</button>
+	<?php
+	}
+	else
+	{
+		?>
+		<div class="container">
+			<h4>
+				No Items in your Shopping Cart
+			</h4>
+			<button type="button" id="continue_shop_btn">Continue Shopping</button>
+		</div>
 	<?php
 	}
 ?>

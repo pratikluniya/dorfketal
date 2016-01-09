@@ -46,7 +46,7 @@
                 <a href="#"><span class="nav-label">Support</span><span class="fa arrow"></span> </a>
                 <ul class="nav nav-second-level">
                     <li><a href="">Live Chat</a></li>
-                    <li><a href="">Contact Us</a></li>  
+                    <li id="contactus_btn"><a href="#">Contact Us</a></li>  
                 </ul>
             </li>
         </ul>

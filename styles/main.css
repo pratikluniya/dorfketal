@@ -20,7 +20,7 @@ select {
     display: block;
     padding: 0px 3px;
     text-align: center;
-    background: rgba(41,162,67,0.5);
+    background: rgba(41,162,67,0.6);
     color: #ffffff;
     border:none !important;
 }
@@ -49,7 +49,7 @@ select {
     background-color: #ffffff;
 }
 .add_to_cart_btn{
-    background-color: #339849;
+    background-color: #29a243;
     color: #ffffff;
     float: none;
     font-weight: bold;
@@ -65,7 +65,7 @@ select {
     margin-bottom: 10px;
 }
 .f-cat{
-    border: 5px solid #339849;
+    border: 5px solid #29a243;
 }
 .cart-table{
     border:2px solid;
@@ -82,8 +82,11 @@ select {
     background: transparent;
     cursor: pointer;
 }
+.save_product_btn, .remove_product_btn, #mycart, #logout-button{
+    cursor: pointer;
+}
 #checkout_btn{
-    background-color: #339849;
+    background-color: #29a243;
     color: #ffffff;
     float: right;
     font-weight: bold;
@@ -103,5 +106,54 @@ select {
     height: 35px;
     font-size: 14px;
     margin-top: 30px;
-    border: 2px solid #339849;   
+    border: 2px solid #29a243;   
+}
+.save_product_btn{
+    display: none;
+}
+#cart_count{
+    margin: 0px 0px 0px -29px;
+    font-size: 16px;
+    font-weight: 800;
+    vertical-align: bottom;
+}
+
+
+
+.contactus-input{
+    margin-bottom: 10px;
+    width: 70%;
+    height: 36px;
+    border-color: #d5d6d7;
+    font-size: 20px;
+    line-height: 36px;
+    font-weight: 300;
+    color: #919191;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 4px 6px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+}
+.contactus-msg{
+    width: 70%;
+    margin-bottom: 10px;
+    border-color: #d5d6d7;
+    font-size: 20px;
+    line-height: 36px;
+    font-weight: 300;
+    color: #919191;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 4px 6px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+}
+.contactus_submit{
+    background-color: #29a243;
+    border-color: #29a243;
+}
+.contactus_submit:hover{
+    background-color: #339849;
+    border-color: #339849;
 }

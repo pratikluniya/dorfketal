@@ -28,7 +28,6 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "F-Vertical") ){
 }
 if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "updatefcat") ){
 	$sql = "UPDATE login_master SET FAVOURITE_VERTICAL = '".$_REQUEST['cat_name']."' WHERE CUSTOMER_NUMBER = ".$_SESSION['cust_id'];
-
 	$result=$con->data_update($sql);
 	echo "Success";
 }
@@ -70,4 +69,14 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "removecart") ){
 	$result=$con->data_delete($sql);
 	$_SESSION['cart_count'] = ( $cart_count - $increment) ;
 	echo $_SESSION['cart_count'];
+}
+if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "updatecart") ){
+	$prod_code = $_REQUEST['prod_code'];
+	$remark = $_REQUEST['remark'];
+	$qty =	$_REQUEST['qty'];
+	$pkgsize = $_REQUEST['pkgsize'];
+	$cust_id = $_SESSION['cust_id'];
+	$sql = "UPDATE customer_cart SET QUANTITY = '".$qty."', PACKAGING_SIZE ='".$pkgsize."', REMARK = '".$remark."' WHERE CUSTOMER_NUMBER = ".$_SESSION['cust_id']." AND PRODUCT_CODE = ".$prod_code;
+	$result=$con->data_update($sql);
+	echo "success";
 }
