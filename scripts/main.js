@@ -362,8 +362,8 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
 	$(".main_body" ).on( "click","#checkout_btn", function(e) {
-		$('.main_heading').html("Checkout Order Form");
-		$('.main_body').load('order_form.php'); 
+    	$('.main_heading').html("Checkout Order Form");
+		$('.main_body').load('order_form.php');  	
 	});
 });
 
@@ -421,4 +421,20 @@ $(document).ready(function () {
 		$(this).parent().parent().find('.save_product_btn').hide();
 	});
 });
+
+
+
+
+
+
+
+
+
+// Checkout JS
+$(document).ready(function () {
+	$(".main_body" ).on( "click","#additional_info_btn", function(e) {
+		$("#additional_info_div").toggle(700);
+	});
+});
+
 

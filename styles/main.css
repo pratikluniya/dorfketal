@@ -194,3 +194,28 @@ input[type=number]::-webkit-outer-spin-button {
     width: 60%;
     margin-bottom: 20px;
 }
+.chk_lables{
+    width: 30%;
+    position: relative;
+    margin-bottom: 20px;
+}
+.chk_fields input{
+    width: 50%;
+    position: relative;
+    margin-bottom: 20px;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+}       
+.chk_fields select{
+    width: 50%;
+    height: 36px;
+    margin-bottom: 20px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+}
+#additional_info_div{
+    display: none;
+}
