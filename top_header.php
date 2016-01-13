@@ -1,7 +1,5 @@
 <!-- Header -->
 <div id="header">
-    <div class="color-line">
-    </div>
     <div id="logo" class="light-version">
         <span>
             <a href="home.php">
