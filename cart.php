@@ -29,7 +29,7 @@ if($result != "no")
 		        	<td> <?php echo $result[$key]['DESCRIPTION']; ?> </td>
 
 		        	<td>
-		        		<input type="number" class="cart-qty cart-input" value=" <?php echo $result[$key]['QUANTITY']; ?> ">
+		        		<input type="text" class="cart-qty cart-input" value=" <?php echo $result[$key]['QUANTITY']; ?> ">
 		        	</td>
 		        	<td>
 		        		<select class="cart-pck-size cart-input">

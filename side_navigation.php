@@ -8,7 +8,7 @@
                 <a href="#"><span class="nav-label">Order Management</span><span class="fa arrow"></span> </a>
                 <ul class="nav nav-second-level">
                     <li id="place_order_btn"><a href="#">Place Order</a></li>
-                    <li id=""><a href="#">Request Quotation</a></li>
+                    <li id="req_quotation_btn"><a href="#">Request Quotation</a></li>
                     <li><a href="#">Upload P.O.</a></li>
                     <li id="regular_prod_btn"><a href="#">Regular Products</a></li>
                     <li id="fav_vertical_btn"><a href="#">Favorite Vertical</a></li>                    

@@ -7,7 +7,7 @@ include("side_navigation.php");
 
 <div id="wrapper">
     <div class="normalheader transition animated fadeIn">
-        <div class="hpanel">
+        <div class="hpanel row">
             <div class="panel-body">
                 <div class="col-lg-6">
                     <h2 class="font-light m-b-xs main_heading">
@@ -31,7 +31,7 @@ include("side_navigation.php");
     <div class="content animate-panel">
         <div class="row">
             <div class="col-lg-12">
-                <div class="hpanel">
+                <div class="hpanel row">
                     <div class="panel-body main_body">
                         <p>
                             Lorem Ipsum is simply dummy text of the <strong>printing and typesetting</strong> industry. Lorem Ipsum has been the industry's standard dummy text ever since the

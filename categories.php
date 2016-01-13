@@ -1,4 +1,4 @@
-<div class="row">
+<div class="container">
     <div class="col-lg-4 transition animated bounceInRight">
         <div class="hpanel">
             <div class="panel-body">
@@ -52,7 +52,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+<div class="container">
     <div class="col-lg-4 transition animated bounceInRight">
         <div class="hpanel">
             <div class="panel-body">

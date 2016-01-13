@@ -150,22 +150,28 @@ $(document).ready(function () {
 		$.ajax({
             type: "POST",
             url: "ajax.php",
-            data: 'action=track_order',
+            data: 'action=chkuser',
             success: function( returnedData ){
-	            var fval = returnedData;
-	            $('input[name="cat_name"]').each(function () {
-    					if ($(this).val() == fval) $(this).closest('.hpanel').addClass('f-cat');
-					});
+	    		if(returnedData == 2)
+	    		{
+	    			$('.main_heading').html("Customer Dashboard");
+	    			$('.main_body').load('logistics/customer_dashboard.php');
+	    		}
+	    		return false;        
 			}
-		});
-		$('.main_heading').html("Track Order");
-		$('.main_body').load('track_order.php');
+		}); 
     });
 });
 $(document).ready(function () {
 	$("#contactus_btn" ).on( "click", function() {
 		$('.main_heading').html("Contact Us");
 		$('.main_body').load('contactus.php');
+    });
+});
+$(document).ready(function () {
+	$("#req_quotation_btn" ).on( "click", function() {
+		$('.main_heading').html("Request Quotation");
+		$('.main_body').load('req_quotation.php');
     });
 });
 
@@ -214,6 +220,102 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).ready(function () {
+	$(".main_body" ).on( "click","#by_application", function(e) {
+		var cat_name = $('#cat_name').val();
+		$.ajax({
+            type: "POST",
+            url: "ajax.php",
+            data: 'cat_name='+cat_name +'&action=getcatapplication',
+            
+            success: function( returnedData ){
+            	var opt = JSON.parse(returnedData);
+            	$.each(opt, function(key, value) {  
+            		$('#cat_applications')
+         			.append($("<option></option>")
+         			.attr("value",value['ID'])
+         			.text(value['APPLICATION'])); 
+				});
+        	}
+    	});
+    	$(this).removeClass('inactive-cat-tab');
+		$('#by_product').addClass('inactive-cat-tab');
+		$('#cat_applications').show();
+	});
+});
+
+$(document).ready(function () {
+	$(".main_body" ).on( "click","#by_product", function(e) {
+		$(this).removeClass('inactive-cat-tab');
+		$('#by_application').addClass('inactive-cat-tab');
+		$('#cat_applications').hide();
+	});
+});
+$(document).ready(function () {
+	$(".main_body" ).on( "change","#cat_applications", function(e) {
+    	var cat_name = $('#cat_name').val();
+    	var pgid = $("#cat_applications option:selected").val();
+    	var pgapp = $("#cat_applications option:selected").text();
+    	$.ajax({
+            type: "POST",
+            url: "product_list.php",
+            data: 'cat_name='+ cat_name +'&pgid='+ pgid +'&cat_prod=3',
+            
+            success: function( returnedData ){
+            	$('.main_body').html(returnedData);
+            	$("#by_application").trigger("click");
+            	$("#cat_applications option[value='" + pgid + "']").attr('selected', 'selected');
+            }
+        });
+    });
+});
+$(document).ready(function () {
+	$(".main_body" ).on( "change","#q_cat", function(e) {
+    	var cat_name = $("#q_cat option:selected").text();
+    	$.ajax({
+            type: "POST",
+            url: "ajax.php",
+            data: 'cat_name='+ cat_name +'&action=getquoteproduct',
+            
+            success: function( returnedData ){
+            	var opt = JSON.parse(returnedData);
+            	$.each(opt, function(key, value) {  
+            		$('#q_prod')
+            		.append($("<option></option>")
+         			.attr("value",value['ITEM_CODE'])
+         			.text(value['DESCRIPTION']));
+				});
+				$("#q_prod").removeAttr("disabled");
+            }
+        });
+    });
+});
+$(document).ready(function () {
+	$(".main_body" ).on( "change","#q_prod", function(e) {
+		$("#q_packaging_size").removeAttr("disabled");
+	});
+});
+$(document).ready(function () {
+	$(".main_body" ).on( "change","#q_packaging_size", function(e) {
+		var q_cat = $("#q_cat option:selected").text();
+		var q_prod_id = $("#q_prod option:selected").val();
+		var q_prod_desc = $("#q_prod option:selected").text();
+		var q_packaging_size = $("#q_packaging_size option:selected").text();
+
+		$.ajax({
+            type: "POST",
+            url: "ajax.php",
+            data: 'cat_name='+ q_cat +'&prod_id='+q_prod_id +'&prod_desc='+ q_prod_desc +'&pkg_size='+ q_packaging_size +'&action=getquoteprice',
+            
+            success: function( returnedData ){
+            	$("#q_price").removeAttr("disabled");
+            	$("#q_price").val(returnedData);
+            }
+        });
+	});
+});
+
 
 
 // Cart JS

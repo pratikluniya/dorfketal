@@ -80,3 +80,76 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "updatecart") ){
 	$result=$con->data_update($sql);
 	echo "success";
 }
+if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "getcatapplication") ){
+	$cat_name = $_REQUEST['cat_name'];
+	$sql = "SELECT * FROM xxdkapps_product_group_application WHERE PG = '".$cat_name."'";
+	$result=$con->data_select($sql);
+	echo json_encode($result);
+}
+if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "getquoteproduct") ){
+	$cat_name = $_REQUEST['cat_name'];
+	$sql ="SELECT ID, PRODUCT_CODE AS ITEM_CODE, DESCRIPTION, ATTRIBUTE18 as PRODUCT_APPLICATION, ATTRIBUTE17 as PRODUCT_GROUP FROM xxdkapps_unsegregated_products WHERE ATTRIBUTE17 ='".$cat_name."' order by ID";
+	$result=$con->data_select($sql);
+	echo json_encode($result);
+}
+if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "getquoteproduct") ){
+	$cat_name = $_REQUEST['cat_name'];
+	$prod_code = $_REQUEST['prod_id'];
+	$prod_desc = $_REQUEST['prod_desc'];
+	$pkg_size = $_REQUEST['pkg_size'];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Logistic Management AJAX Calls
+
+if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "chkuser") ){
+	$sql = "SELECT role_id FROM user_registration WHERE email_id = ".$_SESSION['cust_id'];
+	$result=$con->data_select($sql);
+	echo $result[0]['role_id'];
+}
+
+if($_REQUEST['action'] == "showcustomerdocument")
+{
+	$query="SELECT  service_provider, shipping_document, shipping_document_update, commercial_invoice, commercial_invoice_update, india_commercial_invoice,india_commercial_invoice_update, created_date, consignment_id FROM document_detatils WHERE consignment_id=".$_REQUEST['consignment_id'];
+	$result=$con->data_select($query);
+	if($result !="no")
+	{
+	 	echo json_encode($result);
+		exit;  
+	}
+	else
+	{
+	}
+}
+if($_REQUEST['action'] == "customershippeddetails")
+{
+	$query_link="SELECT tracking_url FROM  tracking_url WHERE  id =1";
+	$result_link=$con->data_select($query_link);
+	$url_logistic=$result_link[0]['tracking_url'];
+	$query="SELECT * FROM consignment_details WHERE consignment_id=".$_REQUEST['consignment_id'];
+	$result=$con->data_select($query);
+	if($result !="no")
+	{
+		$result[0]['url_logistic'] = $url_logistic;
+	 	echo json_encode($result);
+	}
+	else
+	{
+	}
+    exit; 
+}

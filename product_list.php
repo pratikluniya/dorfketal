@@ -2,7 +2,18 @@
  include "classes/functions.php";
  session_start();
  $con =new functions();
- 
+ ?>
+
+<div class="container cat-tabs">
+    <input type="hidden" name="cat_name" id="cat_name" value="<?php echo $_REQUEST['cat_name']; ?>">
+    <button type="button" class="by_product btn btn-primary" id="by_product">By Products</button>
+    <button type="button" class="by_application btn btn-primary inactive-cat-tab" id="by_application">By Application</button><br>
+    <select id="cat_applications">
+    </select>
+    <hr>
+</div>
+
+<?php
 if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "1") )
 {
     $sql ="SELECT ID, PRODUCT_CODE AS ITEM_CODE, DESCRIPTION, ATTRIBUTE18 as PRODUCT_APPLICATION, ATTRIBUTE17 as PRODUCT_GROUP FROM xxdkapps_unsegregated_products WHERE ATTRIBUTE17 ='".$_REQUEST['cat_name']."' order by ID";
@@ -11,6 +22,11 @@ if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "1") )
 if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "2") )
 {
     $sql ="SELECT up.ID, up.PRODUCT_CODE AS  ITEM_CODE, up.DESCRIPTION, up.ATTRIBUTE18 as  PRODUCT_APPLICATION, up.ATTRIBUTE17 as PRODUCT_GROUP, rp.CUSTOMER_NUMBER FROM xxdkapps_regular_products as rp, xxdkapps_unsegregated_products as up WHERE rp.CUSTOMER_NUMBER= " . $_SESSION['cust_id']." and rp.PRODUCT_CODE = up.PRODUCT_CODE order by SEQUENCE DESC ";
+    $result=$con->data_select($sql);
+}
+if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "3") )
+{
+    $sql="SELECT ID, PRODUCT_CODE AS ITEM_CODE, DESCRIPTION, ATTRIBUTE18 as PRODUCT_APPLICATION, ATTRIBUTE17 as PRODUCT_GROUP FROM xxdkapps_unsegregated_products WHERE ATTRIBUTE17 ='".$_REQUEST['cat_name']."' AND PGID = '".$_REQUEST['pgid']."' order by ID";
     $result=$con->data_select($sql);
 }
     if($result != "no")
@@ -76,7 +92,7 @@ if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "2") )
     }
     else
     {
-        echo "No Data Found ";
+        echo "No Product Found ";
         exit;
     } 
 ?>

@@ -993,8 +993,8 @@ body.blank {
   color: #fff;
 }
 .btn-primary {
-  background-color: #34495e;
-  border-color: #34495e;
+  background-color: #29a243;
+  border-color: #29a243;
   color: #FFFFFF ;
 }
 .btn-primary:hover,
@@ -1002,8 +1002,8 @@ body.blank {
 .btn-primary:active,
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
-  background-color: #3f5872;
-  border-color: #3f5872;
+  background-color: #339849;
+  border-color: #339849;
   color: #FFFFFF ;
 }
 .btn-primary:active,
