@@ -273,6 +273,7 @@ $(document).ready(function () {
 $(document).ready(function () {
 	$(".main_body" ).on( "change","#q_cat", function(e) {
     	var cat_name = $("#q_cat option:selected").text();
+    	alert(cat_name);
     	$.ajax({
             type: "POST",
             url: "ajax.php",

@@ -16,7 +16,7 @@ include("side_navigation.php");
                 </div>
                 <div class="col-lg-6">
                     <span id="mycart">
-                        <img src="images/cart.png" style="height:40px;">
+                        <img src="images/cart-icon.png" style="height:60px;">
                         <span class="" id="cart_count">
                             <?php echo $_SESSION['cart_count'];?>
                         </span>

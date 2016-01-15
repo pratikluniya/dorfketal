@@ -7,7 +7,7 @@
                 </button>
                 <h4 class="modal-title" id="myModalLabel">Download Document Details</h4>
             </div>
-            <div class="modal-body"  id="documenttable">
+            <div class="modal-body table-responsive"  id="documenttable">
                 <div class="row">
                     <div class="col-md-7">                      
                           

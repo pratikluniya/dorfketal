@@ -92,12 +92,12 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "getquoteproduct") ){
 	$result=$con->data_select($sql);
 	echo json_encode($result);
 }
-if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "getquoteproduct") ){
-	$cat_name = $_REQUEST['cat_name'];
-	$prod_code = $_REQUEST['prod_id'];
-	$prod_desc = $_REQUEST['prod_desc'];
-	$pkg_size = $_REQUEST['pkg_size'];
-}
+// if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "getquoteproduct") ){
+// 	$cat_name = $_REQUEST['cat_name'];
+// 	$prod_code = $_REQUEST['prod_id'];
+// 	$prod_desc = $_REQUEST['prod_desc'];
+// 	$pkg_size = $_REQUEST['pkg_size'];
+// }
 
 
 
