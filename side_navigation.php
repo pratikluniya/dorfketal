@@ -3,13 +3,13 @@
 
 <aside id="menu">
     <div id="navigation">
-        <ul class="nav" id="side-menu">
+        <ul class="nav affix" id="side-menu">
             <li>
                 <a href="#"><span class="nav-label">Order Management</span><span class="fa arrow"></span> </a>
                 <ul class="nav nav-second-level">
                     <li id="place_order_btn"><a href="#">Place Order</a></li>
                     <li id="req_quotation_btn"><a href="#">Request Quotation</a></li>
-                    <li><a href="#">Upload P.O.</a></li>
+                    <li id="upload_po_btn"><a href="#">Upload P.O.</a></li>
                     <li id="regular_prod_btn"><a href="#">Regular Products</a></li>
                     <li id="fav_vertical_btn"><a href="#">Favorite Vertical</a></li>                    
                     <li id="reset_vertical_btn"><a href="#">Reset Favorite Vertical</a></li>

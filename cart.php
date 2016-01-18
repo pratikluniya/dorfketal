@@ -10,14 +10,14 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "getcart") )
 if($result != "no")
     {
     	?>
-    	<table class="table table-striped cart-table">
+    	<table class="table table-bordered table-striped">
 		    	<thead>
-		      		<tr>
+		      		<tr class="headings">
 		        		<th>PRODUCT</th>
 		        		<th>QUANTITY (KG)</th>
 		        		<th>PACKAGING SIZE (Drum/Tank)</th>
 		        		<th>REMARK</th>
-		        		<th></th>
+		        		<th>ACTION</th>
 		      		</tr>
 		    	</thead>
 		    	<tbody>
@@ -29,10 +29,10 @@ if($result != "no")
 		        	<td> <?php echo $result[$key]['DESCRIPTION']; ?> </td>
 
 		        	<td>
-		        		<input type="text" class="cart-qty cart-input" value=" <?php echo $result[$key]['QUANTITY']; ?> ">
+		        		<input type="text" class="cart-qty cart-input form-control" value=" <?php echo $result[$key]['QUANTITY']; ?> ">
 		        	</td>
 		        	<td>
-		        		<select class="cart-pck-size cart-input">
+		        		<select class="cart-pck-size cart-input form-control">
 			        		<option <?php if ($result[$key]['PACKAGING_SIZE'] == "ANY" ) echo 'selected' ; ?> value="ANY">ANY</option>
 	                        <option <?php if ($result[$key]['PACKAGING_SIZE'] == "1" ) echo 'selected' ; ?> value="1">1</option>
 	                        <option <?php if ($result[$key]['PACKAGING_SIZE'] == "5" ) echo 'selected' ; ?> value="5">5</option>
@@ -62,7 +62,7 @@ if($result != "no")
 	                    </select>
 	                </td>
 	                <td>
-	                	<input type="text" class="cart-remark cart-input" value=" <?php echo $result[$key]['REMARK']; ?> ">
+	                	<input type="text" class="cart-remark cart-input form-control" value=" <?php echo $result[$key]['REMARK']; ?> ">
 	                	<input type="hidden" class="prod_id" value=" <?php echo $result[$key]['ITEM_CODE']; ?> ">
 	                </td>
 	                <td class="remove_product_btn">

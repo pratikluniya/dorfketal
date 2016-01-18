@@ -32,6 +32,9 @@ include("side_navigation.php");
         <div class="row">
             <div class="col-lg-12">
                 <div class="hpanel row">
+                    <div class="alert" style="position: fixed; top: 0; right: 0;display:none;z-index:999;">
+  
+                    </div>
                     <div class="panel-body main_body">
                         <p>
                             Lorem Ipsum is simply dummy text of the <strong>printing and typesetting</strong> industry. Lorem Ipsum has been the industry's standard dummy text ever since the

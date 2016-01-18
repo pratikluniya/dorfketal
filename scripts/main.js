@@ -5,7 +5,6 @@
  */
 
 // Login JS
- 
 $(document).ready(function () {
 	$("#login-button" ).on( "click", function() {
 		var cust_id=$("#login_cust_id").val();
@@ -146,6 +145,13 @@ $(document).ready(function () {
 	});
 });
 $(document).ready(function () {
+    $("#upload_po_btn" ).on( "click", function() {
+        $('.main_heading').html("Upload PO#");
+        $('.main_body').load('upload_po.php');
+    });
+});
+
+$(document).ready(function () {
 	$("#track_order_btn" ).on( "click", function() {
 		$.ajax({
             type: "POST",
@@ -273,7 +279,6 @@ $(document).ready(function () {
 $(document).ready(function () {
 	$(".main_body" ).on( "change","#q_cat", function(e) {
     	var cat_name = $("#q_cat option:selected").text();
-    	alert(cat_name);
     	$.ajax({
             type: "POST",
             url: "ajax.php",
@@ -310,12 +315,86 @@ $(document).ready(function () {
             data: 'cat_name='+ q_cat +'&prod_id='+q_prod_id +'&prod_desc='+ q_prod_desc +'&pkg_size='+ q_packaging_size +'&action=getquoteprice',
             
             success: function( returnedData ){
-            	$("#q_price").removeAttr("disabled");
-            	$("#q_price").val(returnedData);
+                $("#q_price").removeAttr("disabled");
+                var data = JSON.parse(returnedData);
+                if((data['status']) == "Success")
+                {
+                    $("#q_price").val(data['price']);
+                    $("#packaging_code").val(data['PACKAGING_CODE']);
+                }
+                else
+                {
+                    $("#q_price").val(data['status']);
+                }
             }
         });
 	});
 });
+$(document).ready(function () {
+    $(".main_body" ).on( "click","#req_q_btn", function(e) {
+        var q_cat = $("#q_cat option:selected").text();
+        var q_prod_id = $("#q_prod option:selected").val();
+        var q_packaging_size = $("#q_packaging_size option:selected").text();
+        var price = $("#q_price").val();
+        var remark = $("#q_remark").val();
+        $.ajax({
+            type: "POST",
+            url: "ajax.php",
+            data: 'cat_name='+ q_cat +'&prod_id='+q_prod_id +'&price='+ price +'&pkg_size='+ q_packaging_size +'&remark='+ remark +'&action=insertquote',
+            
+            success: function( returnedData ){
+                $("#q_cat").val("0");
+                $("#q_prod").val("0");
+                $("#q_packaging_size").val("0");
+                $("#q_price").val("");
+                $("#q_remark").val("");
+                $("#q_prod").attr("disabled", "disabled");
+                $("#q_packaging_size").attr("disabled", "disabled");
+                $("#q_price").attr("disabled", "disabled");
+                alert("Quotation Submitted");
+            }
+        });
+    });
+});
+$(document).ready(function () {
+    $(".main_body" ).on( "click","#upload_po_doc_btn", function(e) {
+        $("#uploaded_po").trigger("click");  
+    });
+});
+$(document).ready(function () { 
+    $(".main_body" ).on( "click","#submit_po", function(e) {
+    var err = 0;
+    var fields = $(".form-group")
+        .find("select, textarea, input").serializeArray();
+  
+    $.each(fields, function(i, field) {
+    if (!field.value)
+        err=1;
+    });
+    if(err == '0')
+    {
+        var file_data = $('#uploaded_po').prop('files')[0];   
+        var form_data = new FormData();                  
+        form_data.append('file', file_data);
+        form_data.append('action', 'uploadPO');
+        $.ajax({
+            url: 'ajax.php',
+            dataType: 'text',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,                      
+            type: 'post',
+            success: function(returnedData){
+                $('.alert').html("<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>#PO Uploaded Successfully!</strong> ");
+                $('.alert').addClass('alert-success');
+                $('.alert').show();
+                }
+            });
+        }
+    });
+});
+
 
 
 
@@ -432,10 +511,5 @@ $(document).ready(function () {
 
 
 // Checkout JS
-$(document).ready(function () {
-	$(".main_body" ).on( "click","#additional_info_btn", function(e) {
-		$("#additional_info_div").toggle(700);
-	});
-});
 
 

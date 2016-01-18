@@ -2,8 +2,9 @@
 	<div class="col-md-6">
 		<form>
 			<div class="form-group">
+				<label for="q_cat">Category :</label>
 				<select id="q_cat" class="form-control">
-					<option>Select One</option>
+					<option value="0">Select One</option>
 					<option>Refinery</option>
 					<option>Petrochemicals</option>
 					<option>Additives & Cargo</option>
@@ -13,13 +14,15 @@
 				</select>
 			</div>
 			<div class="form-group">
+				<label for="q_prod">Product :</label>
 				<select id="q_prod" class="form-control" disabled>
 					<option value="0" selected>Select Product</option>
 				</select>
 			</div>
 			<div class="form-group">
+				<label for="q_packaging_size">Packaging Size :</label>
 				<select id="q_packaging_size" class="form-control" disabled>
-					<option selected="selected">ANY</option>
+					<option value="0" selected="selected">ANY</option>
 			        <option>1</option>
 			        <option>5</option>
 			        <option>10</option>
@@ -46,9 +49,18 @@
 			        <option>16000</option>
 			        <option>20000</option>
 				</select>
+				<input type="hidden" id="packaging_code" value="">
 			</div>
 			<div class="form-group">
-				<input type="number" class="form-control" id="q_price" name="q_price" placeholder="Quote Price" disabled>
+				<label for="q_price">Available Price :</label>
+				<input type="text" class="form-control" id="q_price" name="q_price" placeholder="Quote Price" disabled>
+			</div>
+			<div class="form-group">
+				<label for="q_remark">Remark :</label>
+				<input type="text" class="form-control" id="q_remark" name="q_remark" placeholder="Remark">
+			</div>
+			<div class="form-group">
+				<button type="button" class="btn btn-primary" id="req_q_btn">SUBMIT</button>
 			</div>
 		</form>
 	</div>

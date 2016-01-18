@@ -81,11 +81,11 @@ $con =new functions();
 			</div>
 			<div class="form-group">
 				<label for="payment_term">Payment Terms : </label>
-				<select class="form-control" id="payment_term">
+				<select class="form-control" id="payment_term" required>
 					<option value="0">Choose One</option>
 					<?php
 						foreach($result_payment_terms as $key => $value):
-							echo '<option value="'.$value['TERM_ID'].'">'.$value['DESCRIPTION'].'</option>'; 
+							echo '<option value="'.$value['TERM_ID'].'">'.$value['DESCRIPTION'].'</option>';
 						endforeach;
 					?>
 				</select>
@@ -95,7 +95,12 @@ $con =new functions();
 				<textarea class="form-control" id="comments" name="comments" placeholder="Comments"></textarea>
 			</div>
 			<div class="form-group">
-				<button type="button" class="btn btn-primary" id="place_order"><i class="fa fa-check"></i> SUBMIT</button>
+				<label for="comments">Attach #PO : </label>
+				<button type="button" class="btn btn-primary" id="upload_po_doc_btn"><i class="fa fa-paperclip"></i> Attach #PO</button>
+			</div>
+			<input type="file" name="uploaded_po" id="uploaded_po" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain, application/pdf, image/*" style="visibility:hidden;">
+			<div class="form-group">
+				<input type="submit" class="btn btn-primary" id="submit_po"></button>
 			</div>
 		</form>
 	</div>

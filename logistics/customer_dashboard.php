@@ -112,10 +112,9 @@ $result_custom=$con->data_select($query_custom);
             </style>
             <hr width=100%  align=left>
             <div class="x_content table-responsive" style="height:600px;overflow-y:auto;">
-                <table id="example1" class="table">
+                <table id="example1" class="table table-striped">
                     <thead>
                         <tr class="headings">
-                            <input type="hidden" id="userId" value="<?php echo $user_id;?>" name="userId"/>
                             <th>No</th>
                             <th>PO&nbsp;Number</th>
                             <th>Shipment&nbsp;Terms</th>

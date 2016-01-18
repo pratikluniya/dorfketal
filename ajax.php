@@ -92,13 +92,46 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "getquoteproduct") ){
 	$result=$con->data_select($sql);
 	echo json_encode($result);
 }
-// if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "getquoteproduct") ){
-// 	$cat_name = $_REQUEST['cat_name'];
-// 	$prod_code = $_REQUEST['prod_id'];
-// 	$prod_desc = $_REQUEST['prod_desc'];
-// 	$pkg_size = $_REQUEST['pkg_size'];
-// }
-
+if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "getquoteprice") ){
+	$cat_name = $_REQUEST['cat_name'];
+	$prod_code = $_REQUEST['prod_id'];
+	$prod_desc = $_REQUEST['prod_desc'];
+	$pkg_size = $_REQUEST['pkg_size'];
+	$cust_id = $_SESSION['cust_id'];
+	$sql = "SELECT ID, PACKAGING_CODE, OPERAND, ACCOUNT_NUMBER, PRODUCT_CODE FROM xxdkapps_price_list_master WHERE PACKAGING_CODE LIKE '%".$pkg_size."' AND ACCOUNT_NUMBER = '".$cust_id."' AND PRODUCT_CODE = '".$prod_code."' ORDER BY ID DESC LIMIT 1";
+	$result=$con->data_select($sql);
+	if($result !="no")
+	{
+		$data = array('price' => $result[0]['OPERAND'], 'PACKAGING_CODE' => $result[0]['PACKAGING_CODE'],'status' => 'Success' );
+		echo json_encode($data);
+	}
+	else
+	{
+		$data = array('status' =>'Price Not Available Please Enter Quote Price');
+		echo json_encode($data);
+	}
+}
+if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "insertquote") ){
+	$cat_name = $_REQUEST['cat_name'];
+	$prod_code = $_REQUEST['prod_id'];
+	$pkg_size = $_REQUEST['pkg_size'];
+	$price = $_REQUEST['price'];
+	$cust_id = $_SESSION['cust_id'];
+	$remark = $_REQUEST['remark'];
+	$sql = "INSERT INTO customer_quotations (CUSTOMER_NUMBER, PRODUCT_CODE, PACKAGING_SIZE, OPERAND, REMARK, STATUS) VALUES ($cust_id, $prod_code, $pkg_size, $price, '$remark', 'SUBMITTED')";
+	$result=$con->data_insert($sql);
+	echo "Success";
+}
+if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "uploadPO") ){
+	if ( 0 < $_FILES['file']['error'] ) 
+	{
+        echo 'Error: ' . $_FILES['file']['error'] . '<br>';
+    }
+    else 
+    {
+        move_uploaded_file($_FILES['file']['tmp_name'], 'uploadedPO/' . $_FILES['file']['name']);
+    }
+}
 
 
 
