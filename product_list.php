@@ -46,7 +46,7 @@ if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "3") )
                     <div class="panel-body">
                         <div class="col-lg-12">
                             <label class="prod-lables" for="qty">Quantity :</label>
-                            <input type="number" name="qty" id="qty" class="prod_qty" value="0"> Kg<br>
+                            <input type="text" name="qty" id="qty" class="prod_qty"> Kg<br>
                             <label class="prod-lables" for="qty">Packaging Size :</label>
                             <select id="pkg_size">
                                 <option selected="selected">ANY</option>

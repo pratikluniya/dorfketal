@@ -442,8 +442,8 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
 	$(".main_body" ).on( "click","#checkout_btn", function(e) {
-    	$('.main_heading').html("Checkout Order Form");
-		$('.main_body').load('order_form.php');  	
+        $('.main_heading').html("Checkout Order Form");
+        $('.main_body').load('order_form.php');    
 	});
 });
 

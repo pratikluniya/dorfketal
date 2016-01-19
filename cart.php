@@ -16,6 +16,7 @@ if($result != "no")
 		        		<th>PRODUCT</th>
 		        		<th>QUANTITY (KG)</th>
 		        		<th>PACKAGING SIZE (Drum/Tank)</th>
+		        		<th>AVAILABLE PRICE (PER KG)</th>
 		        		<th>REMARK</th>
 		        		<th>ACTION</th>
 		      		</tr>
@@ -60,6 +61,9 @@ if($result != "no")
 	                        <option <?php if ($result[$key]['PACKAGING_SIZE'] == "16000" ) echo 'selected' ; ?> value="16000">16000</option>
 	                        <option <?php if ($result[$key]['PACKAGING_SIZE'] == "20000" ) echo 'selected' ; ?> value="20000">20000</option>
 	                    </select>
+	                </td>
+	                <td>
+	                	asdfasdf
 	                </td>
 	                <td>
 	                	<input type="text" class="cart-remark cart-input form-control" value=" <?php echo $result[$key]['REMARK']; ?> ">

@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="col-md-6">
+	<div class="col-md-6 animated fadeInRight">
 		<form>
 			<div class="form-group">
 				<label for="q_cat">Category :</label>

@@ -27,7 +27,7 @@ $con =new functions();
 ?>
 
 <div class="container">
-	<div class="col-md-6">
+	<div class="col-md-6 animated fadeInRight">
 		<form id="checkout_data">
 			<div class="form-group">
 				<label for="PO_number">#PO : </label>
