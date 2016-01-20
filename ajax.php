@@ -48,13 +48,19 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "insertcart") ){
 	$increment = 1;
 	$sql1= "SELECT CUSTOMER_NUMBER PRODUCT_CODE FROM customer_cart WHERE PRODUCT_CODE =".$prod_code." AND CUSTOMER_NUMBER=".$cust_id;
 	$result1=$con->data_select($sql1);
+	$sql2 = "SELECT ID, PACKAGING_CODE, OPERAND, ACCOUNT_NUMBER, PRODUCT_CODE FROM xxdkapps_price_list_master WHERE PACKAGING_CODE LIKE '%".$pkgsize."' AND ACCOUNT_NUMBER = '".$cust_id."' AND PRODUCT_CODE = '".$prod_code."' ORDER BY ID DESC LIMIT 1";
+	$result2 = $con->data_select($sql2);
+	if($result2 != "no")
+		$price = $result2[0]['OPERAND'];
+	else
+		$price = 0;
 	if($result1 != "no")
 	{
 		echo "Product already in the Cart";
 	}
 	else
 	{
-		$sql = "INSERT INTO customer_cart (CUSTOMER_NUMBER, PRODUCT_CODE, ITEM_DESCRIPTION, PACKAGING_SIZE, QUANTITY, REMARK) VALUES ($cust_id,$prod_code,'$prod_desc','$pkgsize',$qty,'$remark')";
+		$sql = "INSERT INTO customer_cart (CUSTOMER_NUMBER, PRODUCT_CODE, ITEM_DESCRIPTION, PACKAGING_SIZE, QUANTITY, AVAILABLE_PRICE, REMARK) VALUES ($cust_id,$prod_code,'$prod_desc','$pkgsize',$qty,$price,'$remark')";
 		$result=$con->data_insert($sql);
 		$_SESSION['cart_count'] = ( $cart_count+ $increment) ;
 		echo $_SESSION['cart_count'];

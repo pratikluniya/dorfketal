@@ -26,7 +26,7 @@ $con =new functions();
 	$result_payment_terms = $con -> data_select($sql_payment_terms);
 
 	//Fetch Cart Products
-	$sql_prod ="SELECT up.ID, up.PRODUCT_CODE AS  ITEM_CODE, up.DESCRIPTION, up.ATTRIBUTE18 as  PRODUCT_APPLICATION, up.ATTRIBUTE17 as PRODUCT_GROUP, cc.CUSTOMER_NUMBER, cc.QUANTITY, cc.PACKAGING_SIZE, cc.REMARK FROM customer_cart as cc, xxdkapps_unsegregated_products as up WHERE cc.CUSTOMER_NUMBER= '" . $_SESSION['cust_id']."' and cc.PRODUCT_CODE = up.PRODUCT_CODE";
+	$sql_prod ="SELECT up.ID, up.PRODUCT_CODE AS  ITEM_CODE, up.DESCRIPTION, up.ATTRIBUTE18 as  PRODUCT_APPLICATION, up.ATTRIBUTE17 as PRODUCT_GROUP, cc.CUSTOMER_NUMBER, cc.QUANTITY, cc.PACKAGING_SIZE, cc.AVAILABLE_PRICE, cc.REMARK FROM customer_cart as cc, xxdkapps_unsegregated_products as up WHERE cc.CUSTOMER_NUMBER= '" . $_SESSION['cust_id']."' and cc.PRODUCT_CODE = up.PRODUCT_CODE";
     $result_prod=$con->data_select($sql_prod);
 ?>
 
@@ -155,7 +155,16 @@ $con =new functions();
 	                    	</select>
 	                    </div>
 	                    <div class="col-lg-12">
-                            <label class="prod-lables" for="remark">Remark </label>
+	                    	<label class="prod-lables" for="remark">Available Price :</label>
+	                    		<?php 
+                				if($result_prod[$key]['AVAILABLE_PRICE']== '0.00000')
+                					echo "NA";
+                				else
+                					echo ($result_prod[$key]['AVAILABLE_PRICE']."/ Kg");
+	                			?>
+	                    </div>
+	                    <div class="col-lg-12">
+                            <label class="prod-lables" for="remark">Remark :</label>
                             <input type="text" name="remark" id="remark" class="prod_qty" value="<?php echo $result_prod[$key]['REMARK']; ?>" readonly/>
                         </div>
                     </div>

@@ -7,8 +7,8 @@
 // Login JS
 $(document).ready(function () {
 	$("#login-button" ).on( "click", function() {
-		var cust_id=$("#login_cust_id").val();
-		var pass = $("#login_cust_pass").val();
+		var cust_id=$("#login_cust_id").val().trim();
+		var pass = $("#login_cust_pass").val().trim();
 		if(cust_id == "")
 		{
 			$('#login-error').html("Please Enter Customer ID");
@@ -187,7 +187,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $(".main_body" ).on( "click",".b-verticals", function(e) {
     	var frm = $(this).parents("form:first");
-   		var cat_name = $(frm).find("#cat_name").val();
+   		var cat_name = $(frm).find("#cat_name").val().trim();
    		
     	$.ajax({
             type: "POST",
@@ -211,7 +211,7 @@ $(document).ready(function () {
 	$(".main_body" ).on( "click",".f-verticals", function(e) {
 		$('.rm-all').removeClass('f-cat');
 		var favcat = $(this).parents("form:first");
-		var cat_name = $(favcat).find('#cat_name').val();
+		var cat_name = $(favcat).find('#cat_name').val().trim();
 		$.ajax({
             type: "POST",
             url: "ajax.php",
@@ -229,7 +229,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 	$(".main_body" ).on( "click","#by_application", function(e) {
-		var cat_name = $('#cat_name').val();
+		var cat_name = $('#cat_name').val().trim();
 		$.ajax({
             type: "POST",
             url: "ajax.php",
@@ -261,8 +261,8 @@ $(document).ready(function () {
 $(document).ready(function () {
 	$(".main_body" ).on( "change","#cat_applications", function(e) {
     	var cat_name = $('#cat_name').val();
-    	var pgid = $("#cat_applications option:selected").val();
-    	var pgapp = $("#cat_applications option:selected").text();
+    	var pgid = $("#cat_applications option:selected").val().trim();
+    	var pgapp = $("#cat_applications option:selected").text().trim();
     	$.ajax({
             type: "POST",
             url: "product_list.php",
@@ -278,7 +278,7 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
 	$(".main_body" ).on( "change","#q_cat", function(e) {
-    	var cat_name = $("#q_cat option:selected").text();
+    	var cat_name = $("#q_cat option:selected").text().trim();
     	$.ajax({
             type: "POST",
             url: "ajax.php",
@@ -304,10 +304,10 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
 	$(".main_body" ).on( "change","#q_packaging_size", function(e) {
-		var q_cat = $("#q_cat option:selected").text();
-		var q_prod_id = $("#q_prod option:selected").val();
-		var q_prod_desc = $("#q_prod option:selected").text();
-		var q_packaging_size = $("#q_packaging_size option:selected").text();
+		var q_cat = $("#q_cat option:selected").text().trim();
+		var q_prod_id = $("#q_prod option:selected").val().trim();
+		var q_prod_desc = $("#q_prod option:selected").text().trim();
+		var q_packaging_size = $("#q_packaging_size option:selected").text().trim();
 
 		$.ajax({
             type: "POST",
@@ -332,11 +332,11 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
     $(".main_body" ).on( "click","#req_q_btn", function(e) {
-        var q_cat = $("#q_cat option:selected").text();
-        var q_prod_id = $("#q_prod option:selected").val();
-        var q_packaging_size = $("#q_packaging_size option:selected").text();
-        var price = $("#q_price").val();
-        var remark = $("#q_remark").val();
+        var q_cat = $("#q_cat option:selected").text().trim();
+        var q_prod_id = $("#q_prod option:selected").val().trim();
+        var q_packaging_size = $("#q_packaging_size option:selected").text().trim();
+        var price = $("#q_price").val().trim();
+        var remark = $("#q_remark").val().trim();
         $.ajax({
             type: "POST",
             url: "ajax.php",
@@ -402,11 +402,11 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 	$(".main_body" ).on( "click",".add_to_cart_btn", function(e) {
-		var prod_code = $(this).parent().find("#prod_code").val();
-		var desc = $(this).parent().parent().parent().find("#prod_desc").html();
-		var remark = $(this).parent().find("#remark").val();
-		var pkgsize = $(this).parent().find("#pkg_size").val();
-		var qty = $(this).parent().find("#qty").val();
+		var prod_code = $(this).parent().find("#prod_code").val().trim();
+		var desc = $(this).parent().parent().parent().find("#prod_desc").html().trim();
+		var remark = $(this).parent().find("#remark").val().trim();
+		var pkgsize = $(this).parent().find("#pkg_size").val().trim();
+		var qty = $(this).parent().find("#qty").val().trim();
 		$.ajax({
             type: "POST",
             url: "ajax.php",
@@ -456,7 +456,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 	$(".main_body" ).on( "click",".remove_product_btn", function(e) {
-		var prod_code = $(this).parent().find('.prod_id').val();
+		var prod_code = $(this).parent().find('.prod_id').val().trim();
 		$(this).parent().hide();
 		$.ajax({
             type: "POST",
@@ -481,10 +481,10 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 	$(".main_body" ).on( "click",".save_product_btn", function(e) {
-		var prod_code = $(this).parent().find('.prod_id').val();
-		var qty = $(this).parent().find('.cart-qty').val();
-		var pkgsize = $(this).parent().find('.cart-pck-size').val();
-		var remark = $(this).parent().find('.cart-remark').val();
+		var prod_code = $(this).parent().find('.prod_id').val().trim();
+		var qty = $(this).parent().find('.cart-qty').val().trim();
+		var pkgsize = $(this).parent().find('.cart-pck-size').val().trim();
+		var remark = $(this).parent().find('.cart-remark').val().trim();
 		$.ajax({
             type: "POST",
             url: "ajax.php",
