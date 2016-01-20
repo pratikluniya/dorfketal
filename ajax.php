@@ -53,14 +53,14 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "insertcart") ){
 	if($result2 != "no")
 		$price = $result2[0]['OPERAND'];
 	else
-		$price = 0;
+		$price = 0.00000;
 	if($result1 != "no")
 	{
 		echo "Product already in the Cart";
 	}
 	else
 	{
-		$sql = "INSERT INTO customer_cart (CUSTOMER_NUMBER, PRODUCT_CODE, ITEM_DESCRIPTION, PACKAGING_SIZE, QUANTITY, AVAILABLE_PRICE, REMARK) VALUES ($cust_id,$prod_code,'$prod_desc','$pkgsize',$qty,$price,'$remark')";
+		$sql = "INSERT INTO customer_cart (CUSTOMER_NUMBER, PRODUCT_CODE, ITEM_DESCRIPTION, PACKAGING_SIZE, QUANTITY, AVAILABLE_PRICE, REMARK) VALUES ($cust_id,$prod_code,'$prod_desc','$pkgsize','$qty','$price','$remark')";
 		$result=$con->data_insert($sql);
 		$_SESSION['cart_count'] = ( $cart_count+ $increment) ;
 		echo $_SESSION['cart_count'];
