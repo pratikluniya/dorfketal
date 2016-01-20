@@ -367,6 +367,7 @@ $(document).ready(function () {
                 $('.notify').removeClass('notify-failed');
                 $('.notify').addClass('notify-success');
                 $('.notify').show();
+                setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
             }
         });
     });
@@ -405,6 +406,7 @@ $(document).ready(function () {
                 $('.notify').removeClass('notify-failed');
                 $('.notify').addClass('notify-success');
                 $('.notify').show();
+                setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
                 }
             });
         }
@@ -434,6 +436,7 @@ $(document).ready(function () {
                         $('.notify').removeClass('notify-failed');
                         $('.notify').addClass('notify-success');
                         $('.notify').show();
+                        setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
                         $("#cart_count").html(returnedData);
             		}
             		else
@@ -442,6 +445,7 @@ $(document).ready(function () {
                         $('.notify').removeClass('notify-success');
                         $('.notify').addClass('notify-failed');
                         $('.notify').show();
+                        setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
             		}
         	}
         });
@@ -490,6 +494,7 @@ $(document).ready(function () {
                 $('.notify').removeClass('notify-success');
                 $('.notify').addClass('notify-failed');
                 $('.notify').show();
+                setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
     			$("#cart_count").html(returnedData);
     		}
     	});
@@ -522,6 +527,7 @@ $(document).ready(function () {
                     $('.notify').removeClass('notify-failed');
                     $('.notify').addClass('notify-success');
                     $('.notify').show();
+                    setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
 				}
     		}
     	});

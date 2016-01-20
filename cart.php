@@ -8,8 +8,9 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "getcart") )
     $result=$con->data_select($sql);
 }
 if($result != "no")
-    {
-    	?>
+{
+?>
+    <div class="container animated bounceInRight">
     	<table class="table table-bordered table-striped">
 		    	<thead>
 		      		<tr class="headings">
@@ -91,7 +92,7 @@ if($result != "no")
 			</tbody>
 		</table>
 		<button type="button" id="continue_shop_btn">Continue Shopping</button>
-		<button type="button" id="checkout_btn" style="float:right;margin-right:10%;">Checkout</button>
+		<button type="button" id="checkout_btn">Checkout</button>
 	<?php
 	}
 	else
@@ -106,4 +107,5 @@ if($result != "no")
 	<?php
 	}
 ?>
+	</div>
 

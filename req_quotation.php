@@ -3,7 +3,7 @@
 		<form>
 			<div class="form-group">
 				<label for="q_cat">Category :</label>
-				<select id="q_cat" class="form-control">
+				<select id="q_cat" class="form-control" required>
 					<option value="0">Select One</option>
 					<option>Refinery</option>
 					<option>Petrochemicals</option>
@@ -15,13 +15,13 @@
 			</div>
 			<div class="form-group">
 				<label for="q_prod">Product :</label>
-				<select id="q_prod" class="form-control" disabled>
+				<select id="q_prod" class="form-control" disabled required>
 					<option value="0" selected>Select Product</option>
 				</select>
 			</div>
 			<div class="form-group">
 				<label for="q_packaging_size">Packaging Size :</label>
-				<select id="q_packaging_size" class="form-control" disabled>
+				<select id="q_packaging_size" class="form-control" disabled required>
 					<option value="0" selected="selected">ANY</option>
 			        <option>1</option>
 			        <option>5</option>
@@ -53,7 +53,7 @@
 			</div>
 			<div class="form-group">
 				<label for="q_price">Available Price :</label>
-				<input type="text" class="form-control" id="q_price" name="q_price" placeholder="Quote Price" disabled>
+				<input type="text" class="form-control" id="q_price" name="q_price" placeholder="Quote Price" disabled required>
 			</div>
 			<div class="form-group">
 				<label for="q_remark">Remark :</label>
