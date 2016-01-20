@@ -32,7 +32,7 @@ include("side_navigation.php");
         <div class="row">
             <div class="col-lg-12">
                 <div class="hpanel row">
-                    <div class="alert" style="position: fixed; top: 0; right: 0;display:none;z-index:999;">
+                    <div class="notify animated fadeIn">
   
                     </div>
                     <div class="panel-body main_body">

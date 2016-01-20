@@ -74,6 +74,18 @@ $(document).ready(function () {
 	});
 });
 
+//GLobal
+$(document).ready(function () {
+    $(".notify" ).on( "click",".close-notify", function(e) {
+        $('.notify').removeClass('notify-success');
+        $('.notify').removeClass('notify-failed');
+        $('.notify').hide();
+    });
+});
+
+
+
+
  // Left Sidebar Click Events.
  
 $(document).ready(function () {
@@ -351,7 +363,10 @@ $(document).ready(function () {
                 $("#q_prod").attr("disabled", "disabled");
                 $("#q_packaging_size").attr("disabled", "disabled");
                 $("#q_price").attr("disabled", "disabled");
-                alert("Quotation Submitted");
+                $('.notify').html("<a href='#' class='close-notify'>&times;</a><strong>Quotation Submitted!</strong> ");
+                $('.notify').removeClass('notify-failed');
+                $('.notify').addClass('notify-success');
+                $('.notify').show();
             }
         });
     });
@@ -386,9 +401,10 @@ $(document).ready(function () {
             data: form_data,                      
             type: 'post',
             success: function(returnedData){
-                $('.alert').html("<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>#PO Uploaded Successfully!</strong> ");
-                $('.alert').addClass('alert-success');
-                $('.alert').show();
+                $('.notify').html("<a href='#' class='close-notify'>&times;</a><strong>#PO Uploaded Successfully!</strong> ");
+                $('.notify').removeClass('notify-failed');
+                $('.notify').addClass('notify-success');
+                $('.notify').show();
                 }
             });
         }
@@ -414,12 +430,18 @@ $(document).ready(function () {
             
             success: function( returnedData ){
             		if($.isNumeric( returnedData )){ 
-            			alert("Product Added to Cart");
-            			$("#cart_count").html(returnedData);
+            			$('.notify').html("<a href='#' class='close-notify'>&times;</a><strong>Product Added to Cart!</strong> ");
+                        $('.notify').removeClass('notify-failed');
+                        $('.notify').addClass('notify-success');
+                        $('.notify').show();
+                        $("#cart_count").html(returnedData);
             		}
             		else
             		{
-            			alert(returnedData);
+            			$('.notify').html("<a href='#' class='close-notify'>&times;</a><strong>"+returnedData+"!</strong> ");
+                        $('.notify').removeClass('notify-success');
+                        $('.notify').addClass('notify-failed');
+                        $('.notify').show();
             		}
         	}
         });
@@ -464,7 +486,10 @@ $(document).ready(function () {
             data: 'prod_code=' + prod_code +'&action=removecart',
             
             success: function( returnedData ){
-    			alert("Product Removed from Cart");
+                $('.notify').html("<a href='#' class='close-notify'>&times;</a><strong>Product Removed from Cart!</strong> ");
+                $('.notify').removeClass('notify-success');
+                $('.notify').addClass('notify-failed');
+                $('.notify').show();
     			$("#cart_count").html(returnedData);
     		}
     	});
@@ -493,7 +518,10 @@ $(document).ready(function () {
             success: function( returnedData ){
     			if(returnedData == "success")
     			{
-    				alert("Product Information Updated");
+                    $('.notify').html("<a href='#' class='close-notify'>&times;</a><strong>Product Information Updated!</strong> ");
+                    $('.notify').removeClass('notify-failed');
+                    $('.notify').addClass('notify-success');
+                    $('.notify').show();
 				}
     		}
     	});
