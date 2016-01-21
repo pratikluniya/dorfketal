@@ -102,6 +102,7 @@ $(document).ready(function () {
             data: '&cat_prod=2',
             
             success: function( returnedData ){
+                $('.cat-tabs').show();
         		$('.main_heading').html("Regular Products");
 				$('.main_body').html(returnedData);        
         	}
@@ -147,6 +148,7 @@ $(document).ready(function () {
             		data: 'cat_name='+cat_name + '&cat_prod=1',
             
             		success: function( returnedData ){
+                        $('.cat-tabs').show();
         				$('.main_heading').html(cat_name);
 						$('.main_body').html(returnedData);        
         			}
@@ -207,6 +209,7 @@ $(document).ready(function () {
             data: 'cat_name='+cat_name + '&cat_prod=1',
             
             success: function( returnedData ){
+                $('.cat-tabs').show();
         		$('.main_heading').html(cat_name);
 				$('.main_body').html(returnedData);        
         	}
@@ -238,17 +241,23 @@ $(document).ready(function () {
         });
     });
 });
+$(document).ready(function () {
+    $(".hide-nav").on("click", function(event){
+        $(".cat-tabs").hide();
+    });
+});
 
 $(document).ready(function () {
-	$(".main_body" ).on( "click","#by_application", function(e) {
+	$("#by_application" ).on( "click", function(e) {
 		var cat_name = $('#cat_name').val().trim();
-		$.ajax({
+        $.ajax({
             type: "POST",
             url: "ajax.php",
             data: 'cat_name='+cat_name +'&action=getcatapplication',
             
             success: function( returnedData ){
             	var opt = JSON.parse(returnedData);
+                $('#cat_applications').find('option').remove().end();
             	$.each(opt, function(key, value) {  
             		$('#cat_applications')
          			.append($("<option></option>")
@@ -264,14 +273,14 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-	$(".main_body" ).on( "click","#by_product", function(e) {
+	$("#by_product" ).on( "click", function(e) {
 		$(this).removeClass('inactive-cat-tab');
 		$('#by_application').addClass('inactive-cat-tab');
 		$('#cat_applications').hide();
 	});
 });
 $(document).ready(function () {
-	$(".main_body" ).on( "change","#cat_applications", function(e) {
+	$("#cat_applications" ).on( "change", function(e) {
     	var cat_name = $('#cat_name').val();
     	var pgid = $("#cat_applications option:selected").val().trim();
     	var pgapp = $("#cat_applications option:selected").text().trim();
@@ -282,8 +291,6 @@ $(document).ready(function () {
             
             success: function( returnedData ){
             	$('.main_body').html(returnedData);
-            	$("#by_application").trigger("click");
-            	$("#cat_applications option[value='" + pgid + "']").attr('selected', 'selected');
             }
         });
     });
@@ -298,6 +305,8 @@ $(document).ready(function () {
             
             success: function( returnedData ){
             	var opt = JSON.parse(returnedData);
+                $('#q_prod').find('option').remove().end();
+                $('#q_prod').append('<option value="0" selected>Select Product</option>');
             	$.each(opt, function(key, value) {  
             		$('#q_prod')
             		.append($("<option></option>")
@@ -363,7 +372,7 @@ $(document).ready(function () {
                 $("#q_prod").attr("disabled", "disabled");
                 $("#q_packaging_size").attr("disabled", "disabled");
                 $("#q_price").attr("disabled", "disabled");
-                $('.notify').html("<a href='#' class='close-notify'>&times;</a><strong>Quotation Submitted!</strong> ");
+                $('.notify').html("<span class='close-notify'>&times;</span><strong>Quotation Submitted!</strong> ");
                 $('.notify').removeClass('notify-failed');
                 $('.notify').addClass('notify-success');
                 $('.notify').show();
@@ -402,7 +411,7 @@ $(document).ready(function () {
             data: form_data,                      
             type: 'post',
             success: function(returnedData){
-                $('.notify').html("<a href='#' class='close-notify'>&times;</a><strong>#PO Uploaded Successfully!</strong> ");
+                $('.notify').html("<span class='close-notify'>&times;</span><strong>#PO Uploaded Successfully!</strong> ");
                 $('.notify').removeClass('notify-failed');
                 $('.notify').addClass('notify-success');
                 $('.notify').show();
@@ -425,30 +434,40 @@ $(document).ready(function () {
 		var remark = $(this).parent().find("#remark").val().trim();
 		var pkgsize = $(this).parent().find("#pkg_size").val().trim();
 		var qty = $(this).parent().find("#qty").val().trim();
-		$.ajax({
-            type: "POST",
-            url: "ajax.php",
-            data: 'prod_code=' + prod_code +'&prod_desc='+desc +'&remark='+ remark +'&pkgsize=' + pkgsize +'&qty='+qty +'&action=insertcart',
-            
-            success: function( returnedData ){
-            		if($.isNumeric( returnedData )){ 
-            			$('.notify').html("<a href='#' class='close-notify'>&times;</a><strong>Product Added to Cart!</strong> ");
-                        $('.notify').removeClass('notify-failed');
-                        $('.notify').addClass('notify-success');
-                        $('.notify').show();
-                        setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
-                        $("#cart_count").html(returnedData);
-            		}
-            		else
-            		{
-            			$('.notify').html("<a href='#' class='close-notify'>&times;</a><strong>"+returnedData+"!</strong> ");
-                        $('.notify').removeClass('notify-success');
-                        $('.notify').addClass('notify-failed');
-                        $('.notify').show();
-                        setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
-            		}
-        	}
-        });
+        if(qty == "" || qty == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter Quantity!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+        }
+        else
+        {
+    		$.ajax({
+                type: "POST",
+                url: "ajax.php",
+                data: 'prod_code=' + prod_code +'&prod_desc='+desc +'&remark='+ remark +'&pkgsize=' + pkgsize +'&qty='+qty +'&action=insertcart',
+                
+                success: function( returnedData ){
+                		if($.isNumeric( returnedData )){ 
+                			$('.notify').html("<span class='close-notify'>&times;</span><strong>Product Added to Cart!</strong> ");
+                            $('.notify').removeClass('notify-failed');
+                            $('.notify').addClass('notify-success');
+                            $('.notify').show();
+                            setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+                            $("#cart_count").html(returnedData);
+                		}
+                		else
+                		{
+                			$('.notify').html("<span class='close-notify'>&times;</span><strong>"+returnedData+"!</strong> ");
+                            $('.notify').removeClass('notify-success');
+                            $('.notify').addClass('notify-failed');
+                            $('.notify').show();
+                            setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+                		}
+            	}
+            });
+        }
     });
 });
 
@@ -461,6 +480,7 @@ $(document).ready(function () {
             
             success: function( returnedData ){
         		$('.main_heading').html("Shopping Cart");
+                $('.cat-tabs').hide();
 				$('.main_body').html(returnedData);        
         	}
     	});
@@ -490,7 +510,7 @@ $(document).ready(function () {
             data: 'prod_code=' + prod_code +'&action=removecart',
             
             success: function( returnedData ){
-                $('.notify').html("<a href='#' class='close-notify'>&times;</a><strong>Product Removed from Cart!</strong> ");
+                $('.notify').html("<span class='close-notify'>&times;</span><strong>Product Removed from Cart!</strong> ");
                 $('.notify').removeClass('notify-success');
                 $('.notify').addClass('notify-failed');
                 $('.notify').show();
@@ -523,7 +543,7 @@ $(document).ready(function () {
             success: function( returnedData ){
     			if(returnedData == "success")
     			{
-                    $('.notify').html("<a href='#' class='close-notify'>&times;</a><strong>Product Information Updated!</strong> ");
+                    $('.notify').html("<span class='close-notify'>&times;</span><strong>Product Information Updated!</strong> ");
                     $('.notify').removeClass('notify-failed');
                     $('.notify').addClass('notify-success');
                     $('.notify').show();

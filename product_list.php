@@ -3,16 +3,7 @@
  session_start();
  $con =new functions();
  ?>
-
-<div class="container cat-tabs">
-    <input type="hidden" name="cat_name" id="cat_name" value="<?php echo $_REQUEST['cat_name']; ?>">
-    <button type="button" class="by_product btn btn-primary" id="by_product">By Products</button>
-    <button type="button" class="by_application btn btn-primary inactive-cat-tab" id="by_application">By Application</button><br>
-    <select id="cat_applications">
-    </select>
-    <hr>
-</div>
-
+<input type="hidden" name="cat_name" id="cat_name" value="<?php echo $_REQUEST['cat_name']; ?>">                       
 <?php
 if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "1") )
 {
@@ -34,7 +25,7 @@ if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "3") )
         foreach ($result as $key => $value) 
         {
             echo '
-            <div class="col-lg-6 animated bounceInRight">
+            <div class="col-lg-6 animated bounceInRight prod_list">
                 <div class="hpanel">
                     <div class="panel-heading hbuilt">
                         <div class="panel-tools">
@@ -44,7 +35,7 @@ if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "3") )
                         <h4 id="prod_desc">'.$result[$key]['DESCRIPTION'].'</h4>
                     </div>
                     <div class="panel-body">
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 form-prod">
                             <label class="prod-lables" for="qty">Quantity :</label>
                             <input type="text" name="qty" id="qty" class="prod_qty"> Kg<br>
                             <label class="prod-lables" for="qty">Packaging Size :</label>

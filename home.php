@@ -35,6 +35,12 @@ include("side_navigation.php");
                     <div class="notify animated fadeIn">
   
                     </div>
+                    <div class="container cat-tabs">
+                        <button type="button" class="by_product btn btn-primary" id="by_product">By Products</button>
+                        <button type="button" class="by_application btn btn-primary inactive-cat-tab" id="by_application">By Application</button><br>
+                        <select id="cat_applications">
+                        </select>
+                    </div>
                     <div class="panel-body main_body">
                         <p>
                             Lorem Ipsum is simply dummy text of the <strong>printing and typesetting</strong> industry. Lorem Ipsum has been the industry's standard dummy text ever since the
