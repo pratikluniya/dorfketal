@@ -60,6 +60,8 @@ $(document).on('keypress','#login_cust_pass',function(event){
         $("#login-button").trigger("click");
     }
 });
+
+
 // Log Out JS
 $(document).ready(function () {
 	$("#logout-button" ).on( "click", function() {
@@ -74,6 +76,7 @@ $(document).ready(function () {
 	});
 });
 
+
 //GLobal
 $(document).ready(function () {
     $(".notify" ).on( "click",".close-notify", function(e) {
@@ -82,12 +85,14 @@ $(document).ready(function () {
         $('.notify').hide();
     });
 });
+$(document).ready(function () {
+    $(".hide-nav").on("click", function(event){
+        $(".cat-tabs").hide();
+    });
+});
 
 
-
-
- // Left Sidebar Click Events.
- 
+// Left Sidebar Click Events. 
 $(document).ready(function () {
 	$("#place_order_btn" ).on( "click", function() {
 		$('.main_heading').html("Place Order");
@@ -164,7 +169,6 @@ $(document).ready(function () {
         $('.main_body').load('upload_po.php');
     });
 });
-
 $(document).ready(function () {
 	$("#track_order_btn" ).on( "click", function() {
 		$.ajax({
@@ -197,7 +201,6 @@ $(document).ready(function () {
 
 
 // On Page Click Events.
-
 $(document).ready(function () {
     $(".main_body" ).on( "click",".b-verticals", function(e) {
     	var frm = $(this).parents("form:first");
@@ -242,12 +245,6 @@ $(document).ready(function () {
     });
 });
 $(document).ready(function () {
-    $(".hide-nav").on("click", function(event){
-        $(".cat-tabs").hide();
-    });
-});
-
-$(document).ready(function () {
 	$("#by_application" ).on( "click", function(e) {
 		var cat_name = $('#cat_name').val().trim();
         $.ajax({
@@ -271,7 +268,6 @@ $(document).ready(function () {
 		$('#cat_applications').show();
 	});
 });
-
 $(document).ready(function () {
 	$("#by_product" ).on( "click", function(e) {
 		$(this).removeClass('inactive-cat-tab');
@@ -398,10 +394,12 @@ $(document).ready(function () {
                     $("#q_prod").val("0");
                     $("#q_packaging_size").val("0");
                     $("#q_price").val("");
+                    $("#q_quantity").val("");
                     $("#q_remark").val("");
                     $("#q_prod").attr("disabled", "disabled");
                     $("#q_packaging_size").attr("disabled", "disabled");
                     $("#q_price").attr("disabled", "disabled");
+                    $("#q_quantity").attr("disabled", "disabled");
                     $('.notify').html("<span class='close-notify'>&times;</span><strong>Quotation Submitted!</strong> ");
                     $('.notify').removeClass('notify-failed');
                     $('.notify').addClass('notify-success');
@@ -542,10 +540,7 @@ $(document).ready(function () {
 });
 
 
-
-
 // Cart JS
-
 $(document).ready(function () {
 	$(".main_body" ).on( "click",".add_to_cart_btn", function(e) {
 		var prod_code = $(this).parent().find("#prod_code").val().trim();
@@ -589,7 +584,6 @@ $(document).ready(function () {
         }
     });
 });
-
 $(document).ready(function () {
 	$("#mycart" ).on( "click", function(e) {
 		$.ajax({
@@ -611,14 +605,12 @@ $(document).ready(function () {
         $('.main_body').load('order_form.php');    
 	});
 });
-
 $(document).ready(function () {
 	$(".main_body" ).on( "click","#continue_shop_btn", function(e) {
 		$('.main_heading').html("Place Order");
 		$('.main_body').load('categories.php');
 	});
 });
-
 $(document).ready(function () {
 	$(".main_body" ).on( "click",".remove_product_btn", function(e) {
 		var prod_code = $(this).parent().find('.prod_id').val().trim();
@@ -639,7 +631,6 @@ $(document).ready(function () {
     	});
 	});
 });
-
 $(document).ready(function () {
 	$(".main_body" ).on( "focusin",".cart-input", function(e) {
 
@@ -647,7 +638,6 @@ $(document).ready(function () {
 		$(this).parent().parent().find('.save_product_btn').show();
 	});
 });
-
 $(document).ready(function () {
 	$(".main_body" ).on( "click",".save_product_btn", function(e) {
 		var prod_code = $(this).parent().find('.prod_id').val().trim();
@@ -674,13 +664,6 @@ $(document).ready(function () {
 		$(this).parent().parent().find('.save_product_btn').hide();
 	});
 });
-
-
-
-
-
-
-
 
 
 // Checkout JS
