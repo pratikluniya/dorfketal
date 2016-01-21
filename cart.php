@@ -91,7 +91,7 @@ if($result != "no")
 		?>
 			</tbody>
 		</table>
-		<button type="button" id="continue_shop_btn">Continue Shopping</button>
+		<button type="button" id="continue_shop_btn">Continue Buying</button>
 		<button type="button" id="checkout_btn">Checkout</button>
 	<?php
 	}
@@ -102,7 +102,7 @@ if($result != "no")
 			<h4>
 				No Items in your Shopping Cart
 			</h4>
-			<button type="button" id="continue_shop_btn">Continue Shopping</button>
+			<button type="button" id="continue_shop_btn">Continue Buying</button>
 		</div>
 	<?php
 	}

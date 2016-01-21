@@ -52,6 +52,10 @@
 				<input type="hidden" id="packaging_code" value="">
 			</div>
 			<div class="form-group">
+				<label for="q_quantity">Quantity :</label>
+				<input type="text" class="form-control" id="q_quantity" name="q_quantity" placeholder="Quantity" disabled required>
+			</div>
+			<div class="form-group">
 				<label for="q_price">Available Price :</label>
 				<input type="text" class="form-control" id="q_price" name="q_price" placeholder="Quote Price" disabled required>
 			</div>

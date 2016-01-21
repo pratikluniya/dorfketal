@@ -349,6 +349,7 @@ $(document).ready(function () {
             
             success: function( returnedData ){
                 $("#q_price").removeAttr("disabled");
+                $("#q_quantity").removeAttr("disabled");
                 var data = JSON.parse(returnedData);
                 if((data['status']) == "Success")
                 {
@@ -369,28 +370,46 @@ $(document).ready(function () {
         var q_prod_id = $("#q_prod option:selected").val().trim();
         var q_packaging_size = $("#q_packaging_size option:selected").text().trim();
         var price = $("#q_price").val().trim();
+        var qty = $("#q_quantity").val().trim();
         var remark = $("#q_remark").val().trim();
-        $.ajax({
-            type: "POST",
-            url: "ajax.php",
-            data: 'cat_name='+ q_cat +'&prod_id='+q_prod_id +'&price='+ price +'&pkg_size='+ q_packaging_size +'&remark='+ remark +'&action=insertquote',
-            
-            success: function( returnedData ){
-                $("#q_cat").val("0");
-                $("#q_prod").val("0");
-                $("#q_packaging_size").val("0");
-                $("#q_price").val("");
-                $("#q_remark").val("");
-                $("#q_prod").attr("disabled", "disabled");
-                $("#q_packaging_size").attr("disabled", "disabled");
-                $("#q_price").attr("disabled", "disabled");
-                $('.notify').html("<span class='close-notify'>&times;</span><strong>Quotation Submitted!</strong> ");
-                $('.notify').removeClass('notify-failed');
-                $('.notify').addClass('notify-success');
-                $('.notify').show();
-                setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
-            }
-        });
+        if(price == "" || price == "Price Not Available Please Enter Quote Price")
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Fill All Required Fields!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+        }
+        else if(qty == "" || qty == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Fill All Required Fields!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+        }
+        else
+        {
+            $.ajax({
+                type: "POST",
+                url: "ajax.php",
+                data: 'cat_name='+ q_cat +'&prod_id='+q_prod_id +'&price='+ price +'&pkg_size='+ q_packaging_size +'&qty='+ qty +'&remark='+ remark +'&action=insertquote',
+                
+                success: function( returnedData ){
+                    $("#q_cat").val("0");
+                    $("#q_prod").val("0");
+                    $("#q_packaging_size").val("0");
+                    $("#q_price").val("");
+                    $("#q_remark").val("");
+                    $("#q_prod").attr("disabled", "disabled");
+                    $("#q_packaging_size").attr("disabled", "disabled");
+                    $("#q_price").attr("disabled", "disabled");
+                    $('.notify').html("<span class='close-notify'>&times;</span><strong>Quotation Submitted!</strong> ");
+                    $('.notify').removeClass('notify-failed');
+                    $('.notify').addClass('notify-success');
+                    $('.notify').show();
+                    setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+                }
+            });
+        }
     });
 });
 $(document).ready(function () {
@@ -400,34 +419,122 @@ $(document).ready(function () {
 });
 $(document).ready(function () { 
     $(".main_body" ).on( "click","#submit_po", function(e) {
-    var err = 0;
-    var fields = $(".form-group")
-        .find("select, textarea, input").serializeArray();
-  
-    $.each(fields, function(i, field) {
-    if (!field.value)
-        err=1;
-    });
-    if(err == '0')
-    {
-        var file_data = $('#uploaded_po').prop('files')[0];   
-        var form_data = new FormData();                  
-        form_data.append('file', file_data);
-        form_data.append('action', 'uploadPO');
-        $.ajax({
-            url: 'ajax.php',
-            dataType: 'text',
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: form_data,                      
-            type: 'post',
-            success: function(returnedData){
-                $('.notify').html("<span class='close-notify'>&times;</span><strong>#PO Uploaded Successfully!</strong> ");
-                $('.notify').removeClass('notify-failed');
-                $('.notify').addClass('notify-success');
-                $('.notify').show();
-                setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+        var err = 0;
+        var po_no = $('#PO_number').val().trim();
+        var sold_to = $("#PO_sold_to option:selected").text().trim();
+        var ship_to = $("#PO_ship_to option:selected").text().trim();
+        var cont_per = $('#PO_contact_person').val().trim();
+        var del_date = $('#PO_delivery_date').val().trim();
+        var f_term = $('#PO_freight_term option:selected').text().trim();
+        var f_chrges = $('#PO_freight_charges').val().trim();
+        var vessal = $('#PO_vessel_name').val().trim();
+        var pay_term = $('#PO_payment_term option:selected').text().trim();
+        var comments = $('#PO_comments').val().trim();
+        if(po_no == "" || po_no == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter #PO Number!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;  
+        }
+        else if(sold_to == "Choose One")
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Select Sold_To Value!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(ship_to == "Choose One")
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Select Ship_To Value!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(cont_per == "" || cont_per == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter Contact Person Name!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(del_date == "" || del_date == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Select Delivery Date!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(f_term == "Choose One")
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Select Freight Term!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(f_chrges == "" || f_chrges == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter Freight Charges!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(pay_term == "Choose One")
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Select Payment Term!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        if(err == 0)
+        {
+            var file_data = $('#uploaded_po').prop('files')[0];   
+            var form_data = new FormData();                  
+            form_data.append('file', file_data);
+            form_data.append('action', 'uploadPO');
+            form_data.append('po_no', po_no);
+            form_data.append('sold_to', sold_to);
+            form_data.append('ship_to', ship_to);
+            form_data.append('cont_per', cont_per);
+            form_data.append('del_date', del_date);
+            form_data.append('f_term', f_term);
+            form_data.append('f_chrges', f_chrges);
+            form_data.append('vessal', vessal);
+            form_data.append('pay_term', pay_term);
+            form_data.append('comments', comments);
+            $.ajax({
+                url: 'ajax.php',
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,                      
+                type: 'post',
+                success: function(returnedData){
+                    if(returnedData == "Success")
+                    {
+                        $('.notify').html("<span class='close-notify'>&times;</span><strong>#PO Uploaded Successfully!</strong> ");
+                        $('.notify').removeClass('notify-failed');
+                        $('.notify').addClass('notify-success');
+                        $('.notify').show();
+                        setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+                        $('.main_body').load('upload_po.php');
+                    }
+                    else
+                    {
+                        $('.notify').html("<span class='close-notify'>&times;</span><strong>Something Went Wrong...PLease Try Later!</strong> ");
+                        $('.notify').removeClass('notify-success');
+                        $('.notify').addClass('notify-failed');
+                        $('.notify').show();
+                    }
                 }
             });
         }

@@ -121,14 +121,30 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "insertquote") ){
 	$cat_name = $_REQUEST['cat_name'];
 	$prod_code = $_REQUEST['prod_id'];
 	$pkg_size = $_REQUEST['pkg_size'];
+	$qty = $_REQUEST['qty'];
 	$price = $_REQUEST['price'];
 	$cust_id = $_SESSION['cust_id'];
 	$remark = $_REQUEST['remark'];
-	$sql = "INSERT INTO customer_quotations (CUSTOMER_NUMBER, PRODUCT_CODE, PACKAGING_SIZE, OPERAND, REMARK, STATUS) VALUES ($cust_id, $prod_code, $pkg_size, $price, '$remark', 'SUBMITTED')";
+	$sql = "INSERT INTO customer_quotations (CUSTOMER_NUMBER, PRODUCT_CODE, PACKAGING_SIZE, QUANTITY, OPERAND, REMARK, STATUS) VALUES ($cust_id, $prod_code, $pkg_size, $qty, $price, '$remark', 'SUBMITTED')";
 	$result=$con->data_insert($sql);
 	echo "Success";
 }
 if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "uploadPO") ){
+	$cust_id = $_SESSION['cust_id'];
+	$po_no = $_REQUEST['po_no'];
+	$ship_to = $_REQUEST['ship_to'];
+	$sold_to = $_REQUEST['sold_to'];
+	$cont_per = $_REQUEST['cont_per'];
+	$del_date = $_REQUEST['del_date'];
+	$f_term = $_REQUEST['f_term'];
+	$f_chrges = $_REQUEST['f_chrges'];
+	$vessal = $_REQUEST['vessal'];
+	$pay_term = $_REQUEST['pay_term'];
+	$comments = $_REQUEST['comments'];
+
+	$sql ="INSERT INTO customer_po (CUSTOMER_NUMBER, PO_NUMBER, SOLD_TO, SHIP_TO, CONTACT_PERSON, DELIVERY_DATE, FREIGHT_TERM, FREIGHT_CHARGES, VESSAL_NAME, PAYMENT_TERM, FILE_NAME, COMMENT) VALUES ($cust_id, '$po_no', '$sold_to', '$ship_to', '$cont_per', '$del_date', '$f_term', '$f_chrges', '$vessal', '$pay_term','".$_FILES['file']['name']."', '$comments')";
+	$result=$con->data_insert($sql);
+	echo "Success";
 	if ( 0 < $_FILES['file']['error'] ) 
 	{
         echo 'Error: ' . $_FILES['file']['error'] . '<br>';
