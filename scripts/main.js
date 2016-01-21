@@ -277,6 +277,18 @@ $(document).ready(function () {
 		$(this).removeClass('inactive-cat-tab');
 		$('#by_application').addClass('inactive-cat-tab');
 		$('#cat_applications').hide();
+        var cat_name = $('#cat_name').val().trim();
+        $.ajax({
+            type: "POST",
+            url: "product_list.php",
+            data: 'cat_name='+cat_name + '&cat_prod=1',
+            
+            success: function( returnedData ){
+                $('.cat-tabs').show();
+                $('.main_heading').html(cat_name);
+                $('.main_body').html(returnedData);        
+            }
+        });
 	});
 });
 $(document).ready(function () {
