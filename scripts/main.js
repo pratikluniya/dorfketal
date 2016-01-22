@@ -105,12 +105,17 @@ $(document).ready(function () {
             type: "POST",
             url: "product_list.php",
             data: '&cat_prod=2',
-            
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
             success: function( returnedData ){
                 $('.cat-tabs').show();
         		$('.main_heading').html("Regular Products");
 				$('.main_body').html(returnedData);        
-        	}
+        	},
+            complete: function(){
+                $('#loading').removeClass("showloading");
+            }
     	});
     });
 });
@@ -122,12 +127,18 @@ $(document).ready(function () {
             type: "POST",
             url: "ajax.php",
             data: 'action=F-Vertical',
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
             success: function( returnedData ){
-	            var fval = returnedData;
+                var fval = returnedData;
 	            $('input[name="cat_name"]').each(function () {
     					if ($(this).val() == fval) $(this).closest('.hpanel').addClass('f-cat');
 					});
-			}
+			},
+            complete: function(){
+                $('#loading').removeClass("showloading");
+            }
 		});
 	});
 });
@@ -144,7 +155,9 @@ $(document).ready(function () {
             type: "POST",
             url: "ajax.php",
             data: 'action=F-Vertical',
-            
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
             success: function( returnedData ){
             	cat_name = returnedData;
             	$.ajax({
@@ -156,7 +169,10 @@ $(document).ready(function () {
                         $('.cat-tabs').show();
         				$('.main_heading').html(cat_name);
 						$('.main_body').html(returnedData);        
-        			}
+        			},
+                    complete: function(){
+                        $('#loading').removeClass("showloading");
+                    }
     			});
             }
         });
@@ -175,6 +191,9 @@ $(document).ready(function () {
             type: "POST",
             url: "ajax.php",
             data: 'action=chkuser',
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
             success: function( returnedData ){
 	    		if(returnedData == 2)
 	    		{
@@ -182,7 +201,10 @@ $(document).ready(function () {
 	    			$('.main_body').load('logistics/customer_dashboard.php');
 	    		}
 	    		return false;        
-			}
+			},
+            complete: function(){
+                $('#loading').removeClass("showloading");
+            }
 		}); 
     });
 });
@@ -210,12 +232,17 @@ $(document).ready(function () {
             type: "POST",
             url: "product_list.php",
             data: 'cat_name='+cat_name + '&cat_prod=1',
-            
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
             success: function( returnedData ){
                 $('.cat-tabs').show();
         		$('.main_heading').html(cat_name);
 				$('.main_body').html(returnedData);        
-        	}
+        	},
+            complete: function(){
+                $('#loading').removeClass("showloading");
+            }
     	});
     });
 });
@@ -234,13 +261,18 @@ $(document).ready(function () {
             type: "POST",
             url: "ajax.php",
             data: 'cat_name='+cat_name + '&action=updatefcat',
-            
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
             success: function( returnedData ){
             	if(returnedData == "Success")
 		        {
         			$(favcat).closest('.hpanel').addClass('f-cat');
         		}
-        	}
+        	},
+            complete: function(){
+                $('#loading').removeClass("showloading");
+            }
         });
     });
 });
@@ -251,7 +283,9 @@ $(document).ready(function () {
             type: "POST",
             url: "ajax.php",
             data: 'cat_name='+cat_name +'&action=getcatapplication',
-            
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
             success: function( returnedData ){
             	var opt = JSON.parse(returnedData);
                 $('#cat_applications').find('option').remove().end();
@@ -261,7 +295,10 @@ $(document).ready(function () {
          			.attr("value",value['ID'])
          			.text(value['APPLICATION'])); 
 				});
-        	}
+        	},
+            complete: function(){
+                $('#loading').removeClass("showloading");
+            }
     	});
     	$(this).removeClass('inactive-cat-tab');
 		$('#by_product').addClass('inactive-cat-tab');
@@ -278,11 +315,16 @@ $(document).ready(function () {
             type: "POST",
             url: "product_list.php",
             data: 'cat_name='+cat_name + '&cat_prod=1',
-            
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
             success: function( returnedData ){
                 $('.cat-tabs').show();
                 $('.main_heading').html(cat_name);
                 $('.main_body').html(returnedData);        
+            },
+            complete: function(){
+                $('#loading').removeClass("showloading");
             }
         });
 	});
@@ -296,9 +338,14 @@ $(document).ready(function () {
             type: "POST",
             url: "product_list.php",
             data: 'cat_name='+ cat_name +'&pgid='+ pgid +'&cat_prod=3',
-            
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
             success: function( returnedData ){
             	$('.main_body').html(returnedData);
+            },
+            complete: function(){
+                $('#loading').removeClass("showloading");
             }
         });
     });
@@ -310,7 +357,9 @@ $(document).ready(function () {
             type: "POST",
             url: "ajax.php",
             data: 'cat_name='+ cat_name +'&action=getquoteproduct',
-            
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
             success: function( returnedData ){
             	var opt = JSON.parse(returnedData);
                 $('#q_prod').find('option').remove().end();
@@ -322,6 +371,9 @@ $(document).ready(function () {
          			.text(value['DESCRIPTION']));
 				});
 				$("#q_prod").removeAttr("disabled");
+            },
+            complete: function(){
+                $('#loading').removeClass("showloading");
             }
         });
     });
@@ -342,7 +394,9 @@ $(document).ready(function () {
             type: "POST",
             url: "ajax.php",
             data: 'cat_name='+ q_cat +'&prod_id='+q_prod_id +'&prod_desc='+ q_prod_desc +'&pkg_size='+ q_packaging_size +'&action=getquoteprice',
-            
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
             success: function( returnedData ){
                 $("#q_price").removeAttr("disabled");
                 $("#q_quantity").removeAttr("disabled");
@@ -356,6 +410,9 @@ $(document).ready(function () {
                 {
                     $("#q_price").val(data['status']);
                 }
+            },
+            complete: function(){
+                $('#loading').removeClass("showloading");
             }
         });
 	});
@@ -388,7 +445,9 @@ $(document).ready(function () {
                 type: "POST",
                 url: "ajax.php",
                 data: 'cat_name='+ q_cat +'&prod_id='+q_prod_id +'&price='+ price +'&pkg_size='+ q_packaging_size +'&qty='+ qty +'&remark='+ remark +'&action=insertquote',
-                
+                beforeSend: function(){
+                    $('#loading').addClass("showloading");
+                },
                 success: function( returnedData ){
                     $("#q_cat").val("0");
                     $("#q_prod").val("0");
@@ -405,6 +464,9 @@ $(document).ready(function () {
                     $('.notify').addClass('notify-success');
                     $('.notify').show();
                     setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+                },
+                complete: function(){
+                    $('#loading').removeClass("showloading");
                 }
             });
         }
@@ -516,6 +578,9 @@ $(document).ready(function () {
                 processData: false,
                 data: form_data,                      
                 type: 'post',
+                beforeSend: function(){
+                    $('#loading').addClass("showloading");
+                },
                 success: function(returnedData){
                     if(returnedData == "Success")
                     {
@@ -533,6 +598,9 @@ $(document).ready(function () {
                         $('.notify').addClass('notify-failed');
                         $('.notify').show();
                     }
+                },
+                complete: function(){
+                    $('#loading').removeClass("showloading");
                 }
             });
         }
@@ -561,7 +629,9 @@ $(document).ready(function () {
                 type: "POST",
                 url: "ajax.php",
                 data: 'prod_code=' + prod_code +'&prod_desc='+desc +'&remark='+ remark +'&pkgsize=' + pkgsize +'&qty='+qty +'&action=insertcart',
-                
+                beforeSend: function(){
+                    $('#loading').addClass("showloading");
+                },
                 success: function( returnedData ){
                 		if($.isNumeric( returnedData )){ 
                 			$('.notify').html("<span class='close-notify'>&times;</span><strong>Product Added to Cart!</strong> ");
@@ -579,7 +649,10 @@ $(document).ready(function () {
                             $('.notify').show();
                             setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
                 		}
-            	}
+            	},
+                complete: function(){
+                    $('#loading').removeClass("showloading");
+                }
             });
         }
     });
@@ -590,12 +663,17 @@ $(document).ready(function () {
             type: "POST",
             url: "cart.php",
             data: '&action=getcart',
-            
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
             success: function( returnedData ){
         		$('.main_heading').html("Shopping Cart");
                 $('.cat-tabs').hide();
 				$('.main_body').html(returnedData);        
-        	}
+        	},
+            complete: function(){
+                $('#loading').removeClass("showloading");
+            }
     	});
 	});
 });
@@ -619,7 +697,9 @@ $(document).ready(function () {
             type: "POST",
             url: "ajax.php",
             data: 'prod_code=' + prod_code +'&action=removecart',
-            
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
             success: function( returnedData ){
                 $('.notify').html("<span class='close-notify'>&times;</span><strong>Product Removed from Cart!</strong> ");
                 $('.notify').removeClass('notify-success');
@@ -627,7 +707,10 @@ $(document).ready(function () {
                 $('.notify').show();
                 setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
     			$("#cart_count").html(returnedData);
-    		}
+    		},
+            complete: function(){
+                $('#loading').removeClass("showloading");
+            }
     	});
 	});
 });
@@ -648,7 +731,9 @@ $(document).ready(function () {
             type: "POST",
             url: "ajax.php",
             data: 'prod_code=' + prod_code +'&qty='+ qty +'&pkgsize=' + pkgsize +'&remark='+ remark +'&action=updatecart',
-            
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
             success: function( returnedData ){
     			if(returnedData == "success")
     			{
@@ -658,7 +743,10 @@ $(document).ready(function () {
                     $('.notify').show();
                     setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
 				}
-    		}
+    		},
+            complete: function(){
+                $('#loading').removeClass("showloading");
+            }
     	});
     	$(this).parent().parent().find('.remove_product_btn').show();
 		$(this).parent().parent().find('.save_product_btn').hide();

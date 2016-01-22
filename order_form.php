@@ -120,39 +120,12 @@ $con =new functions();
                     </div>
                     <div class="panel-body">
                         <div class="col-lg-12">
-                            <label class="prod-lables" for="qty">Quantity :</label>
-                            <input type="text" name="qty" id="qty" class="prod_qty" value="<?php echo $result_prod[$key]['QUANTITY'];?>" readonly> Kg<br>
+                            <label class="prod-lables" for="qty">Quantity : </label>
+                            <?php echo $result_prod[$key]['QUANTITY'];?> Kg
                         </div>
                         <div class="col-lg-12">
                             <label class="prod-lables" for="qty">Packaging Size :</label>
-                            <select id="pkg_size" disabled>
-				        		<option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "ANY" ) echo 'selected' ; ?> value="ANY">ANY</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "1" ) echo 'selected' ; ?> value="1">1</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "5" ) echo 'selected' ; ?> value="5">5</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "10" ) echo 'selected' ; ?> value="10">10</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "20" ) echo 'selected' ; ?> value="20">20</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "25" ) echo 'selected' ; ?> value="25">25</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "30" ) echo 'selected' ; ?> value="30">30</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "35" ) echo 'selected' ; ?> value="35">35</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "40" ) echo 'selected' ; ?> value="40">40</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "45" ) echo 'selected' ; ?> value="45">45</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "50" ) echo 'selected' ; ?> value="50">50</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "100" ) echo 'selected' ; ?> value="100">100</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "150" ) echo 'selected' ; ?> value="150">150</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "165" ) echo 'selected' ; ?> value="165">165</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "170" ) echo 'selected' ; ?> value="170">170</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "175" ) echo 'selected' ; ?> value="175">175</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "180" ) echo 'selected' ; ?> value="180">180</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "185" ) echo 'selected' ; ?> value="185">185</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "190" ) echo 'selected' ; ?> value="190">190</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "200" ) echo 'selected' ; ?> value="200">200</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "220" ) echo 'selected' ; ?> value="220">220</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "227" ) echo 'selected' ; ?> value="227">227</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "900" ) echo 'selected' ; ?> value="900">900</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "1000" ) echo 'selected' ; ?> value="1000">1000</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "16000" ) echo 'selected' ; ?> value="16000">16000</option>
-		                        <option <?php if ($result_prod[$key]['PACKAGING_SIZE'] == "20000" ) echo 'selected' ; ?> value="20000">20000</option>
-	                    	</select>
+                            <?php echo $result_prod[$key]['PACKAGING_SIZE'];?> Drum /Tank
 	                    </div>
 	                    <div class="col-lg-12">
 	                    	<label class="prod-lables" for="remark">Available Price :</label>
@@ -160,12 +133,12 @@ $con =new functions();
                 				if($result_prod[$key]['AVAILABLE_PRICE']== '0.00000')
                 					echo "NA";
                 				else
-                					echo ($result_prod[$key]['AVAILABLE_PRICE']."/ Kg");
+                					echo ($result_prod[$key]['AVAILABLE_PRICE']." /Kg");
 	                			?>
 	                    </div>
 	                    <div class="col-lg-12">
-                            <label class="prod-lables" for="remark">Remark :</label>
-                            <input type="text" name="remark" id="remark" class="prod_qty" value="<?php echo $result_prod[$key]['REMARK']; ?>" readonly/>
+                            <label class="prod-lables" for="remark">Remark : </label>
+                            <?php echo $result_prod[$key]['REMARK'];?>
                         </div>
                     </div>
                 </div>

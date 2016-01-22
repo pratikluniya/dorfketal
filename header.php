@@ -38,3 +38,6 @@ if(!isset($_SESSION['cust_id']))
         <!-- Order Management Dependancies End Here -->
     </head>
 <body>
+<div id="loading" class="hideloading">
+    <img src="images/loading.gif" class="loading-img">
+</div>
