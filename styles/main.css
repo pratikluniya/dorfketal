@@ -82,11 +82,11 @@ input[type=number]::-webkit-outer-spin-button {
     width: 30%;
     margin-right: 2%;
     padding-left:5px; 
+    display: inline-block;
  }
  
 #pkg_size{
     display: inline-block;
-    height:25px;
     width: 30%;
     padding-left: 3px;
     background-color: #ffffff;
@@ -223,6 +223,6 @@ input[type=number]::-webkit-outer-spin-button {
     font-size: 14px;
     line-height: 1.42857143;
 }
-#additional_info_div{
+.fc_div{
     display: none;
 }

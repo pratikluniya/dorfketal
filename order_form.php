@@ -35,7 +35,7 @@ $con =new functions();
 		<form id="checkout_data">
 			<div class="form-group">
 				<label for="PO_number">#PO : </label>
-				<input class="form-control" type="number" name="PO_number" id="PO_number" placeholder="#PO" required>
+				<input class="form-control" type="text" name="PO_number" id="PO_number" placeholder="#PO" required>
 			</div>
 			<div class="form-group">
 				<label for="sold_to">Sold To : </label>
@@ -75,9 +75,9 @@ $con =new functions();
 					<option value="At Site">At Site</option>
 				</select>
 			</div>
-			<div class="form-group">
+			<div class="form-group fc_div">
 				<label for="freight_charges">Freight Charges : </label>
-				<input class="form-control" type="text" name="contact_person" id="contact_person" placeholder="Freight Charges" required>
+				<input class="form-control" type="text" name="freight_charges" id="freight_charges" placeholder="Freight Charges" required>
 			</div>
 			<div class="form-group">
 				<label for="vessel_name">Vessel Name : </label>
@@ -136,10 +136,17 @@ $con =new functions();
                 					echo ($result_prod[$key]['AVAILABLE_PRICE']." /Kg");
 	                			?>
 	                    </div>
-	                    <div class="col-lg-12">
-                            <label class="prod-lables" for="remark">Remark : </label>
-                            <?php echo $result_prod[$key]['REMARK'];?>
-                        </div>
+	                    <?php 
+	                    if($result_prod[$key]['REMARK'] != "")
+	                    {
+	                    ?>
+		                    <div class="col-lg-12">
+	                            <label class="prod-lables" for="remark">Remark : </label>
+	                            <?php echo $result_prod[$key]['REMARK'];?>
+	                        </div>
+	                    <?php 
+	                	}
+	                	?>
                     </div>
                 </div>
             </div>

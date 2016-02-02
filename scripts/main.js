@@ -123,6 +123,7 @@ $(document).ready(function () {
 	$("#reset_vertical_btn" ).on( "click", function() {
 		$('.main_heading').html("Reset Your Favorite Verical");
 		$('.main_body').load('reset_fav_vertical.php');
+        var fval;
 		$.ajax({
             type: "POST",
             url: "ajax.php",
@@ -131,7 +132,7 @@ $(document).ready(function () {
                 $('#loading').addClass("showloading");
             },
             success: function( returnedData ){
-                var fval = returnedData;
+                fval = returnedData;
 	            $('input[name="cat_name"]').each(function () {
     					if ($(this).val() == fval) $(this).closest('.hpanel').addClass('f-cat');
 					});
@@ -756,4 +757,123 @@ $(document).ready(function () {
 
 // Checkout JS
 
+$(document).ready(function () {
+    $(".main_body" ).on( "change", "#freight_term", function(e) {
+        var fterm = $("#freight_term option:selected").text().trim();
+        alert(fterm);
+        if(fterm == "At Site")
+            $('.fc_div').show();
+        else
+            $('.fc_div').hide();
+    });
+});
 
+$(document).ready(function () {
+    $(".main_body" ).on( "click","#place_order", function(e) {
+        var err = 0;
+        var po_no = $('#PO_number').val().trim();
+        var sold_to = $("#sold_to option:selected").text().trim();
+        var sold_to_id = $("#sold_to option:selected").val().trim();
+        var ship_to = $("#ship_to option:selected").text().trim();
+        var ship_to_id = $("#ship_to option:selected").val().trim();
+        var cont_per = $('#contact_person').val().trim();
+        var del_date = $('#delivery_date').val().trim();
+        var f_term = $('#freight_term option:selected').text().trim();
+        var f_chrges = $('#freight_charges').val().trim();
+        var vessal = $('#vessel_name').val().trim();
+        var pay_term = $('#payment_term option:selected').text().trim();
+        var pay_term_id = $('#payment_term option:selected').val().trim();
+        var comments = $('#comments').val().trim();
+        if(po_no == "" || po_no == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter #PO Number!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;  
+        }
+        else if(sold_to == "Choose One")
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Select Sold_To Value!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(ship_to == "Choose One")
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Select Ship_To Value!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(cont_per == "" || cont_per == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter Contact Person Name!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(del_date == "" || del_date == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Select Delivery Date!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(f_term == "Choose One")
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Select Freight Term!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(f_term == "At Site" && f_chrges=="" || f_term == "At Site" && f_chrges == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter Freight Charges!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        if(err == 0)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>#Order Placed Successfully!</strong> ");
+            $('.notify').removeClass('notify-failed');
+            $('.notify').addClass('notify-success');
+            $('.notify').show();
+            $.ajax({
+            type: "POST",
+            url: "order_summary.php",
+            data: 'po_no=' + po_no +'&sold_to='+ sold_to +'&sold_to_id='+ sold_to_id +'&ship_to=' + ship_to +'&ship_to_id='+ ship_to_id +'&cont_per='+ cont_per +'&del_date='+ del_date +'&f_term='+ f_term +'&f_chrges='+ f_chrges +'&vessal='+ vessal +'&pay_term='+ pay_term +'&pay_term_id='+ pay_term_id +'&comments='+ comments +'&action=place_order',
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
+            success: function( returnedData ){
+                $('.notify').html("<span class='close-notify'>&times;</span><strong>Order Placed Successfully!</strong> ");
+                $('.notify').removeClass('notify-failed');
+                $('.notify').addClass('notify-success');
+                $('.notify').show();
+                setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+                $('.main_heading').html("Order Summary");
+                $('.main_body').html(returnedData);
+            },
+            complete: function(){
+                $('#loading').removeClass("showloading");
+                $.ajax({
+                type: "POST",
+                    url: "ajax.php",
+                    data:'action=getcartcount',
+                    success: function( returnedData1 ){
+                        $("#cart_count").html(returnedData1);
+                    }
+                });
+            }
+        });
+        }
+    });
+});

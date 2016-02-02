@@ -154,7 +154,9 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "uploadPO") ){
         move_uploaded_file($_FILES['file']['tmp_name'], 'uploadedPO/' . $_FILES['file']['name']);
     }
 }
-
+if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "getcartcount") ){
+	echo $_SESSION['cart_count'];
+}
 
 
 

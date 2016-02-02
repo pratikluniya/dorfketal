@@ -31,7 +31,7 @@ $con =new functions();
 		<form id="checkout_data">
 			<div class="form-group">
 				<label for="PO_number">#PO : </label>
-				<input class="form-control" type="number" name="PO_number" id="PO_number" placeholder="#PO" required>
+				<input class="form-control" type="text" name="PO_number" id="PO_number" placeholder="#PO" required>
 			</div>
 			<div class="form-group">
 				<label for="sold_to">Sold To : </label>

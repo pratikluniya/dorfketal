@@ -37,9 +37,9 @@ if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "3") )
                     <div class="panel-body">
                         <div class="col-lg-12 form-prod">
                             <label class="prod-lables" for="qty">Quantity :</label>
-                            <input type="text" name="qty" id="qty" class="prod_qty"> Kg<br>
+                            <input type="text" name="qty" id="qty" class="form-control prod_qty"> Kg<br>
                             <label class="prod-lables" for="qty">Packaging Size :</label>
-                            <select id="pkg_size">
+                            <select id="pkg_size" class="form-control">
                                 <option selected="selected">ANY</option>
                                 <option>1</option>
                                 <option>5</option>
@@ -69,7 +69,7 @@ if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "3") )
                             </select> Drum / Tank
                             <div>
                                 <label class="prod-lables" for="remark">Remark </label>
-                                <input type="text" name="remark" id="remark" class="prod_qty" value=""/>
+                                <input type="text" name="remark" id="remark" class="prod_qty form-control" value=""/>
                             </div>            
                             <a class="btn btn-default btn-xs center-block add_to_cart_btn" style="margin-top:20px;">Add to Cart</a>
                             <input type="hidden" name="prod_code" id="prod_code" value="'.$result[$key]['ITEM_CODE'].'">
