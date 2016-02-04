@@ -32,7 +32,6 @@ if(!isset($_SESSION['cust_id']))
         <link rel="stylesheet" href="styles/main.css">
 
         <script src="vendor/jquery/dist/jquery.min.js"></script>
-        <script src="vendor/jquery-ui/jquery-ui.min.js"></script>
         <script src="scripts/main.js"></script>
 
         <!-- Order Management Dependancies End Here -->
