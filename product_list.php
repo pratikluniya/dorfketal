@@ -36,7 +36,7 @@ if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "3") )
                     </div>
                     <div class="panel-body">
                         <div class="col-lg-12 form-prod">
-                            <label class="prod-lables" for="qty">Quantity :</label>
+                            <label class="prod-lables" for="qty">Quantity<sup class="required_field">*</sup> :</label>
                             <input type="text" name="qty" id="qty" class="form-control prod_qty"> Kg<br>
                             <label class="prod-lables" for="qty">Packaging Size :</label>
                             <select id="pkg_size" class="form-control">

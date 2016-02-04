@@ -113,7 +113,7 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "getquoteprice") ){
 	}
 	else
 	{
-		$data = array('status' =>'Price Not Available Please Enter Quote Price');
+		$data = array('status' =>'NA');
 		echo json_encode($data);
 	}
 }
@@ -123,11 +123,22 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "insertquote") ){
 	$pkg_size = $_REQUEST['pkg_size'];
 	$qty = $_REQUEST['qty'];
 	$price = $_REQUEST['price'];
+	$req_price = $_REQUEST['req_price'];
 	$cust_id = $_SESSION['cust_id'];
 	$remark = $_REQUEST['remark'];
-	$sql = "INSERT INTO customer_quotations (CUSTOMER_NUMBER, PRODUCT_CODE, PACKAGING_SIZE, QUANTITY, OPERAND, REMARK, STATUS) VALUES ($cust_id, $prod_code, $pkg_size, $qty, $price, '$remark', 'SUBMITTED')";
+	$filename = $_FILES['file']['name'];
+	$sql = "INSERT INTO customer_quotations (CUSTOMER_NUMBER, PRODUCT_CODE, PACKAGING_SIZE, QUANTITY, AVAILABLE_PRICE, REQUESTED_PRICE, REMARK, FILE_NAME, STATUS) VALUES ($cust_id, $prod_code, $pkg_size, $qty, '$price', $req_price, '$remark', '$filename', 'SUBMITTED')";
 	$result=$con->data_insert($sql);
 	echo "Success";
+	if ( 0 < $_FILES['file']['error'] ) 
+	{
+        echo 'Error: ' . $_FILES['file']['error'] . '<br>';
+    }
+    else 
+    {
+        move_uploaded_file($_FILES['file']['tmp_name'], 'uploadedquotes/' . $filename);
+        unset($_FILES);
+    }
 }
 if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "uploadPO") ){
 	$cust_id = $_SESSION['cust_id'];
@@ -140,8 +151,9 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "uploadPO") ){
 	$f_chrges = $_REQUEST['f_chrges'];
 	$vessal = $_REQUEST['vessal'];
 	$pay_term = $_REQUEST['pay_term'];
+	if($pay_term == "Choose One")
+		$pay_term = "NA"; 
 	$comments = $_REQUEST['comments'];
-
 	$sql ="INSERT INTO customer_po (CUSTOMER_NUMBER, PO_NUMBER, SOLD_TO, SHIP_TO, CONTACT_PERSON, DELIVERY_DATE, FREIGHT_TERM, FREIGHT_CHARGES, VESSAL_NAME, PAYMENT_TERM, FILE_NAME, COMMENT) VALUES ($cust_id, '$po_no', '$sold_to', '$ship_to', '$cont_per', '$del_date', '$f_term', '$f_chrges', '$vessal', '$pay_term','".$_FILES['file']['name']."', '$comments')";
 	$result=$con->data_insert($sql);
 	echo "Success";

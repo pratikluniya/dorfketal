@@ -91,7 +91,22 @@ $(document).ready(function () {
     });
 });
 
-
+$(document).ready(function () {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+    if(dd<10){
+        dd='0'+dd
+    } 
+    if(mm<10){
+        mm='0'+mm
+    } 
+    var today = yyyy+'-'+mm+'-'+dd;
+    $(".main_body" ).on( "click","#PO_delivery_date", function(e) {
+        $('#PO_delivery_date').attr("min", '2016-02-04');
+    });
+});
 // Left Sidebar Click Events. 
 $(document).ready(function () {
 	$("#place_order_btn" ).on( "click", function() {
@@ -399,7 +414,7 @@ $(document).ready(function () {
                 $('#loading').addClass("showloading");
             },
             success: function( returnedData ){
-                $("#q_price").removeAttr("disabled");
+                $("#q_req_price").removeAttr("disabled");
                 $("#q_quantity").removeAttr("disabled");
                 var data = JSON.parse(returnedData);
                 if((data['status']) == "Success")
@@ -424,9 +439,10 @@ $(document).ready(function () {
         var q_prod_id = $("#q_prod option:selected").val().trim();
         var q_packaging_size = $("#q_packaging_size option:selected").text().trim();
         var price = $("#q_price").val().trim();
+        var req_price = $('#q_req_price').val().trim();
         var qty = $("#q_quantity").val().trim();
         var remark = $("#q_remark").val().trim();
-        if(price == "" || price == "Price Not Available Please Enter Quote Price")
+        if(req_price == "" || price == null)
         {
             $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Fill All Required Fields!</strong> ");
             $('.notify').removeClass('notify-success');
@@ -442,10 +458,25 @@ $(document).ready(function () {
         }
         else
         {
+            var file_data = $('#uploaded_quote').prop('files')[0];   
+            var form_data = new FormData();                  
+            form_data.append('file', file_data);
+            form_data.append('action', 'insertquote');
+            form_data.append('cat_name', q_cat);
+            form_data.append('prod_id', q_prod_id);
+            form_data.append('price', price);
+            form_data.append('req_price', req_price);
+            form_data.append('pkg_size', q_packaging_size);
+            form_data.append('qty', qty);
+            form_data.append('remark', remark);
             $.ajax({
-                type: "POST",
-                url: "ajax.php",
-                data: 'cat_name='+ q_cat +'&prod_id='+q_prod_id +'&price='+ price +'&pkg_size='+ q_packaging_size +'&qty='+ qty +'&remark='+ remark +'&action=insertquote',
+                url: 'ajax.php',
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,                      
+                type: 'post',
                 beforeSend: function(){
                     $('#loading').addClass("showloading");
                 },
@@ -454,16 +485,19 @@ $(document).ready(function () {
                     $("#q_prod").val("0");
                     $("#q_packaging_size").val("0");
                     $("#q_price").val("");
+                    $("#q_req_price").val("");
                     $("#q_quantity").val("");
                     $("#q_remark").val("");
                     $("#q_prod").attr("disabled", "disabled");
                     $("#q_packaging_size").attr("disabled", "disabled");
                     $("#q_price").attr("disabled", "disabled");
+                    $("#q_req_price").attr("disabled", "disabled");
                     $("#q_quantity").attr("disabled", "disabled");
                     $('.notify').html("<span class='close-notify'>&times;</span><strong>Quotation Submitted!</strong> ");
                     $('.notify').removeClass('notify-failed');
                     $('.notify').addClass('notify-success');
                     $('.notify').show();
+                    $('#uploaded_quote').replaceWith($('#uploaded_quote').val('').clone(true));
                     setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
                 },
                 complete: function(){
@@ -476,6 +510,11 @@ $(document).ready(function () {
 $(document).ready(function () {
     $(".main_body" ).on( "click","#upload_po_doc_btn", function(e) {
         $("#uploaded_po").trigger("click");  
+    });
+});
+$(document).ready(function () {
+    $(".main_body" ).on( "click","#upload_quote_doc_btn", function(e) {
+        $("#uploaded_quote").trigger("click");  
     });
 });
 $(document).ready(function () { 
@@ -491,6 +530,7 @@ $(document).ready(function () {
         var vessal = $('#PO_vessel_name').val().trim();
         var pay_term = $('#PO_payment_term option:selected').text().trim();
         var comments = $('#PO_comments').val().trim();
+        var file_data = $('#uploaded_po').prop('files')[0];
         if(po_no == "" || po_no == null)
         {
             $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter #PO Number!</strong> ");
@@ -539,7 +579,7 @@ $(document).ready(function () {
             $('.notify').show();
             err =1;
         }
-        else if(f_chrges == "" || f_chrges == null)
+        else if(f_term == "At Site" && f_chrges=="" || f_term == "At Site" && f_chrges == null)
         {
             $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter Freight Charges!</strong> ");
             $('.notify').removeClass('notify-success');
@@ -547,9 +587,9 @@ $(document).ready(function () {
             $('.notify').show();
             err =1;
         }
-        else if(pay_term == "Choose One")
+        else if(file_data == "" || file_data == null)
         {
-            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Select Payment Term!</strong> ");
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Attach #PO File!</strong> ");
             $('.notify').removeClass('notify-success');
             $('.notify').addClass('notify-failed');
             $('.notify').show();
@@ -557,7 +597,6 @@ $(document).ready(function () {
         }
         if(err == 0)
         {
-            var file_data = $('#uploaded_po').prop('files')[0];   
             var form_data = new FormData();                  
             form_data.append('file', file_data);
             form_data.append('action', 'uploadPO');
@@ -590,6 +629,7 @@ $(document).ready(function () {
                         $('.notify').addClass('notify-success');
                         $('.notify').show();
                         setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+                        $('#uploaded_po').replaceWith($('#uploaded_po').val('').clone(true));
                         $('.main_body').load('upload_po.php');
                     }
                     else
@@ -760,7 +800,6 @@ $(document).ready(function () {
 $(document).ready(function () {
     $(".main_body" ).on( "change", "#freight_term", function(e) {
         var fterm = $("#freight_term option:selected").text().trim();
-        alert(fterm);
         if(fterm == "At Site")
             $('.fc_div').show();
         else
@@ -842,10 +881,6 @@ $(document).ready(function () {
         }
         if(err == 0)
         {
-            $('.notify').html("<span class='close-notify'>&times;</span><strong>#Order Placed Successfully!</strong> ");
-            $('.notify').removeClass('notify-failed');
-            $('.notify').addClass('notify-success');
-            $('.notify').show();
             $.ajax({
             type: "POST",
             url: "order_summary.php",
@@ -874,6 +909,122 @@ $(document).ready(function () {
                 });
             }
         });
+        }
+    });
+});
+$(document).ready(function () {
+    $(".main_body" ).on( "click","#submit_query", function(e) {
+        var err = 0;
+        var purpose = $("#purpose option:selected").text().trim();
+        var region = $("#region option:selected").text().trim();
+        var industry_app = $("#industry_app option:selected").text().trim();
+        var fname = $('#fname').val().trim();
+        var lname = $('#lname').val().trim();
+        var email = $('#email').val().trim();
+        var phone = $('#phone').val().trim();
+        var title = $('#title').val().trim();
+        var country = $('#country').val().trim();
+        var message = $('#message').val().trim();
+        if(purpose == "Purpose of My request" || purpose == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Select Purpose!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+            err =1;  
+        }
+        else if(region == "Select Region" || region == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Select Region!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+            err =1;  
+        }
+        else if(industry_app == "Select Industry or Application" || industry_app == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Select Industry or Application!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+            err =1;  
+        }
+        else if(fname == "" || fname == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter First Name!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+            err =1;  
+        }
+        else if(lname == "" || lname == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter Last Name!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+            err =1;  
+        }
+        else if(email == "" || email == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter email</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+            err =1;  
+        }
+        else if(phone == "" || phone == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter Phone Number!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+            err =1;  
+        }
+        else if(country == "" || country == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter Country Name!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+            err =1;  
+        }
+        else if(title == "" || title == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter Title!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+            err =1;  
+        }
+        else if(message == "" || message == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter Message!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+            err =1;  
+        }
+        if(err == 0)
+        {
+            $('.form-group').find('input').val('');
+            $('.form-group').find('select').val('0');
+            $('.form-group').find('textbox').val('');
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Thanks for your valuable Feedback!<br> We Will get back to you Soon!!</strong> ");
+            $('.notify').removeClass('notify-failed');
+            $('.notify').addClass('notify-success');
+            $('.notify').show();
+            setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
         }
     });
 });

@@ -226,3 +226,9 @@ input[type=number]::-webkit-outer-spin-button {
 .fc_div{
     display: none;
 }
+#side-menu{
+    min-width: 220px;
+}
+.required_field{
+    color: red;
+}

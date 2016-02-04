@@ -30,11 +30,11 @@ $con =new functions();
 	<div class="col-md-6 animated fadeInRight">
 		<form id="checkout_data">
 			<div class="form-group">
-				<label for="PO_number">#PO : </label>
-				<input class="form-control" type="text" name="PO_number" id="PO_number" placeholder="#PO" required>
+				<label for="PO_number">PO#<sup class="required_field">*</sup> : </label>
+				<input class="form-control" type="text" name="PO_number" id="PO_number" placeholder="PO#" required>
 			</div>
 			<div class="form-group">
-				<label for="sold_to">Sold To : </label>
+				<label for="sold_to">Sold To<sup class="required_field">*</sup> : </label>
 				<select class="form-control" id="PO_sold_to">
 					<option value="0">Choose One</option>
 					<?php
@@ -45,7 +45,7 @@ $con =new functions();
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="ship_to">Ship To : </label>
+				<label for="ship_to">Ship To<sup class="required_field">*</sup> : </label>
 				<select class="form-control" id="PO_ship_to">
 					<option value="0">Choose One</option>
 					<?php
@@ -56,22 +56,22 @@ $con =new functions();
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="contact_person">Contact Person : </label>
+				<label for="contact_person">Contact Person<sup class="required_field">*</sup> : </label>
 				<input class="form-control" type="text" name="contact_person" id="PO_contact_person" placeholder="Contact Person" required>
 			</div>
 			<div class="form-group">
-				<label for="delivery_date">Delivery Date : </label>
+				<label for="delivery_date">Delivery Date<sup class="required_field" min="">*</sup> : </label>
 				<input class="form-control" type="date" name="delivery_date" id="PO_delivery_date" placeholder="Delivery Date" required>
 			</div>
 			<div class="form-group">
-				<label for="freight_term">Freight Term : </label>
+				<label for="freight_term">Freight Term<sup class="required_field">*</sup> : </label>
 				<select class="form-control" id="PO_freight_term">
 					<option value="0">Choose One</option>
 					<option value="Ex-Work">Ex-Work</option>
 					<option value="At Site">At Site</option>
 				</select>
 			</div>
-			<div class="form-group">
+			<div class="form-group fc_div">
 				<label for="freight_charges">Freight Charges : </label>
 				<input class="form-control" type="text" name="freight_charges" id="PO_freight_charges" placeholder="Freight Charges" required>
 			</div>
@@ -95,8 +95,7 @@ $con =new functions();
 				<textarea class="form-control" id="PO_comments" name="comments" placeholder="Comments"></textarea>
 			</div>
 			<div class="form-group">
-				<label for="uploaded_po_doc">Attach #PO : </label>
-				<button type="button" class="btn btn-primary" id="upload_po_doc_btn"><i class="fa fa-paperclip"></i> Attach #PO</button>
+				<button type="button" class="btn btn-primary" id="upload_po_doc_btn"><i class="fa fa-paperclip"></i> Attach PO#</button>
 			</div>
 			<input type="file" name="uploaded_po" id="uploaded_po" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain, application/pdf, image/*" style="visibility:hidden;">
 			<div class="form-group">

@@ -287,7 +287,7 @@ if($orgWiseProducts !="no")
 		}
 		$curr_date = date('Y-m-d H:i:s');
 		$sql_order_form_insert = "INSERT INTO order_form_details (ID, PO, CUSTOMER_NUMBER,ORDER_DATE, SOLD_TO, SHIP_TO, CONTACT_PERSON, DELIVERY_DATE, ORDERED_FROM, ORDER_WEB_ID, UPLOAD_TYPE, TRANSACTIONAL_CURR_CODE, ORDER_TYPE, SALESREP_ID, ORG_ID, PRICE_LIST_ID, SHIP_FROM_ORG_ID, SOLD_TO_ORG_ID, CREATED_BY, PAYMENT_TERM_ID, INVOICE_TO_ORG_ID, VESSEL, COMMENTS, ATTRIBUTE12, FREIGHT_TERMS, FREIGHT_VALUE, DAY_SEQUENCE) 
-		VALUES (NULL, '$PO', $CUSTOMER_NUMBER , '$curr_date', $SOLD_TO_ID, $SHIP_TO_ID, '$CONTACT_PERSON', $DELIVERY_DATE, 'PORTAL', '$orderWebId', 'ORDER', '$currCode', $orderType, $salesRep, $org, $defaultPriceList, $defaultWarehouse, $SOLD_TO_ORG_ID, $createdBy, $paymentTermId, $INVOICE_TO_ORG_ID, '$VESSEL', '$COMMENTS', '$ATTRIBUTE12', '$FREIGHT_TERMS', '$FREIGHT_VALUE', $lastId	)";
+		VALUES (NULL, '$PO', $CUSTOMER_NUMBER , '$curr_date', $SOLD_TO_ID, $SHIP_TO_ID, '$CONTACT_PERSON', '$DELIVERY_DATE', 'PORTAL', '$orderWebId', 'ORDER', '$currCode', $orderType, $salesRep, $org, $defaultPriceList, $defaultWarehouse, $SOLD_TO_ORG_ID, $createdBy, $paymentTermId, $INVOICE_TO_ORG_ID, '$VESSEL', '$COMMENTS', '$ATTRIBUTE12', '$FREIGHT_TERMS', '$FREIGHT_VALUE', $lastId	)";
 		$lastInsertId=$con->data_insert_return_id($sql_order_form_insert);
 		foreach ($prodArr as $id=>$pC)
 		{
@@ -303,7 +303,7 @@ if($orgWiseProducts !="no")
 			$rmk = $prodDetArr[$pC]['remarks'];
 			$tot = ($up *  $qty);
 			$sql_order_products_insert = "INSERT INTO order_products (ID, ORDER_ID, PRICE_LIST_ID, PRODUCT_CODE, PACKAGE_CODE, ITEM_CODE, INVENTORY_ITEM_ID, PACKAGE_QTY, PRODUCT_TOTAL, QUANTITY, UOM, UNIT_PRICE,	ORG_ID, REMARKS) 
-			VALUES (NULL, $lastInsertId, $pcl , $pC, $pkcd, $icd, $ivd, '$pksz', '$tot', '$qty', '$uom', $up, $oid, '$rmk') ";
+			VALUES (NULL, $lastInsertId, $pcl , $pC, '$pkcd', $icd, $ivd, '$pksz', '$tot', '$qty', '$uom', $up, $oid, '$rmk') ";
 			$lastInsertId=$con->data_insert_return_id($sql_order_products_insert);
 		}
 	}

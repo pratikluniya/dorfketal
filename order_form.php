@@ -34,22 +34,22 @@ $con =new functions();
 	<div class="col-md-6 animated fadeInUp">
 		<form id="checkout_data">
 			<div class="form-group">
-				<label for="PO_number">#PO : </label>
+				<label for="PO_number">#PO<sup class="required_field">*</sup> : </label>
 				<input class="form-control" type="text" name="PO_number" id="PO_number" placeholder="#PO" required>
 			</div>
 			<div class="form-group">
-				<label for="sold_to">Sold To : </label>
+				<label for="sold_to">Sold To<sup class="required_field">*</sup> : </label>
 				<select class="form-control" id="sold_to">
 					<option value="0">Choose One</option>
 					<?php
-					foreach($result_sold_to as $key => $value):
+					foreach($result_sold_to<sup class="required_field">*</sup> as $key => $value):
 						echo '<option value="'.$value['ID'].'">'.$value['SHIP_ADDRESS'].'</option>'; //close your tags!!
 					endforeach;
 					?>
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="ship_to">Ship To : </label>
+				<label for="ship_to">Ship To<sup class="required_field">*</sup> : </label>
 				<select class="form-control" id="ship_to">
 					<option value="0">Choose One</option>
 					<?php
@@ -60,15 +60,15 @@ $con =new functions();
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="contact_person">Contact Person : </label>
+				<label for="contact_person">Contact Person<sup class="required_field">*</sup> : </label>
 				<input class="form-control" type="text" name="contact_person" id="contact_person" placeholder="Contact Person" required>
 			</div>
 			<div class="form-group">
-				<label for="delivery_date">Delivery Date : </label>
+				<label for="delivery_date">Delivery Date<sup class="required_field">*</sup> : </label>
 				<input class="form-control" type="date" name="delivery_date" id="delivery_date" placeholder="Delivery Date" required>
 			</div>
 			<div class="form-group">
-				<label for="freight_term">Freight Term : </label>
+				<label for="freight_term">Freight Term<sup class="required_field">*</sup> : </label>
 				<select class="form-control" id="freight_term">
 					<option value="0">Choose One</option>
 					<option value="Ex-Work">Ex-Work</option>
