@@ -42,7 +42,7 @@ $con =new functions();
 				<select class="form-control" id="sold_to">
 					<option value="0">Choose One</option>
 					<?php
-					foreach($result_sold_to<sup class="required_field">*</sup> as $key => $value):
+					foreach($result_sold_to as $key => $value):
 						echo '<option value="'.$value['ID'].'">'.$value['SHIP_ADDRESS'].'</option>'; //close your tags!!
 					endforeach;
 					?>
