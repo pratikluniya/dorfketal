@@ -4,7 +4,7 @@
  *
  */
 
-// Login JS
+/********  Login JS  *****/
 $(document).ready(function () {
 	$("#login-button" ).on( "click", function() {
 		var cust_id=$("#login_cust_id").val().trim();
@@ -62,7 +62,7 @@ $(document).on('keypress','#login_cust_pass',function(event){
 });
 
 
-// Log Out JS
+/********  Log Out JS  *****/
 $(document).ready(function () {
 	$("#logout-button" ).on( "click", function() {
 		$.ajax({
@@ -77,7 +77,7 @@ $(document).ready(function () {
 });
 
 
-//GLobal
+/********  GLobal  *****/
 $(document).ready(function () {
     $(".notify" ).on( "click",".close-notify", function(e) {
         $('.notify').removeClass('notify-success');
@@ -94,7 +94,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     var today = new Date();
     var dd = today.getDate();
-    var mm = today.getMonth()+1; //January is 0!
+    var mm = today.getMonth()+1; 
     var yyyy = today.getFullYear();
     if(dd<10){
         dd='0'+dd
@@ -107,7 +107,7 @@ $(document).ready(function () {
         $('#PO_delivery_date').attr("min", '2016-02-04');
     });
 });
-// Left Sidebar Click Events. 
+/********  Left Sidebar Click Events  *****/ 
 $(document).ready(function () {
 	$("#place_order_btn" ).on( "click", function() {
 		$('.main_heading').html("Place Order");
@@ -238,7 +238,7 @@ $(document).ready(function () {
 });
 
 
-// On Page Click Events.
+/********  On Page Click Events  *****/
 $(document).ready(function () {
     $(".main_body" ).on( "click",".b-verticals", function(e) {
     	var frm = $(this).parents("form:first");
@@ -649,7 +649,7 @@ $(document).ready(function () {
 });
 
 
-// Cart JS
+/********  Cart JS  *****/ 
 $(document).ready(function () {
 	$(".main_body" ).on( "click",".add_to_cart_btn", function(e) {
 		var prod_code = $(this).parent().find("#prod_code").val().trim();
@@ -795,7 +795,7 @@ $(document).ready(function () {
 });
 
 
-// Checkout JS
+/********  Checkout JS  *****/
 
 $(document).ready(function () {
     $(".main_body" ).on( "change", "#freight_term", function(e) {

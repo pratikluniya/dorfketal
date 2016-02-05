@@ -4,12 +4,12 @@ $con =new functions();
 session_start();
 date_default_timezone_set("Asia/Kolkata");
 
-// Fetch Cart Products
+/********  Fetch Cart Products  *****/
 $sql_prod ="SELECT up.ID, up.PRODUCT_CODE AS  ITEM_CODE, up.DESCRIPTION, up.ATTRIBUTE18 as  PRODUCT_APPLICATION, up.ATTRIBUTE17 as PRODUCT_GROUP, cc.CUSTOMER_NUMBER, cc.QUANTITY, cc.PACKAGING_SIZE, cc.AVAILABLE_PRICE, cc.REMARK FROM customer_cart as cc, xxdkapps_unsegregated_products as up WHERE cc.CUSTOMER_NUMBER= '" . $_SESSION['cust_id']."' and cc.PRODUCT_CODE = up.PRODUCT_CODE";
 $result_prod=$con->data_select($sql_prod);
 
 
-// Order Form Data Fields
+/********  Order Form Data Fields  *****/
 $ORDER_WEB_ID = 0;
 $PO = $_REQUEST['po_no'];
 $CUSTOMER_NUMBER = $_SESSION['cust_id'];
@@ -44,8 +44,7 @@ if($FREIGHT_TERMS == "Ex-Work")
 }
 
 
-
-// Fetch Customer Data
+/*******  Fetch Customer Data  *****/
 $sql_cust_data = "SELECT CUSTOMER_NUMBER ,CUST_ACCOUNT_ID , (select SITE_USE_ID  FROM xxdkapps_customer_master  WHERE BUSINESS_CODE ='BILL_TO' and CUSTOMER_NUMBER = ".$CUSTOMER_NUMBER." limit 1) as INVOICE_ORG_ID FROM xxdkapps_customer_master WHERE CUSTOMER_NUMBER = ".$CUSTOMER_NUMBER;
 $result_cust_data=$con->data_select($sql_cust_data);
 $SOLD_TO_ORG_ID = $result_cust_data[0]['CUST_ACCOUNT_ID'];
@@ -168,9 +167,7 @@ foreach($prodDetArr as $p => $res)
 	}
 	$i++;
 }
-/************** 
-	for each of organization insert into order details
-*********/
+/************** for each of organization insert into order details *********/
 
 $orderIdArr=array();
 
@@ -200,7 +197,7 @@ if($orgWiseProducts !="no")
 		$webOrderIdStr.=$orderWebId.",";
 
 
-		//Fetch order type					
+/********  Fetch order type  *****/
 		$orderTypeRes = array();
 		$orderTypeSql = "SELECT ORDER_TYPE_ID FROM xxdkapps_customer_ship_order_types WHERE CUSTOMER_NUMBER=". $CUSTOMER_NUMBER ." and  SHIP_TO_ORG_ID=".$SHIP_TO_ID ." and   PRODUCT_CODE='".$firstProductCode."' limit 1";
 		$orderTypeRes = $con->data_select($orderTypeSql);
@@ -214,7 +211,7 @@ if($orgWiseProducts !="no")
 		}
 
 
-		//Fetch payment terms
+/********  Fetch payment terms  *****/
 		$salesRepArr = array();
 		$salesRep="";
 		$salesRepSql = "SELECT SALESREP_ID, ORG_ID,SHIP_TO_ORG_ID,CUSTOMER_NUMBER FROM xxdkapps_customer_ship_salesrep where CUSTOMER_NUMBER =".$CUSTOMER_NUMBER." AND ORG_ID =".$org. " AND SHIP_TO_ORG_ID=".$SHIP_TO_ID ." limit 1";
@@ -228,7 +225,7 @@ if($orgWiseProducts !="no")
 		
 		if($attribute12 = "Choose One")
 		{
-			$paymentSql ="SELECT * FROM  xxdkapps_customer_payment_terms WHERE  CUSTOMER_NUMBER =".$CUSTOMER_NUMBER." AND  ORG_ID =".$org." limit 1";
+			$paymentSql ="SELECT * FROM xxdkapps_customer_payment_terms WHERE CUSTOMER_NUMBER =".$CUSTOMER_NUMBER." AND  ORG_ID =".$org." limit 1";
 			$paymentRes = $con->data_select($paymentSql);
 			if($paymentRes !="no")
 			{
@@ -303,15 +300,16 @@ if($orgWiseProducts !="no")
 			$rmk = $prodDetArr[$pC]['remarks'];
 			$tot = ($up *  $qty);
 			$sql_order_products_insert = "INSERT INTO order_products (ID, ORDER_ID, PRICE_LIST_ID, PRODUCT_CODE, PACKAGE_CODE, ITEM_CODE, INVENTORY_ITEM_ID, PACKAGE_QTY, PRODUCT_TOTAL, QUANTITY, UOM, UNIT_PRICE,	ORG_ID, REMARKS) 
-			VALUES (NULL, $lastInsertId, $pcl , $pC, '$pkcd', $icd, $ivd, '$pksz', '$tot', '$qty', '$uom', $up, $oid, '$rmk') ";
-			$lastInsertId=$con->data_insert_return_id($sql_order_products_insert);
+			VALUES (NULL, $lastInsertId, $pcl , $pC, '$pkcd', '$icd', $ivd, '$pksz', '$tot', '$qty', '$uom', $up, $oid, '$rmk') ";
+			echo $sql_order_products_insert;
+			$result=$con->data_insert_return_id($sql_order_products_insert);
 		}
 	}
 }
 
 
 
-//Remove Products From Cart
+/********  Remove Products From Cart  *****/
 
 $sql_empty_cart =  "DELETE FROM customer_cart WHERE CUSTOMER_NUMBER =".$CUSTOMER_NUMBER;
 $result=$con->data_delete($sql_empty_cart);
@@ -320,7 +318,7 @@ $_SESSION['cart_count'] = "0";
 
 
 
-//Send mail to customer, sales person and customer service.
+/********  Send mail to customer, sales person and customer service   *****/
 ?>
 <div class="container">
 	<div class="row animated fadeInRight">
