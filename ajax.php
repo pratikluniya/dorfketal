@@ -174,11 +174,26 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "getorderdetail") ){
 	$order_id = $_REQUEST['order_id'];
 	$oracle_order = $_REQUEST['oracle_order'];
 	$sql ="SELECT op.ORDER_ID, op.PRODUCT_CODE, op.PACKAGE_QTY, op.QUANTITY, op.UNIT_PRICE, op.OSTATUS, op.REMARKS, up.DESCRIPTION, ofd.ID, ofd.ORACLE_ORDER, ofd.CUSTOMER_NUMBER, ofd.PO, ofd.DELIVERY_DATE, ofd.CONTACT_PERSON, ofd.COMMENTS, ofd.ATTRIBUTE12 FROM order_form_details as ofd, order_products as op, xxdkapps_unsegregated_products as up WHERE ofd.CUSTOMER_NUMBER= " . $cust_id." and op.PRODUCT_CODE = up.PRODUCT_CODE and op.ORDER_ID = " .$order_id." and ofd.ORACLE_ORDER = ".$oracle_order;    
-	echo $sql;
-	exit;
 	$result=$con->data_select($sql);
-	echo "<pre>";
-	print_r($result);
+	if($result !="no")
+	{	
+		foreach ($result as $key => $value) 
+		{
+		
+			echo "<div class='container'>
+					<div class='col-md-6'>
+						<div class='form-group'>
+							<label>Order ID : ".$value['ORACLE_ORDER']."</lable>
+						</div>
+					</div>
+				  </div>
+				";
+		}
+	}
+	else
+	{
+		echo "No result";
+	}
 }
 
 

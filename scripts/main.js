@@ -104,7 +104,10 @@ $(document).ready(function () {
     } 
     var today = yyyy+'-'+mm+'-'+dd;
     $(".main_body" ).on( "click","#PO_delivery_date", function(e) {
-        $('#PO_delivery_date').attr("min", '2016-02-04');
+        $('#PO_delivery_date').attr("min", today);
+    });
+    $(".main_body" ).on( "click","#delivery_date", function(e) {
+        $('#delivery_date').attr("min", today);
     });
 });
 /********  Left Sidebar Click Events  *****/ 
@@ -124,9 +127,9 @@ $(document).ready(function () {
                 $('#loading').addClass("showloading");
             },
             success: function( returnedData ){
-                $('.cat-tabs').show();
+                $('.cat-tabs').hide();
         		$('.main_heading').html("Regular Products");
-				$('.main_body').html(returnedData);        
+				$('.main_body').html(returnedData);
         	},
             complete: function(){
                 $('#loading').removeClass("showloading");

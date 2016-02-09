@@ -232,3 +232,6 @@ input[type=number]::-webkit-outer-spin-button {
 .required_field{
     color: red;
 }
+.history_label{
+    width: 35%;
+}

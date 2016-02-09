@@ -137,9 +137,12 @@ foreach($productDetailsRes as $id=> $pResArr)
 		
 	}
 }
+// echo "<pre>";
+// print_r($prodDetArr);
+// exit;
 foreach( $prodDetArr as $pcode => $pValuesArr)
 {
-    if($pValuesArr['pack']!="ANY" && $pValuesArr['pack']!=1 )
+    if($pValuesArr['pack']!="ANY" && $pValuesArr['AVAILABLE_PRICE']!=1 )
     {
  	    $sql_trans_curr_code =" SELECT ORG_ID, PRICE_LIST_ID, PRICE_LIST_NAME, CURR_CODE, p.ITEM_CODE,PRODUCT_CODE,inv.INVENTORY_ITEM_ID, PACKAGING_CODE, OPERAND FROM xxdkapps_price_list_master as p, xxdkapps_product_inventory as inv where inv.ITEM_CODE=p.ITEM_CODE and p.ACCOUNT_NUMBER=". $CUSTOMER_NUMBER." AND p.BUSINESS_CODE='SHIP_TO' AND p.ACCOUNT_STATUS='A' AND p.SITE_USE_ID=".$SHIP_TO_ID."
 		AND p.PRODUCT_CODE= ". $pcode ." AND p.PACKAGING_CODE like '%".$pValuesArr['pack']."' limit 1";
@@ -240,6 +243,9 @@ if($orgWiseProducts !="no")
 		$defaultPriceList ="1017352";
 		$defaultPriceListName ="DKCT Default Web App Price List";
 		$createdBy="1970";
+		echo "<pre>";
+		print_r($prodDetArr);
+		exit;
 		foreach($orgData as $id=>$orgD)
 		{
 			if($orgD['ATTRIBUTE_NAME']=="ORDER_TYPE")
