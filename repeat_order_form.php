@@ -95,7 +95,7 @@ $con =new functions();
 				<textarea class="form-control" id="comments" name="comments" placeholder="Comments"></textarea>
 			</div>
 			<div class="form-group">
-				<button type="button" class="btn btn-primary" id="place_order"><i class="fa fa-check"></i> SUBMIT</button>
+				<button type="button" class="btn btn-primary" id="repeat_place_order"><i class="fa fa-check"></i> SUBMIT</button>
 			</div>
 		</form>
 	</div>

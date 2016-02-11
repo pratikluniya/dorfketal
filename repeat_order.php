@@ -76,19 +76,25 @@ if($result != "no")
                                             <span id="con_person"><?php echo ($result[$key]['CONTACT_PERSON']);?></span><br><br>
                                             <label class="history_label">Pay Terms : </label>
                                             <span id="pay_term"><?php echo ($result[$key]['ATTRIBUTE12']);?></span><br><br>
-                                            <button id="repeat_order" class="btn btn-primary pull-right">Repeat Order</button>
                                         </div>
                                         <div class="container col-md-6">
                                             <label class="history_label">Oracle Order : </label>
                                             <span id="oracle_order"><?php echo ($result[$key]['ORACLE_ORDER']);?></span><br><br>
                                             <label class="history_label">Order Date: </label>
                                             <span id="order_date"><?php echo ($result[$key]['ORDER_DATE']);?></span><br><br>
-                                            <label class="history_label">Product Name : </label><?php echo ($result[$key]['DESCRIPTION']);?><br><br>
-                                            <label class="history_label">Quantity : </label><?php echo ($result[$key]['QUANTITY']." KG");?><br><br>
-                                            <label class="history_label">Packaging Size : </label><?php echo ($result[$key]['PACKAGE_QTY']." Drum/Tank");?><br><br>
-                                            <label class="history_label">Price : </label><?php echo ($result[$key]['UNIT_PRICE']." /KG");?><br><br>
+                                            <label class="history_label">Product Name : </label>
+                                            <span id="rep_prod_desc"><?php echo ($result[$key]['DESCRIPTION']);?></span>/<br><br>
+                                            <label class="history_label">Quantity : </label>
+                                            <span id="qty"><?php echo ($result[$key]['QUANTITY']." KG");?></span><br><br>
+                                            <label class="history_label">Packaging Size : </label>
+                                            <span id="pkg_size"><?php echo ($result[$key]['PACKAGE_QTY']." Drum/Tank");?></span><br><br>
+                                            <label class="history_label">Price : </label>
+                                            <span id="operand"><?php echo ($result[$key]['UNIT_PRICE']." /KG");?></span><br><br>
                                             <label class="history_label">Comments : </label>
-                                            <span id="comments"><?php echo ($result[$key]['COMMENTS']);?></span>
+                                            <span id="comments"><?php echo ($result[$key]['COMMENTS']);?></span><br><br>
+                                            <label class="history_label">Remark : </label>
+                                            <span id="remark"><?php echo ($result[$key]['REMARKS']);?></span><br><br>
+                                            <button id="repeat_order" class="btn btn-primary pull-right">Repeat Order</button> 
                                         </div>
                                   </div> 
                               </td>

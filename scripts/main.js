@@ -699,20 +699,26 @@ $(document).ready(function () {
 $(document).ready(function () { 
     $(".main_body" ).on( "click","#repeat_order", function(e) {
         $('#loading').addClass("showloading");
-        var po = $(this).parent().find("#PO").val();
-        var ship_to_id = $(this).parent().find("#ship_to_id").val();
-        var sold_to_id = $(this).parent().find("#sold_to_id").val();
-        var con_person = $(this).parent().find("#con_person").text();
-        var vessel = $(this).parent().find("#vessel").text();
+        var prod_desc = $(this).parent().find("#rep_prod_desc").text();
+        var pkg_size = $(this).parent().find("#pkg_size").text();
+        var qty = $(this).parent().find("#qty").text();
+        var operand = $(this).parent().find("#operand").text();
+        var remark = $(this).parent().find("#remark").text();
+        $('#topcontrol').trigger('click');
         $('.main_heading').html("Checkout Order Form");
         $('.main_body').load('repeat_order_form.php',function(data){
-            $('#PO_number').val(po);
-            $('#contact_person').val(con_person);
-            $('#sold_to').val(sold_to_id);
-            $('#ship_to').val(ship_to_id);
-            $('#vessel_name').val(vessel);
+            // $('#contact_person').val(con_person);
+            // $('#sold_to').val(sold_to_id);
+            // $('#ship_to').val(ship_to_id);
+            // $('#vessel_name').val(vessel);
+            $('#checkout_data').append('<input type="hidden" id="rep_prod_desc" value="'+prod_desc+'">');
+            $('#checkout_data').append('<input type="hidden" id="rep_prod_qty" value="'+qty+'">');
+            $('#checkout_data').append('<input type="hidden" id="rep_prod_pkg_size" value="'+pkg_size+'">');
+            $('#checkout_data').append('<input type="hidden" id="rep_prod_price" value="'+operand+'">');
+            $('#checkout_data').append('<input type="hidden" id="rep_prod_remark" value="'+remark+'">');  
             $('#loading').removeClass("showloading");
         });
+
     });
 });
 /********  Cart JS  *****/ 
@@ -978,6 +984,120 @@ $(document).ready(function () {
         }
     });
 });
+
+/********  Repeat Order JS  *****/
+$(document).ready(function () {
+    $(".main_body" ).on( "click","#repeat_place_order", function(e) {
+        var err = 0;
+        var po_no = $('#PO_number').val().trim();
+        var sold_to = $("#sold_to option:selected").text().trim();
+        var sold_to_id = $("#sold_to option:selected").val().trim();
+        var ship_to = $("#ship_to option:selected").text().trim();
+        var ship_to_id = $("#ship_to option:selected").val().trim();
+        var cont_per = $('#contact_person').val().trim();
+        var del_date = $('#delivery_date').val().trim();
+        var f_term = $('#freight_term option:selected').text().trim();
+        var f_chrges = $('#freight_charges').val().trim();
+        var vessal = $('#vessel_name').val().trim();
+        var pay_term = $('#payment_term option:selected').text().trim();
+        var pay_term_id = $('#payment_term option:selected').val().trim();
+        var comments = $('#comments').val().trim();
+        var prod_desc = $('#rep_prod_desc').val().trim();
+        var qty = $('#rep_prod_qty').val().trim();
+        var pkg_size = $('#rep_prod_pkg_size').val().trim();
+        var price = $('#rep_prod_price').val().trim();
+        var remark = $('#rep_prod_remark').val().trim();
+        if(po_no == "" || po_no == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter #PO Number!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;  
+        }
+        else if(sold_to == "Choose One")
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Select Sold_To Value!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(ship_to == "Choose One")
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Select Ship_To Value!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(cont_per == "" || cont_per == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter Contact Person Name!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(del_date == "" || del_date == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Select Delivery Date!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(f_term == "Choose One")
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Select Freight Term!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(f_term == "At Site" && f_chrges=="" || f_term == "At Site" && f_chrges == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter Freight Charges!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        if(err == 0)
+        {
+            $.ajax({
+            type: "POST",
+            url: "repeat_order_summary.php",
+            data: 'po_no=' + po_no +'&sold_to='+ sold_to +'&sold_to_id='+ sold_to_id +'&ship_to=' + ship_to +'&ship_to_id='+ ship_to_id +'&cont_per='+ cont_per +'&del_date='+ del_date +'&f_term='+ f_term +'&f_chrges='+ f_chrges +'&vessal='+ vessal +'&pay_term='+ pay_term +'&pay_term_id='+ pay_term_id +'&comments='+ comments +'&prod_desc=' + prod_desc +'&pkg_size='+ pkg_size +'&qty='+ qty +'&price='+ price + '&remark='+ remark + '&action=repeat_order',
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
+            success: function( returnedData ){
+                $('.notify').html("<span class='close-notify'>&times;</span><strong>Order Placed Successfully!</strong> ");
+                $('.notify').removeClass('notify-failed');
+                $('.notify').addClass('notify-success');
+                $('.notify').show();
+                setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+                $('.main_heading').html("Order Summary");
+                $('.main_body').html(returnedData);
+            },
+            complete: function(){
+                $('#loading').removeClass("showloading");
+                $.ajax({
+                type: "POST",
+                    url: "ajax.php",
+                    data:'action=getcartcount',
+                    success: function( returnedData1 ){
+                        $("#cart_count").html(returnedData1);
+                    }
+                });
+            }
+        });
+        }
+    });
+});
+
+/********  Contact Us JS  *****/
 $(document).ready(function () {
     $(".main_body" ).on( "click","#submit_query", function(e) {
         var err = 0;

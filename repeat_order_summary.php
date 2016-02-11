@@ -3,13 +3,17 @@ include("./classes/functions.php");
 $con =new functions();
 session_start();
 date_default_timezone_set("Asia/Kolkata");
-
+// echo "<pre>";
+// print_r($_REQUEST);
+// exit;
 /********  Fetch Cart Products  *****/
-$sql_prod ="SELECT up.ID, up.PRODUCT_CODE AS  ITEM_CODE, up.DESCRIPTION, up.ATTRIBUTE18 as  PRODUCT_APPLICATION, up.ATTRIBUTE17 as PRODUCT_GROUP, cc.CUSTOMER_NUMBER, cc.QUANTITY, cc.PACKAGING_SIZE, cc.AVAILABLE_PRICE, cc.REMARK FROM customer_cart as cc, xxdkapps_unsegregated_products as up WHERE cc.CUSTOMER_NUMBER= '" . $_SESSION['cust_id']."' and cc.PRODUCT_CODE = up.PRODUCT_CODE";
+$sql_prod ="SELECT ID, PRODUCT_CODE AS  ITEM_CODE, DESCRIPTION, ATTRIBUTE18 as  PRODUCT_APPLICATION, ATTRIBUTE17 as PRODUCT_GROUP FROM xxdkapps_unsegregated_products as up WHERE DESCRIPTION = '".$_REQUEST['prod_desc']."'";
 $result_prod=$con->data_select($sql_prod);
-echo "<pre>";
-print_r($result_prod);
-exit;
+$result_prod [0]['CUSTOMER_NUMBER'] = $_SESSION['cust_id'];
+$result_prod [0]['QUANTITY'] = trim(substr($_REQUEST['qty'], 0,-3));
+$result_prod [0]['PACKAGING_SIZE'] = trim(substr($_REQUEST['pkg_size'], 0,-10));
+$result_prod [0]['AVAILABLE_PRICE'] = trim(substr($_REQUEST['price'], 0,-4));
+$result_prod [0]['REMARK'] = $_REQUEST['remark'];
 
 /********  Order Form Data Fields  *****/
 $ORDER_WEB_ID = 0;
