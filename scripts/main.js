@@ -113,8 +113,11 @@ $(document).ready(function () {
 /********  Left Sidebar Click Events  *****/ 
 $(document).ready(function () {
 	$("#place_order_btn" ).on( "click", function() {
+        $('#loading').addClass("showloading");
 		$('.main_heading').html("Place Order");
-		$('.main_body').load('categories.php');
+		$('.main_body').load('categories.php', function(data){
+            $('#loading').removeClass("showloading");
+        });
     });
 });
 $(document).ready(function () {
@@ -162,9 +165,30 @@ $(document).ready(function () {
 	});
 });
 $(document).ready(function () {
-	$("#order_history_btn" ).on( "click", function() {
-		$('.main_heading').html("Order History");
-		$('.main_body').load('order_history.php');
+    $("#order_history_btn" ).on( "click", function() {
+        $('#loading').addClass("showloading");
+        $('.main_heading').html("Order History");
+        $('.main_body').load('order_history.php', function(data){
+            $('#loading').removeClass("showloading");
+        });
+    });
+});
+$(document).ready(function () {
+    $("#repeat_order_btn" ).on( "click", function() {
+        $('#loading').addClass("showloading");
+        $('.main_heading').html("Repeat Order");
+        $('.main_body').load('repeat_order.php', function(data){
+            $('#loading').removeClass("showloading");
+        });
+    });
+});
+$(document).ready(function () {
+    $("#sales_order_btn" ).on( "click", function() {
+        $('#loading').addClass("showloading");
+        $('.main_heading').html("Sales Order Agreement");
+        $('.main_body').load('sales_order_agreement.php', function(data){
+            $('#loading').removeClass("showloading");
+        });
     });
 });
 $(document).ready(function () {
@@ -200,8 +224,11 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
     $("#upload_po_btn" ).on( "click", function() {
+        $('#loading').addClass("showloading");
         $('.main_heading').html("Upload PO#");
-        $('.main_body').load('upload_po.php');
+        $('.main_body').load('upload_po.php', function(data){
+            $('#loading').removeClass("showloading");
+        });
     });
 });
 $(document).ready(function () {
@@ -229,14 +256,20 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
 	$("#contactus_btn" ).on( "click", function() {
+        $('#loading').addClass("showloading");
 		$('.main_heading').html("Contact Us");
-		$('.main_body').load('contactus.php');
+		$('.main_body').load('contactus.php', function(data){
+            $('#loading').removeClass("showloading");
+        });
     });
 });
 $(document).ready(function () {
 	$("#req_quotation_btn" ).on( "click", function() {
+        $('#loading').addClass("showloading");
 		$('.main_heading').html("Request Quotation");
-		$('.main_body').load('req_quotation.php');
+		$('.main_body').load('req_quotation.php', function(data){
+            $('#loading').removeClass("showloading");
+        });
     });
 });
 
@@ -520,12 +553,23 @@ $(document).ready(function () {
         $("#uploaded_quote").trigger("click");  
     });
 });
+$(document).ready(function () {
+    $(".main_body" ).on( "change", "#PO_freight_term", function(e) {
+        var fterm = $("#PO_freight_term option:selected").text().trim();
+        if(fterm == "At Site")
+            $('.fc_div').show();
+        else
+            $('.fc_div').hide();
+    });
+});
 $(document).ready(function () { 
     $(".main_body" ).on( "click","#submit_po", function(e) {
         var err = 0;
         var po_no = $('#PO_number').val().trim();
         var sold_to = $("#PO_sold_to option:selected").text().trim();
+        var sold_to_id = $("#PO_sold_to option:selected").val().trim();
         var ship_to = $("#PO_ship_to option:selected").text().trim();
+        var ship_to_id =  $("#PO_ship_to option:selected").val().trim();
         var cont_per = $('#PO_contact_person').val().trim();
         var del_date = $('#PO_delivery_date').val().trim();
         var f_term = $('#PO_freight_term option:selected').text().trim();
@@ -605,7 +649,9 @@ $(document).ready(function () {
             form_data.append('action', 'uploadPO');
             form_data.append('po_no', po_no);
             form_data.append('sold_to', sold_to);
+            form_data.append('sold_to_id', sold_to_id);
             form_data.append('ship_to', ship_to);
+            form_data.append('ship_to_id', ship_to_id);
             form_data.append('cont_per', cont_per);
             form_data.append('del_date', del_date);
             form_data.append('f_term', f_term);
@@ -650,8 +696,25 @@ $(document).ready(function () {
         }
     });
 });
-
-
+$(document).ready(function () { 
+    $(".main_body" ).on( "click","#repeat_order", function(e) {
+        $('#loading').addClass("showloading");
+        var po = $(this).parent().find("#PO").val();
+        var ship_to_id = $(this).parent().find("#ship_to_id").val();
+        var sold_to_id = $(this).parent().find("#sold_to_id").val();
+        var con_person = $(this).parent().find("#con_person").text();
+        var vessel = $(this).parent().find("#vessel").text();
+        $('.main_heading').html("Checkout Order Form");
+        $('.main_body').load('repeat_order_form.php',function(data){
+            $('#PO_number').val(po);
+            $('#contact_person').val(con_person);
+            $('#sold_to').val(sold_to_id);
+            $('#ship_to').val(ship_to_id);
+            $('#vessel_name').val(vessel);
+            $('#loading').removeClass("showloading");
+        });
+    });
+});
 /********  Cart JS  *****/ 
 $(document).ready(function () {
 	$(".main_body" ).on( "click",".add_to_cart_btn", function(e) {

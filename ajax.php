@@ -144,7 +144,9 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "uploadPO") ){
 	$cust_id = $_SESSION['cust_id'];
 	$po_no = $_REQUEST['po_no'];
 	$ship_to = $_REQUEST['ship_to'];
+	$ship_to_id = $_REQUEST['ship_to_id'];
 	$sold_to = $_REQUEST['sold_to'];
+	$sold_to_id = $_REQUEST['sold_to_id'];
 	$cont_per = $_REQUEST['cont_per'];
 	$del_date = $_REQUEST['del_date'];
 	$f_term = $_REQUEST['f_term'];
@@ -154,7 +156,7 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "uploadPO") ){
 	if($pay_term == "Choose One")
 		$pay_term = "NA"; 
 	$comments = $_REQUEST['comments'];
-	$sql ="INSERT INTO customer_po (CUSTOMER_NUMBER, PO_NUMBER, SOLD_TO, SHIP_TO, CONTACT_PERSON, DELIVERY_DATE, FREIGHT_TERM, FREIGHT_CHARGES, VESSAL_NAME, PAYMENT_TERM, FILE_NAME, COMMENT) VALUES ($cust_id, '$po_no', '$sold_to', '$ship_to', '$cont_per', '$del_date', '$f_term', '$f_chrges', '$vessal', '$pay_term','".$_FILES['file']['name']."', '$comments')";
+	$sql ="INSERT INTO customer_po (CUSTOMER_NUMBER, PO_NUMBER, SOLD_TO, SHIP_TO, CONTACT_PERSON, DELIVERY_DATE, FREIGHT_TERM, FREIGHT_CHARGES, VESSAL_NAME, PAYMENT_TERM, FILE_NAME, COMMENT) VALUES ($cust_id, '$po_no', '$sold_to_id', '$ship_to_id', '$cont_per', '$del_date', '$f_term', '$f_chrges', '$vessal', '$pay_term','".$_FILES['file']['name']."', '$comments')";
 	$result=$con->data_insert($sql);
 	echo "Success";
 	if ( 0 < $_FILES['file']['error'] ) 

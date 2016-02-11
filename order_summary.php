@@ -137,9 +137,6 @@ foreach($productDetailsRes as $id=> $pResArr)
 		
 	}
 }
-// echo "<pre>";
-// print_r($prodDetArr);
-// exit;
 foreach( $prodDetArr as $pcode => $pValuesArr)
 {
     if($pValuesArr['pack']!="ANY" && $pValuesArr['AVAILABLE_PRICE']!=1 )
@@ -177,27 +174,27 @@ $orderIdArr=array();
 if($orgWiseProducts !="no")
 {
 	$webOrderIdStr = "";
-	foreach($orgWiseProducts as $org=>$prodArr)
+	foreach($orgWiseProducts as $ORG_ID=>$prodArr)
 	{
 		$lastOrderIdSql  ="SELECT DATE_FORMAT( ORDER_DATE,  '%Y-%m-%d' ) AS perday, MAX( DAY_SEQUENCE ) AS max FROM order_form_details WHERE DATE_FORMAT( ORDER_DATE,  '%Y-%m-%d' ) =CURDATE( ) GROUP BY DATE( ORDER_DATE ) ";
 		$maxIdArr = $con->data_select($lastOrderIdSql);
 		if($maxIdArr !="no")
 		{
-			$lastId = $maxIdArr[0]['max']+1;
+			$LAST_ID = $maxIdArr[0]['max']+1;
 		}
 		else
 		{
-			$lastId =1;
+			$LAST_ID =1;
 		}
-		if($org=="")
+		if($ORG_ID=="")
 		{
-			$org ="722";
+			$ORG_ID ="722";
 		}
 		$orderDate =date("Y-m-d H:i:s");
 		$day =date("ymdH");
-		$orgStr = str_pad($org, 4, "0", STR_PAD_LEFT); 
-		$orderWebId = "DKP".$orgStr.$day."T".$lastId;
-		$webOrderIdStr.=$orderWebId.",";
+		$orgStr = str_pad($ORG_ID, 4, "0", STR_PAD_LEFT); 
+		$ORDER_WEB_ID = "DKP".$orgStr.$day."T".$LAST_ID;
+		$webOrderIdStr.=$ORDER_WEB_ID.",";
 
 
 /********  Fetch order type  *****/
@@ -206,91 +203,88 @@ if($orgWiseProducts !="no")
 		$orderTypeRes = $con->data_select($orderTypeSql);
 		if(isset($orderTypeRes[0]['ORDER_TYPE_ID']))
 		{
-			$orderType =$orderTypeRes[0]['ORDER_TYPE_ID'];
+			$ORDER_TYPE =$orderTypeRes[0]['ORDER_TYPE_ID'];
 		}
 		else
 		{
-			$orderType ="1434";
+			$ORDER_TYPE ="1434";
 		}
 
 
 /********  Fetch payment terms  *****/
 		$salesRepArr = array();
 		$salesRep="";
-		$salesRepSql = "SELECT SALESREP_ID, ORG_ID,SHIP_TO_ORG_ID,CUSTOMER_NUMBER FROM xxdkapps_customer_ship_salesrep where CUSTOMER_NUMBER =".$CUSTOMER_NUMBER." AND ORG_ID =".$org. " AND SHIP_TO_ORG_ID=".$SHIP_TO_ID ." limit 1";
+		$salesRepSql = "SELECT SALESREP_ID, ORG_ID,SHIP_TO_ORG_ID,CUSTOMER_NUMBER FROM xxdkapps_customer_ship_salesrep where CUSTOMER_NUMBER =".$CUSTOMER_NUMBER." AND ORG_ID =".$ORG_ID. " AND SHIP_TO_ORG_ID=".$SHIP_TO_ID ." limit 1";
 		$salesRepArr = $con->data_select($salesRepSql);
 		if($salesRepArr !="no")
 		{
-			$salesRep=trim($salesRepArr[0]['SALESREP_ID']);
+			$SALESREP_ID=trim($salesRepArr[0]['SALESREP_ID']);
 		}
 		$attribute12 = $PAYMENT_TERM;
-		$paymentTermId= $PAYMENT_TERM_ID;
+		$PAYMENT_TERM_ID= $PAYMENT_TERM_ID;
 		
 		if($attribute12 = "Choose One")
 		{
-			$paymentSql ="SELECT * FROM xxdkapps_customer_payment_terms WHERE CUSTOMER_NUMBER =".$CUSTOMER_NUMBER." AND  ORG_ID =".$org." limit 1";
+			$paymentSql ="SELECT * FROM xxdkapps_customer_payment_terms WHERE CUSTOMER_NUMBER =".$CUSTOMER_NUMBER." AND  ORG_ID =".$ORG_ID." limit 1";
 			$paymentRes = $con->data_select($paymentSql);
 			if($paymentRes !="no")
 			{
 				$attribute12 =$paymentRes[0]['PAYMENT_TERM_NAME'];
-				$paymentTermId=$paymentRes[0]['PAYMENT_TERM_ID'];
+				$PAYMENT_TERM_ID=$paymentRes[0]['PAYMENT_TERM_ID'];
 			}
 		}
-		$orgSql ="select ATTRIBUTE_NAME, ATTRIBUTE_VALUE, ATTRIBUTE_ID, ENTITY_ID from xxdkapps_default_attributes where ATTRIBUTE_NAME in ('ORDER_TYPE','DEFAULT_WAREHOUSE','SALES_PERSON','PAYMENT_TERMS','DEFAULT_APP_PRICE_LIST','CURRENCY_CODE','CREATED_BY') and ENTITY_ID in (0, ".$org.")";
+		$orgSql ="select ATTRIBUTE_NAME, ATTRIBUTE_VALUE, ATTRIBUTE_ID, ENTITY_ID from xxdkapps_default_attributes where ATTRIBUTE_NAME in ('ORDER_TYPE','DEFAULT_WAREHOUSE','SALES_PERSON','PAYMENT_TERMS','DEFAULT_APP_PRICE_LIST','CURRENCY_CODE','CREATED_BY') and ENTITY_ID in (0, ".$ORG_ID.")";
 		$orgData = $con->data_select($orgSql);
-		$defaultWarehouse ="502";
-		$currCode ="INR";
-		$defaultPriceList ="1017352";
+		$DEFAULT_WAREHOUSE ="502";
+		$TRANSACTIONAL_CURR_CODE ="INR";
+		$DEFAULTPRICELIST ="1017352";
 		$defaultPriceListName ="DKCT Default Web App Price List";
-		$createdBy="1970";
-		echo "<pre>";
-		print_r($prodDetArr);
-		exit;
+		$CREATED_BY="1970";
 		foreach($orgData as $id=>$orgD)
 		{
 			if($orgD['ATTRIBUTE_NAME']=="ORDER_TYPE")
 			{
-				if($orderType=="1434")
+				if($ORDER_TYPE=="1434")
 				{
-					$orderType =$orgD['ATTRIBUTE_ID'];
+					$ORDER_TYPE =$orgD['ATTRIBUTE_ID'];
 				}
 			}
 			if($orgD['ATTRIBUTE_NAME']=="DEFAULT_WAREHOUSE")
 			{
-				$defaultWarehouse =$orgD['ATTRIBUTE_ID'];
+				$DEFAULT_WAREHOUSE =$orgD['ATTRIBUTE_ID'];
 			}
 			if($orgD['ATTRIBUTE_NAME']=="SALES_PERSON" )
 			{
-				if($salesRep==""||$salesRep==0)
+				if($SALESREP_ID==""||$SALESREP_ID==0)
 				{
-					$salesRep =$orgD['ATTRIBUTE_ID'];
+					$SALESREP_ID =$orgD['ATTRIBUTE_ID'];
 				}
 			}
 			if($orgD['ATTRIBUTE_NAME']=="PAYMENT_TERMS")
 			{
-				if($attribute12=="" && $paymentTermId=="")
+				if($attribute12=="" && $PAYMENT_TERM_ID=="")
 				{
-					$paymentTermId =$orgD['ATTRIBUTE_ID'];	
+					$PAYMENT_TERM_ID =$orgD['ATTRIBUTE_ID'];	
 					$attribute12=$orgD['ATTRIBUTE_VALUE'];
 				}
 			}
 			if($orgD['ATTRIBUTE_NAME']=="CURRENCY_CODE")
 			{
-				$currCode =$orgD['ATTRIBUTE_VALUE'];
+				$TRANSACTIONAL_CURR_CODE =$orgD['ATTRIBUTE_VALUE'];
 			}
 			if($orgD['ATTRIBUTE_NAME']=="DEFAULT_APP_PRICE_LIST")
 			{
-				$defaultPriceList =$orgD['ATTRIBUTE_ID'];
+				$DEFAULTPRICELIST =$orgD['ATTRIBUTE_ID'];
 				$defaultPriceListName =$orgD['ATTRIBUTE_VALUE'];
 			}
 			if($orgD['ATTRIBUTE_NAME']=="CREATED_BY")
 			{
-				$createdBy=$orgD['ATTRIBUTE_ID'];
+				$CREATED_BY=$orgD['ATTRIBUTE_ID'];
 			}
 		}
-		$curr_date = date('Y-m-d H:i:s');
+		$CURR_DATE = date('Y-m-d H:i:s');
 		$sql_order_form_insert = "INSERT INTO order_form_details (ID, PO, CUSTOMER_NUMBER,ORDER_DATE, SOLD_TO, SHIP_TO, CONTACT_PERSON, DELIVERY_DATE, ORDERED_FROM, ORDER_WEB_ID, UPLOAD_TYPE, TRANSACTIONAL_CURR_CODE, ORDER_TYPE, SALESREP_ID, ORG_ID, PRICE_LIST_ID, SHIP_FROM_ORG_ID, SOLD_TO_ORG_ID, CREATED_BY, PAYMENT_TERM_ID, INVOICE_TO_ORG_ID, VESSEL, COMMENTS, ATTRIBUTE12, FREIGHT_TERMS, FREIGHT_VALUE, DAY_SEQUENCE) 
-		VALUES (NULL, '$PO', $CUSTOMER_NUMBER , '$curr_date', $SOLD_TO_ID, $SHIP_TO_ID, '$CONTACT_PERSON', '$DELIVERY_DATE', 'PORTAL', '$orderWebId', 'ORDER', '$currCode', $orderType, $salesRep, $org, $defaultPriceList, $defaultWarehouse, $SOLD_TO_ORG_ID, $createdBy, $paymentTermId, $INVOICE_TO_ORG_ID, '$VESSEL', '$COMMENTS', '$ATTRIBUTE12', '$FREIGHT_TERMS', '$FREIGHT_VALUE', $lastId	)";
+		VALUES (NULL, '$PO', $CUSTOMER_NUMBER , '$CURR_DATE', $SOLD_TO_ID, $SHIP_TO_ID, '$CONTACT_PERSON', '$DELIVERY_DATE', 'PORTAL', '$ORDER_WEB_ID', 'ORDER', '$TRANSACTIONAL_CURR_CODE', $ORDER_TYPE, $SALESREP_ID, $ORG_ID, $DEFAULTPRICELIST, $DEFAULT_WAREHOUSE, $SOLD_TO_ORG_ID, $CREATED_BY, $PAYMENT_TERM_ID, $INVOICE_TO_ORG_ID, '$VESSEL', '$COMMENTS', '$ATTRIBUTE12', '$FREIGHT_TERMS', '$FREIGHT_VALUE', $LAST_ID	)";
 		$lastInsertId=$con->data_insert_return_id($sql_order_form_insert);
 		foreach ($prodArr as $id=>$pC)
 		{
@@ -307,7 +301,6 @@ if($orgWiseProducts !="no")
 			$tot = ($up *  $qty);
 			$sql_order_products_insert = "INSERT INTO order_products (ID, ORDER_ID, PRICE_LIST_ID, PRODUCT_CODE, PACKAGE_CODE, ITEM_CODE, INVENTORY_ITEM_ID, PACKAGE_QTY, PRODUCT_TOTAL, QUANTITY, UOM, UNIT_PRICE,	ORG_ID, REMARKS) 
 			VALUES (NULL, $lastInsertId, $pcl , $pC, '$pkcd', '$icd', $ivd, '$pksz', '$tot', '$qty', '$uom', $up, $oid, '$rmk') ";
-			echo $sql_order_products_insert;
 			$result=$con->data_insert_return_id($sql_order_products_insert);
 		}
 	}

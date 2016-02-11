@@ -14,8 +14,8 @@
                     <li class="hide-nav" id="fav_vertical_btn"><a href="#">Favorite Vertical</a></li>                    
                     <li class="hide-nav" id="reset_vertical_btn"><a href="#">Reset Favorite Vertical</a></li>
                     <li class="hide-nav" id="order_history_btn"><a href="#">View Order History</a></li>
-                    <li class="hide-nav"><a href="#">Repeat Order</a></li>                    
-                    <li class="hide-nav"><a href="#">Sales Order Agreement</a></li>
+                    <li class="hide-nav" id="repeat_order_btn"><a href="#">Repeat Order</a></li>                    
+                    <li class="hide-nav" id="sales_order_btn"><a href="#">Sales Order Agreement</a></li>
                 </ul>
             </li>
             <li>
