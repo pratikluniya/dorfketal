@@ -7,9 +7,6 @@ date_default_timezone_set("Asia/Kolkata");
 /********  Fetch Cart Products  *****/
 $sql_prod ="SELECT up.ID, up.PRODUCT_CODE AS  ITEM_CODE, up.DESCRIPTION, up.ATTRIBUTE18 as  PRODUCT_APPLICATION, up.ATTRIBUTE17 as PRODUCT_GROUP, cc.CUSTOMER_NUMBER, cc.QUANTITY, cc.PACKAGING_SIZE, cc.AVAILABLE_PRICE, cc.REMARK FROM customer_cart as cc, xxdkapps_unsegregated_products as up WHERE cc.CUSTOMER_NUMBER= '" . $_SESSION['cust_id']."' and cc.PRODUCT_CODE = up.PRODUCT_CODE";
 $result_prod=$con->data_select($sql_prod);
-echo "<pre>";
-print_r($result_prod);
-exit;
 
 /********  Order Form Data Fields  *****/
 $ORDER_WEB_ID = 0;

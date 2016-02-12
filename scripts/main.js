@@ -154,11 +154,11 @@ $(document).ready(function () {
             },
             success: function( returnedData ){
                 fval = returnedData;
-	            $('input[name="cat_name"]').each(function () {
-    					if ($(this).val() == fval) $(this).closest('.hpanel').addClass('f-cat');
-					});
 			},
             complete: function(){
+                $('input[name="cat_name"]').each(function () {
+                        if ($(this).val() == fval) $(this).closest('.hpanel').addClass('f-cat');
+                    });
                 $('#loading').removeClass("showloading");
             }
 		});

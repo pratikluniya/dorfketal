@@ -72,7 +72,7 @@ $con =new functions();
 				</select>
 			</div>
 			<div class="form-group fc_div">
-				<label for="freight_charges">Freight Charges : </label>
+				<label for="freight_charges">Freight Charges<sup class="required_field">*</sup> : </label>
 				<input class="form-control" type="text" name="freight_charges" id="PO_freight_charges" placeholder="Freight Charges" required>
 			</div>
 			<div class="form-group">
