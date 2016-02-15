@@ -17,7 +17,7 @@ include("side_navigation.php");
                 <div class="col-lg-6">
                     <span id="mycart">
                         <img src="images/cart-icon.png" style="height:60px;">
-                        <span class="" id="cart_count">
+                        <span class="" id="cart_count" style="<?php if($_SESSION['cart_count'] > 9) { echo'margin:16px 0px 0px -46px';  } else{  echo 'margin:16px 0px 0px -40px'; } ?>;">
                             <?php echo $_SESSION['cart_count'];?>
                         </span>
                     </span>

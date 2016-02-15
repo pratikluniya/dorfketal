@@ -125,7 +125,7 @@ $result_custom=$con->data_select($query_custom);
                             <th>Quantity&nbsp;</th>
                             <th>Currency&nbsp;</th>
                             <th>Shipment&nbsp;Value</th>                                                     
-                            <th>Sailing&nbsp;Date</th>
+                            <th>Selling&nbsp;Date</th>
                             <th>Arrival&nbsp;Date&nbsp;@&nbsp;Destination</th>
                             <th>Require&nbsp;Date&nbsp;@&nbsp;Destination</th>
                             <th>Remarks</th>

@@ -494,52 +494,62 @@ $(document).ready(function () {
         }
         else
         {
-            var file_data = $('#uploaded_quote').prop('files')[0];   
-            var form_data = new FormData();                  
-            form_data.append('file', file_data);
-            form_data.append('action', 'insertquote');
-            form_data.append('cat_name', q_cat);
-            form_data.append('prod_id', q_prod_id);
-            form_data.append('price', price);
-            form_data.append('req_price', req_price);
-            form_data.append('pkg_size', q_packaging_size);
-            form_data.append('qty', qty);
-            form_data.append('remark', remark);
-            $.ajax({
-                url: 'ajax.php',
-                dataType: 'text',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: form_data,                      
-                type: 'post',
-                beforeSend: function(){
-                    $('#loading').addClass("showloading");
-                },
-                success: function( returnedData ){
-                    $("#q_cat").val("0");
-                    $("#q_prod").val("0");
-                    $("#q_packaging_size").val("0");
-                    $("#q_price").val("");
-                    $("#q_req_price").val("");
-                    $("#q_quantity").val("");
-                    $("#q_remark").val("");
-                    $("#q_prod").attr("disabled", "disabled");
-                    $("#q_packaging_size").attr("disabled", "disabled");
-                    $("#q_price").attr("disabled", "disabled");
-                    $("#q_req_price").attr("disabled", "disabled");
-                    $("#q_quantity").attr("disabled", "disabled");
-                    $('.notify').html("<span class='close-notify'>&times;</span><strong>Quotation Submitted!</strong> ");
-                    $('.notify').removeClass('notify-failed');
-                    $('.notify').addClass('notify-success');
-                    $('.notify').show();
-                    $('#uploaded_quote').replaceWith($('#uploaded_quote').val('').clone(true));
-                    setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
-                },
-                complete: function(){
-                    $('#loading').removeClass("showloading");
-                }
-            });
+            if(isNaN(qty))
+            {
+                $('.notify').html("<span class='close-notify'>&times;</span><strong>Quantity Must in Number!</strong> ");
+                $('.notify').removeClass('notify-success');
+                $('.notify').addClass('notify-failed');
+                $('.notify').show();
+            }
+            else
+            {
+                var file_data = $('#uploaded_quote').prop('files')[0];   
+                var form_data = new FormData();                  
+                form_data.append('file', file_data);
+                form_data.append('action', 'insertquote');
+                form_data.append('cat_name', q_cat);
+                form_data.append('prod_id', q_prod_id);
+                form_data.append('price', price);
+                form_data.append('req_price', req_price);
+                form_data.append('pkg_size', q_packaging_size);
+                form_data.append('qty', qty);
+                form_data.append('remark', remark);
+                $.ajax({
+                    url: 'ajax.php',
+                    dataType: 'text',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: form_data,                      
+                    type: 'post',
+                    beforeSend: function(){
+                        $('#loading').addClass("showloading");
+                    },
+                    success: function( returnedData ){
+                        $("#q_cat").val("0");
+                        $("#q_prod").val("0");
+                        $("#q_packaging_size").val("0");
+                        $("#q_price").val("");
+                        $("#q_req_price").val("");
+                        $("#q_quantity").val("");
+                        $("#q_remark").val("");
+                        $("#q_prod").attr("disabled", "disabled");
+                        $("#q_packaging_size").attr("disabled", "disabled");
+                        $("#q_price").attr("disabled", "disabled");
+                        $("#q_req_price").attr("disabled", "disabled");
+                        $("#q_quantity").attr("disabled", "disabled");
+                        $('.notify').html("<span class='close-notify'>&times;</span><strong>Quotation Submitted!</strong> ");
+                        $('.notify').removeClass('notify-failed');
+                        $('.notify').addClass('notify-success');
+                        $('.notify').show();
+                        $('#uploaded_quote').replaceWith($('#uploaded_quote').val('').clone(true));
+                        setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+                    },
+                    complete: function(){
+                        $('#loading').removeClass("showloading");
+                    }
+                });
+            }
         }
     });
 });
@@ -738,36 +748,56 @@ $(document).ready(function () {
         }
         else
         {
-    		$.ajax({
-                type: "POST",
-                url: "ajax.php",
-                data: 'prod_code=' + prod_code +'&prod_desc='+desc +'&remark='+ remark +'&pkgsize=' + pkgsize +'&qty='+qty +'&action=insertcart',
-                beforeSend: function(){
-                    $('#loading').addClass("showloading");
-                },
-                success: function( returnedData ){
-                		if($.isNumeric( returnedData )){ 
-                			$('.notify').html("<span class='close-notify'>&times;</span><strong>Product Added to Cart!</strong> ");
-                            $('.notify').removeClass('notify-failed');
-                            $('.notify').addClass('notify-success');
-                            $('.notify').show();
-                            setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
-                            $("#cart_count").html(returnedData);
-                		}
-                		else
-                		{
-                			$('.notify').html("<span class='close-notify'>&times;</span><strong>"+returnedData+"!</strong> ");
-                            $('.notify').removeClass('notify-success');
-                            $('.notify').addClass('notify-failed');
-                            $('.notify').show();
-                            setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
-                		}
-            	},
-                complete: function(){
-                    $('#loading').removeClass("showloading");
-                }
-            });
-        }
+            if(isNaN(qty))
+            {
+                $('.notify').html("<span class='close-notify'>&times;</span><strong>Quantity Must in Number!</strong> ");
+                $('.notify').removeClass('notify-success');
+                $('.notify').addClass('notify-failed');
+                $('.notify').show();
+            }
+            else
+            {
+        		$.ajax({
+                    type: "POST",
+                    url: "ajax.php",
+                    data: 'prod_code=' + prod_code +'&prod_desc='+desc +'&remark='+ remark +'&pkgsize=' + pkgsize +'&qty='+qty +'&action=insertcart',
+                    beforeSend: function(){
+                        $('#loading').addClass("showloading");
+                    },
+                    success: function( returnedData ){
+                    		if($.isNumeric( returnedData )){ 
+                    			$('.notify').html("<span class='close-notify'>&times;</span><strong>Product Added to Cart!</strong> ");
+                                $('.notify').removeClass('notify-failed');
+                                $('.notify').addClass('notify-success');
+                                $('.notify').show();
+                                setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+                                if(returnedData > 9)
+                                {
+                                    $("#cart_count").css("margin","16px 0px 0px -46px");
+                                }
+                                else{
+                                    $("#cart_count").css("margin","16px 0px 0px -40px");
+                                }
+                                $("#cart_count").html(returnedData);
+                                $(".qty").val("");
+                                $(".remark").val("");
+                                $(".pkg_size").val("ANY");
+                    		}
+                    		else
+                    		{
+                    			$('.notify').html("<span class='close-notify'>&times;</span><strong>"+returnedData+"!</strong> ");
+                                $('.notify').removeClass('notify-success');
+                                $('.notify').addClass('notify-failed');
+                                $('.notify').show();
+                                setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+                    		}
+                	},
+                    complete: function(){
+                        $('#loading').removeClass("showloading");
+                    }
+                });
+            }
+        }    
     });
 });
 $(document).ready(function () {
@@ -792,8 +822,37 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
 	$(".main_body" ).on( "click","#checkout_btn", function(e) {
-        $('.main_heading').html("Checkout Order Form");
-        $('.main_body').load('order_form.php');    
+        var err=0;
+        $('#cart_table > tbody > tr.item').each(function() {
+            var qty = $(this).find("input.cart-qty").val().trim();
+            if(qty == "" || qty == null)
+            {
+                err=1;
+            }
+            if(isNaN(qty))
+            {
+                err=2;
+            }
+        });
+        if(err == 0)
+        {
+            $('.main_heading').html("Checkout Order Form");
+            $('.main_body').load('order_form.php');
+        }    
+        else if(err == 1)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter Quantity for all Products!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+        }
+        else
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Quantity Must in Number!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+        }
 	});
 });
 $(document).ready(function () {
@@ -819,6 +878,13 @@ $(document).ready(function () {
                 $('.notify').addClass('notify-failed');
                 $('.notify').show();
                 setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+                if(returnedData > 9)
+                                {
+                                    $("#cart_count").css("margin","16px 0px 0px -46px");
+                                }
+                                else{
+                                    $("#cart_count").css("margin","16px 0px 0px -40px");
+                                }
     			$("#cart_count").html(returnedData);
     		},
             complete: function(){
@@ -840,29 +906,49 @@ $(document).ready(function () {
 		var qty = $(this).parent().find('.cart-qty').val().trim();
 		var pkgsize = $(this).parent().find('.cart-pck-size').val().trim();
 		var remark = $(this).parent().find('.cart-remark').val().trim();
-		$.ajax({
-            type: "POST",
-            url: "ajax.php",
-            data: 'prod_code=' + prod_code +'&qty='+ qty +'&pkgsize=' + pkgsize +'&remark='+ remark +'&action=updatecart',
-            beforeSend: function(){
-                $('#loading').addClass("showloading");
-            },
-            success: function( returnedData ){
-    			if(returnedData == "success")
-    			{
-                    $('.notify').html("<span class='close-notify'>&times;</span><strong>Product Information Updated!</strong> ");
-                    $('.notify').removeClass('notify-failed');
-                    $('.notify').addClass('notify-success');
-                    $('.notify').show();
-                    setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
-				}
-    		},
-            complete: function(){
-                $('#loading').removeClass("showloading");
+        if(qty == "" || qty == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter Quantity!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+        }
+        else
+        {
+            if(isNaN(qty))
+            {
+                $('.notify').html("<span class='close-notify'>&times;</span><strong>Quantity Must be a Number!</strong> ");
+                $('.notify').removeClass('notify-success');
+                $('.notify').addClass('notify-failed');
+                $('.notify').show();
             }
-    	});
-    	$(this).parent().parent().find('.remove_product_btn').show();
-		$(this).parent().parent().find('.save_product_btn').hide();
+            else
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "ajax.php",
+                    data: 'prod_code=' + prod_code +'&qty='+ qty +'&pkgsize=' + pkgsize +'&remark='+ remark +'&action=updatecart',
+                    beforeSend: function(){
+                        $('#loading').addClass("showloading");
+                    },
+                    success: function( returnedData ){
+            			if(returnedData == "success")
+            			{
+                            $('.notify').html("<span class='close-notify'>&times;</span><strong>Product Information Updated!</strong> ");
+                            $('.notify').removeClass('notify-failed');
+                            $('.notify').addClass('notify-success');
+                            $('.notify').show();
+                            setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+        				}
+            		},
+                    complete: function(){
+                        $('#loading').removeClass("showloading");
+                    }
+            	});
+            	$(this).parent().parent().find('.remove_product_btn').show();
+        		$(this).parent().parent().find('.save_product_btn').hide();
+            }
+        }
 	});
 });
 
@@ -976,6 +1062,13 @@ $(document).ready(function () {
                     url: "ajax.php",
                     data:'action=getcartcount',
                     success: function( returnedData1 ){
+                        if(returnedData > 9)
+                                {
+                                    $("#cart_count").css("margin","16px 0px 0px -46px");
+                                }
+                                else{
+                                    $("#cart_count").css("margin","16px 0px 0px -40px");
+                                }
                         $("#cart_count").html(returnedData1);
                     }
                 });
@@ -1088,6 +1181,13 @@ $(document).ready(function () {
                     url: "ajax.php",
                     data:'action=getcartcount',
                     success: function( returnedData1 ){
+                        if(returnedData > 9)
+                        {
+                            $("#cart_count").css("margin","16px 0px 0px -46px");
+                        }
+                        else{
+                            $("#cart_count").css("margin","16px 0px 0px -40px");
+                        }
                         $("#cart_count").html(returnedData1);
                     }
                 });

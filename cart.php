@@ -11,7 +11,7 @@ if($result != "no")
 {
 ?>
     <div class="container animated bounceInRight">
-    	<table class="table table-bordered table-striped">
+    	<table id="cart_table" class="table table-bordered table-striped">
 		    	<thead>
 		      		<tr class="headings">
 		        		<th>PRODUCT</th>
@@ -27,7 +27,7 @@ if($result != "no")
         foreach ($result as $key => $value) 
         {
         ?>
-		      	<tr>
+		      	<tr class="item">
 		        	<td> <?php echo $result[$key]['DESCRIPTION']; ?> </td>
 
 		        	<td>
