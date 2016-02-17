@@ -26,7 +26,6 @@ include("side_navigation.php");
             </div>
         </div>
     </div>
-    <!-- Hi This is Tushar -->
     <!-- End of post Header Box  -->
     <!-- Main body starts -->
     <div class="content animate-panel">

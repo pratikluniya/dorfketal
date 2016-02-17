@@ -2750,7 +2750,7 @@ h6 {
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
-  background-color: #3498db;
+  background-color: #339849;
   border-color: #258cd1;
   color: #fff;
   cursor: default;

@@ -1,23 +1,66 @@
 <?php
  include "classes/functions.php";
+ include "classes/paginate_function.php";
+
  session_start();
  $con =new functions();
  ?>
 <input type="hidden" name="cat_name" id="cat_name" value="<?php echo $_REQUEST['cat_name']; ?>">                       
 <?php
+$item_per_page = 8;
+
+if(isset($_POST) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
+//Get page number from Ajax POST
+if(isset($_POST["page"])){
+    $page_number = filter_var($_POST["page"], FILTER_SANITIZE_NUMBER_INT, FILTER_FLAG_STRIP_HIGH); //filter number
+    if(!is_numeric($page_number)){die('Invalid page number!');} //incase of invalid page number
+}else{
+    $page_number = 1; //if there's no page number, set it to 1
+}
+
 if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "1") )
 {
-    $sql ="SELECT ID, PRODUCT_CODE AS ITEM_CODE, DESCRIPTION, ATTRIBUTE18 as PRODUCT_APPLICATION, ATTRIBUTE17 as PRODUCT_GROUP FROM xxdkapps_unsegregated_products WHERE ATTRIBUTE17 ='".$_REQUEST['cat_name']."' order by ID";
+    $sql ="SELECT ID FROM xxdkapps_unsegregated_products WHERE ATTRIBUTE17 ='".$_REQUEST['cat_name']."' order by ID";
+    $result= $con->data_select($sql);
+
+    $get_total_rows = count($result); //hold total records in variable
+    //break records into pages
+    $total_pages = ceil($get_total_rows/$item_per_page);
+
+    //get starting position to fetch the records
+    $page_position = (($page_number-1) * $item_per_page);
+
+    $sql ="SELECT ID, PRODUCT_CODE AS ITEM_CODE, DESCRIPTION, ATTRIBUTE18 as PRODUCT_APPLICATION, ATTRIBUTE17 as PRODUCT_GROUP FROM xxdkapps_unsegregated_products WHERE ATTRIBUTE17 ='".$_REQUEST['cat_name']."' order by ID LIMIT $page_position, $item_per_page";
     $result=$con->data_select($sql);
 }
 if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "2") )
 {
-    $sql ="SELECT up.ID, up.PRODUCT_CODE AS  ITEM_CODE, up.DESCRIPTION, up.ATTRIBUTE18 as  PRODUCT_APPLICATION, up.ATTRIBUTE17 as PRODUCT_GROUP, rp.CUSTOMER_NUMBER FROM xxdkapps_regular_products as rp, xxdkapps_unsegregated_products as up WHERE rp.CUSTOMER_NUMBER= " . $_SESSION['cust_id']." and rp.PRODUCT_CODE = up.PRODUCT_CODE order by SEQUENCE DESC ";
+    $sql ="SELECT up.ID FROM xxdkapps_regular_products as rp, xxdkapps_unsegregated_products as up WHERE rp.CUSTOMER_NUMBER= " . $_SESSION['cust_id']." and rp.PRODUCT_CODE = up.PRODUCT_CODE order by SEQUENCE DESC ";
+    $result= $con->data_select($sql);
+
+    $get_total_rows = count($result); //hold total records in variable
+    //break records into pages
+    $total_pages = ceil($get_total_rows/$item_per_page);
+
+    //get starting position to fetch the records
+    $page_position = (($page_number-1) * $item_per_page);
+
+    $sql ="SELECT up.ID, up.PRODUCT_CODE AS  ITEM_CODE, up.DESCRIPTION, up.ATTRIBUTE18 as  PRODUCT_APPLICATION, up.ATTRIBUTE17 as PRODUCT_GROUP, rp.CUSTOMER_NUMBER FROM xxdkapps_regular_products as rp, xxdkapps_unsegregated_products as up WHERE rp.CUSTOMER_NUMBER= " . $_SESSION['cust_id']." and rp.PRODUCT_CODE = up.PRODUCT_CODE order by SEQUENCE DESC LIMIT $page_position, $item_per_page";
     $result=$con->data_select($sql);
 }
 if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "3") )
 {
-    $sql="SELECT ID, PRODUCT_CODE AS ITEM_CODE, DESCRIPTION, ATTRIBUTE18 as PRODUCT_APPLICATION, ATTRIBUTE17 as PRODUCT_GROUP FROM xxdkapps_unsegregated_products WHERE ATTRIBUTE17 ='".$_REQUEST['cat_name']."' AND PGID = '".$_REQUEST['pgid']."' order by ID";
+    $sql="SELECT ID FROM xxdkapps_unsegregated_products WHERE ATTRIBUTE17 ='".$_REQUEST['cat_name']."' AND PGID = '".$_REQUEST['pgid']."' order by ID";
+    $result= $con->data_select($sql);
+
+    $get_total_rows = count($result); //hold total records in variable
+    //break records into pages
+    $total_pages = ceil($get_total_rows/$item_per_page);
+
+    //get starting position to fetch the records
+    $page_position = (($page_number-1) * $item_per_page);
+
+    $sql="SELECT ID, PRODUCT_CODE AS ITEM_CODE, DESCRIPTION, ATTRIBUTE18 as PRODUCT_APPLICATION, ATTRIBUTE17 as PRODUCT_GROUP FROM xxdkapps_unsegregated_products WHERE ATTRIBUTE17 ='".$_REQUEST['cat_name']."' AND PGID = '".$_REQUEST['pgid']."' order by ID LIMIT $page_position, $item_per_page";
     $result=$con->data_select($sql);
 }
     if($result != "no")
@@ -78,13 +121,46 @@ if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "3") )
                 </div>
             </div>
             ';
-        }           
+        }
+        if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "1") )
+        {
+            echo '<div class="row text-center">
+                    <div class="col-md-12">
+                        <div class="cat_prod_pagination1">';                                                            
+                            echo paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages);                   
+            echo'       </div>                        
+                    </div>                    
+                </div>';
+        }  
+
+        if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "2") )
+        {
+            echo '<div class="row text-center">
+                    <div class="col-md-12">
+                        <div class="cat_prod_pagination2">';                                                            
+                            echo paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages);                   
+            echo'       </div>                        
+                    </div>                    
+                </div>';
+        } 
+
+         if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "3") )
+        {
+            echo '<div class="row text-center">
+                    <div class="col-md-12">
+                        <div class="cat_prod_pagination3">';                                                            
+                            echo paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages);                   
+            echo'       </div>                        
+                    </div>                    
+                </div>';
+        }        
         exit;
     }
     else
     {
         echo "No Product Found ";
         exit;
+    }
     } 
 ?>
 

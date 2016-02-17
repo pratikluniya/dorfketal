@@ -110,6 +110,8 @@ $(document).ready(function () {
         $('#delivery_date').attr("min", today);
     });
 });
+
+
 /********  Left Sidebar Click Events  *****/ 
 $(document).ready(function () {
 	$("#place_order_btn" ).on( "click", function() {
@@ -139,6 +141,29 @@ $(document).ready(function () {
             }
     	});
     });
+
+    //executes code below when user click on pagination links
+    $(".main_body").on( "click", ".cat_prod_pagination2 .pagination a", function (e){
+        e.preventDefault();
+        var cat_name = $('.main_heading').html();
+        var page = $(this).attr("data-page");
+        $.ajax({
+            type: "POST",
+            url: "product_list.php",
+            data: '&cat_prod=2&page='+page,
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
+            success: function( returnedData ){
+                $('.cat-tabs').hide();
+                $('.main_heading').html("Regular Products");
+                $('.main_body').html(returnedData);
+            },
+            complete: function(){
+                $('#loading').removeClass("showloading");
+            }
+        });            
+    });
 });
 $(document).ready(function () {
 	$("#reset_vertical_btn" ).on( "click", function() {
@@ -165,12 +190,23 @@ $(document).ready(function () {
 	});
 });
 $(document).ready(function () {
-    $("#order_history_btn" ).on( "click", function() {
+    $("#order_history_btn" ).on( "click", function() {        
         $('#loading').addClass("showloading");
         $('.main_heading').html("Order History");
         $('.main_body').load('order_history.php', function(data){
             $('#loading').removeClass("showloading");
         });
+    });
+
+    //executes code below when user click on pagination links
+    $(".main_body").on( "click", ".order_history_pagination .pagination a", function (e){
+        e.preventDefault();
+        $('#loading').addClass("showloading"); //show loading element
+        var page = $(this).attr("data-page"); //get page number from link
+        $(".main_body").load("order_history.php",{"page":page}, function(){ //get content from PHP page
+            $('#loading').removeClass("showloading"); //once done, hide loading element
+        });
+        
     });
 });
 $(document).ready(function () {
@@ -180,6 +216,17 @@ $(document).ready(function () {
         $('.main_body').load('repeat_order.php', function(data){
             $('#loading').removeClass("showloading");
         });
+    });
+
+    //executes code below when user click on pagination links
+    $(".main_body").on( "click", ".repeat_order_pagination .pagination a", function (e){
+        e.preventDefault();
+        $('#loading').addClass("showloading"); //show loading element
+        var page = $(this).attr("data-page"); //get page number from link
+        $(".main_body").load("repeat_order.php",{"page":page}, function(){ //get content from PHP page
+            $('#loading').removeClass("showloading"); //once done, hide loading element
+        });
+        
     });
 });
 $(document).ready(function () {
@@ -297,6 +344,27 @@ $(document).ready(function () {
             }
     	});
     });
+
+    //executes code below when user click on pagination links
+    $(".main_body").on( "click", ".cat_prod_pagination1 .pagination a", function (e){
+        e.preventDefault();
+        var cat_name = $('.main_heading').html();
+        var page = $(this).attr("data-page");
+        $.ajax({
+            type: "POST",
+            url: "product_list.php",
+            data: 'cat_name='+cat_name + '&cat_prod=1&page='+page,
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
+            success: function( returnedData ){
+                $('.main_body').html(returnedData);        
+            },
+            complete: function(){
+                $('#loading').removeClass("showloading");
+            }
+        });            
+    });
 });
 $(document).ready(function () {
 	$( ".main_body" ).on( "click","#order-history-btn", function(e) {
@@ -400,6 +468,28 @@ $(document).ready(function () {
                 $('#loading').removeClass("showloading");
             }
         });
+    });
+
+    //executes code below when user click on pagination links
+    $(".main_body").on( "click", ".cat_prod_pagination3 .pagination a", function (e){
+        e.preventDefault();
+        var cat_name = $('.main_heading').html();
+        var pgid = $("#cat_applications option:selected").val().trim();
+        var page = $(this).attr("data-page");
+        $.ajax({
+            type: "POST",
+            url: "product_list.php",
+            data: 'cat_name='+ cat_name +'&pgid='+ pgid +'&cat_prod=3',
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
+            success: function( returnedData ){
+                $('.main_body').html(returnedData);
+            },
+            complete: function(){
+                $('#loading').removeClass("showloading");
+            }
+        });            
     });
 });
 $(document).ready(function () {
@@ -731,6 +821,8 @@ $(document).ready(function () {
 
     });
 });
+
+
 /********  Cart JS  *****/ 
 $(document).ready(function () {
 	$(".main_body" ).on( "click",".add_to_cart_btn", function(e) {
@@ -954,7 +1046,6 @@ $(document).ready(function () {
 
 
 /********  Checkout JS  *****/
-
 $(document).ready(function () {
     $(".main_body" ).on( "change", "#freight_term", function(e) {
         var fterm = $("#freight_term option:selected").text().trim();
@@ -1077,6 +1168,7 @@ $(document).ready(function () {
         }
     });
 });
+
 
 /********  Repeat Order JS  *****/
 $(document).ready(function () {
