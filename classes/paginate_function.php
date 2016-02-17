@@ -17,12 +17,12 @@ function paginate_function($item_per_page, $current_page, $total_records, $total
             
             //$pagination .= '<li class="first"><a href="#" data-page="1" title="First">&laquo;</a></li>'; //first link
             if($current_page == 1){
-                $pagination .= '<li class="disabled"><a href="#" aria-label="Previous" title="First"><span aria-hidden="true">&laquo;</span></a></li>'; //first link
-                $pagination .= '<li class="disabled"><a href="#" title="Previous">&lt;</a></li>'; //previous link
+                $pagination .= '<li class="disabled"><a href="#" aria-label="Previous" title="First"><span aria-hidden="true">First</span></a></li>'; //first link
+                $pagination .= '<li class="disabled"><a href="#" title="Previous">Previous</a></li>'; //previous link
             }else
             {
-                $pagination .= '<li><a href="#" data-page="1" aria-label="Previous" title="First"><span aria-hidden="true">&laquo;</span></a></li>'; //first link
-                $pagination .= '<li><a href="#" data-page="'.$previous.'" title="Previous">&lt;</a></li>'; //previous link
+                $pagination .= '<li><a href="#" data-page="1" aria-label="Previous" title="First"><span aria-hidden="true">First</span></a></li>'; //first link
+                $pagination .= '<li><a href="#" data-page="'.$previous.'" title="Previous">Previous</a></li>'; //previous link
             }            
             for($i = ($current_page-2); $i < $current_page; $i++){ //Create left-hand side links
                 if($i > 0){
@@ -47,13 +47,13 @@ function paginate_function($item_per_page, $current_page, $total_records, $total
         }
         if($current_page == $total_pages){ 
                 //$next_link = ($i > $total_pages) ? $total_pages : $i;
-                $pagination .= '<li class="disabled"><a href="#" title="Next">&gt;</a></li>'; //next link
-                $pagination .= '<li class="disabled"><a href="#" aria-label="Next" title="Last"><span aria-hidden="true">&raquo;</span></a></li>'; //last link
+                $pagination .= '<li class="disabled"><a href="#" title="Next">Next</a></li>'; //next link
+                $pagination .= '<li class="disabled"><a href="#" aria-label="Next" title="Last"><span aria-hidden="true">Last</span></a></li>'; //last link
         }
         else{ 
                 //$next_link = ($i > $total_pages) ? $total_pages : $i;
-                $pagination .= '<li><a href="#" data-page="'.$next.'" title="Next">&gt;</a></li>'; //next link
-                $pagination .= '<li><a href="#" aria-label="Next" data-page="'.$total_pages.'" title="Last"><span aria-hidden="true">&raquo;</span></a></li>'; //last link
+                $pagination .= '<li><a href="#" data-page="'.$next.'" title="Next">Next</a></li>'; //next link
+                $pagination .= '<li><a href="#" aria-label="Next" data-page="'.$total_pages.'" title="Last"><span aria-hidden="true">Last</span></a></li>'; //last link
         }
 
         

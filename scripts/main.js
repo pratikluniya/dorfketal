@@ -15,9 +15,14 @@
         if(theEvent.preventDefault) theEvent.preventDefault();
     }
 }
+function maxLengthCheck(object)
+{
+    if (object.value.length > object.maxLength)
+        object.value = object.value.slice(0, object.maxLength)
+}
 function alphanumeric(inputtxt)  
 {  
-    var letterNumber = /^[0-9a-zA-Z]+$/;  
+    var letterNumber = /^[0-9a-zA-Z ]+$/;  
     if((inputtxt.match(letterNumber)))   
     {  
         return true;  
@@ -231,7 +236,7 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
 	$("#reset_vertical_btn" ).on( "click", function() {
-		$('.main_heading').html("Reset Your Favorite Verical");
+		$('.main_heading').html("Reset Your Favorite Vertical");
 		$('.main_body').load('reset_fav_vertical.php');
         var fval;
 		$.ajax({
@@ -1322,7 +1327,6 @@ $(document).ready(function () {
                                 else{
                                     $("#cart_count").css("margin","16px 0px 0px -40px");
                                 }
-                        alert(returnedData1);
                         $("#cart_count").html(returnedData1);
                     }
                 });
