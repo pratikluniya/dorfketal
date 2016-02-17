@@ -21,7 +21,10 @@ include("side_navigation.php");
                             <?php echo $_SESSION['cart_count'];?>
                         </span>
                     </span>
-                    <span class="pull-right" id="logout-button"> Log Out </span>
+                    <span class="pull-right" id="logout-button"> &nbsp;&nbsp;Log Out </span>
+                    <span class="pull-right" id="cust_name">
+                        <?php echo("Welcome, <b>".$_SESSION['cust_id']."</b>"); ?>
+                    </span>
                 </div>
             </div>
         </div>
@@ -39,6 +42,16 @@ include("side_navigation.php");
                         <button type="button" class="by_product btn btn-primary" id="by_product">By Products</button>
                         <button type="button" class="by_application btn btn-primary inactive-cat-tab" id="by_application">By Application</button><br>
                         <select id="cat_applications">
+                        </select>
+                    </div>
+                    <div class="container po-tabs">
+                        <button type="button" class="up_po btn btn-primary" id="up_po">Upload PO#</button>
+                        <button type="button" class="po_history btn btn-primary inactive-cat-tab" id="po_history">PO# History</button><br>
+                        </select>
+                    </div>
+                    <div class="container quote-tabs">
+                        <button type="button" class="up_quote btn btn-primary" id="up_quote">Request Quotation</button>
+                        <button type="button" class="quote_history btn btn-primary inactive-cat-tab" id="quote_history">Quotation History</button><br>
                         </select>
                     </div>
                     <div class="panel-body main_body">

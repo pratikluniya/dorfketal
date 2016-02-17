@@ -25,6 +25,7 @@ if(!isset($_SESSION['cust_id']))
         <link rel="stylesheet" href="vendor/metisMenu/dist/metisMenu.css" />
         <link rel="stylesheet" href="vendor/animate.css/animate.css" />
         <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="vendor/confirmjs/dist/jquery-confirm.css" />
         <link rel="stylesheet" href="styles/login-style.css">
 
         <!-- App styles -->

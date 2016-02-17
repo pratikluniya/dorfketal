@@ -1,5 +1,17 @@
+<?php
+include "classes/functions.php";
+session_start();
+$cust_id = $_SESSION['cust_id'];
+$con =new functions();
+
+	// FEtch Quations History
+	$sql_quote = "SELECT cq.PRODUCT_CODE, cq.PACKAGING_SIZE, cq.QUANTITY, cq.AVAILABLE_PRICE, cq.REQUESTED_PRICE, cq.REMARK, cq.FILE_NAME, cq.STATUS, up.DESCRIPTION FROM customer_quotations as cq, xxdkapps_unsegregated_products as up WHERE cq.CUSTOMER_NUMBER = ".$cust_id." and cq.PRODUCT_CODE = up.PRODUCT_CODE ORDER BY cq.ID DESC";
+	$result_quote_history = $con -> data_select($sql_quote);
+	
+?>
+
 <div class="container">
-	<div class="col-md-6 animated fadeInRight">
+	<div class="col-md-6 animated fadeInRight req-quote-div">
 		<form>
 			<div class="form-group">
 				<label for="q_cat">Category<sup class="required_field">*</sup> : </label>
@@ -75,5 +87,56 @@
 				<button type="button" class="btn btn-primary" id="req_q_btn">SUBMIT</button>
 			</div>
 		</form>
+	</div>
+	<div class="container animated bounceInRight quote-history-div" style="display:none;">
+	    <table id="cart_table" class="table table-bordered table-striped">
+	    	<thead>
+	      		<tr class="headings">
+	        		<th>PRODUCT NAME</th>
+	        		<th>QUANTITY (KG)</th>
+	        		<th>PACKAGING SIZE (Drum/Tank)</th>
+	        		<th>AVAILABLE PRICE (PER KG)</th>
+	        		<th>REQUESTED PRICE (PER KG)</th>
+	        		<th>REMARK</th>
+	        		<th>FILE_NAME</th>
+	        		<th>STATUS</th>
+	      		</tr>
+	    	</thead>
+	    	<tbody>
+	    	<?php
+	        	foreach ($result_quote_history as $key => $value) 
+	        	{
+	        ?>
+	        		<tr class="item">
+			        	<td>
+			        		<?php echo $value['DESCRIPTION']; ?>
+			        	</td>
+			        	<td>
+			        		<?php echo $value['QUANTITY']; ?>
+			        	</td>
+			        	<td>
+			        		<?php echo $value['PACKAGING_SIZE']; ?>
+		                </td>
+		                <td>
+		                	<?php echo $value['AVAILABLE_PRICE']; ?>
+		                </td>
+		                <td>
+		                	<?php echo $value['REQUESTED_PRICE']; ?>
+		                </td>
+		                <td>
+		                	<?php echo $value['REMARK']; ?>
+		                </td>
+		                <td>
+		                	<?php echo $value['FILE_NAME']; ?>
+		                </td>
+		                <td>
+		                	<?php echo $value['STATUS']; ?>
+		                </td>
+			      	</tr>
+			<?php 
+			}
+			?>
+			</tbody>
+		</table>
 	</div>
 </div>

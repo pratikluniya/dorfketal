@@ -64,7 +64,7 @@
 		</div>
 		<div class="form-group">
 			<label for="phone">Phone<sup class="required_field">*</sup> : </label>
-			<input type="number" name="phone" id="phone" class="form-control" placeholder="Phone" required>
+			<input type="number" name="phone" id="phone" class="form-control" placeholder="Phone" maxlength="15" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)"required>
 		</div>
 		<div class="form-group">
 			<label for="country">Country<sup class="required_field">*</sup> : </label>

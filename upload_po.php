@@ -3,7 +3,7 @@ include "classes/functions.php";
 session_start();
 $cust_id = $_SESSION['cust_id'];
 $con =new functions();
-//Fetching Sold_To droupdown values
+	//Fetching Sold_To droupdown values
 	$sql_sold_to = "SELECT distinct  SITE_USE_ID as ID, PRIMARY_FLAG,
 		   CONCAT_WS(',',ADDRESS1,ADDRESS2, ADDRESS3,ADDRESS4,CITY,COUNTRY) AS SHIP_ADDRESS		  
 		   FROM xxdkapps_customer_master WHERE BUSINESS_CODE ='BILL_TO'
@@ -24,10 +24,14 @@ $con =new functions();
 	//Fetching Payment Terms droupdown values
 	$sql_payment_terms = "SELECT TERM_ID, DESCRIPTION FROM xxdkapps_payment_terms";
 	$result_payment_terms = $con -> data_select($sql_payment_terms);
+
+	//Fetch previous PO
+	$sql_PO = "SELECT cp.PO_NUMBER, cp.SHIP_TO, cp.SOLD_TO, cp.CONTACT_PERSON, cp.DELIVERY_DATE, cp.FREIGHT_TERM, cp.FREIGHT_CHARGES, cp.VESSAL_NAME, cp.PAYMENT_TERM, cp.FILE_NAME, cp.COMMENT, cp.STATUS, CONCAT_WS(',',cm.ADDRESS1,cm.ADDRESS2 , cm.ADDRESS3,cm.ADDRESS4,cm.CITY, cm.COUNTRY) AS SHIP_ADDRESS FROM customer_po as cp, xxdkapps_customer_master as cm WHERE cp.CUSTOMER_NUMBER = ".$cust_id." and cp.SHIP_TO = cm.SITE_USE_ID and cm.BUSINESS_CODE = 'SHIP_TO' ORDER BY cp.ID DESC";
+	$result_po_history = $con -> data_select($sql_PO);
 ?>
 
 <div class="container">
-	<div class="col-md-6 animated fadeInRight">
+	<div class="col-md-6 animated fadeInRight po-form-div">
 		<form id="checkout_data">
 			<div class="form-group">
 				<label for="PO_number">PO#<sup class="required_field">*</sup> : </label>
@@ -102,5 +106,56 @@ $con =new functions();
 				<input type="button" class="btn btn-primary" id="submit_po" value="SUBMIT"></button>
 			</div>
 		</form>
+	</div>
+	<div class="container animated bounceInRight po-history-div" style="display:none;">
+	    <table id="cart_table" class="table table-bordered table-striped">
+	    	<thead>
+	      		<tr class="headings">
+	        		<th>PO# NUMBER</th>
+	        		<th>SHIP ADDRESS</th>
+	        		<th>DELIVERY DATE</th>
+	        		<th>FREIGHT TERM</th>
+	        		<th>PAYMENT TERM</th>
+	        		<th>FILE</th>
+	        		<th>COMMENT</th>
+	        		<th>STATUS</th>
+	      		</tr>
+	    	</thead>
+	    	<tbody>
+	    	<?php
+	        	foreach ($result_po_history as $key => $value) 
+	        	{
+	        ?>
+	        		<tr class="item">
+			        	<td>
+			        		<?php echo $value['PO_NUMBER']; ?>
+			        	</td>
+			        	<td>
+			        		<?php echo $value['SHIP_ADDRESS']; ?>
+			        	</td>
+			        	<td>
+			        		<?php echo $value['DELIVERY_DATE']; ?>
+		                </td>
+		                <td>
+		                	<?php echo $value['FREIGHT_TERM']; ?>
+		                </td>
+		                <td>
+		                	<?php echo $value['PAYMENT_TERM']; ?>
+		                </td>
+		                <td>
+		                	<?php echo $value['FILE_NAME']; ?>
+		                </td>
+		                <td>
+		                	<?php echo $value['COMMENT']; ?>
+		                </td>
+		                <td>
+		                	<?php echo $value['STATUS']; ?>
+		                </td>
+			      	</tr>
+			<?php 
+			}
+			?>
+			</tbody>
+		</table>
 	</div>
 </div>

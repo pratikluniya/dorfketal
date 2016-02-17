@@ -3,7 +3,53 @@
  * version 1.0
  *
  */
-
+ function isNumeric (evt) 
+{
+    var theEvent = evt || window.event;
+    var key = theEvent.keyCode || theEvent.which;
+    key = String.fromCharCode (key);
+    var regex = /[0-9]|\./;
+    if ( !regex.test(key) ) 
+    {
+        theEvent.returnValue = false;
+        if(theEvent.preventDefault) theEvent.preventDefault();
+    }
+}
+function alphanumeric(inputtxt)  
+{  
+    var letterNumber = /^[0-9a-zA-Z]+$/;  
+    if((inputtxt.match(letterNumber)))   
+    {  
+        return true;  
+    }  
+    else  
+    {   
+        return false;   
+    }  
+}  
+function allLetter(inputtxt)  
+{  
+    var letters = /^[a-zA-Z ]*$/;  
+    if(inputtxt.match(letters))  
+    {  
+        return true;  
+    }  
+    else  
+    {  
+        return false;  
+    }  
+}
+function validateEmail(inputtxt) {
+    var emailid = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(inputtxt.match(emailid))  
+    {  
+        return true;  
+    }  
+    else  
+    {  
+        return false;  
+    }
+}
 /********  Login JS  *****/
 $(document).ready(function () {
 	$("#login-button" ).on( "click", function() {
@@ -88,6 +134,12 @@ $(document).ready(function () {
 $(document).ready(function () {
     $(".hide-nav").on("click", function(event){
         $(".cat-tabs").hide();
+        $(".po-tabs").hide();
+        $(".quote-tabs").hide();
+        $('#po_history').addClass('inactive-cat-tab');
+        $('#up_po').removeClass('inactive-cat-tab');
+        $('#quote_history').addClass('inactive-cat-tab');
+        $('#up_quote').removeClass('inactive-cat-tab');
     });
 });
 
@@ -111,6 +163,19 @@ $(document).ready(function () {
     });
 });
 
+=======
+$(document).ready(function () {
+    $('.main_body').on('focus', 'input[type=number]', function (e) {
+        $(this).on('mousewheel.disableScroll', function (e) {
+            e.preventDefault();
+        });
+    });
+});
+$(document).ready(function () {
+    $('.main_body').on('blur', 'input[type=number]', function (e) {
+        $(this).off('mousewheel.disableScroll');
+    });
+});
 
 /********  Left Sidebar Click Events  *****/ 
 $(document).ready(function () {
@@ -273,6 +338,7 @@ $(document).ready(function () {
     $("#upload_po_btn" ).on( "click", function() {
         $('#loading').addClass("showloading");
         $('.main_heading').html("Upload PO#");
+        $('.po-tabs').show();
         $('.main_body').load('upload_po.php', function(data){
             $('#loading').removeClass("showloading");
         });
@@ -290,7 +356,7 @@ $(document).ready(function () {
             success: function( returnedData ){
 	    		if(returnedData == 2)
 	    		{
-	    			$('.main_heading').html("Customer Dashboard");
+	    			$('.main_heading').html("Track Order");
 	    			$('.main_body').load('logistics/customer_dashboard.php');
 	    		}
 	    		return false;        
@@ -313,6 +379,7 @@ $(document).ready(function () {
 $(document).ready(function () {
 	$("#req_quotation_btn" ).on( "click", function() {
         $('#loading').addClass("showloading");
+        $('.quote-tabs').show();
 		$('.main_heading').html("Request Quotation");
 		$('.main_body').load('req_quotation.php', function(data){
             $('#loading').removeClass("showloading");
@@ -448,6 +515,38 @@ $(document).ready(function () {
             }
         });
 	});
+});
+$(document).ready(function () {
+    $("#po_history" ).on( "click", function(e) {
+        $(this).removeClass('inactive-cat-tab');
+        $('#up_po').addClass('inactive-cat-tab');
+        $('.po-form-div').hide();
+        $('.po-history-div').show();
+    });
+});
+$(document).ready(function () {
+    $("#up_po" ).on( "click", function(e) {
+        $(this).removeClass('inactive-cat-tab');
+        $('#po_history').addClass('inactive-cat-tab');
+        $('.po-history-div').hide();
+        $('.po-form-div').show();
+    });
+});
+$(document).ready(function () {
+    $("#quote_history" ).on( "click", function(e) {
+        $(this).removeClass('inactive-cat-tab');
+        $('#up_quote').addClass('inactive-cat-tab');
+        $('.req-quote-div').hide();
+        $('.quote-history-div').show();
+    });
+});
+$(document).ready(function () {
+    $("#up_quote" ).on( "click", function(e) {
+        $(this).removeClass('inactive-cat-tab');
+        $('#quote_history').addClass('inactive-cat-tab');
+        $('.quote-history-div').hide();
+        $('.req-quote-div').show();
+    });
 });
 $(document).ready(function () {
 	$("#cat_applications" ).on( "change", function(e) {
@@ -587,6 +686,13 @@ $(document).ready(function () {
             if(isNaN(qty))
             {
                 $('.notify').html("<span class='close-notify'>&times;</span><strong>Quantity Must in Number!</strong> ");
+                $('.notify').removeClass('notify-success');
+                $('.notify').addClass('notify-failed');
+                $('.notify').show();
+            }
+            else if(isNaN(req_price))
+            {
+                $('.notify').html("<span class='close-notify'>&times;</span><strong>Price Must in Number!</strong> ");
                 $('.notify').removeClass('notify-success');
                 $('.notify').addClass('notify-failed');
                 $('.notify').show();
@@ -736,7 +842,31 @@ $(document).ready(function () {
         }
         else if(file_data == "" || file_data == null)
         {
-            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Attach #PO File!</strong> ");
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Attach PO# File!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if ( !alphanumeric(po_no) ) 
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>PO# Number must be AlphaNumeric!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(!(allLetter(cont_per)))
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Contact Person must be Alpahbests only!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if((isNaN(f_chrges)))
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Freight Charges must be Number!</strong> ");
             $('.notify').removeClass('notify-success');
             $('.notify').addClass('notify-failed');
             $('.notify').show();
@@ -956,33 +1086,42 @@ $(document).ready(function () {
 $(document).ready(function () {
 	$(".main_body" ).on( "click",".remove_product_btn", function(e) {
 		var prod_code = $(this).parent().find('.prod_id').val().trim();
-		$(this).parent().hide();
-		$.ajax({
-            type: "POST",
-            url: "ajax.php",
-            data: 'prod_code=' + prod_code +'&action=removecart',
-            beforeSend: function(){
-                $('#loading').addClass("showloading");
+        $.confirm({
+            title: '',
+            content: '<h3><strong>Are You Sure?</h3><br><span>You want to removre Product from Cart...?</span>',
+            keyboardEnabled: true,
+            confirm: function(){
+                $(this).parent().hide();
+                $.ajax({
+                    type: "POST",
+                    url: "ajax.php",
+                    data: 'prod_code=' + prod_code +'&action=removecart',
+                    beforeSend: function(){
+                        $('#loading').addClass("showloading");
+                    },
+                    success: function( returnedData ){
+                        $('.notify').html("<span class='close-notify'>&times;</span><strong>Product Removed from Cart!</strong> ");
+                        $('.notify').removeClass('notify-success');
+                        $('.notify').addClass('notify-failed');
+                        $('.notify').show();
+                        setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+                        if(returnedData > 9)
+                                        {
+                                            $("#cart_count").css("margin","16px 0px 0px -46px");
+                                        }
+                                        else{
+                                            $("#cart_count").css("margin","16px 0px 0px -40px");
+                                        }
+                        $("#cart_count").html(returnedData);
+                    },
+                    complete: function(){
+                        $('#mycart').trigger('click');
+                        $('#loading').removeClass("showloading");
+                    }
+                });
             },
-            success: function( returnedData ){
-                $('.notify').html("<span class='close-notify'>&times;</span><strong>Product Removed from Cart!</strong> ");
-                $('.notify').removeClass('notify-success');
-                $('.notify').addClass('notify-failed');
-                $('.notify').show();
-                setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
-                if(returnedData > 9)
-                                {
-                                    $("#cart_count").css("margin","16px 0px 0px -46px");
-                                }
-                                else{
-                                    $("#cart_count").css("margin","16px 0px 0px -40px");
-                                }
-    			$("#cart_count").html(returnedData);
-    		},
-            complete: function(){
-                $('#loading').removeClass("showloading");
-            }
-    	});
+        });
+		
 	});
 });
 $(document).ready(function () {
@@ -1128,6 +1267,30 @@ $(document).ready(function () {
             $('.notify').show();
             err =1;
         }
+        else if ( !alphanumeric(po_no) ) 
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>PO# Number must be AlphaNumeric!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(!(allLetter(cont_per)))
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Contact Person must be Alpahbests only!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if((isNaN(f_chrges)))
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Freight Charges must be Number!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
         if(err == 0)
         {
             $.ajax({
@@ -1153,13 +1316,14 @@ $(document).ready(function () {
                     url: "ajax.php",
                     data:'action=getcartcount',
                     success: function( returnedData1 ){
-                        if(returnedData > 9)
+                        if(returnedData1 > 9)
                                 {
                                     $("#cart_count").css("margin","16px 0px 0px -46px");
                                 }
                                 else{
                                     $("#cart_count").css("margin","16px 0px 0px -40px");
                                 }
+                        alert(returnedData1);
                         $("#cart_count").html(returnedData1);
                     }
                 });
@@ -1273,7 +1437,7 @@ $(document).ready(function () {
                     url: "ajax.php",
                     data:'action=getcartcount',
                     success: function( returnedData1 ){
-                        if(returnedData > 9)
+                        if(returnedData1 > 9)
                         {
                             $("#cart_count").css("margin","16px 0px 0px -46px");
                         }
@@ -1393,11 +1557,43 @@ $(document).ready(function () {
             setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
             err =1;  
         }
+        else if(!(allLetter(fname)))
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>First Name must be Alpahbests only!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(!(allLetter(lname)))
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Last Name must be Alpahbests only!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(!(validateEmail(email)))
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter Valid Email id!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
+        else if(!(allLetter(country)))
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Country must be Alpahbests only!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            err =1;
+        }
         if(err == 0)
         {
             $('.form-group').find('input').val('');
             $('.form-group').find('select').val('0');
-            $('.form-group').find('textbox').val('');
+            $('.form-group').find('textarea').val('');
             $('.notify').html("<span class='close-notify'>&times;</span><strong>Thanks for your valuable Feedback!<br> We Will get back to you Soon!!</strong> ");
             $('.notify').removeClass('notify-failed');
             $('.notify').addClass('notify-success');

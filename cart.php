@@ -4,13 +4,13 @@
  $con =new functions();
 if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "getcart") )
 {
-	$sql ="SELECT up.ID, up.PRODUCT_CODE AS  ITEM_CODE, up.DESCRIPTION, up.ATTRIBUTE18 as  PRODUCT_APPLICATION, up.ATTRIBUTE17 as PRODUCT_GROUP, cc.CUSTOMER_NUMBER, cc.QUANTITY, cc.PACKAGING_SIZE, cc.AVAILABLE_PRICE, cc.REMARK FROM customer_cart as cc, xxdkapps_unsegregated_products as up WHERE cc.CUSTOMER_NUMBER= '" . $_SESSION['cust_id']."' and cc.PRODUCT_CODE = up.PRODUCT_CODE";
+	$sql ="SELECT up.ID, up.PRODUCT_CODE AS  ITEM_CODE, up.DESCRIPTION, up.ATTRIBUTE18 as  PRODUCT_APPLICATION, up.ATTRIBUTE17 as PRODUCT_GROUP, cc.CUSTOMER_NUMBER, cc.QUANTITY, cc.PACKAGING_SIZE, cc.AVAILABLE_PRICE, cc.REMARK FROM customer_cart as cc, xxdkapps_unsegregated_products as up WHERE cc.CUSTOMER_NUMBER= '" . $_SESSION['cust_id']."' and cc.PRODUCT_CODE = up.PRODUCT_CODE ORDER BY cc.ID";
     $result=$con->data_select($sql);
 }
 if($result != "no")
 {
 ?>
-    <div class="container animated bounceInRight">
+    <div class="container">
     	<table id="cart_table" class="table table-bordered table-striped">
 		    	<thead>
 		      		<tr class="headings">
@@ -75,7 +75,7 @@ if($result != "no")
 	                	<input type="text" class="cart-remark cart-input form-control" value=" <?php echo $result[$key]['REMARK']; ?> ">
 	                	<input type="hidden" class="prod_id" value=" <?php echo $result[$key]['ITEM_CODE']; ?> ">
 	                </td>
-	                <td class="remove_product_btn">
+	                <td  class="remove_product_btn">
 	                	<span>
 	                		REMOVE <span class="badge" style="background-color:red;"> - </span>
 	                	</span>
@@ -108,4 +108,3 @@ if($result != "no")
 	}
 ?>
 	</div>
-

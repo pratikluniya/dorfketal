@@ -177,7 +177,7 @@ input[type=number]::-webkit-outer-spin-button {
 .headings{
     background-color: #c9c9c9;
 }
-.cat-tabs{
+.cat-tabs, .po-tabs, .quote-tabs{
     text-align: center;
     padding: 25px 0px;
     width: 100%;
