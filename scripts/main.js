@@ -163,7 +163,6 @@ $(document).ready(function () {
     });
 });
 
-=======
 $(document).ready(function () {
     $('.main_body').on('focus', 'input[type=number]', function (e) {
         $(this).on('mousewheel.disableScroll', function (e) {
