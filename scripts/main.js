@@ -263,6 +263,7 @@ $(document).ready(function () {
         $('#loading').addClass("showloading");
         $('.main_heading').html("Order History");
         $('.main_body').load('order_history.php', function(data){
+            $('.search-tabs').show();
             $('#loading').removeClass("showloading");
         });
     });
@@ -273,6 +274,7 @@ $(document).ready(function () {
         $('#loading').addClass("showloading"); //show loading element
         var page = $(this).attr("data-page"); //get page number from link
         $(".main_body").load("order_history.php",{"page":page}, function(){ //get content from PHP page
+            $('.search-tabs').show();
             $('#loading').removeClass("showloading"); //once done, hide loading element
         });
         
@@ -408,6 +410,7 @@ $(document).ready(function () {
             success: function( returnedData ){
                 $('.cat-tabs').show();
         		$('.main_heading').html(cat_name);
+                $('#local_search_cat').val(cat_name);
 				$('.main_body').html(returnedData);        
         	},
             complete: function(){
@@ -512,6 +515,7 @@ $(document).ready(function () {
             success: function( returnedData ){
                 $('.cat-tabs').show();
                 $('.main_heading').html(cat_name);
+                
                 $('.main_body').html(returnedData);        
             },
             complete: function(){

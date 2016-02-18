@@ -87,7 +87,7 @@ $(document).ready(function(){
                         $('#pagination_search_value').val(search_value);
                         $('#pagination_search_id').val(search_category);
                         $('#search_box').val('');
-                        $('.main_body').prepend("<div class='col-md-12 search-tabs' style='display: block;'>Search result for <strong>"+cat+"</strong> like <strong>"+search_value+"</strong>...</div>");
+                        $('.main_body').prepend("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat+"</strong> like <strong>"+search_value+"</strong>...</div>");
                     }
                 });
             }
@@ -96,7 +96,7 @@ $(document).ready(function(){
                 $('#loading').addClass("showloading"); //show loading element
                 $(".main_body").load("repeat_order.php",{"search_category":search_category,"search_value":search_value}, function(){ 
                     $('.main_heading').html("Search Results");
-                    $('.main_body').prepend("<div class='col-md-12 search-tabs' style='display: block;'>Search result for <strong>"+cat+"</strong> is <strong>"+search_value+"</strong>...</div>");
+                    $('.main_body').prepend("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat+"</strong> is <strong>"+search_value+"</strong>...</div>");
                     $('#loading').removeClass("showloading"); //once done, hide loading element
                     $('#pagination_search_value').val(search_value);
                     $('#pagination_search_id').val(search_category);
@@ -130,4 +130,71 @@ $(document).ready(function(){
     });
     
 
+});
+
+/************ Local search ***********/
+$(document).on('keypress','.local_search_box',function(event){
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if(keycode == '13')
+    {
+        $(".input-group-addon").trigger("click");
+    }
+});
+
+$(document).ready(function () {
+    $(".local-search-div" ).on( "click",".input-group-addon", function(e) {
+        var cat_name = $("#local_search_cat").val();
+        var search_value = $(".local_search_box").val();
+
+        if(search_value == ""){
+            return false;
+        }
+        else
+        {
+            $.ajax({
+                type: "POST",
+                url: "product_list.php",
+                data: 'l_cat_name='+cat_name + '&l_cat_prod=1&l_search_value='+search_value,
+                beforeSend: function(){
+                    $('#loading').addClass("showloading");
+                    $('.main_body').remove('.pagination_div');
+                },
+                success: function( returnedData ){
+                    $('.cat-tabs').show();
+                    $('.main_heading').html(cat_name);                
+                    $('.main_body').html(returnedData);        
+                },
+                complete: function(){
+                    $('#loading').removeClass("showloading");
+                    $('#local_pagination_search_cat').val(cat_name);
+                    $('#local_pagination_search_value').val(search_value);
+                    $('.local_search_box').val('');
+                    $('.main_body').prepend("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat_name+"</strong> like <strong>"+search_value+"</strong>...</div>");
+                }
+            });
+        }    
+    });
+
+    //executes code below when user click on pagination links
+    $(".main_body").on( "click", ".local_search_pagination1 .pagination a", function (e){
+        e.preventDefault();
+        var cat_name = $('#local_pagination_search_cat').val();
+        var search_value = $("#local_pagination_search_value").val();
+        var page = $(this).attr("data-page");
+        $.ajax({
+            type: "POST",
+            url: "product_list.php",
+            data: 'l_cat_name='+cat_name + '&l_cat_prod=1&l_search_value='+search_value+'&page='+page,
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
+            success: function( returnedData ){
+                $('.main_body').html(returnedData);        
+            },
+            complete: function(){
+                $('#loading').removeClass("showloading");
+                $('.main_body').prepend("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat_name+"</strong> like <strong>"+search_value+"</strong>...</div>");
+            }
+        });            
+    });
 });

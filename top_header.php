@@ -1,12 +1,14 @@
 <!-- Header -->
-<div id="header">
-    <div id="logo" class="light-version">
-        <span >
-            <a href="home.php">
-                <img src="images/dk-logo.png">
-            </a>
-        </span>
-        <div class="col-md-4 col-xs-4 col-lg-4 col-sm-4 pull-right search-div">
+<div id="row header">
+    <div id="logo" class="container light-version">
+        <div class="col-xs-12 col-sm-6 col-md-8 pull-left">
+            <span >
+                <a href="home.php">
+                    <img src="images/dk-logo.png" style="height: 80px;width: 187px;">
+                </a>
+            </span> 
+        </div>       
+        <div class="col-xs-6 col-md-4 pull-right search-div">
             <div class="input-group">
                 <div class="input-group-btn">
                     <button type="button" class="btn search-dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="search_cat">Product Id <span class="caret"></span></button>

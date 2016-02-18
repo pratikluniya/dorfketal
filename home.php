@@ -39,10 +39,25 @@ include("side_navigation.php");
   
                     </div>
                     <div class="container cat-tabs">
-                        <button type="button" class="by_product btn btn-primary" id="by_product">By Products</button>
-                        <button type="button" class="by_application btn btn-primary inactive-cat-tab" id="by_application">By Application</button><br>
-                        <select id="cat_applications">
-                        </select>
+                        <div class="container">
+                            <div class="col-md-7">
+                                <div class="pull-right">
+                                    <button type="button" class="by_product btn btn-primary" id="by_product">By Products</button>
+                                    <button type="button" class="by_application btn btn-primary inactive-cat-tab" id="by_application">By Application</button><br>
+                                    <select id="cat_applications">
+                                    </select>
+                                </div>
+                            </div>                        
+                            <div class="col-md-4 pull-right local-search-div">
+                                <div class="input-group">                                
+                                    <input type="text" class="form-control local_search_box" aria-label="..." placeholder="Search...">
+                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                    <input type="hidden" id="local_search_cat" value="">
+                                    <input type="hidden" id="local_pagination_search_cat" value="">
+                                    <input type="hidden" id="local_pagination_search_value" value="">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="container po-tabs">
                         <button type="button" class="up_po btn btn-primary" id="up_po">Upload PO#</button>
@@ -53,6 +68,19 @@ include("side_navigation.php");
                         <button type="button" class="up_quote btn btn-primary" id="up_quote">Request Quotation</button>
                         <button type="button" class="quote_history btn btn-primary inactive-cat-tab" id="quote_history">Quotation History</button><br>
                         </select>
+                    </div>
+                    <div class="container search-tabs">
+                        <div class="col-md-12">
+                            <div class="col-xs-6 col-md-4 pull-right local-search-div">
+                                <div class="input-group">                                
+                                    <input type="text" class="form-control local_search_box" aria-label="..." placeholder="Search...">
+                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                    <input type="hidden" id="local_search_cat" value="">
+                                    <input type="hidden" id="local_pagination_search_cat" value="">
+                                    <input type="hidden" id="local_pagination_search_value" value="">
+                                </div>
+                            </div>                           
+                        </div>
                     </div>
                     <div class="panel-body main_body">
                         <p>
