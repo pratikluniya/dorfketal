@@ -10,7 +10,7 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "getcart") )
 if($result != "no")
 {
 ?>
-    <div class="container">
+    <div class="container table-responsive">
     	<table id="cart_table" class="table table-bordered table-striped">
 		    	<thead>
 		      		<tr class="headings">

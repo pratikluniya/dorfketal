@@ -11,7 +11,7 @@ $con =new functions();
 ?>
 
 <div class="container">
-	<div class="col-md-6 animated fadeInRight req-quote-div">
+	<div class="col-md-6 col-xs-6 col-lg-6 col-sm-6 animated fadeInRight req-quote-div">
 		<form>
 			<div class="form-group">
 				<label for="q_cat">Category<sup class="required_field">*</sup> : </label>

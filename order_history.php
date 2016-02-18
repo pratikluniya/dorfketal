@@ -81,7 +81,7 @@ if($result != "no")
                             <tr>
                                 <td colspan="12" class="hiddenRow">
                                     <div class="accordian-body collapse" id="demo<?php echo $key;?>"> 
-                                        <div class="container col-md-6" style="border-right:1px dotted #c9c9c9;">
+                                        <div class="container col-md-6 col-xs-6 col-lg-6 col-sm-6" style="border-right:1px dotted #c9c9c9;">
                                             <div class="form-group">
                                                 <label class="history_label">Oracle Order : </label><?php echo ($result[$key]['ORACLE_ORDER']);?>
                                             </div>
@@ -107,7 +107,7 @@ if($result != "no")
                                                 <label class="history_label">Comments : </label><?php echo ($result[$key]['COMMENTS']);?>
                                             </div>
                                         </div>
-                                        <div class="container col-md-6">
+                                        <div class="container col-md-6 col-xs-6 col-lg-6 col-sm-6">
                                             <div class="form-group">
                                                 <label class="history_label">Product Name : </label><?php echo ($result[$key]['DESCRIPTION']);?>
                                             </div>

@@ -113,7 +113,7 @@ if(isset($_REQUEST['search_category']) && ($_REQUEST['search_category'] == "4") 
         foreach ($result as $key => $value) 
         {
             echo '
-            <div class="col-lg-6 animated bounceInRight prod_list">
+            <div class="col-md-6 col-xs-6 col-lg-6 col-sm-6 animated bounceInRight prod_list">
                 <div class="hpanel">
                     <div class="panel-heading hbuilt">
                         <div class="panel-tools">
@@ -123,7 +123,7 @@ if(isset($_REQUEST['search_category']) && ($_REQUEST['search_category'] == "4") 
                         <h4 id="prod_desc">'.$result[$key]['DESCRIPTION'].'</h4>
                     </div>
                     <div class="panel-body">
-                        <div class="col-lg-12 form-prod">
+                        <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 form-prod">
                             <label class="prod-lables" for="qty">Quantity<sup class="required_field">*</sup> :</label>
                             <input type="text" name="qty" id="qty" class="form-control qty prod_qty"> Kg<br>
                             <label class="prod-lables" for="qty">Packaging Size :</label>
@@ -170,7 +170,7 @@ if(isset($_REQUEST['search_category']) && ($_REQUEST['search_category'] == "4") 
         if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "1") )
         {
             echo '<div class="row text-center">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
                         <div class="cat_prod_pagination1">';                                                            
                             echo paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages);                   
             echo'       </div>                        
@@ -181,7 +181,7 @@ if(isset($_REQUEST['search_category']) && ($_REQUEST['search_category'] == "4") 
         if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "2") )
         {
             echo '<div class="row text-center">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
                         <div class="cat_prod_pagination2">';                                                            
                             echo paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages);                   
             echo'       </div>                        
@@ -192,7 +192,7 @@ if(isset($_REQUEST['search_category']) && ($_REQUEST['search_category'] == "4") 
         if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "3") )
         {
             echo '<div class="row text-center">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
                         <div class="cat_prod_pagination3">';                                                            
                             echo paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages);                   
             echo'       </div>                        
@@ -204,7 +204,7 @@ if(isset($_REQUEST['search_category']) && ($_REQUEST['search_category'] == "4") 
         if(isset($_REQUEST['search_category']) )
         {
             echo '<div class="row text-center">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
                         <div class="search_pagination1">';                                                            
                             echo paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages);                   
             echo'       </div>                        

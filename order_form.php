@@ -31,7 +31,7 @@ $con =new functions();
 ?>
 
 <div class="container">
-	<div class="col-md-6 animated fadeInUp">
+	<div class="col-md-6 col-xs-6 col-lg-6 col-sm-6 animated fadeInUp">
 		<form id="checkout_data">
 			<div class="form-group">
 				<label for="PO_number">#PO<sup class="required_field">*</sup> : </label>
@@ -104,7 +104,7 @@ $con =new functions();
 		</form>
 	</div>
 
-	<div class="col-md-6" style="border-left: 1px dotted #c9c9c9;">
+	<div class="col-md-6 col-xs-6 col-lg-6 col-sm-6" style="border-left: 1px dotted #c9c9c9;">
 		<h3>Products in Cart</h3>
 		<?php
         foreach ($result_prod as $key => $value) 
@@ -119,15 +119,15 @@ $con =new functions();
                         <h4 id="prod_desc"><?php echo $result_prod[$key]['DESCRIPTION']; ?></h4>
                     </div>
                     <div class="panel-body">
-                        <div class="col-lg-12">
+                        <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
                             <label class="prod-lables" for="qty">Quantity : </label>
                             <?php echo $result_prod[$key]['QUANTITY'];?> Kg
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
                             <label class="prod-lables" for="qty">Packaging Size :</label>
                             <?php echo $result_prod[$key]['PACKAGING_SIZE'];?> Drum /Tank
 	                    </div>
-	                    <div class="col-lg-12">
+	                    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
 	                    	<label class="prod-lables" for="remark">Available Price :</label>
 	                    		<?php 
                 				if($result_prod[$key]['AVAILABLE_PRICE']== '0.00000')
@@ -140,7 +140,7 @@ $con =new functions();
 	                    if($result_prod[$key]['REMARK'] != "")
 	                    {
 	                    ?>
-		                    <div class="col-lg-12">
+		                    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
 	                            <label class="prod-lables" for="remark">Remark : </label>
 	                            <?php echo $result_prod[$key]['REMARK'];?>
 	                        </div>

@@ -1,6 +1,6 @@
-<div class="container">
+<div class="row">
     <div class="container">
-        <div class="col-lg-4 transition animated bounceInRight">
+        <div class="col-md-4 col-xs-4 col-lg-4 col-sm-4 transition animated bounceInRight">
             <div class="hpanel rm-all">
                 <div class="panel-body">
                     <div>
@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 transition animated bounceInRight">
+        <div class="col-md-4 col-xs-4 col-lg-4 col-sm-4 transition animated bounceInRight">
             <div class="hpanel rm-all">
                 <div class="panel-body">
                     <div>
@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 transition animated bounceInRight">
+        <div class="col-md-4 col-xs-4 col-lg-4 col-sm-4 transition animated bounceInRight">
             <div class="hpanel rm-all">
                 <div class="panel-body">
                     <form class="prod_form">
@@ -54,7 +54,7 @@
         </div>
     </div>
     <div class="container">
-        <div class="col-lg-4 transition animated bounceInRight">
+        <div class="col-md-4 col-xs-4 col-lg-4 col-sm-4 transition animated bounceInRight">
             <div class="hpanel rm-all">
                 <div class="panel-body">
                     <form class="prod_form">
@@ -70,7 +70,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 transition animated bounceInRight">
+        <div class="col-md-4 col-xs-4 col-lg-4 col-sm-4 transition animated bounceInRight">
             <div class="hpanel rm-all">
                 <div class="panel-body">
                     <form class="prod_form">
@@ -86,7 +86,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 transition animated bounceInRight">
+        <div class="col-md-4 col-xs-4 col-lg-4 col-sm-4 transition animated bounceInRight">
             <div class="hpanel rm-all">
                 <div class="panel-body">
                     <form class="prod_form">

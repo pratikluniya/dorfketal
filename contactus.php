@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="col-md-6 animated bounceInRight">
+	<div class="col-md-6 col-xs-6 col-lg-6 col-sm-6 animated bounceInRight">
 		<div class="form-group">
 			<label for="purpose">Purpose<sup class="required_field">*</sup> : </label>
 			<select id="purpose" class="form-control" required>

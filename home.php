@@ -9,12 +9,12 @@ include("side_navigation.php");
     <div class="normalheader transition animated fadeIn">
         <div class="hpanel row">
             <div class="panel-body">
-                <div class="col-lg-6">
+                <div class="col-md-6 col-xs-6 col-lg-6 col-sm-6">
                     <h2 class="font-light m-b-xs main_heading">
                         Welcome to Dorf Ketal
                     </h2>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-md-6 col-xs-6 col-lg-6 col-sm-6">
                     <span id="mycart">
                         <img src="images/cart-icon.png" style="height:60px;">
                         <span class="" id="cart_count" style="<?php if($_SESSION['cart_count'] > 9) { echo'margin:16px 0px 0px -46px';  } else{  echo 'margin:16px 0px 0px -40px'; } ?>;">
@@ -33,7 +33,7 @@ include("side_navigation.php");
     <!-- Main body starts -->
     <div class="content animate-panel">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
                 <div class="hpanel row">
                     <div class="notify animated fadeIn">
   

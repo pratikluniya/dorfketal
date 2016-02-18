@@ -114,7 +114,7 @@ if($result != "no")
                                             <label class="history_label">Pay Terms : </label>
                                             <span id="pay_term"><?php echo ($result[$key]['ATTRIBUTE12']);?></span><br><br>
                                         </div>
-                                        <div class="container col-md-6">
+                                        <div class="container col-md-6 col-xs-6 col-lg-6 col-sm-6">
                                             <label class="history_label">Oracle Order : </label>
                                             <span id="oracle_order"><?php echo ($result[$key]['ORACLE_ORDER']);?></span><br><br>
                                             <label class="history_label">Order Date: </label>
@@ -147,7 +147,7 @@ if($result != "no")
                     { 
                 ?>
                         <div class="row text-center">
-                            <div class="col-md-12">
+                            <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
                                 <div class="repeat_order_pagination">
                                     <?php                                
                                         echo paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages);

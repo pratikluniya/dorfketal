@@ -6,7 +6,7 @@
                 <img src="images/dk-logo.png">
             </a>
         </span>
-        <div class="col-md-4 pull-right search-div">
+        <div class="col-md-4 col-xs-4 col-lg-4 col-sm-4 pull-right search-div">
             <div class="input-group">
                 <div class="input-group-btn">
                     <button type="button" class="btn search-dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="search_cat">Product Id <span class="caret"></span></button>
