@@ -34,6 +34,7 @@ if(!isset($_SESSION['cust_id']))
 
         <script src="vendor/jquery/dist/jquery.min.js"></script>
         <script src="scripts/main.js"></script>
+        <script src="scripts/search.js"></script>
 
         <!-- Order Management Dependancies End Here -->
     </head>

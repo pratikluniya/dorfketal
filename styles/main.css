@@ -243,3 +243,24 @@ input[type=number]::-webkit-outer-spin-button {
     pointer-events: none;
 
 }
+.search-div{
+    top: 60px;
+}
+.search-dropdown-btn{
+    background-color: #339849;
+    color: #fff;
+}
+.btn .search-dropdown-btn:hover {
+  color: #fff !important;
+}
+.search-div .input-group-addon{
+    color: #339849;
+    cursor:pointer;
+}
+.search-tabs{
+    padding: 15px 17px;
+    width: 100%;
+    display: none;
+    background: #fff;
+    font-size: 15px;
+}

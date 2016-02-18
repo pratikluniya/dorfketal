@@ -2210,17 +2210,7 @@ body.fullscreen-panel-mode {
   background-color: #f7f9fa;
 }
 /* Slider */
-#logo {
-  background-color: #ffffff;
-  padding: 18px 10px 18px 18px;
-  height: 117px;
-  text-align: center;
-}
-#logo span {
-  font-weight: 600;
-  color: #fff;
-  font-size: 14px;
-}
+
 .profile-picture {
   padding: 20px 20px;
   text-align: center;
