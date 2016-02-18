@@ -32,9 +32,9 @@ $sold_to = $con->data_select($sql_sold_to);
 if($result != "no")
 {
 ?>
-    <div class="container table-responsive table-boredered animated bounceInRight">
+    <div class="container animated bounceInRight">
         <div class="panel panel-default">
-            <div class="panel-body">
+            <div class="panel-body table-responsive">
                 <table class="table table-condensed table-striped" style="border-collapse:collapse;">
                     <thead>
                         <tr>
@@ -139,8 +139,7 @@ if($result != "no")
                                 echo paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages);
                             ?>
                         </div>                        
-                    </div>
-                    
+                    </div>    
                 </div>                
             </div>    
         </div>     

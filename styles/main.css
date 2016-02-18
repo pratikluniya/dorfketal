@@ -256,6 +256,8 @@ input[type=number]::-webkit-outer-spin-button {
 .search-div .input-group-addon{
     color: #339849;
     cursor:pointer;
+    border-top-right-radius: 3px !important;
+    border-bottom-right-radius: 3px !important;
 }
 .search-tabs{
     padding: 15px 17px;

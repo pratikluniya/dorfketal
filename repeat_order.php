@@ -48,9 +48,9 @@ else
 if($result != "no")
 {
 ?>
-    <div class="container table-responsive table-boredered animated bounceInRight">
+    <div class="container animated bounceInRight">
         <div class="panel panel-default">
-            <div class="panel-body">
+            <div class="panel-body table-responsive">
                 <table class="table table-condensed table-striped" style="border-collapse:collapse;">
                     <thead>
                         <tr>

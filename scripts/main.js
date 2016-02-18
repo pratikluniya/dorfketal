@@ -183,7 +183,7 @@ $(document).ready(function () {
 
 /********  Left Sidebar Click Events  *****/ 
 $(document).ready(function () {
-	$("#place_order_btn" ).on( "click", function() {
+	$(".place_order_btn" ).on( "click", function() {
         $('#loading').addClass("showloading");
 		$('.main_heading').html("Place Order");
 		$('.main_body').load('categories.php', function(data){
@@ -192,7 +192,7 @@ $(document).ready(function () {
     });
 });
 $(document).ready(function () {
-	$("#regular_prod_btn" ).on( "click", function() {
+	$(".regular_prod_btn" ).on( "click", function() {
 		$.ajax({
             type: "POST",
             url: "product_list.php",
@@ -235,7 +235,7 @@ $(document).ready(function () {
     });
 });
 $(document).ready(function () {
-	$("#reset_vertical_btn" ).on( "click", function() {
+	$(".reset_vertical_btn" ).on( "click", function() {
 		$('.main_heading').html("Reset Your Favorite Vertical");
 		$('.main_body').load('reset_fav_vertical.php');
         var fval;
@@ -259,7 +259,7 @@ $(document).ready(function () {
 	});
 });
 $(document).ready(function () {
-    $("#order_history_btn" ).on( "click", function() {        
+    $(".order_history_btn" ).on( "click", function() {        
         $('#loading').addClass("showloading");
         $('.main_heading').html("Order History");
         $('.main_body').load('order_history.php', function(data){
@@ -279,7 +279,7 @@ $(document).ready(function () {
     });
 });
 $(document).ready(function () {
-    $("#repeat_order_btn" ).on( "click", function() {
+    $(".repeat_order_btn" ).on( "click", function() {
         $('#loading').addClass("showloading");
         $('.main_heading').html("Repeat Order");
         $('.main_body').load('repeat_order.php', function(data){
@@ -299,7 +299,7 @@ $(document).ready(function () {
     });
 });
 $(document).ready(function () {
-    $("#sales_order_btn" ).on( "click", function() {
+    $(".sales_order_btn" ).on( "click", function() {
         $('#loading').addClass("showloading");
         $('.main_heading').html("Sales Order Agreement");
         $('.main_body').load('sales_order_agreement.php', function(data){
@@ -309,7 +309,7 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
 	var cat_name;
-	$("#fav_vertical_btn" ).on( "click", function() {
+	$(".fav_vertical_btn" ).on( "click", function() {
 		$.ajax({
             type: "POST",
             url: "ajax.php",
@@ -339,7 +339,7 @@ $(document).ready(function () {
 	});
 });
 $(document).ready(function () {
-    $("#upload_po_btn" ).on( "click", function() {
+    $(".upload_po_btn" ).on( "click", function() {
         $('#loading').addClass("showloading");
         $('.main_heading').html("Upload PO#");
         $('.po-tabs').show();
@@ -349,7 +349,7 @@ $(document).ready(function () {
     });
 });
 $(document).ready(function () {
-	$("#track_order_btn" ).on( "click", function() {
+	$(".track_order_btn" ).on( "click", function() {
 		$.ajax({
             type: "POST",
             url: "ajax.php",
@@ -372,7 +372,7 @@ $(document).ready(function () {
     });
 });
 $(document).ready(function () {
-	$("#contactus_btn" ).on( "click", function() {
+	$(".contactus_btn" ).on( "click", function() {
         $('#loading').addClass("showloading");
 		$('.main_heading').html("Contact Us");
 		$('.main_body').load('contactus.php', function(data){
@@ -381,7 +381,7 @@ $(document).ready(function () {
     });
 });
 $(document).ready(function () {
-	$("#req_quotation_btn" ).on( "click", function() {
+	$(".req_quotation_btn" ).on( "click", function() {
         $('#loading').addClass("showloading");
         $('.quote-tabs').show();
 		$('.main_heading').html("Request Quotation");
