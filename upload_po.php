@@ -105,7 +105,7 @@ $con =new functions();
 			</div>
 		</form>
 	</div>
-	<div class="container animated bounceInRight po-history-div" style="display:none;">
+	<div class="container table-responsive animated bounceInRight po-history-div" style="display:none;">
 	    <table id="cart_table" class="table table-bordered table-striped">
 	    	<thead>
 	      		<tr class="headings">

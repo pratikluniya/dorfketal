@@ -1096,7 +1096,9 @@ $(document).ready(function () {
             success: function( returnedData ){
         		$('.main_heading').html("Shopping Cart");
                 $('.cat-tabs').hide();
+                $('.po-tabs').hide();
                 $(".search-tabs").hide();
+                $('.quote-tabs').hide();
 				$('.main_body').html(returnedData);        
         	},
             complete: function(){

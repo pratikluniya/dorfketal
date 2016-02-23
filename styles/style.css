@@ -1596,6 +1596,9 @@ body {
   left: 181px;
   right: 0;
 }*/
+#mobile-menu{
+  display: none;
+}
 .fixed-footer.hide-sidebar .footer {
   left: 0;
 }
@@ -1606,6 +1609,9 @@ body {
   .fixed-footer.show-sidebar .footer {
     left: 181px;
   }
+}
+#mobile-menu{
+  display: block;
 }
 #right-sidebar {
   background-color: #fff;

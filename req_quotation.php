@@ -96,7 +96,7 @@ $result_quote_history = $con -> data_select($sql_quote);
 			</div>
 		</form>
 	</div>
-	<div class="container animated bounceInRight quote-history-div" style="display:none;">
+	<div class="container table-responsive animated bounceInRight quote-history-div" style="display:none;">
 	    <table id="cart_table" class="table table-bordered table-striped">
 	    	<thead>
 	      		<tr class="headings">
