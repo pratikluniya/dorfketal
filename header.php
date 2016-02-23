@@ -27,6 +27,7 @@ if(!isset($_SESSION['cust_id']))
         <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="vendor/confirmjs/dist/jquery-confirm.css" />
         <link rel="stylesheet" href="styles/login-style.css">
+        <link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
 
         <!-- App styles -->
         <link rel="stylesheet" href="styles/style.css">
@@ -35,6 +36,11 @@ if(!isset($_SESSION['cust_id']))
         <script src="vendor/jquery/dist/jquery.min.js"></script>
         <script src="scripts/main.js"></script>
         <script src="scripts/search.js"></script>
+        <script src="scripts/auto-search.js"></script>               
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+     
+
 
         <!-- Order Management Dependancies End Here -->
     </head>

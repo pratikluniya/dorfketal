@@ -3,11 +3,19 @@ include "classes/functions.php";
 session_start();
 $cust_id = $_SESSION['cust_id'];
 $con =new functions();
+$item_per_page = 10;
+$page_number = 1;
 
-	// FEtch Quations History
-	$sql_quote = "SELECT cq.PRODUCT_CODE, cq.PACKAGING_SIZE, cq.QUANTITY, cq.AVAILABLE_PRICE, cq.REQUESTED_PRICE, cq.REMARK, cq.FILE_NAME, cq.STATUS, up.DESCRIPTION FROM customer_quotations as cq, xxdkapps_unsegregated_products as up WHERE cq.CUSTOMER_NUMBER = ".$cust_id." and cq.PRODUCT_CODE = up.PRODUCT_CODE ORDER BY cq.ID DESC";
-	$result_quote_history = $con -> data_select($sql_quote);
-	
+$sql = "SELECT cq.PRODUCT_CODE FROM customer_quotations as cq, xxdkapps_unsegregated_products as up WHERE cq.CUSTOMER_NUMBER = ".$cust_id." and cq.PRODUCT_CODE = up.PRODUCT_CODE ORDER BY cq.ID DESC";
+$result = $con -> data_select($sql);
+$get_total_rows = count($result); //hold total records in variable
+$total_pages = ceil($get_total_rows/$item_per_page);//break records into pages
+$page_position = (($page_number-1) * $item_per_page);//get starting position to fetch the records 
+
+//Fetch Quations History
+$sql_quote = "SELECT cq.PRODUCT_CODE, cq.PACKAGING_SIZE, cq.QUANTITY, cq.AVAILABLE_PRICE, cq.REQUESTED_PRICE, cq.REMARK, cq.FILE_NAME, cq.STATUS, up.DESCRIPTION FROM customer_quotations as cq, xxdkapps_unsegregated_products as up WHERE cq.CUSTOMER_NUMBER = ".$cust_id." and cq.PRODUCT_CODE = up.PRODUCT_CODE ORDER BY cq.ID DESC LIMIT $page_position, $item_per_page";
+$result_quote_history = $con -> data_select($sql_quote);
+
 ?>
 
 <div class="container">
@@ -102,41 +110,62 @@ $con =new functions();
 	        		<th>STATUS</th>
 	      		</tr>
 	    	</thead>
-	    	<tbody>
-	    	<?php
-	        	foreach ($result_quote_history as $key => $value) 
-	        	{
-	        ?>
-	        		<tr class="item">
-			        	<td>
-			        		<?php echo $value['DESCRIPTION']; ?>
-			        	</td>
-			        	<td>
-			        		<?php echo $value['QUANTITY']; ?>
-			        	</td>
-			        	<td>
-			        		<?php echo $value['PACKAGING_SIZE']; ?>
-		                </td>
-		                <td>
-		                	<?php echo $value['AVAILABLE_PRICE']; ?>
-		                </td>
-		                <td>
-		                	<?php echo $value['REQUESTED_PRICE']; ?>
-		                </td>
-		                <td>
-		                	<?php echo $value['REMARK']; ?>
-		                </td>
-		                <td>
-		                	<?php echo $value['FILE_NAME']; ?>
-		                </td>
-		                <td>
-		                	<?php echo $value['STATUS']; ?>
-		                </td>
-			      	</tr>
-			<?php 
-			}
-			?>
+	    	<tbody id="quote_history_table">
+	    		<?php
+				if($result_quote_history != 'no'){
+					foreach ($result_quote_history as $key => $value) 
+					{
+				?>
+						<tr class="item">        	
+				        	<td>
+				        		<?php echo $value['DESCRIPTION']; ?>
+				        	</td>
+				        	<td>
+				        		<?php echo $value['QUANTITY']; ?>
+				        	</td>
+				        	<td>
+				        		<?php echo $value['PACKAGING_SIZE']; ?>
+				            </td>
+				            <td>
+				            	<?php echo $value['AVAILABLE_PRICE']; ?>
+				            </td>
+				            <td>
+				            	<?php echo $value['REQUESTED_PRICE']; ?>
+				            </td>
+				            <td>
+				            	<?php echo $value['REMARK']; ?>
+				            </td>
+				            <td>
+				            	<?php echo $value['FILE_NAME']; ?>
+				            </td>
+				            <td>
+				            	<?php echo $value['STATUS']; ?>
+				            </td>
+				      	</tr>
+				<?php 
+					}
+				}
+				else{
+					echo '<tr class="item"><td colspan="8" align="center">No Records Found</td></tr>';
+				}
+				?>
 			</tbody>
 		</table>
+		<?php
+		if(isset($_REQUEST['search_value']))
+		{			
+		?>
+		<div class="row text-center">
+            <div class="col-md-12">
+                <div class="quote_history_loc_src_pagtn">
+                    <?php                                
+                        echo paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages);
+                    ?>
+                </div>                        
+            </div>    
+        </div>
+	    <?php
+	    }
+	    ?>
 	</div>
 </div>

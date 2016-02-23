@@ -11,23 +11,24 @@
         <div class="col-xs-6 col-md-4 pull-right search-div">
             <div class="input-group">
                 <div class="input-group-btn">
-                    <button type="button" class="btn search-dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="search_cat">Product Id <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" data-page="1">Product Id</a></li>
-                        <li><a href="#" data-page="2">Product Name</a></li>
-                        <li><a href="#" data-page="3">Application</a></li>
-                        <li><a href="#" data-page="4">Category</a></li>
-                        <li><a href="#" data-page="5">Order Id</a></li>
-                        <li><a href="#" data-page="6">Order Web Id</a></li>
+                    <button type="button" class="btn search-dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="search_cat">Select <span class="caret"></span></button>
+                    <ul class="dropdown-menu">                        
+                        <li><a href="#" data-value="1" data-category="Product Id">Product Id</a></li>
+                        <li><a href="#" data-value="2" data-category="Product Name">Product Name</a></li>
+                        <li><a href="#" data-value="3" data-category="Application">Application</a></li>
+                        <li><a href="#" data-value="4" data-category="Category">Category</a></li>
+                        <li><a href="#" data-value="5" data-category="Order Id">Order Id</a></li>
+                        <li><a href="#" data-value="6" data-category="Order Web Id">Order Web Id</a></li>
                         
                     </ul>
                 </div><!-- /btn-group -->
-                <input type="text" class="form-control" id="search_box" aria-label="..." placeholder="Enter Product Id">
+                <input type="text" class="form-control" id="search_box" aria-label="..." placeholder="Search">
                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                <input type="hidden" id="search_id" value="1">
+                <input type="hidden" id="search_id" value="0">
                 <input type="hidden" id="pagination_search_id" value="">
-                <input type="hidden" id="pagination_search_value" value="">
+                <input type="hidden" id="pagination_search_value" value="">                
             </div>
+            <div class="text-center" id="global_no_result">No Result Found</div>
         </div>        
     </div>
 </div>

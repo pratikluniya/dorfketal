@@ -141,6 +141,7 @@ $(document).ready(function () {
         $(".cat-tabs").hide();
         $(".po-tabs").hide();
         $(".quote-tabs").hide();
+        $(".search-tabs").hide();
         $('#po_history').addClass('inactive-cat-tab');
         $('#up_po').removeClass('inactive-cat-tab');
         $('#quote_history').addClass('inactive-cat-tab');
@@ -202,6 +203,7 @@ $(document).ready(function () {
             },
             success: function( returnedData ){
                 $('.cat-tabs').hide();
+                $(".search-tabs").hide();
         		$('.main_heading').html("Regular Products");
 				$('.main_body').html(returnedData);
         	},
@@ -225,6 +227,7 @@ $(document).ready(function () {
             },
             success: function( returnedData ){
                 $('.cat-tabs').hide();
+                $(".search-tabs").hide();
                 $('.main_heading').html("Regular Products");
                 $('.main_body').html(returnedData);
             },
@@ -264,6 +267,7 @@ $(document).ready(function () {
         $('.main_heading').html("Order History");
         $('.main_body').load('order_history.php', function(data){
             $('.search-tabs').show();
+            $('#order_type_div').val('OH');
             $('#loading').removeClass("showloading");
         });
     });
@@ -286,6 +290,8 @@ $(document).ready(function () {
         $('.main_heading').html("Repeat Order");
         $('.main_body').load('repeat_order.php', function(data){
             $('#loading').removeClass("showloading");
+            $('.search-tabs').show();
+            $('#order_type_div').val('RO');
         });
     });
 
@@ -386,6 +392,7 @@ $(document).ready(function () {
 	$(".req_quotation_btn" ).on( "click", function() {
         $('#loading').addClass("showloading");
         $('.quote-tabs').show();
+        $('.quote_search').hide();
 		$('.main_heading').html("Request Quotation");
 		$('.main_body').load('req_quotation.php', function(data){
             $('#loading').removeClass("showloading");
@@ -444,6 +451,8 @@ $(document).ready(function () {
 	$( ".main_body" ).on( "click","#order-history-btn", function(e) {
 		$('.main_heading').html("Order History");
 		$('.main_body').load('order_history.php');
+        $('.search-tabs').show();
+        $('#order_type_div').val('OH');
     });
 });
 $(document).ready(function () {
@@ -504,6 +513,7 @@ $(document).ready(function () {
 		$(this).removeClass('inactive-cat-tab');
 		$('#by_application').addClass('inactive-cat-tab');
 		$('#cat_applications').hide();
+        $(".search-tabs").hide();
         var cat_name = $('#cat_name').val().trim();
         $.ajax({
             type: "POST",
@@ -529,7 +539,25 @@ $(document).ready(function () {
         $(this).removeClass('inactive-cat-tab');
         $('#up_po').addClass('inactive-cat-tab');
         $('.po-form-div').hide();
+        $(".search-tabs").hide();
+        $('.search-result-tabs').remove();
         $('.po-history-div').show();
+        $('.po_search').show();
+        $.ajax({
+            url:'ajax.php',
+            type: "POST",
+            data:'action=get_po_history',
+            beforeSend:function(){
+                $('#loading').addClass("showloading"); //show loading element
+            },
+            success:function(data){
+                $('#po_history_table').html(data);
+            },
+            complete:function(){
+                $('#loading').removeClass("showloading"); //once done, hide loading element
+                $('#po_search_box').val('');                
+            }
+        });
     });
 });
 $(document).ready(function () {
@@ -537,7 +565,10 @@ $(document).ready(function () {
         $(this).removeClass('inactive-cat-tab');
         $('#po_history').addClass('inactive-cat-tab');
         $('.po-history-div').hide();
+        $(".search-tabs").hide();
         $('.po-form-div').show();
+        $('.po_search').hide();
+        $('.search-result-tabs').remove();
     });
 });
 $(document).ready(function () {
@@ -545,7 +576,25 @@ $(document).ready(function () {
         $(this).removeClass('inactive-cat-tab');
         $('#up_quote').addClass('inactive-cat-tab');
         $('.req-quote-div').hide();
+        $(".search-tabs").hide();
         $('.quote-history-div').show();
+        $('.quote_search').show();
+        $('.search-result-tabs').remove();
+        $.ajax({
+            url:'ajax.php',
+            type: "POST",
+            data:'action=get_quote_history',
+            beforeSend:function(){
+                $('#loading').addClass("showloading"); //show loading element
+            },
+            success:function(data){
+                $('#quote_history_table').html(data);
+            },
+            complete:function(){
+                $('#loading').removeClass("showloading"); //once done, hide loading element
+                $('#quote_search_box').val('');                
+            }
+        });        
     });
 });
 $(document).ready(function () {
@@ -553,7 +602,10 @@ $(document).ready(function () {
         $(this).removeClass('inactive-cat-tab');
         $('#quote_history').addClass('inactive-cat-tab');
         $('.quote-history-div').hide();
+        $(".search-tabs").hide();
         $('.req-quote-div').show();
+        $('.quote_search').hide();
+        $('.search-result-tabs').remove();
     });
 });
 $(document).ready(function () {
@@ -586,7 +638,7 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "product_list.php",
-            data: 'cat_name='+ cat_name +'&pgid='+ pgid +'&cat_prod=3',
+            data: 'cat_name='+ cat_name +'&pgid='+ pgid +'&cat_prod=3&page='+page,
             beforeSend: function(){
                 $('#loading').addClass("showloading");
             },
@@ -937,6 +989,8 @@ $(document).ready(function () {
 $(document).ready(function () { 
     $(".main_body" ).on( "click","#repeat_order", function(e) {
         $('#loading').addClass("showloading");
+        $('.search-tabs').show();
+        $('#order_type_div').val('RO');
         var prod_desc = $(this).parent().find("#rep_prod_desc").text();
         var pkg_size = $(this).parent().find("#pkg_size").text();
         var qty = $(this).parent().find("#qty").text();
@@ -1042,6 +1096,7 @@ $(document).ready(function () {
             success: function( returnedData ){
         		$('.main_heading').html("Shopping Cart");
                 $('.cat-tabs').hide();
+                $(".search-tabs").hide();
 				$('.main_body').html(returnedData);        
         	},
             complete: function(){
@@ -1089,6 +1144,7 @@ $(document).ready(function () {
 	$(".main_body" ).on( "click","#continue_shop_btn", function(e) {
 		$('.main_heading').html("Place Order");
 		$('.main_body').load('categories.php');
+        $('.search-tabs').hide();
 	});
 });
 $(document).ready(function () {

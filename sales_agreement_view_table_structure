@@ -1,0 +1,67 @@
+[SALES_AGREEMENT_NUMBER] => 1115130002                                  INT-11
+
+[SALES_AGREEMENT_NAME] => IOCL CONTRACT-100250                          VARCHAR-256
+[CUSTOMER_NAME] => Indian Oil Corporation Limited                       VARCHAR-256
+
+[CUSTOMER_NUMBER] => 7996                                               INT-11
+
+[SALES_AGREEMENT_DATE] => 07-APR-2014                                   VARCHAR-256
+
+[LINE_ID] => 710730                                                     INT-11
+[ORG_ID] => 722                                                         INT-11
+[HEADER_ID] => 849750                                                   INT-11
+[LINE_NUMBER] => 1                                                      INT-11
+
+[ORDERED_ITEM] => 300217-160020                                         VARCHAR-256
+[ORDER_QUANTITY_UOM] => KG                                              VARCHAR-256
+[DESCRIPTION] => DORF-1440 -  20 kg Pack                                VARCHAR-256
+[START_DATE_ACTIVE] => 12-APR-13                                        VARCHAR-256
+[END_DATE_ACTIVE] => 14-JUN-14                                          VARCHAR-256
+
+[SALESREP_ID] => 100018048                                              INT-11
+
+[CUST_PO_NUMBER] => 5781/LI-2222/12-13/4586/DKCIPL/LUBES DT.12.04.2013  VARCHAR-256
+[PRICE_LIST] => IOCL -M -LI-2222                                        VARCHAR-256
+[TERMS] => 1008                                                         VARCHAR-256
+[SHIPPING_METHOD_CODE] => 000001_By Land_T_D2D                          VARCHAR-256
+[FREIGHT_TERMS_CODE] => DDP                                             VARCHAR-256
+
+[SHIP_FROM_LOCATION] => 502                                             INT-11
+
+[SHIP_TO] => IOC-Mumbai (S)                                             VARCHAR-256
+[SHIP_TO_LOCATION] => IOC-Mumbai (S)                                    VARCHAR-256
+[SHIP_TO_ADDRESS1] => IOC-Mumbai (S)                                    VARCHAR-256
+[SHIP_TO_ADDRESS2] => Regd. Office: India Oil                           VARCHAR-256
+[SHIP_TO_ADDRESS3] => Bhavan, G-9,Ali Yavar Jung                        VARCHAR-256
+[SHIP_TO_ADDRESS4] => Marg, Bandra (East)                               VARCHAR-256     
+[INVOICE_TO] =>                                                         VARCHAR-256
+[INVOICE_TO_LOCATION] =>                                                VARCHAR-256
+[INVOICE_TO_ADDRESS1] =>                                                VARCHAR-256            
+[INVOICE_TO_ADDRESS2] =>                                                VARCHAR-256      
+[INVOICE_TO_ADDRESS3] =>                                                VARCHAR-256
+[INVOICE_TO_ADDRESS4] =>                                                VARCHAR-256
+[INVOICE_TO_ADDRESS5] =>                                                VARCHAR-256
+[DELIVER_TO] =>                                                         VARCHAR-256
+[DELIVER_TO_LOCATION] =>                                                VARCHAR-256      
+[DELIVER_TO_ADDRESS1] =>                                                VARCHAR-256
+[DELIVER_TO_ADDRESS2] =>                                                VARCHAR-256
+[DELIVER_TO_ADDRESS3] =>                                                VARCHAR-256      
+[DELIVER_TO_ADDRESS4] =>                                                VARCHAR-256
+[DELIVER_TO_ADDRESS5] =>                                                VARCHAR-256
+
+[BLANKET_MAX_QUANTITY] => 58197                                         INT-11
+[BLANKET_MIN_QUANTITY] =>                                               INT-11
+[RELEASED_QUANTITY] => 0                                                INT-11                                 
+[FULFILLED_QUANTITY] =>                                                 INT-11
+[RETURNED_QUANTITY] =>                                                  INT-11
+[UNRELEASED_QUANTITY] => 58197                                          INT-11
+[UNFULFILLED_QUANTITY] =>                                               INT-11
+[RELEASED_AMOUNT] => 0                                                  INT-11            
+[FULFILLED_AMOUNT] =>                                                   INT-11
+[RETURNED_AMOUNT] =>                                                    INT-11
+[SHIP_FROM_ORG_ID] => 727                                               INT-11
+[SHIP_TO_ORG_ID] => 16527                                               INT-11            
+[INVOICE_TO_ORG_ID] =>                                                  INT-11
+[DELIVER_TO_ORG_ID] =>                                                  INT-11
+[SOLD_TO_ORG_ID] => 355172                                              INT-11
+[INVENTORY_ITEM_ID] => 500267                                           INT-11      

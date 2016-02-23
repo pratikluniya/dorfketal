@@ -25,9 +25,7 @@ $con =new functions();
 	$sql_payment_terms = "SELECT TERM_ID, DESCRIPTION FROM xxdkapps_payment_terms";
 	$result_payment_terms = $con -> data_select($sql_payment_terms);
 
-	//Fetch previous PO
-	$sql_PO = "SELECT cp.PO_NUMBER, cp.SHIP_TO, cp.SOLD_TO, cp.CONTACT_PERSON, cp.DELIVERY_DATE, cp.FREIGHT_TERM, cp.FREIGHT_CHARGES, cp.VESSAL_NAME, cp.PAYMENT_TERM, cp.FILE_NAME, cp.COMMENT, cp.STATUS, CONCAT_WS(',',cm.ADDRESS1,cm.ADDRESS2 , cm.ADDRESS3,cm.ADDRESS4,cm.CITY, cm.COUNTRY) AS SHIP_ADDRESS FROM customer_po as cp, xxdkapps_customer_master as cm WHERE cp.CUSTOMER_NUMBER = ".$cust_id." and cp.SHIP_TO = cm.SITE_USE_ID and cm.BUSINESS_CODE = 'SHIP_TO' ORDER BY cp.ID DESC";
-	$result_po_history = $con -> data_select($sql_PO);
+	
 ?>
 
 <div class="container">
@@ -121,41 +119,26 @@ $con =new functions();
 	        		<th>STATUS</th>
 	      		</tr>
 	    	</thead>
-	    	<tbody>
-	    	<?php
-	        	foreach ($result_po_history as $key => $value) 
-	        	{
-	        ?>
-	        		<tr class="item">
-			        	<td>
-			        		<?php echo $value['PO_NUMBER']; ?>
-			        	</td>
-			        	<td>
-			        		<?php echo $value['SHIP_ADDRESS']; ?>
-			        	</td>
-			        	<td>
-			        		<?php echo $value['DELIVERY_DATE']; ?>
-		                </td>
-		                <td>
-		                	<?php echo $value['FREIGHT_TERM']; ?>
-		                </td>
-		                <td>
-		                	<?php echo $value['PAYMENT_TERM']; ?>
-		                </td>
-		                <td>
-		                	<?php echo $value['FILE_NAME']; ?>
-		                </td>
-		                <td>
-		                	<?php echo $value['COMMENT']; ?>
-		                </td>
-		                <td>
-		                	<?php echo $value['STATUS']; ?>
-		                </td>
-			      	</tr>
-			<?php 
-			}
-			?>
+	    	<tbody id="po_history_table">
+	    	
 			</tbody>
 		</table>
+		<?php
+		if(isset($_REQUEST['search_value']))
+		{			
+		?>
+		<div class="row text-center">
+            <div class="col-md-12">
+                <div class="po_history_loc_src_pagtn">
+                    <?php                                
+                        echo paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages);
+                    ?>
+                </div>                        
+            </div>    
+        </div>
+	    <?php
+	    }
+	    ?>
+		
 	</div>
 </div>

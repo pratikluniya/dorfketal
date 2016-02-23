@@ -39,47 +39,77 @@ include("side_navigation.php");
   
                     </div>
                     <div class="container cat-tabs">
-                        <div class="container">
-                            <div class="col-md-7">
-                                <div class="pull-right">
-                                    <button type="button" class="by_product btn btn-primary" id="by_product">By Products</button>
-                                    <button type="button" class="by_application btn btn-primary inactive-cat-tab" id="by_application">By Application</button><br>
-                                    <select id="cat_applications">
-                                    </select>
-                                </div>
-                            </div>                        
-                            <div class="col-md-4 pull-right local-search-div">
-                                <div class="input-group">                                
-                                    <input type="text" class="form-control local_search_box" aria-label="..." placeholder="Search...">
-                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                    <input type="hidden" id="local_search_cat" value="">
-                                    <input type="hidden" id="local_pagination_search_cat" value="">
-                                    <input type="hidden" id="local_pagination_search_value" value="">
-                                </div>
+                        <div class="col-xs-10 col-sm-6 col-md-7 pull-left">
+                            <div class="pull-right">
+                                <button type="button" class="by_product btn btn-primary" id="by_product">By Products</button>
+                                <button type="button" class="by_application btn btn-primary inactive-cat-tab" id="by_application">By Application</button><br>
+                                <select id="cat_applications">
+                                </select>
+                            </div>
+                        </div>                        
+                        <div class="col-xs-10 col-sm-6 col-md-4 pull-right local-search-div product_search">
+                            <div class="input-group">                                
+                                <input type="text" class="form-control " id="product_search_box" aria-label="..." placeholder="Search By Product Code OR Name">
+                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                <input type="hidden" id="local_search_cat" value="">
+                                <input type="hidden" id="local_pagination_search_cat" value="">
+                                <input type="hidden" id="local_pagination_search_value" value="">
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="container po-tabs">
+                        <div class="col-xs-10 col-sm-6 col-md-7 pull-left">
+                            <div class="pull-right">
+                                <button type="button" class="up_po btn btn-primary" id="up_po">Upload PO#</button>
+                                <button type="button" class="po_history btn btn-primary inactive-cat-tab" id="po_history">PO# History</button><br>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-10 col-sm-6 col-md-4 pull-right local-search-div po_search">
+                            <div class="input-group">                                
+                                <input type="text" class="form-control " id="po_search_box" aria-label="..." placeholder="Search By PO# Number">
+                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                <input type="hidden" id="local_pagination_po_value" value="">
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="container quote-tabs">
+                        <div class="col-xs-10 col-sm-6 col-md-7 pull-left">
+                            <div class="pull-right">
+                                <button type="button" class="up_quote btn btn-primary" id="up_quote">Request Quotation</button>
+                                <button type="button" class="quote_history btn btn-primary inactive-cat-tab" id="quote_history">Quotation History</button><br>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-10 col-sm-6 col-md-4 pull-right local-search-div quote_search">
+                            <div class="input-group">                                
+                                <input type="text" class="form-control " id="quote_search_box" aria-label="..." placeholder="Search By Product Code OR Name">
+                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                <input type="hidden" id="local_pagination_quote_value" value="">
                             </div>
                         </div>
                     </div>
-                    <div class="container po-tabs">
-                        <button type="button" class="up_po btn btn-primary" id="up_po">Upload PO#</button>
-                        <button type="button" class="po_history btn btn-primary inactive-cat-tab" id="po_history">PO# History</button><br>
-                        </select>
-                    </div>
-                    <div class="container quote-tabs">
-                        <button type="button" class="up_quote btn btn-primary" id="up_quote">Request Quotation</button>
-                        <button type="button" class="quote_history btn btn-primary inactive-cat-tab" id="quote_history">Quotation History</button><br>
-                        </select>
-                    </div>
                     <div class="container search-tabs">
                         <div class="col-md-12">
-                            <div class="col-xs-6 col-md-4 pull-right local-search-div">
-                                <div class="input-group">                                
-                                    <input type="text" class="form-control local_search_box" aria-label="..." placeholder="Search...">
+                            <div class="col-xs-10 col-sm-8 col-md-6 col-lg-5 pull-right local-search-div order_history_search">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn local-search-dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="order_history_cat">Select <span class="caret"></span></button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#" data-value="1" data-category="Product Id">Product Id</a></li>
+                                            <li><a href="#" data-value="2" data-category="Product Name">Product Name</a></li>
+                                            <li><a href="#" data-value="3" data-category="Order Id">Order Id</a></li>
+                                            <li><a href="#" data-value="4" data-category="Order Web Id">Order Web Id</a></li>                                            
+                                        </ul>
+                                    </div><!-- /btn-group -->                                
+                                    <input type="text" class="form-control" id="order_history_search_box" aria-label="..." placeholder="Search...">
                                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                    <input type="hidden" id="local_search_cat" value="">
-                                    <input type="hidden" id="local_pagination_search_cat" value="">
-                                    <input type="hidden" id="local_pagination_search_value" value="">
+                                    <input type="hidden" id="local_src_ord_histry_cat" value="0">
+                                    <input type="hidden" id="local_pagtn_src_ord_histry" value="">
+                                    <input type="hidden" id="local_pagtn_src_ord_histry_cat" value="">
+                                    <input type="hidden" id="order_type_div" value="">
                                 </div>
-                            </div>                           
+                            </div>                                                       
                         </div>
                     </div>
                     <div class="panel-body main_body">
