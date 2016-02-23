@@ -28,7 +28,6 @@
                 <input type="hidden" id="pagination_search_id" value="">
                 <input type="hidden" id="pagination_search_value" value="">                
             </div>
-            <div class="text-center" id="global_no_result">No Result Found</div>
         </div>        
     </div>
 </div>
