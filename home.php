@@ -99,7 +99,7 @@ include("side_navigation.php");
                                     <div class="input-group-btn">
                                         <button type="button" class="btn local-search-dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="order_history_cat">Select Search By <span class="caret"></span></button>
                                         <ul class="dropdown-menu">
-                                            <li><a data-value="1" data-category="Product Id">Product Id</a></li>
+                                            <li><a data-value="1" data-category="Product Code">Product Code</a></li>
                                             <li><a data-value="2" data-category="Product Name">Product Name</a></li>
                                             <li><a data-value="3" data-category="Order Id">Order Id</a></li>
                                             <li><a data-value="4" data-category="Order Web Id">Order Web Id</a></li>

@@ -45,7 +45,7 @@ $(document).ready(function(){
 
         var cat;
         if(search_category == 1){
-            cat = "Product Id";
+            cat = "Product Code";
         }
         if(search_category == 2){
             cat = "Product Name";
@@ -103,6 +103,7 @@ $(document).ready(function(){
                 $('#search_cat').html("Select Search By <span class='caret'></span>"); 
                 $('#search_box').val('');
                 $('#search_id').val('0');
+                $("#search_box").attr("placeholder","Search ");
             });                
         }            
        
@@ -179,6 +180,7 @@ $(document).ready(function () {
                     $('#local_pagination_search_cat').val(cat_name);
                     $('#local_pagination_search_value').val(search_value);
                     $('#product_search_box').val('');
+                    $("#product_search_box").attr("placeholder","Search ");
                     $('.main_body').prepend("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat_name+"</strong> like <strong>"+search_value+"</strong>...</div>");
                 }
             });
@@ -284,6 +286,7 @@ $(document).ready(function () {
                     $('#local_pagtn_src_ord_histry_cat').val(search_cat);
                     $('#order_history_search_box').val('');
                     $('#local_src_ord_histry_cat').val('0');
+                    $("#order_history_search_box").attr("placeholder","Search ");
                     $('#order_history_cat').html("Select Search By <span class='caret'></span>");
                 });
             }
@@ -296,6 +299,7 @@ $(document).ready(function () {
                     $('#local_pagtn_src_ord_histry_cat').val(search_cat);
                     $('#order_history_search_box').val('');
                     $('#local_src_ord_histry_cat').val('0');
+                    $("#order_history_search_box").attr("placeholder","Search ");
                     $('#order_history_cat').html("Select Search By <span class='caret'></span>");
                 });
             }          
@@ -334,6 +338,7 @@ $(document).ready(function () {
                 $('#loading').removeClass("showloading"); //once done, hide loading element
                 $('#order_history_search_box').val('');
                 $('#local_src_ord_histry_cat').val('0');
+                $("#order_history_search_box").attr("placeholder","Search ");
                 $('#order_history_cat').html("Select Search By <span class='caret'></span>");
                 $('.search-result-tabs').html("Search result for <strong>"+cat+"</strong> like <strong>"+search_value+"</strong>...");
             }); 
@@ -344,6 +349,7 @@ $(document).ready(function () {
                 $('#loading').removeClass("showloading"); //once done, hide loading element
                 $('#order_history_search_box').val('');
                 $('#local_src_ord_histry_cat').val('0');
+                $("#order_history_search_box").attr("placeholder","Search ");
                 $('#order_history_cat').html("Select Search By <span class='caret'></span>");
                 $('.search-result-tabs').html("Search result for <strong>"+cat+"</strong> like <strong>"+search_value+"</strong>...");
             });
@@ -387,6 +393,7 @@ $(document).ready(function () {
                 complete:function(){
                     $('#loading').removeClass("showloading"); //once done, hide loading element
                     $('#po_search_box').val('');
+                    $("#po_search_box").attr("placeholder","Search ");
                     $('#local_pagination_po_value').val(search_value);
                     $('.search-result-tabs').remove();
                     $("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>PO# Number</strong> like <strong>"+search_value+"</strong>...</div>").insertBefore('.po-history-div');                
@@ -413,6 +420,7 @@ $(document).ready(function () {
                 complete:function(){
                     $('#loading').removeClass("showloading"); //once done, hide loading element
                     $('#po_search_box').val('');
+                    $("#po_search_box").attr("placeholder","Search ");
                     $('.search-result-tabs').remove();
                     $("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>PO# Number</strong> like <strong>"+search_value+"</strong>...</div>").insertBefore('.po-history-div');                
                 }
@@ -465,6 +473,7 @@ $(document).ready(function () {
                 complete:function(){
                     $('#loading').removeClass("showloading"); //once done, hide loading element
                     $('#quote_search_box').val('');
+                    $("#quote_search_box").attr("placeholder","Search ");
                     $('#local_pagination_quote_value').val(search_value);
                     $('.search-result-tabs').remove();
                     $("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat_value+"</strong> like <strong>"+search_value+"</strong>...</div>").insertBefore('.quote-history-div');
@@ -491,6 +500,7 @@ $(document).ready(function () {
                 complete:function(){
                     $('#loading').removeClass("showloading"); //once done, hide loading element
                     $('#quote_search_box').val('');
+                    $("#quote_search_box").attr("placeholder","Search ");
                     $('.search-result-tabs').remove();
                     $("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat_value+"</strong> like <strong>"+search_value+"</strong>...</div>").insertBefore('.quote-history-div');
                 }
