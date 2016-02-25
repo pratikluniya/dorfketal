@@ -101,7 +101,7 @@ if($result != "no")
                     <thead>
                         <tr>
                             <th>&nbsp;</th>
-                            <th>ORDER NUMBER</th>
+                            <th>ORDER WEB ID</th>
                             <th>PO#</th>
                             <th>ORDER DATE</th>
                             <th>PRODUCT NAME</th>
@@ -161,7 +161,7 @@ if($result != "no")
                                             <span id="pay_term"><?php echo ($result[$key]['ATTRIBUTE12']);?></span><br><br>
                                         </div>
                                         <div class="container col-md-6 col-xs-6 col-lg-6 col-sm-6">
-                                            <label class="history_label">Oracle Order : </label>
+                                            <label class="history_label">Order Number: </label>
                                             <span id="oracle_order"><?php echo ($result[$key]['ORACLE_ORDER']);?></span><br><br>
                                             <label class="history_label">Order Date: </label>
                                             <span id="order_date"><?php echo ($result[$key]['ORDER_DATE']);?></span><br><br>

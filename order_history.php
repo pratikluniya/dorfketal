@@ -96,7 +96,7 @@ if($result != "no")
                     <thead>
                         <tr>
                             <th>&nbsp;</th>
-                            <th>ORDER NUMBER</th>
+                            <th>ORDER WEB ID</th>
                             <th>PO#</th>
                             <th>ORDER DATE</th>
                             <th>PRODUCT NAME</th>
@@ -140,7 +140,7 @@ if($result != "no")
                                     <div class="accordian-body collapse" id="demo<?php echo $key;?>"> 
                                         <div class="container col-md-6 col-xs-6 col-lg-6 col-sm-6" style="border-right:1px dotted #c9c9c9;">
                                             <div class="form-group">
-                                                <label class="history_label">Oracle Order : </label><?php echo ($result[$key]['ORACLE_ORDER']);?>
+                                                <label class="history_label">Order Number: </label><?php echo ($result[$key]['ORACLE_ORDER']);?>
                                             </div>
                                              <div class="form-group">
                                                 <label class="history_label">Order Date: </label><?php echo ($result[$key]['ORDER_DATE']);?>

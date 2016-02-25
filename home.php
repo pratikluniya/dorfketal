@@ -101,7 +101,7 @@ include("side_navigation.php");
                                         <ul class="dropdown-menu">
                                             <li><a data-value="1" data-category="Product Code">Product Code</a></li>
                                             <li><a data-value="2" data-category="Product Name">Product Name</a></li>
-                                            <li><a data-value="3" data-category="Order Id">Order Id</a></li>
+                                            <li><a data-value="3" data-category="Order Number">Order Number</a></li>
                                             <li><a data-value="4" data-category="Order Web Id">Order Web Id</a></li>
                                             <li><a data-value="5" data-category="PO# Number">PO# Number</a></li>                                            
                                         </ul>

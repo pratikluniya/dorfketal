@@ -17,7 +17,7 @@
                         <li><a href="#" data-value="2" data-category="Product Name">Product Name</a></li>
                         <li><a href="#" data-value="3" data-category="Application">Application</a></li>
                         <li><a href="#" data-value="4" data-category="Category">Category</a></li>
-                        <li><a href="#" data-value="5" data-category="Order Id">Order Id</a></li>
+                        <li><a href="#" data-value="5" data-category="Order Number">Order Number</a></li>
                         <li><a href="#" data-value="6" data-category="Order Web Id">Order Web Id</a></li>
                         
                     </ul>
