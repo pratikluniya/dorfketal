@@ -52,11 +52,7 @@ $(document).ready(function(){
                     }
                 }     
             });
-        },               
-        messages: {
-          noResults: '',
-          results: ''
-        },   
+        }, 
         minLength: 0  
     }).data("ui-autocomplete")._renderItem = function (ul, item) {
         var auto_search_cat = $('#search_id').val();
@@ -351,35 +347,38 @@ $(document).ready(function(){
                     action: 'order_history_search'
                 },
                 success: function (data) {
-                    response($.map(data, function (item) {
-                        if(data.length > 5){
-                            $('.ui-autocomplete').addClass('ul_scroll');
-                        }
-                        else{
-                            $('.ui-autocomplete').removeClass('ul_scroll');
-                        }
-
-                        if(auto_search_cat == 1){
-                            return { 
-                                value: item.PRODUCT_CODE,
-                                label: item.PRODUCT_CODE,
-                                description: item.DESCRIPTION,
-                            };
-                        }          
-                        else{
-                            if(item == 'No Data'){
-                                return { 
-                                    label:''                                    
-                                };
+                    if(data[0] != 'No Data'){
+                        response($.map(data, function (item) {
+                            if(data.length > 5){
+                                $('.ui-autocomplete').addClass('ul_scroll');
                             }
+                            else{
+                                $('.ui-autocomplete').removeClass('ul_scroll');
+                            }
+
+                            if(auto_search_cat == 1){
+                                return { 
+                                    value: item.PRODUCT_CODE,
+                                    label: item.PRODUCT_CODE,
+                                    description: item.DESCRIPTION,
+                                };
+                            }          
                             else{
                                 return { 
                                     value: item,
                                     label: item                                    
-                                };
-                            }                         
-                        }                
-                    }));
+                                };                  
+                            }                
+                        })); 
+                    }                    
+                    else{
+                        $('.ui-autocomplete').removeClass('ul_scroll');
+                        response($.map(data, function (item) {                            
+                            return { 
+                                label:'' 
+                            };                            
+                        }));                        
+                    }
                 }     
             });
         },           

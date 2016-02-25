@@ -73,10 +73,11 @@ if(isset($_REQUEST['action']) && $_REQUEST['action'] == "po_search")
 
 /******** Order History *********/
 if(isset($_REQUEST['action']) && $_REQUEST['action'] == "order_history_search"){
+
     if(isset($_REQUEST['search_category']) && ($_REQUEST['search_category'] == "1") )
     {
         $sql ="SELECT DISTINCT op.PRODUCT_CODE,up.DESCRIPTION FROM order_form_details as ofd, order_products as op, xxdkapps_unsegregated_products as up, xxdkapps_customer_master as cm WHERE ofd.CUSTOMER_NUMBER= " . $cust_id." and op.PRODUCT_CODE = up.PRODUCT_CODE and op.ORDER_ID = ofd.ID and ofd.SHIP_TO = cm.SITE_USE_ID and op.PRODUCT_CODE LIKE '%".$_REQUEST['auto_search_value']."%' order by PRODUCT_CODE";   
-        $result= $con->data_select($sql);    
+        $result= $con->data_select($sql);          
         $data = array();
         if($result == 'no'){
             array_push($data, 'No Data');
