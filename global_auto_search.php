@@ -14,13 +14,12 @@ if(isset($_REQUEST['search_category']) && ($_REQUEST['search_category'] == "1") 
     $data = array();
     if($result == 'no'){
 		array_push($data, 'No Data');
+		echo json_encode($data);
 	}
 	else{
-		foreach ($result as $key => $value) {
-			array_push($data, array("id" => $result[$key]['PRODUCT_CODE'], "desc" => $result[$key]['DESCRIPTION'])); 	    	
-	    }
+		echo json_encode($result);
 	}	
-    echo json_encode($data);
+    exit;
 }
 
 if(isset($_REQUEST['search_category']) && ($_REQUEST['search_category'] == "2") )

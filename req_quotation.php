@@ -155,8 +155,8 @@ $result_quote_history = $con -> data_select($sql_quote);
 		if(isset($_REQUEST['search_value']))
 		{			
 		?>
-		<div class="row text-center">
-            <div class="col-md-12">
+		<div class="container text-center">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="quote_history_loc_src_pagtn">
                     <?php                                
                         echo paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages);

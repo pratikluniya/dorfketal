@@ -49,7 +49,7 @@ include("side_navigation.php");
                         </div>                        
                         <div class="col-xs-10 col-sm-6 col-md-4 pull-right local-search-div product_search">
                             <div class="input-group">                                
-                                <input type="text" class="form-control " id="product_search_box" aria-label="..." placeholder="Search By Product Code OR Name">
+                                <input type="text" class="form-control " id="product_search_box" aria-label="..." placeholder="Search By Product Code or Name">
                                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
                                 <input type="hidden" id="local_search_cat" value="">
                                 <input type="hidden" id="local_pagination_search_cat" value="">
@@ -83,7 +83,7 @@ include("side_navigation.php");
                         </div>
                         <div class="col-xs-10 col-sm-6 col-md-4 pull-right local-search-div quote_search">
                             <div class="input-group">                                
-                                <input type="text" class="form-control " id="quote_search_box" aria-label="..." placeholder="Search By Product Code OR Name">
+                                <input type="text" class="form-control " id="quote_search_box" aria-label="..." placeholder="Search By Product Code or Name">
                                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
                                 <input type="hidden" id="local_pagination_quote_value" value="">
                             </div>
@@ -91,15 +91,19 @@ include("side_navigation.php");
                     </div>
                     <div class="container search-tabs">
                         <div class="col-md-12">
+                            <div class="col-xs-10 col-sm-8 col-md-6 col-lg-5">
+                                <span class="search-result-tabs"></span>
+                            </div>
                             <div class="col-xs-10 col-sm-8 col-md-6 col-lg-5 pull-right local-search-div order_history_search">
                                 <div class="input-group">
                                     <div class="input-group-btn">
-                                        <button type="button" class="btn local-search-dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="order_history_cat">Select <span class="caret"></span></button>
+                                        <button type="button" class="btn local-search-dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="order_history_cat">Select Search By <span class="caret"></span></button>
                                         <ul class="dropdown-menu">
-                                            <li><a href="#" data-value="1" data-category="Product Id">Product Id</a></li>
-                                            <li><a href="#" data-value="2" data-category="Product Name">Product Name</a></li>
-                                            <li><a href="#" data-value="3" data-category="Order Id">Order Id</a></li>
-                                            <li><a href="#" data-value="4" data-category="Order Web Id">Order Web Id</a></li>                                            
+                                            <li><a data-value="1" data-category="Product Id">Product Id</a></li>
+                                            <li><a data-value="2" data-category="Product Name">Product Name</a></li>
+                                            <li><a data-value="3" data-category="Order Id">Order Id</a></li>
+                                            <li><a data-value="4" data-category="Order Web Id">Order Web Id</a></li>
+                                            <li><a data-value="5" data-category="PO# Number">PO# Number</a></li>                                            
                                         </ul>
                                     </div><!-- /btn-group -->                                
                                     <input type="text" class="form-control" id="order_history_search_box" aria-label="..." placeholder="Search...">

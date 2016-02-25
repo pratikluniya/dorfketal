@@ -192,58 +192,58 @@ if(isset($_REQUEST['l_cat_name']) && isset($_REQUEST['l_search_value']) && ($_RE
         }
         if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "1") )
         {
-            $html_data .='<div class="row text-center">
-                    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
-                        <div class="cat_prod_pagination1">                                                          
-                            '.paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages).'                  
-                        </div>                        
-                    </div>                    
-                </div>';
+            $html_data .='<div class="container text-center">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="cat_prod_pagination1">                                                          
+                                '.paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages).'                  
+                            </div>                        
+                        </div>                    
+                    </div>';
         }  
 
         if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "2") )
         {
-            $html_data .='<div class="row text-center">
-                    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
-                        <div class="cat_prod_pagination2">                                                           
-                            '.paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages).'                   
-                        </div>                        
-                    </div>                    
-                </div>';
+            $html_data .='<div class="container text-center">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="cat_prod_pagination2">                                                           
+                                '.paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages).'                   
+                            </div>                        
+                        </div>                    
+                    </div>';
         } 
 
         if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "3") )
         {
-            $html_data .='<div class="row text-center">
-                    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
-                        <div class="cat_prod_pagination3">                                                            
-                            '.paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages).'                   
-                        </div>                        
-                    </div>                    
-                </div>';
+            $html_data .='<div class="container text-center">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="cat_prod_pagination3">                                                            
+                                '.paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages).'                   
+                            </div>                        
+                        </div>                    
+                    </div>';
         }
 
         /****** Global Search pagination *******/       
         if(isset($_REQUEST['search_category']) )
         {
-            $html_data .='<div class="row text-center">
-                    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
-                        <div class="search_pagination1">                                                          
-                            '.paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages).'                  
-                        </div>                        
-                    </div>                    
-                </div>';
+            $html_data .='<div class="container text-center">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="search_pagination1">                                                          
+                                '.paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages).'                  
+                            </div>                        
+                        </div>                    
+                    </div>';
         } 
         /****** Local Search pagination *******/     
         if(isset($_REQUEST['l_cat_name']) && isset($_REQUEST['l_search_value']) && ($_REQUEST['l_cat_prod'] == "1") )
         {
-            $html_data .='<div class="row text-center">
-                    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
-                        <div class="local_search_pagination1">                                                           
-                            '.paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages).'                  
-                        </div>                        
-                    </div>                    
-                </div>';
+            $html_data .='<div class="container text-center">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="local_search_pagination1">                                                           
+                                '.paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages).'                  
+                            </div>                        
+                        </div>                    
+                    </div>';
         } 
         echo $html_data;      
         exit;

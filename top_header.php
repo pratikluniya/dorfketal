@@ -11,7 +11,7 @@
         <div class="col-xs-6 col-md-4 pull-right search-div">
             <div class="input-group">
                 <div class="input-group-btn">
-                    <button type="button" class="btn search-dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="search_cat">Select <span class="caret"></span></button>
+                    <button type="button" class="btn search-dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="search_cat">Select Search By <span class="caret"></span></button>
                     <ul class="dropdown-menu">                        
                         <li><a href="#" data-value="1" data-category="Product Id">Product Id</a></li>
                         <li><a href="#" data-value="2" data-category="Product Name">Product Name</a></li>

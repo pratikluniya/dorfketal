@@ -82,9 +82,10 @@ $(document).ready(function(){
                     $('#loading').removeClass("showloading");                        
                     $('#pagination_search_value').val(search_value);
                     $('#pagination_search_id').val(search_category);
-                    $('#search_cat').html("Select <span class='caret'></span>");  
+                    $('#search_cat').html("Select Search By <span class='caret'></span>");  
                     $('#search_box').val('');
                     $('#search_id').val('0');
+                    $("#search_box").attr("placeholder","Search ");
                     $('.main_body').prepend("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat+"</strong> like <strong>"+search_value+"</strong>...</div>");
                 }
             });
@@ -99,7 +100,7 @@ $(document).ready(function(){
                 $('#loading').removeClass("showloading"); //once done, hide loading element
                 $('#pagination_search_value').val(search_value);
                 $('#pagination_search_id').val(search_category);
-                $('#search_cat').html("Select <span class='caret'></span>"); 
+                $('#search_cat').html("Select Search By <span class='caret'></span>"); 
                 $('#search_box').val('');
                 $('#search_id').val('0');
             });                
@@ -235,6 +236,24 @@ $(document).ready(function () {
     $(".order_history_search" ).on( "click",".input-group-addon", function(e){        
         var search_value = $("#order_history_search_box").val();
         var search_cat = $('#local_src_ord_histry_cat').val();
+
+        var cat;
+        if(search_cat == 1){
+            cat = "Product Code";
+        }
+        if(search_cat == 2){
+            cat = "Product Name";
+        }        
+        if(search_cat == 3){
+            cat = "Order Id";
+        }
+        if(search_cat == 4){
+            cat = "Order Web Id";
+        }
+        if(search_cat == 5){
+            cat = "PO# Number";
+        }
+
         if(search_cat == 0){
             $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Select Search Category!</strong> ");
             $('.notify').removeClass('notify-success');
@@ -259,25 +278,25 @@ $(document).ready(function () {
             if(order_type == 'OH'){
                 $(".main_body").load("order_history.php",{"search_cat":search_cat,"search_value":search_value}, function(){ //get content from PHP page
                     $('.search-tabs').show();
-                    $('.main_body').prepend("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+search_value+"</strong>...</div>");
+                    $('.search-result-tabs').html("Search result for <strong>"+cat+"</strong> like <strong>"+search_value+"</strong>...");
                     $('#loading').removeClass("showloading"); //once done, hide loading element
                     $('#local_pagtn_src_ord_histry').val(search_value);
                     $('#local_pagtn_src_ord_histry_cat').val(search_cat);
                     $('#order_history_search_box').val('');
                     $('#local_src_ord_histry_cat').val('0');
-                    $('#order_history_cat').html("Select <span class='caret'></span>");
+                    $('#order_history_cat').html("Select Search By <span class='caret'></span>");
                 });
             }
             else{
                 $(".main_body").load("repeat_order.php",{"search_cat":search_cat,"search_value":search_value}, function(){ //get content from PHP page
                     $('.search-tabs').show();
-                    $('.main_body').prepend("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+search_value+"</strong>...</div>");
+                    $('.search-result-tabs').html("Search result for <strong>"+cat+"</strong> like <strong>"+search_value+"</strong>...");
                     $('#loading').removeClass("showloading"); //once done, hide loading element
                     $('#local_pagtn_src_ord_histry').val(search_value);
                     $('#local_pagtn_src_ord_histry_cat').val(search_cat);
                     $('#order_history_search_box').val('');
                     $('#local_src_ord_histry_cat').val('0');
-                    $('#order_history_cat').html("Select <span class='caret'></span>");
+                    $('#order_history_cat').html("Select Search By <span class='caret'></span>");
                 });
             }          
         }    
@@ -289,6 +308,23 @@ $(document).ready(function () {
         var search_value = $("#local_pagtn_src_ord_histry").val();
         var search_cat = $('#local_pagtn_src_ord_histry_cat').val();
 
+        var cat;
+        if(search_cat == 1){
+            cat = "Product Code";
+        }
+        if(search_cat == 2){
+            cat = "Product Name";
+        }        
+        if(search_cat == 3){
+            cat = "Order Id";
+        }
+        if(search_cat == 4){
+            cat = "Order Web Id";
+        }
+        if(search_cat == 5){
+            cat = "PO# Number";
+        }
+
         $('#loading').addClass("showloading"); //show loading element
         var page = $(this).attr("data-page"); //get page number from link
         var order_type = $('#order_type_div').val();
@@ -298,8 +334,8 @@ $(document).ready(function () {
                 $('#loading').removeClass("showloading"); //once done, hide loading element
                 $('#order_history_search_box').val('');
                 $('#local_src_ord_histry_cat').val('0');
-                $('#order_history_cat').html("Select <span class='caret'></span>");
-                $('.main_body').prepend("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+search_value+"</strong>...</div>");
+                $('#order_history_cat').html("Select Search By <span class='caret'></span>");
+                $('.search-result-tabs').html("Search result for <strong>"+cat+"</strong> like <strong>"+search_value+"</strong>...");
             }); 
         }
         else{
@@ -308,8 +344,8 @@ $(document).ready(function () {
                 $('#loading').removeClass("showloading"); //once done, hide loading element
                 $('#order_history_search_box').val('');
                 $('#local_src_ord_histry_cat').val('0');
-                $('#order_history_cat').html("Select <span class='caret'></span>");
-                $('.main_body').prepend("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+search_value+"</strong>...</div>");
+                $('#order_history_cat').html("Select Search By <span class='caret'></span>");
+                $('.search-result-tabs').html("Search result for <strong>"+cat+"</strong> like <strong>"+search_value+"</strong>...");
             });
         }             
     });
@@ -353,7 +389,7 @@ $(document).ready(function () {
                     $('#po_search_box').val('');
                     $('#local_pagination_po_value').val(search_value);
                     $('.search-result-tabs').remove();
-                    $("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+search_value+"</strong>...</div>").insertBefore('.po-history-div');                
+                    $("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>PO# Number</strong> like <strong>"+search_value+"</strong>...</div>").insertBefore('.po-history-div');                
                 }
             });            
         } 
@@ -378,7 +414,7 @@ $(document).ready(function () {
                     $('#loading').removeClass("showloading"); //once done, hide loading element
                     $('#po_search_box').val('');
                     $('.search-result-tabs').remove();
-                    $("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+search_value+"</strong>...</div>").insertBefore('.po-history-div');                
+                    $("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>PO# Number</strong> like <strong>"+search_value+"</strong>...</div>").insertBefore('.po-history-div');                
                 }
             });          
         });
@@ -397,6 +433,14 @@ $(document).on('keypress','#quote_search_box',function(event){
 $(document).ready(function () {
     $(".quote_search" ).on( "click",".input-group-addon", function(e) {
         var search_value = $("#quote_search_box").val();
+        var cat_value = '';
+        if (isNaN( search_value )) {                
+            // For Description Only
+            cat_value = "Product Name";
+        } else {
+            // For Product Code and Description Only
+            cat_value = "Product Code";
+        }
         
         if(search_value == ""){
             $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter Text In Search Box!</strong> ");
@@ -423,7 +467,7 @@ $(document).ready(function () {
                     $('#quote_search_box').val('');
                     $('#local_pagination_quote_value').val(search_value);
                     $('.search-result-tabs').remove();
-                    $("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+search_value+"</strong>...</div>").insertBefore('.quote-history-div');
+                    $("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat_value+"</strong> like <strong>"+search_value+"</strong>...</div>").insertBefore('.quote-history-div');
                 }
             });
         } 
@@ -448,7 +492,7 @@ $(document).ready(function () {
                     $('#loading').removeClass("showloading"); //once done, hide loading element
                     $('#quote_search_box').val('');
                     $('.search-result-tabs').remove();
-                    $("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+search_value+"</strong>...</div>").insertBefore('.quote-history-div');
+                    $("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat_value+"</strong> like <strong>"+search_value+"</strong>...</div>").insertBefore('.quote-history-div');
                 }
             });         
         });
