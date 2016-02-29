@@ -65,27 +65,27 @@ if(isset($_REQUEST['cat_prod']) && ($_REQUEST['cat_prod'] == "3") )
 /******** Global Search Query ***********/
 if(isset($_REQUEST['search_category']) && ($_REQUEST['search_category'] == "1") )
 {
-    $sql ="SELECT ID FROM xxdkapps_unsegregated_products WHERE PRODUCT_CODE LIKE '%".$_REQUEST['search_value']."%' order by ID";
+    $sql ="SELECT ID FROM xxdkapps_unsegregated_products WHERE PRODUCT_CODE LIKE '".$_REQUEST['search_value']."%' order by ID";
     $result= $con->data_select($sql);
 
     $get_total_rows = count($result); //hold total records in variable    
     $total_pages = ceil($get_total_rows/$item_per_page);//break records into pages    
     $page_position = (($page_number-1) * $item_per_page);//get starting position to fetch the records
 
-    $sql ="SELECT ID, PRODUCT_CODE AS ITEM_CODE, DESCRIPTION, ATTRIBUTE18 as PRODUCT_APPLICATION, ATTRIBUTE17 as PRODUCT_GROUP FROM xxdkapps_unsegregated_products WHERE PRODUCT_CODE LIKE '%".$_REQUEST['search_value']."%' order by ID LIMIT $page_position, $item_per_page";
+    $sql ="SELECT ID, PRODUCT_CODE AS ITEM_CODE, DESCRIPTION, ATTRIBUTE18 as PRODUCT_APPLICATION, ATTRIBUTE17 as PRODUCT_GROUP FROM xxdkapps_unsegregated_products WHERE PRODUCT_CODE LIKE '".$_REQUEST['search_value']."%' order by ID LIMIT $page_position, $item_per_page";
     $result=$con->data_select($sql);
 }
 
 if(isset($_REQUEST['search_category']) && ($_REQUEST['search_category'] == "2") )
 {
-    $sql ="SELECT ID FROM xxdkapps_unsegregated_products WHERE DESCRIPTION LIKE '%".$_REQUEST['search_value']."%' order by ID";
+    $sql ="SELECT ID FROM xxdkapps_unsegregated_products WHERE DESCRIPTION LIKE '".$_REQUEST['search_value']."%' order by ID";
     $result= $con->data_select($sql);
 
     $get_total_rows = count($result); //hold total records in variable    
     $total_pages = ceil($get_total_rows/$item_per_page);//break records into pages    
     $page_position = (($page_number-1) * $item_per_page);//get starting position to fetch the records
 
-    $sql ="SELECT ID, PRODUCT_CODE AS ITEM_CODE, DESCRIPTION, ATTRIBUTE18 as PRODUCT_APPLICATION, ATTRIBUTE17 as PRODUCT_GROUP FROM xxdkapps_unsegregated_products WHERE DESCRIPTION LIKE '%".$_REQUEST['search_value']."%' order by ID LIMIT $page_position, $item_per_page";
+    $sql ="SELECT ID, PRODUCT_CODE AS ITEM_CODE, DESCRIPTION, ATTRIBUTE18 as PRODUCT_APPLICATION, ATTRIBUTE17 as PRODUCT_GROUP FROM xxdkapps_unsegregated_products WHERE DESCRIPTION LIKE '".$_REQUEST['search_value']."%' order by ID LIMIT $page_position, $item_per_page";
     $result=$con->data_select($sql);
 }
 
@@ -104,28 +104,28 @@ if(isset($_REQUEST['search_category']) && ($_REQUEST['search_category'] == "3") 
 
 if(isset($_REQUEST['search_category']) && ($_REQUEST['search_category'] == "4") )
 {
-    $sql ="SELECT ID FROM xxdkapps_unsegregated_products WHERE ATTRIBUTE17 LIKE '%".$_REQUEST['search_value']."%' order by ID";
+    $sql ="SELECT ID FROM xxdkapps_unsegregated_products WHERE ATTRIBUTE17 LIKE '".$_REQUEST['search_value']."%' order by ID";
     $result= $con->data_select($sql);
 
     $get_total_rows = count($result); //hold total records in variable    
     $total_pages = ceil($get_total_rows/$item_per_page);//break records into pages    
     $page_position = (($page_number-1) * $item_per_page);//get starting position to fetch the records
 
-    $sql ="SELECT ID, PRODUCT_CODE AS ITEM_CODE, DESCRIPTION, ATTRIBUTE18 as PRODUCT_APPLICATION, ATTRIBUTE17 as PRODUCT_GROUP FROM xxdkapps_unsegregated_products WHERE ATTRIBUTE17 LIKE '%".$_REQUEST['search_value']."%' order by ID LIMIT $page_position, $item_per_page";
+    $sql ="SELECT ID, PRODUCT_CODE AS ITEM_CODE, DESCRIPTION, ATTRIBUTE18 as PRODUCT_APPLICATION, ATTRIBUTE17 as PRODUCT_GROUP FROM xxdkapps_unsegregated_products WHERE ATTRIBUTE17 LIKE '".$_REQUEST['search_value']."%' order by ID LIMIT $page_position, $item_per_page";
     $result=$con->data_select($sql);
 }
 
 /******** Local Search Query ***********/
 if(isset($_REQUEST['l_cat_name']) && isset($_REQUEST['l_search_value']) && ($_REQUEST['l_cat_prod'] == "1") )
 {
-    $sql ="SELECT ID FROM xxdkapps_unsegregated_products WHERE ATTRIBUTE17 ='".$_REQUEST['l_cat_name']."' AND PRODUCT_CODE LIKE '%".$_REQUEST['l_search_value']."%' OR DESCRIPTION LIKE '%".$_REQUEST['l_search_value']."%' order by ID";
+    $sql ="SELECT ID FROM xxdkapps_unsegregated_products WHERE ATTRIBUTE17 ='".$_REQUEST['l_cat_name']."' AND PRODUCT_CODE LIKE '".$_REQUEST['l_search_value']."%' OR DESCRIPTION LIKE '".$_REQUEST['l_search_value']."%' order by ID";
     $result= $con->data_select($sql);
 
     $get_total_rows = count($result); //hold total records in variable    
     $total_pages = ceil($get_total_rows/$item_per_page);//break records into pages    
     $page_position = (($page_number-1) * $item_per_page);//get starting position to fetch the records
 
-    $sql ="SELECT ID, PRODUCT_CODE AS ITEM_CODE, DESCRIPTION, ATTRIBUTE18 as PRODUCT_APPLICATION, ATTRIBUTE17 as PRODUCT_GROUP FROM xxdkapps_unsegregated_products WHERE ATTRIBUTE17 ='".$_REQUEST['l_cat_name']."' AND PRODUCT_CODE LIKE '%".$_REQUEST['l_search_value']."%' OR DESCRIPTION LIKE '%".$_REQUEST['l_search_value']."%' order by ID LIMIT $page_position, $item_per_page";
+    $sql ="SELECT ID, PRODUCT_CODE AS ITEM_CODE, DESCRIPTION, ATTRIBUTE18 as PRODUCT_APPLICATION, ATTRIBUTE17 as PRODUCT_GROUP FROM xxdkapps_unsegregated_products WHERE ATTRIBUTE17 ='".$_REQUEST['l_cat_name']."' AND PRODUCT_CODE LIKE '".$_REQUEST['l_search_value']."%' OR DESCRIPTION LIKE '".$_REQUEST['l_search_value']."%' order by ID LIMIT $page_position, $item_per_page";
     $result=$con->data_select($sql);
 }
     if($result != "no")

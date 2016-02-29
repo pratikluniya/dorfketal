@@ -267,10 +267,10 @@ if($_REQUEST['action'] == "get_quote_history")
 		{
 			//To get total count
 	        if (is_numeric(trim($_REQUEST['search_value']))){
-	            $sql = "SELECT DISTINCT cq.PRODUCT_CODE FROM customer_quotations as cq, xxdkapps_unsegregated_products as up WHERE cq.CUSTOMER_NUMBER = ".$cust_id." and cq.PRODUCT_CODE = up.PRODUCT_CODE and cq.PRODUCT_CODE LIKE '%".$_REQUEST['search_value']."%' ORDER BY cq.ID DESC ";
+	            $sql = "SELECT DISTINCT cq.PRODUCT_CODE FROM customer_quotations as cq, xxdkapps_unsegregated_products as up WHERE cq.CUSTOMER_NUMBER = ".$cust_id." and cq.PRODUCT_CODE = up.PRODUCT_CODE and cq.PRODUCT_CODE LIKE '".$_REQUEST['search_value']."%' ORDER BY cq.ID DESC ";
 	        }
 	        else{
-	            $sql = "SELECT DISTINCT cq.PRODUCT_CODE FROM customer_quotations as cq, xxdkapps_unsegregated_products as up WHERE cq.CUSTOMER_NUMBER = ".$cust_id." and cq.PRODUCT_CODE = up.PRODUCT_CODE and up.DESCRIPTION LIKE '%".$_REQUEST['search_value']."%' ORDER BY cq.ID DESC ";
+	            $sql = "SELECT DISTINCT cq.PRODUCT_CODE FROM customer_quotations as cq, xxdkapps_unsegregated_products as up WHERE cq.CUSTOMER_NUMBER = ".$cust_id." and cq.PRODUCT_CODE = up.PRODUCT_CODE and up.DESCRIPTION LIKE '".$_REQUEST['search_value']."%' ORDER BY cq.ID DESC ";
 	        }
 		}
 		else{
@@ -287,10 +287,10 @@ if($_REQUEST['action'] == "get_quote_history")
 		{
 			//Fetch Quations History
 	        if (is_numeric(trim($_REQUEST['search_value']))){
-	            $sql_quote = "SELECT DISTINCT cq.PRODUCT_CODE, cq.PACKAGING_SIZE, cq.QUANTITY, cq.AVAILABLE_PRICE, cq.REQUESTED_PRICE, cq.REMARK, cq.FILE_NAME, cq.STATUS, up.DESCRIPTION FROM customer_quotations as cq, xxdkapps_unsegregated_products as up WHERE cq.CUSTOMER_NUMBER = ".$cust_id." and cq.PRODUCT_CODE = up.PRODUCT_CODE and cq.PRODUCT_CODE LIKE '%".$_REQUEST['search_value']."%' ORDER BY cq.ID DESC LIMIT $page_position, $item_per_page";
+	            $sql_quote = "SELECT DISTINCT cq.PRODUCT_CODE, cq.PACKAGING_SIZE, cq.QUANTITY, cq.AVAILABLE_PRICE, cq.REQUESTED_PRICE, cq.REMARK, cq.FILE_NAME, cq.STATUS, up.DESCRIPTION FROM customer_quotations as cq, xxdkapps_unsegregated_products as up WHERE cq.CUSTOMER_NUMBER = ".$cust_id." and cq.PRODUCT_CODE = up.PRODUCT_CODE and cq.PRODUCT_CODE LIKE '".$_REQUEST['search_value']."%' ORDER BY cq.ID DESC LIMIT $page_position, $item_per_page";
 	        }
 	        else{
-	            $sql_quote = "SELECT DISTINCT cq.PRODUCT_CODE, cq.PACKAGING_SIZE, cq.QUANTITY, cq.AVAILABLE_PRICE, cq.REQUESTED_PRICE, cq.REMARK, cq.FILE_NAME, cq.STATUS, up.DESCRIPTION FROM customer_quotations as cq, xxdkapps_unsegregated_products as up WHERE cq.CUSTOMER_NUMBER = ".$cust_id." and cq.PRODUCT_CODE = up.PRODUCT_CODE and up.DESCRIPTION LIKE '%".$_REQUEST['search_value']."%' ORDER BY cq.ID DESC LIMIT $page_position, $item_per_page";
+	            $sql_quote = "SELECT DISTINCT cq.PRODUCT_CODE, cq.PACKAGING_SIZE, cq.QUANTITY, cq.AVAILABLE_PRICE, cq.REQUESTED_PRICE, cq.REMARK, cq.FILE_NAME, cq.STATUS, up.DESCRIPTION FROM customer_quotations as cq, xxdkapps_unsegregated_products as up WHERE cq.CUSTOMER_NUMBER = ".$cust_id." and cq.PRODUCT_CODE = up.PRODUCT_CODE and up.DESCRIPTION LIKE '".$_REQUEST['search_value']."%' ORDER BY cq.ID DESC LIMIT $page_position, $item_per_page";
 	        }
 		}
 		else{
@@ -342,7 +342,7 @@ if($_REQUEST['action'] == "get_po_history")
 		if(isset($_REQUEST['search_value']))
 		{
 			//To get total count
-			$sql = "SELECT DISTINCT cp.ID FROM customer_po as cp, xxdkapps_customer_master as cm WHERE cp.CUSTOMER_NUMBER = ".$cust_id." and cp.PO_NUMBER LIKE '%".$_REQUEST['search_value']."%' and cp.SHIP_TO = cm.SITE_USE_ID and cm.BUSINESS_CODE = 'SHIP_TO' ORDER BY cp.ID DESC";
+			$sql = "SELECT DISTINCT cp.ID FROM customer_po as cp, xxdkapps_customer_master as cm WHERE cp.CUSTOMER_NUMBER = ".$cust_id." and cp.PO_NUMBER LIKE '".$_REQUEST['search_value']."%' and cp.SHIP_TO = cm.SITE_USE_ID and cm.BUSINESS_CODE = 'SHIP_TO' ORDER BY cp.ID DESC";
 		}
 		else{
 			//To get total count
@@ -357,7 +357,7 @@ if($_REQUEST['action'] == "get_po_history")
 	    if(isset($_REQUEST['search_value']))
 		{
 			//Fetch previous PO
-	    	$sql_PO = "SELECT DISTINCT cp.PO_NUMBER, cp.SHIP_TO, cp.SOLD_TO, cp.CONTACT_PERSON, cp.DELIVERY_DATE, cp.FREIGHT_TERM, cp.FREIGHT_CHARGES, cp.VESSAL_NAME, cp.PAYMENT_TERM, cp.FILE_NAME, cp.COMMENT, cp.STATUS, CONCAT_WS(',',cm.ADDRESS1,cm.ADDRESS2 , cm.ADDRESS3,cm.ADDRESS4,cm.CITY, cm.COUNTRY) AS SHIP_ADDRESS FROM customer_po as cp, xxdkapps_customer_master as cm WHERE cp.CUSTOMER_NUMBER = ".$cust_id." and cp.PO_NUMBER LIKE '%".$_REQUEST['search_value']."%' and cp.SHIP_TO = cm.SITE_USE_ID and cm.BUSINESS_CODE = 'SHIP_TO' ORDER BY cp.ID DESC LIMIT $page_position, $item_per_page";
+	    	$sql_PO = "SELECT DISTINCT cp.PO_NUMBER, cp.SHIP_TO, cp.SOLD_TO, cp.CONTACT_PERSON, cp.DELIVERY_DATE, cp.FREIGHT_TERM, cp.FREIGHT_CHARGES, cp.VESSAL_NAME, cp.PAYMENT_TERM, cp.FILE_NAME, cp.COMMENT, cp.STATUS, CONCAT_WS(',',cm.ADDRESS1,cm.ADDRESS2 , cm.ADDRESS3,cm.ADDRESS4,cm.CITY, cm.COUNTRY) AS SHIP_ADDRESS FROM customer_po as cp, xxdkapps_customer_master as cm WHERE cp.CUSTOMER_NUMBER = ".$cust_id." and cp.PO_NUMBER LIKE '".$_REQUEST['search_value']."%' and cp.SHIP_TO = cm.SITE_USE_ID and cm.BUSINESS_CODE = 'SHIP_TO' ORDER BY cp.ID DESC LIMIT $page_position, $item_per_page";
 		}
 		else{
 			//Fetch previous PO
