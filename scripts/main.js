@@ -1195,7 +1195,7 @@ $(document).ready(function () {
 
 		$(this).parent().parent().find('.remove_product_btn').hide();
         $(this).parent().parent().find('.remove_product_btn').addClass('edited');
-        $('#checkout_btn').hide();
+        $('#checkout_btn').addClass('disabled');
 		$(this).parent().parent().find('.save_product_btn').show();
 	});
 });
@@ -1240,12 +1240,12 @@ $(document).ready(function () {
                             setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
                             if ( $('.edited').length )
                             {
-                                $('#checkout_btn').hide();
+                                $('#checkout_btn').addClass('disabled');
                                 // Do something if class exists
                             } 
                             else 
                             {
-                                $('#checkout_btn').show();
+                                $('#checkout_btn').removeClass('disabled');
                                 // Do something if class does not exist
                             }  
         				}

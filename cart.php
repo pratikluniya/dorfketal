@@ -76,14 +76,10 @@ if($result != "no")
 	                	<input type="hidden" class="prod_id" value=" <?php echo $result[$key]['ITEM_CODE']; ?> ">
 	                </td>
 	                <td  class="remove_product_btn">
-	                	<span>
-	                		REMOVE <span class="badge" style="background-color:red;"> - </span>
-	                	</span>
+	                	<button type="button" class="btn btn-danger-outline">REMOVE</button>
 	                </td>
 	                <td class="save_product_btn">
-	                	<span>
-	                		SAVE
-	                	</span>
+	                	<button type="button" class="btn btn-success-outline">SAVE</button>
 	                </td>
 		      	</tr>
 		<?php 
@@ -91,8 +87,8 @@ if($result != "no")
 		?>
 			</tbody>
 		</table>
-		<button type="button" id="continue_shop_btn">Continue Buying</button>
-		<button type="button" id="checkout_btn">Checkout</button>
+		<button type="button" id="continue_shop_btn" class="btn">Continue Buying</button>
+		<button type="button" id="checkout_btn" class="btn">Checkout</button>
 	<?php
 	}
 	else
@@ -102,7 +98,7 @@ if($result != "no")
 			<h4>
 				No Items in your Shopping Cart
 			</h4>
-			<button type="button" id="continue_shop_btn">Continue Buying</button>
+			<button type="button" id="continue_shop_btn" class="btn">Continue Buying</button>
 		</div>
 	<?php
 	}
