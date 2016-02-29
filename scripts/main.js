@@ -280,8 +280,7 @@ $(document).ready(function () {
         $(".main_body").load("order_history.php",{"page":page}, function(){ //get content from PHP page
             $('.search-tabs').show();
             $('#loading').removeClass("showloading"); //once done, hide loading element
-        });
-        
+        });        
     });
 });
 $(document).ready(function () {
@@ -351,6 +350,7 @@ $(document).ready(function () {
         $('#loading').addClass("showloading");
         $('.main_heading').html("Upload PO#");
         $('.po-tabs').show();
+        $('.po_search').hide();
         $('.main_body').load('upload_po.php', function(data){
             $('#loading').removeClass("showloading");
         });

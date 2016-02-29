@@ -1,14 +1,14 @@
 <!-- Header -->
 <div id="row header">
     <div id="logo" class="container light-version">
-        <div class="col-xs-12 col-sm-6 col-md-8 pull-left">
+        <div class="col-xs-12 col-sm-6 col-md-7 col-lg-4 pull-left">
             <span >
                 <a href="home.php">
                     <img src="images/dk-logo.png" style="height: 80px;width: 187px;">
                 </a>
             </span> 
         </div>       
-        <div class="col-xs-6 col-md-4 pull-right search-div">
+        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4 pull-right search-div">
             <div class="input-group">
                 <div class="input-group-btn">
                     <button type="button" class="btn search-dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="search_cat">Select Search By <span class="caret"></span></button>
@@ -18,8 +18,7 @@
                         <li><a href="#" data-value="3" data-category="Application">Application</a></li>
                         <li><a href="#" data-value="4" data-category="Category">Category</a></li>
                         <li><a href="#" data-value="5" data-category="Order Number">Order Number</a></li>
-                        <li><a href="#" data-value="6" data-category="Order Web Id">Order Web Id</a></li>
-                        
+                        <li><a href="#" data-value="6" data-category="Order Web Id">Order Web Id</a></li>                        
                     </ul>
                 </div><!-- /btn-group -->
                 <input type="text" class="form-control" id="search_box" aria-label="..." placeholder="Search">
@@ -89,4 +88,4 @@
         <div class="navbar-right">
         </div>
     </nav>
-</div>
+

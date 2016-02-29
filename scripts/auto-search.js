@@ -1,14 +1,11 @@
 /************* Autocomplete Global Search *******************/
 $(document).ready(function(){
-    $('#search_box').autocomplete({
-        select:function(event,ui){
-            $('#search_box').val(ui.item.value);
-            if($('#search_box').val()==''){
+    $('#search_box').autocomplete({        
+        source: function (request, response) {
+            if(request.term==''){
+                $('.ui-autocomplete').css("display","none");
                 return false;
             }
-            $(".search-div .input-group-addon").trigger("click");
-        },
-        source: function (request, response) {
             var auto_search_cat = $('#search_id').val();
             $.ajax({
                 url : 'global_auto_search.php',
@@ -20,7 +17,7 @@ $(document).ready(function(){
                 success: function (data) {
                     if(data[0] != 'No Data'){
                         response($.map(data, function (item) {
-                            if(data.length > 5){
+                            if(data.length > 10){
                                 $('.ui-autocomplete').addClass('ul_scroll');
                             }
                             else{
@@ -43,16 +40,28 @@ $(document).ready(function(){
                         }));
                     }
                     else{
-                        $('.ui-autocomplete').removeClass('ul_scroll');
-                        response($.map(data, function (item) {                            
-                            return { 
-                                label:'' 
-                            };                            
-                        }));                        
+                        if(auto_search_cat == 5 || auto_search_cat == 6){
+                            return false;
+                        }
+                        else{
+                            $('.ui-autocomplete').removeClass('ul_scroll');
+                            response($.map(data, function (item) {                            
+                                return { 
+                                    label:'' 
+                                };                            
+                            })); 
+                        }                                               
                     }
                 }     
             });
-        }, 
+        },
+        select:function(event,ui){
+            $('#search_box').val(ui.item.value);
+            if($('#search_box').val()==''){
+                return false;
+            }
+            $(".search-div .input-group-addon").trigger("click");
+        },         
         minLength: 0  
     }).data("ui-autocomplete")._renderItem = function (ul, item) {
         var auto_search_cat = $('#search_id').val();
@@ -82,16 +91,10 @@ $(document).ready(function(){
 //For Product
 $(document).ready(function(){
     var cat_value = '';   
-    $('#product_search_box').autocomplete({
-        select:function(event,ui){
-            $('#product_search_box').val(ui.item.value);
-            if($('#product_search_box').val()==''){
-                return false;
-            }
-            $(".product_search .input-group-addon").trigger("click");
-        },
+    $('#product_search_box').autocomplete({        
         source: function (request, response) {
-            if(request.term == ''){
+            if(request.term==''){
+                $('.ui-autocomplete').css("display","none");
                 return false;
             }
             var auto_search_cat = $('#local_search_cat').val();
@@ -114,7 +117,7 @@ $(document).ready(function(){
                 success: function (data) {
                     if(data[0] != 'No Data'){
                         response($.map(data, function (item) {                 
-                            if(data.length > 5){
+                            if(data.length > 10){
                                 $('.ui-autocomplete').addClass('ul_scroll');
                             }
                             else{
@@ -146,6 +149,13 @@ $(document).ready(function(){
                     }                    
                 }
             });
+        },
+        select:function(event,ui){
+            $('#product_search_box').val(ui.item.value);
+            if($('#product_search_box').val()==''){
+                return false;
+            }
+            $(".product_search .input-group-addon").trigger("click");
         },
         minLength: 0  
     }).data("ui-autocomplete")._renderItem = function (ul, item) {
@@ -174,17 +184,10 @@ $(document).ready(function(){
 //For Quotation History
 $(document).ready(function(){
     var cat_value = '';   
-    $('#quote_search_box').autocomplete({
-        select:function(event,ui){
-            $('#quote_search_box').val(ui.item.value);
-            if($('#quote_search_box').val()==''){
-                return false;
-            }
-            $(".quote_search .input-group-addon").trigger("click");
-        },
+    $('#quote_search_box').autocomplete({        
         source: function (request, response) {
-
-            if(request.term == ''){
+            if(request.term==''){
+                $('.ui-autocomplete').css("display","none");
                 return false;
             }
             if (isNaN( request.term )) {                
@@ -205,7 +208,7 @@ $(document).ready(function(){
                 success: function (data) {
                     if(data[0] != 'No Data'){
                         response($.map(data, function (item) {                 
-                            if(data.length > 5){
+                            if(data.length > 10){
                                 $('.ui-autocomplete').addClass('ul_scroll');
                             }
                             else{
@@ -237,7 +240,14 @@ $(document).ready(function(){
                     }                    
                 }
             });
-        },        
+        }, 
+        select:function(event,ui){
+            $('#quote_search_box').val(ui.item.value);
+            if($('#quote_search_box').val()==''){
+                return false;
+            }
+            $(".quote_search .input-group-addon").trigger("click");
+        },       
         minLength: 0  
     }).data("ui-autocomplete")._renderItem = function (ul, item) {
         if(item.label == undefined || item.label == ''){        
@@ -264,17 +274,10 @@ $(document).ready(function(){
 
 //For PO History
 $(document).ready(function(){
-    $('#po_search_box').autocomplete({
-        select:function(event,ui){
-            $('#po_search_box').val(ui.item.value);
-            if($('#po_search_box').val()==''){
-                return false;
-            }
-            $(".po_search .input-group-addon").trigger("click");
-        },
+    $('#po_search_box').autocomplete({        
         source: function (request, response) {
-
             if(request.term == ''){
+                $('.ui-autocomplete').css("display","none");
                 return false;
             }                  
             $.ajax({
@@ -287,7 +290,7 @@ $(document).ready(function(){
                 success: function (data) {
                     if(data[0] != 'No Data'){
                         response($.map(data, function (item) {                 
-                            if(data.length > 5){
+                            if(data.length > 10){
                                 $('.ui-autocomplete').addClass('ul_scroll');
                             }
                             else{
@@ -309,7 +312,14 @@ $(document).ready(function(){
                     }                    
                 }             
             });
-        },        
+        }, 
+        select:function(event,ui){
+            $('#po_search_box').val(ui.item.value);
+            if($('#po_search_box').val()==''){
+                return false;
+            }
+            $(".po_search .input-group-addon").trigger("click");
+        },       
         minLength: 0  
     }).data("ui-autocomplete")._renderItem = function (ul, item) {
         if(item.label == undefined || item.label == ''){        
@@ -328,15 +338,12 @@ $(document).ready(function(){
 
 //For Order History
 $(document).ready(function(){
-    $('#order_history_search_box').autocomplete({
-        select:function(event,ui){
-            $('#order_history_search_box').val(ui.item.value);
-            if($('#order_history_search_box').val()==''){
+    $('#order_history_search_box').autocomplete({        
+        source: function (request, response) {
+            if(request.term == ''){
+                $('.ui-autocomplete').css("display","none");
                 return false;
             }
-            $(".order_history_search .input-group-addon").trigger("click");
-        },
-        source: function (request, response) {
             var auto_search_cat = $('#local_src_ord_histry_cat').val();
             $.ajax({
                 url : 'local_auto_search.php',
@@ -349,7 +356,7 @@ $(document).ready(function(){
                 success: function (data) {
                     if(data[0] != 'No Data'){
                         response($.map(data, function (item) {
-                            if(data.length > 5){
+                            if(data.length > 10){
                                 $('.ui-autocomplete').addClass('ul_scroll');
                             }
                             else{
@@ -367,21 +374,28 @@ $(document).ready(function(){
                                 return { 
                                     value: item,
                                     label: item                                    
-                                };                  
+                                };                
                             }                
-                        })); 
-                    }                    
+                        }));
+                    }
                     else{
                         $('.ui-autocomplete').removeClass('ul_scroll');
                         response($.map(data, function (item) {                            
                             return { 
                                 label:'' 
                             };                            
-                        }));                        
+                        }));
                     }
                 }     
             });
-        },           
+        }, 
+        select:function(event,ui){
+            $('#order_history_search_box').val(ui.item.value);
+            if($('#order_history_search_box').val()==''){
+                return false;
+            }
+            $(".order_history_search .input-group-addon").trigger("click");
+        },          
         minLength: 0  
     }).data("ui-autocomplete")._renderItem = function (ul, item) {
         var auto_search_cat = $('#local_src_ord_histry_cat').val();

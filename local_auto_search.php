@@ -10,10 +10,10 @@ if(isset($_REQUEST['search_category']) && ($_REQUEST['action'] == "product_searc
 {
 
 	if (is_numeric(trim($_REQUEST['auto_search_value']))){
-        $sql ="SELECT DISTINCT PRODUCT_CODE,DESCRIPTION FROM xxdkapps_unsegregated_products WHERE PRODUCT_CODE LIKE '%".$_REQUEST['auto_search_value']."%' order by PRODUCT_CODE";
+        $sql ="SELECT DISTINCT PRODUCT_CODE,DESCRIPTION FROM xxdkapps_unsegregated_products WHERE PRODUCT_CODE LIKE '".$_REQUEST['auto_search_value']."%' order by PRODUCT_CODE";
     }
     else{
-        $sql ="SELECT DISTINCT DESCRIPTION FROM xxdkapps_unsegregated_products WHERE DESCRIPTION LIKE '%".$_REQUEST['auto_search_value']."%' order by DESCRIPTION";
+        $sql ="SELECT DISTINCT DESCRIPTION FROM xxdkapps_unsegregated_products WHERE DESCRIPTION LIKE '".$_REQUEST['auto_search_value']."%' order by DESCRIPTION";
     	
     }
 
@@ -34,10 +34,10 @@ if(isset($_REQUEST['search_category']) && ($_REQUEST['action'] == "product_searc
 if(isset($_REQUEST['action']) && $_REQUEST['action'] == "quote_search")
 {	
     if (is_numeric(trim($_REQUEST['auto_search_value']))){
-        $sql = "SELECT DISTINCT cq.PRODUCT_CODE,up.DESCRIPTION FROM customer_quotations as cq, xxdkapps_unsegregated_products as up WHERE cq.CUSTOMER_NUMBER = ".$cust_id." and cq.PRODUCT_CODE = up.PRODUCT_CODE and cq.PRODUCT_CODE LIKE '%".$_REQUEST['auto_search_value']."%' ORDER BY cq.PRODUCT_CODE DESC ";
+        $sql = "SELECT DISTINCT cq.PRODUCT_CODE,up.DESCRIPTION FROM customer_quotations as cq, xxdkapps_unsegregated_products as up WHERE cq.CUSTOMER_NUMBER = ".$cust_id." and cq.PRODUCT_CODE = up.PRODUCT_CODE and cq.PRODUCT_CODE LIKE '".$_REQUEST['auto_search_value']."%' ORDER BY cq.PRODUCT_CODE DESC ";
     }
     else{
-        $sql = "SELECT DISTINCT up.DESCRIPTION FROM customer_quotations as cq, xxdkapps_unsegregated_products as up WHERE cq.CUSTOMER_NUMBER = ".$cust_id." and cq.PRODUCT_CODE = up.PRODUCT_CODE and up.DESCRIPTION LIKE '%".$_REQUEST['auto_search_value']."%' ORDER BY up.DESCRIPTION DESC ";
+        $sql = "SELECT DISTINCT up.DESCRIPTION FROM customer_quotations as cq, xxdkapps_unsegregated_products as up WHERE cq.CUSTOMER_NUMBER = ".$cust_id." and cq.PRODUCT_CODE = up.PRODUCT_CODE and up.DESCRIPTION LIKE '".$_REQUEST['auto_search_value']."%' ORDER BY up.DESCRIPTION DESC ";
     }
 
     $result= $con->data_select($sql);
@@ -56,7 +56,7 @@ if(isset($_REQUEST['action']) && $_REQUEST['action'] == "quote_search")
 /******** PO History ***********/
 if(isset($_REQUEST['action']) && $_REQUEST['action'] == "po_search")
 {	
-    $sql = "SELECT DISTINCT cp.PO_NUMBER FROM customer_po as cp, xxdkapps_customer_master as cm WHERE cp.CUSTOMER_NUMBER = ".$cust_id." and cp.PO_NUMBER LIKE '%".$_REQUEST['auto_search_value']."%' and cp.SHIP_TO = cm.SITE_USE_ID and cm.BUSINESS_CODE = 'SHIP_TO' ORDER BY cp.PO_NUMBER DESC";
+    $sql = "SELECT DISTINCT cp.PO_NUMBER FROM customer_po as cp, xxdkapps_customer_master as cm WHERE cp.CUSTOMER_NUMBER = ".$cust_id." and cp.PO_NUMBER LIKE '".$_REQUEST['auto_search_value']."%' and cp.SHIP_TO = cm.SITE_USE_ID and cm.BUSINESS_CODE = 'SHIP_TO' ORDER BY cp.PO_NUMBER DESC";
 
     $result= $con->data_select($sql);
 
@@ -76,7 +76,7 @@ if(isset($_REQUEST['action']) && $_REQUEST['action'] == "order_history_search"){
 
     if(isset($_REQUEST['search_category']) && ($_REQUEST['search_category'] == "1") )
     {
-        $sql ="SELECT DISTINCT op.PRODUCT_CODE,up.DESCRIPTION FROM order_form_details as ofd, order_products as op, xxdkapps_unsegregated_products as up, xxdkapps_customer_master as cm WHERE ofd.CUSTOMER_NUMBER= " . $cust_id." and op.PRODUCT_CODE = up.PRODUCT_CODE and op.ORDER_ID = ofd.ID and ofd.SHIP_TO = cm.SITE_USE_ID and op.PRODUCT_CODE LIKE '%".$_REQUEST['auto_search_value']."%' order by PRODUCT_CODE";   
+        $sql ="SELECT DISTINCT op.PRODUCT_CODE,up.DESCRIPTION FROM order_form_details as ofd, order_products as op, xxdkapps_unsegregated_products as up, xxdkapps_customer_master as cm WHERE ofd.CUSTOMER_NUMBER= " . $cust_id." and op.PRODUCT_CODE = up.PRODUCT_CODE and op.ORDER_ID = ofd.ID and ofd.SHIP_TO = cm.SITE_USE_ID and op.PRODUCT_CODE LIKE '".$_REQUEST['auto_search_value']."%' order by PRODUCT_CODE";   
         $result= $con->data_select($sql); 
          
         $data = array();
@@ -91,7 +91,7 @@ if(isset($_REQUEST['action']) && $_REQUEST['action'] == "order_history_search"){
     }
     if(isset($_REQUEST['search_category']) && ($_REQUEST['search_category'] == "2") )
     {
-        $sql ="SELECT DISTINCT up.DESCRIPTION FROM order_form_details as ofd, order_products as op, xxdkapps_unsegregated_products as up, xxdkapps_customer_master as cm WHERE ofd.CUSTOMER_NUMBER= " . $cust_id." and op.PRODUCT_CODE = up.PRODUCT_CODE and op.ORDER_ID = ofd.ID and ofd.SHIP_TO = cm.SITE_USE_ID and up.DESCRIPTION LIKE '%".$_REQUEST['auto_search_value']."%' ORDER BY up.DESCRIPTION";
+        $sql ="SELECT DISTINCT up.DESCRIPTION FROM order_form_details as ofd, order_products as op, xxdkapps_unsegregated_products as up, xxdkapps_customer_master as cm WHERE ofd.CUSTOMER_NUMBER= " . $cust_id." and op.PRODUCT_CODE = up.PRODUCT_CODE and op.ORDER_ID = ofd.ID and ofd.SHIP_TO = cm.SITE_USE_ID and up.DESCRIPTION LIKE '".$_REQUEST['auto_search_value']."%' ORDER BY up.DESCRIPTION";
         $result= $con->data_select($sql);    
         $data = array();
         if($result == 'no'){
@@ -142,7 +142,7 @@ if(isset($_REQUEST['action']) && $_REQUEST['action'] == "order_history_search"){
     }
     if(isset($_REQUEST['search_category']) && ($_REQUEST['search_category'] == "5") )
     {
-        $sql ="SELECT DISTINCT ofd.PO FROM order_form_details as ofd, order_products as op, xxdkapps_unsegregated_products as up, xxdkapps_customer_master as cm WHERE ofd.CUSTOMER_NUMBER= " . $cust_id." and op.PRODUCT_CODE = up.PRODUCT_CODE and op.ORDER_ID = ofd.ID and ofd.SHIP_TO = cm.SITE_USE_ID and ofd.PO LIKE '%".$_REQUEST['auto_search_value']."%'  ORDER BY ofd.PO";
+        $sql ="SELECT DISTINCT ofd.PO FROM order_form_details as ofd, order_products as op, xxdkapps_unsegregated_products as up, xxdkapps_customer_master as cm WHERE ofd.CUSTOMER_NUMBER= " . $cust_id." and op.PRODUCT_CODE = up.PRODUCT_CODE and op.ORDER_ID = ofd.ID and ofd.SHIP_TO = cm.SITE_USE_ID and ofd.PO LIKE '".$_REQUEST['auto_search_value']."%'  ORDER BY ofd.PO";
         $result= $con->data_select($sql);    
         $data = array();
         if($result == 'no'){
@@ -152,6 +152,23 @@ if(isset($_REQUEST['action']) && $_REQUEST['action'] == "order_history_search"){
         else{        
             foreach ($result as $key => $value) {
                 array_push($data, $result[$key]['PO']);
+            }
+            echo json_encode($data);
+        }   
+        exit;
+    }
+    if(isset($_REQUEST['search_category']) && ($_REQUEST['search_category'] == "6") )
+    {
+        $sql ="SELECT DISTINCT op.OSTATUS FROM order_form_details as ofd, order_products as op, xxdkapps_unsegregated_products as up, xxdkapps_customer_master as cm WHERE ofd.CUSTOMER_NUMBER= " . $cust_id." and op.PRODUCT_CODE = up.PRODUCT_CODE and op.ORDER_ID = ofd.ID and ofd.SHIP_TO = cm.SITE_USE_ID and op.OSTATUS LIKE '".$_REQUEST['auto_search_value']."%'  ORDER BY op.OSTATUS";
+        $result= $con->data_select($sql);    
+        $data = array();
+        if($result == 'no'){
+            array_push($data, 'No Data');
+            echo json_encode($data);
+        }
+        else{        
+            foreach ($result as $key => $value) {
+                array_push($data, $result[$key]['OSTATUS']);
             }
             echo json_encode($data);
         }   

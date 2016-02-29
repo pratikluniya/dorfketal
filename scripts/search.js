@@ -3,7 +3,7 @@ $(document).on('keypress','#search_box',function(event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
     if(keycode == '13')
     {
-        $(".input-group-addon").trigger("click");
+        $(".search-div .input-group-addon").trigger("click");
     }
 });
 
@@ -19,7 +19,8 @@ $(document).ready(function(){
         $('#search_cat').html(search_cat_name +" <span class='caret'></span>");  
         if(search_value == ''){
             $("#search_box").attr("placeholder","Search By "+search_cat_name);
-        }              
+        }  
+        $("#search_box").focus();            
     });
 
     $('.search-div').on('click','.input-group-addon',function(e){
@@ -62,6 +63,9 @@ $(document).ready(function(){
         if(search_category == 6){
             cat = "Order Web Id";
         }
+        if(search_category == 7){
+            cat = "PO Number";
+        }
        
         if(search_category == 1 || search_category == 2 || search_category == 3 || search_category == 4)
         {
@@ -79,7 +83,8 @@ $(document).ready(function(){
                     $('.main_body').html(returnedData);
                 },
                 complete: function(){
-                    $('#loading').removeClass("showloading");                        
+                    $('#loading').removeClass("showloading"); 
+                    $('.ui-autocomplete').css("display","none");                       
                     $('#pagination_search_value').val(search_value);
                     $('#pagination_search_id').val(search_category);
                     $('#search_cat').html("Select Search By <span class='caret'></span>");  
@@ -90,14 +95,18 @@ $(document).ready(function(){
                 }
             });
         }
+        else if(search_category == 7){
+
+        }
         else
         {
             $('#loading').addClass("showloading"); //show loading element
             $('.search-tabs').hide();
             $(".main_body").load("repeat_order.php",{"search_category":search_category,"search_value":search_value}, function(){ 
                 $('.main_heading').html("Search Results");
-                $('.main_body').prepend("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat+"</strong> is <strong>"+search_value+"</strong>...</div>");
+                $('.bounceInRight').prepend("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat+"</strong> is <strong>"+search_value+"</strong>...</div>");
                 $('#loading').removeClass("showloading"); //once done, hide loading element
+                $('.ui-autocomplete').css("display","none");
                 $('#pagination_search_value').val(search_value);
                 $('#pagination_search_id').val(search_category);
                 $('#search_cat').html("Select Search By <span class='caret'></span>"); 
@@ -115,22 +124,60 @@ $(document).ready(function(){
         var search_value = $('#pagination_search_value').val();
         var search_category = $('#pagination_search_id').val();
         var page = $(this).attr("data-page");
-        $.ajax({
-            type: "POST",
-            url: "product_list.php",
-            data: 'search_category='+search_category+'&search_value='+search_value+'&page='+page,
-            beforeSend: function(){
-                $('#loading').addClass("showloading");
-                $('.search-tabs').hide();
-            },
-            success: function( returnedData ){
+
+        var cat;
+        if(search_category == 1){
+            cat = "Product Code";
+        }
+        if(search_category == 2){
+            cat = "Product Name";
+        }
+        if(search_category == 3){
+            cat = "Application";
+        }
+        if(search_category == 4){
+            cat = "Category";
+        }
+        if(search_category == 5){
+            cat = "Order Id";
+        }
+        if(search_category == 6){
+            cat = "Order Web Id";
+        }
+       
+        if(search_category == 1 || search_category == 2 || search_category == 3 || search_category == 4)
+        {
+            $.ajax({
+                type: "POST",
+                url: "product_list.php",
+                data: 'search_category='+search_category+'&search_value='+search_value+'&page='+page,
+                beforeSend: function(){
+                    $('#loading').addClass("showloading");
+                    $('.search-tabs').hide();
+                },
+                success: function( returnedData ){
+                    $('.cat-tabs').hide();
+                    $('.main_heading').html("Search Results");
+                    $('.main_body').html(returnedData);
+                },
+                complete: function(){
+                    $('#loading').removeClass("showloading");  
+                    $('.ui-autocomplete').css("display","none");                  
+                    $('.main_body').prepend("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat+"</strong> like <strong>"+search_value+"</strong>...</div>");
+                }
+            });
+        }
+        else
+        {
+            $('#loading').addClass("showloading"); //show loading element
+            $('.search-tabs').hide();
+            $(".main_body").load("repeat_order.php",{"search_category":search_category,"search_value":search_value,"page":page}, function(){ 
                 $('.main_heading').html("Search Results");
-                $('.main_body').html(returnedData);        
-            },
-            complete: function(){
-                $('#loading').removeClass("showloading");
-            }
-        });            
+                $('.bounceInRight').prepend("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat+"</strong> is <strong>"+search_value+"</strong>...</div>");
+                $('#loading').removeClass("showloading"); //once done, hide loading element
+                $('.ui-autocomplete').css("display","none");                
+            });                
+        }               
     });
     
 
@@ -177,10 +224,11 @@ $(document).ready(function () {
                 },
                 complete: function(){
                     $('#loading').removeClass("showloading");
+                    $('.ui-autocomplete').css("display","none");
                     $('#local_pagination_search_cat').val(cat_name);
                     $('#local_pagination_search_value').val(search_value);
                     $('#product_search_box').val('');
-                    $("#product_search_box").attr("placeholder","Search ");
+                    $("#product_search_box").attr("placeholder","Search By Product Code or Name ");
                     $('.main_body').prepend("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat_name+"</strong> like <strong>"+search_value+"</strong>...</div>");
                 }
             });
@@ -205,6 +253,7 @@ $(document).ready(function () {
             },
             complete: function(){
                 $('#loading').removeClass("showloading");
+                $('.ui-autocomplete').css("display","none");
                 $('.main_body').prepend("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat_name+"</strong> like <strong>"+search_value+"</strong>...</div>");
             }
         });            
@@ -232,7 +281,8 @@ $(document).ready(function () {
 
         if(search_value == ''){
             $("#order_history_search_box").attr("placeholder","Search By "+search_cat);
-        }              
+        } 
+        $("#order_history_search_box").focus();             
     });
 
     $(".order_history_search" ).on( "click",".input-group-addon", function(e){        
@@ -254,6 +304,9 @@ $(document).ready(function () {
         }
         if(search_cat == 5){
             cat = "PO# Number";
+        }
+        if(search_cat == 6){
+            cat = "Order Status";
         }
 
         if(search_cat == 0){
@@ -280,8 +333,9 @@ $(document).ready(function () {
             if(order_type == 'OH'){
                 $(".main_body").load("order_history.php",{"search_cat":search_cat,"search_value":search_value}, function(){ //get content from PHP page
                     $('.search-tabs').show();
-                    $('.search-result-tabs').html("Search result for <strong>"+cat+"</strong> like <strong>"+search_value+"</strong>...");
+                    $('.bounceInRight').prepend("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat+"</strong> like <strong>"+search_value+"</strong>...</div>");
                     $('#loading').removeClass("showloading"); //once done, hide loading element
+                    $('.ui-autocomplete').css("display","none");
                     $('#local_pagtn_src_ord_histry').val(search_value);
                     $('#local_pagtn_src_ord_histry_cat').val(search_cat);
                     $('#order_history_search_box').val('');
@@ -293,8 +347,9 @@ $(document).ready(function () {
             else{
                 $(".main_body").load("repeat_order.php",{"search_cat":search_cat,"search_value":search_value}, function(){ //get content from PHP page
                     $('.search-tabs').show();
-                    $('.search-result-tabs').html("Search result for <strong>"+cat+"</strong> like <strong>"+search_value+"</strong>...");
+                    $('.bounceInRight').prepend("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat+"</strong> like <strong>"+search_value+"</strong>...</div>");
                     $('#loading').removeClass("showloading"); //once done, hide loading element
+                    $('.ui-autocomplete').css("display","none");
                     $('#local_pagtn_src_ord_histry').val(search_value);
                     $('#local_pagtn_src_ord_histry_cat').val(search_cat);
                     $('#order_history_search_box').val('');
@@ -328,6 +383,9 @@ $(document).ready(function () {
         if(search_cat == 5){
             cat = "PO# Number";
         }
+        if(search_cat == 6){
+            cat = "Order Status";
+        }
 
         $('#loading').addClass("showloading"); //show loading element
         var page = $(this).attr("data-page"); //get page number from link
@@ -336,22 +394,24 @@ $(document).ready(function () {
             $(".main_body").load("order_history.php",{"search_cat":search_cat,"search_value":search_value,"page":page}, function(){ //get content from PHP page
                 $('.search-tabs').show();
                 $('#loading').removeClass("showloading"); //once done, hide loading element
+                $('.ui-autocomplete').css("display","none");
                 $('#order_history_search_box').val('');
                 $('#local_src_ord_histry_cat').val('0');
                 $("#order_history_search_box").attr("placeholder","Search ");
                 $('#order_history_cat').html("Select Search By <span class='caret'></span>");
-                $('.search-result-tabs').html("Search result for <strong>"+cat+"</strong> like <strong>"+search_value+"</strong>...");
+                $('.bounceInRight').prepend("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat+"</strong> like <strong>"+search_value+"</strong>...</div>");
             }); 
         }
         else{
             $(".main_body").load("repeat_order.php",{"search_cat":search_cat,"search_value":search_value,"page":page}, function(){ //get content from PHP page
                 $('.search-tabs').show();
                 $('#loading').removeClass("showloading"); //once done, hide loading element
+                $('.ui-autocomplete').css("display","none");
                 $('#order_history_search_box').val('');
                 $('#local_src_ord_histry_cat').val('0');
                 $("#order_history_search_box").attr("placeholder","Search ");
                 $('#order_history_cat').html("Select Search By <span class='caret'></span>");
-                $('.search-result-tabs').html("Search result for <strong>"+cat+"</strong> like <strong>"+search_value+"</strong>...");
+                $('.bounceInRight').prepend("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat+"</strong> like <strong>"+search_value+"</strong>...</div>");
             });
         }             
     });
@@ -392,8 +452,9 @@ $(document).ready(function () {
                 },
                 complete:function(){
                     $('#loading').removeClass("showloading"); //once done, hide loading element
+                    $('.ui-autocomplete').css("display","none");
                     $('#po_search_box').val('');
-                    $("#po_search_box").attr("placeholder","Search ");
+                    $("#po_search_box").attr("placeholder","Search By PO# Number ");
                     $('#local_pagination_po_value').val(search_value);
                     $('.search-result-tabs').remove();
                     $("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>PO# Number</strong> like <strong>"+search_value+"</strong>...</div>").insertBefore('.po-history-div');                
@@ -419,8 +480,9 @@ $(document).ready(function () {
                 },
                 complete:function(){
                     $('#loading').removeClass("showloading"); //once done, hide loading element
+                    $('.ui-autocomplete').css("display","none");
                     $('#po_search_box').val('');
-                    $("#po_search_box").attr("placeholder","Search ");
+                    $("#po_search_box").attr("placeholder","Search By PO# Number ");
                     $('.search-result-tabs').remove();
                     $("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>PO# Number</strong> like <strong>"+search_value+"</strong>...</div>").insertBefore('.po-history-div');                
                 }
@@ -472,8 +534,9 @@ $(document).ready(function () {
                 },
                 complete:function(){
                     $('#loading').removeClass("showloading"); //once done, hide loading element
+                    $('.ui-autocomplete').css("display","none");
                     $('#quote_search_box').val('');
-                    $("#quote_search_box").attr("placeholder","Search ");
+                    $("#quote_search_box").attr("placeholder","Search By Product Code or Name");
                     $('#local_pagination_quote_value').val(search_value);
                     $('.search-result-tabs').remove();
                     $("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat_value+"</strong> like <strong>"+search_value+"</strong>...</div>").insertBefore('.quote-history-div');
@@ -499,8 +562,9 @@ $(document).ready(function () {
                 },
                 complete:function(){
                     $('#loading').removeClass("showloading"); //once done, hide loading element
+                    $('.ui-autocomplete').css("display","none");
                     $('#quote_search_box').val('');
-                    $("#quote_search_box").attr("placeholder","Search ");
+                    $("#quote_search_box").attr("placeholder","Search By Product Code or Name");
                     $('.search-result-tabs').remove();
                     $("<div class='col-md-12 search-result-tabs' style='display: block;'>Search result for <strong>"+cat_value+"</strong> like <strong>"+search_value+"</strong>...</div>").insertBefore('.quote-history-div');
                 }
