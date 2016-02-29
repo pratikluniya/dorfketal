@@ -1194,6 +1194,8 @@ $(document).ready(function () {
 	$(".main_body" ).on( "focusin",".cart-input", function(e) {
 
 		$(this).parent().parent().find('.remove_product_btn').hide();
+        $(this).parent().parent().find('.remove_product_btn').addClass('edited');
+        $('#checkout_btn').hide();
 		$(this).parent().parent().find('.save_product_btn').show();
 	});
 });
@@ -1236,14 +1238,25 @@ $(document).ready(function () {
                             $('.notify').addClass('notify-success');
                             $('.notify').show();
                             setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+                            if ( $('.edited').length )
+                            {
+                                $('#checkout_btn').hide();
+                                // Do something if class exists
+                            } 
+                            else 
+                            {
+                                $('#checkout_btn').show();
+                                // Do something if class does not exist
+                            }  
         				}
             		},
                     complete: function(){
                         $('#loading').removeClass("showloading");
                     }
             	});
-            	$(this).parent().parent().find('.remove_product_btn').show();
-        		$(this).parent().parent().find('.save_product_btn').hide();
+                $(this).parent().find('.remove_product_btn').removeClass('edited');
+            	$(this).parent().find('.remove_product_btn').show();
+        		$(this).parent().find('.save_product_btn').hide();
             }
         }
 	});
