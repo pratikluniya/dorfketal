@@ -142,6 +142,10 @@ $(document).ready(function () {
         $(".po-tabs").hide();
         $(".quote-tabs").hide();
         $(".search-tabs").hide();
+        $('#cat_applications').hide();
+        $('#cat_applications').val('0');
+        $('#by_product').removeClass('inactive-cat-tab');
+        $('#by_application').addClass('inactive-cat-tab');
         $('#po_history').addClass('inactive-cat-tab');
         $('#up_po').removeClass('inactive-cat-tab');
         $('#quote_history').addClass('inactive-cat-tab');

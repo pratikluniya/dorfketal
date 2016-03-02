@@ -300,14 +300,10 @@ if($_REQUEST['action'] == "get_quote_history")
 	    
 		$result_quote_history = $con -> data_select($sql_quote);
 	}
-	
-
-	
 	if($result_quote_history != 'no'){
 		$html_data = "";
 		foreach ($result_quote_history as $key => $value) 
 		{
-	
 			$html_data .= '<tr class="item">        	
 				        	<td>'.$value['DESCRIPTION'].'</td>
 				        	<td>'.$value['QUANTITY'].'</td>
@@ -315,7 +311,7 @@ if($_REQUEST['action'] == "get_quote_history")
 				            <td>'.$value['AVAILABLE_PRICE'].'</td>
 				            <td>'.$value['REQUESTED_PRICE'].'</td>
 				            <td>'.$value['REMARK'].'</td>
-				            <td>'.$value['FILE_NAME'].'</td>
+				            <td><a href="uploadedquotes/'.$value['FILE_NAME'].'" target="_blank">'.$value['FILE_NAME'].'</a></td>
 				            <td>'.$value['STATUS'].'</td>
 				      	</tr>';	
 		}
@@ -380,7 +376,7 @@ if($_REQUEST['action'] == "get_po_history")
 				        	<td>'.$value['DELIVERY_DATE'].'</td>
 				            <td>'.$value['FREIGHT_TERM'].'</td>
 				            <td>'.$value['PAYMENT_TERM'].'</td>
-				            <td>'.$value['FILE_NAME'].'</td>
+				            <td><a href="uploadedPO/'.$value['FILE_NAME'].'" target="_blank">'.$value['FILE_NAME'].'</a></td>
 				            <td>'.$value['COMMENT'].'</td>
 				            <td>'.$value['STATUS'].'</td>
 				      	</tr>';	
