@@ -18,7 +18,7 @@ $result_quote_history = $con -> data_select($sql_quote);
 
 ?>
 
-<div class="container">
+<div class="container table-responsive">
 	<div class="col-md-6 col-xs-6 col-lg-6 col-sm-6 animated fadeInRight req-quote-div">
 		<form>
 			<div class="form-group">

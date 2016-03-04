@@ -58,14 +58,14 @@ include("side_navigation.php");
                         </div>                        
                     </div>
                     <div class="container po-tabs">
-                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-md-offset-4">
+                        <div class="col-xs-6 col-sm-8 col-md-6 col-lg-6 col-md-offset-2">
                             <div class="">
                                 <button type="button" class="up_po btn btn-primary" id="up_po">Upload PO#</button>
                                 <button type="button" class="po_history btn btn-primary inactive-cat-tab" id="po_history">PO# History</button><br>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 local-search-div po_search">
+                        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 local-search-div po_search">
                             <div class="input-group">                                
                                 <input type="text" class="form-control " id="po_search_box" aria-label="..." placeholder="Search By PO# Number">
                                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
@@ -81,7 +81,7 @@ include("side_navigation.php");
                                 </select>
                             </div>
                         </div>
-                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4  local-search-div quote_search">
+                        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4  local-search-div quote_search">
                             <div class="input-group">                                
                                 <input type="text" class="form-control " id="quote_search_box" aria-label="..." placeholder="Search By Product Code or Name">
                                 <span class="input-group-addon"><i class="fa fa-search"></i></span>

@@ -28,7 +28,7 @@ $con =new functions();
 	
 ?>
 
-<div class="container">
+<div class="container table-responsive">
 	<div class="col-md-6 col-xs-6 col-lg-6 col-sm-6 animated fadeInRight po-form-div">
 		<form id="checkout_data">
 			<div class="form-group">
