@@ -1,6 +1,11 @@
 <?php  
 
     include('classes/functions.php');
+    session_start();
+    if(isset($_SESSION['cust_id']))
+    {
+        header('Location: home.php');
+    }
 	
 ?>  
 <title>Dorfketal</title>

@@ -132,7 +132,6 @@ input[type=number]::-webkit-outer-spin-button {
     color: #ffffff;
     float: right;
     font-weight: bold;
-    width: 30%;
     height: 35px;
     font-size: 14px;
     margin-top: 30px;
@@ -142,7 +141,6 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: #FFFFFF;
     color: #339849;
     font-weight: bold;
-    width: 30%;
     height: 35px;
     font-size: 14px;
     margin-top: 30px;
@@ -191,6 +189,7 @@ input[type=number]::-webkit-outer-spin-button {
     display: none;
     padding: 5px;
     background-color: #ffffff;
+    width: 60%;
     margin:20px 0px 0px 0px;
     font-weight: 300;
 }
@@ -237,7 +236,6 @@ input[type=number]::-webkit-outer-spin-button {
 .disabled a {
     cursor:not-allowed;
     pointer-events: none;
-
 }
 .search-div{
     padding: 40px 12px;
@@ -319,24 +317,27 @@ input[type=number]::-webkit-outer-spin-button {
     display: none;
 } 
 .btn-danger-outline {
-    color: #d9534f;
+    color: #d9534f !important;
     background-color: transparent;
     background-image: none;
-    border-color: #d9534f;
+    border-color: #d9534f !important;
 }
 .btn-success-outline {
-    color: #5cb85c;
+    color: #5cb85c !important;
     background-color: transparent;
     background-image: none;
-    border-color: #5cb85c;
+    border-color: #5cb85c !important;
 }
 .btn-danger-outline:hover {
-    color: #fff;
+    color: #fff !important;
     background-color: #d9534f;
-    border-color: #d9534f;
+    border-color: #d9534f !important;
 }
 .btn-success-outline:hover {
-    color: #fff;
+    color: #fff !important;
     background-color: #5cb85c;
-    border-color: #5cb85c;
+    border-color: #5cb85c !important;
+}
+.pagination > .active > a{
+    pointer-events: none;
 }

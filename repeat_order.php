@@ -205,21 +205,35 @@ if($result != "no")
                     </tbody>
                 </table>
                 <?php
-                if(!isset($_REQUEST['search_category']) )
+                if(isset($_REQUEST['search_cat']) )
                 { 
                 ?>      
                     <div class="container text-center">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="order_history_loc_src_pagtn">
-                                <?php                                
-                                    echo paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages);
-                                ?>
-                            </div>                                               
-                        </div>                    
-                    </div>
-                <?php 
-                }
-                ?>                
+                               <?php                                
+                                   echo paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages);
+                               ?>
+                           </div>                                               
+                       </div>                    
+                   </div>
+               <?php 
+               }
+               else
+               {
+               ?>
+               <div class="container text-center">
+                       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                           <div class="repeat_order_pagination">
+                               <?php                                
+                                   echo paginate_function($item_per_page, $page_number, $get_total_rows, $total_pages);
+                               ?>
+                           </div>                                               
+                       </div>                    
+                   </div>
+               <?php 
+               } 
+               ?>        
             </div>   
         </div> 
     </div>
@@ -230,9 +244,9 @@ else
 ?>
     <div class="container">
         <h4>
-            No Orders Yet
+            No Items in your Shopping Cart
         </h4>
-        <button type="button" id="continue_shop_btn">Continue Buying</button>
+        <button type="button" id="continue_shop_btn" class="btn">Continue Buying</button>
     </div>
 <?php
 }

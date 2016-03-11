@@ -130,6 +130,12 @@ $(document).ready(function () {
 
 /********  GLobal  *****/
 $(document).ready(function () {
+    $('.hide-nav > a').click(function() {
+        $('.hide-nav').removeClass('active');
+        $(this).parent().addClass('active');
+    });
+});
+$(document).ready(function () {
     $(".notify" ).on( "click",".close-notify", function(e) {
         $('.notify').removeClass('notify-success');
         $('.notify').removeClass('notify-failed');
@@ -1103,6 +1109,7 @@ $(document).ready(function () {
                 $('.po-tabs').hide();
                 $(".search-tabs").hide();
                 $('.quote-tabs').hide();
+                $('.hide-nav').removeClass('active');
 				$('.main_body').html(returnedData);        
         	},
             complete: function(){
@@ -1148,8 +1155,7 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
 	$(".main_body" ).on( "click","#continue_shop_btn", function(e) {
-		$('.main_heading').html("Place Order");
-		$('.main_body').load('categories.php');
+		$('.place_order_btn').trigger('click');
         $('.search-tabs').hide();
 	});
 });
