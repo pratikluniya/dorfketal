@@ -36,6 +36,7 @@ if(!isset($_SESSION['cust_id']))
         <script src="vendor/jquery/dist/jquery.min.js"></script>
         <script src="scripts/main.js"></script>
         <script src="scripts/search.js"></script>
+        <script src="scripts/admin.js"></script>
         <script src="scripts/auto-search.js"></script>               
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>

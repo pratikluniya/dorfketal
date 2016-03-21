@@ -237,7 +237,7 @@ else
 ?>
     <div class="container">
         <h4>
-            No Items in your Shopping Cart
+            No Orders Found
         </h4>
         <button type="button" id="continue_shop_btn" class="btn">Continue Buying</button>
     </div>

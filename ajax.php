@@ -153,20 +153,22 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "uploadPO") ){
 	$f_chrges = $_REQUEST['f_chrges'];
 	$vessal = $_REQUEST['vessal'];
 	$pay_term = $_REQUEST['pay_term'];
-	if($pay_term == "Choose One")
+	$pay_term_id = $_REQUEST['pay_term_id'];
+	if($pay_term == "Choose One" && $pay_term_id == "0")
 		$pay_term = "NA"; 
 	$comments = $_REQUEST['comments'];
-	$sql ="INSERT INTO customer_po (CUSTOMER_NUMBER, PO_NUMBER, SOLD_TO, SHIP_TO, CONTACT_PERSON, DELIVERY_DATE, FREIGHT_TERM, FREIGHT_CHARGES, VESSAL_NAME, PAYMENT_TERM, FILE_NAME, COMMENT) VALUES ($cust_id, '$po_no', '$sold_to_id', '$ship_to_id', '$cont_per', '$del_date', '$f_term', '$f_chrges', '$vessal', '$pay_term','".$_FILES['file']['name']."', '$comments')";
+	$sql ="INSERT INTO customer_po (CUSTOMER_NUMBER, PO_NUMBER, SOLD_TO, SHIP_TO, CONTACT_PERSON, DELIVERY_DATE, FREIGHT_TERM, FREIGHT_CHARGES, VESSAL_NAME, PAYMENT_TERM, PAYMENT_TERM_ID, FILE_NAME, COMMENT) VALUES ($cust_id, '$po_no', '$sold_to_id', '$ship_to_id', '$cont_per', '$del_date', '$f_term', '$f_chrges', '$vessal', '$pay_term','$pay_term_id','".$_FILES['file']['name']."', '$comments')";
 	$result=$con->data_insert($sql);
 	echo "Success";
-	if ( 0 < $_FILES['file']['error'] ) 
+	if(isset($_FILES['file']['name']))
 	{
-        echo 'Error: ' . $_FILES['file']['error'] . '<br>';
-    }
-    else 
-    {
-        move_uploaded_file($_FILES['file']['tmp_name'], 'uploadedPO/' . $_FILES['file']['name']);
-    }
+		if ( 0 < $_FILES['file']['error'] ) {
+	        echo 'Error: ' . $_FILES['file']['error'] . '<br>';
+	    }
+	    else {
+	        move_uploaded_file($_FILES['file']['tmp_name'], 'uploadedPO/' . $_FILES['file']['name']);
+	    }
+	}
 }
 if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "getcartcount") ){
 	echo $_SESSION['cart_count'];
@@ -196,58 +198,6 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "getorderdetail") ){
 	{
 		echo "No result";
 	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/********  Logistic Management AJAX Calls  *****/
-
-if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "chkuser") ){
-	$sql = "SELECT role_id FROM user_registration WHERE email_id = ".$_SESSION['cust_id'];
-	$result=$con->data_select($sql);
-	echo $result[0]['role_id'];
-}
-
-if($_REQUEST['action'] == "showcustomerdocument")
-{
-	$query="SELECT  service_provider, shipping_document, shipping_document_update, commercial_invoice, commercial_invoice_update, india_commercial_invoice,india_commercial_invoice_update, created_date, consignment_id FROM document_detatils WHERE consignment_id=".$_REQUEST['consignment_id'];
-	$result=$con->data_select($query);
-	if($result !="no")
-	{
-	 	echo json_encode($result);
-		exit;  
-	}
-	else
-	{
-	}
-}
-if($_REQUEST['action'] == "customershippeddetails")
-{
-	$query_link="SELECT tracking_url FROM  tracking_url WHERE  id =1";
-	$result_link=$con->data_select($query_link);
-	$url_logistic=$result_link[0]['tracking_url'];
-	$query="SELECT * FROM consignment_details WHERE consignment_id=".$_REQUEST['consignment_id'];
-	$result=$con->data_select($query);
-	if($result !="no")
-	{
-		$result[0]['url_logistic'] = $url_logistic;
-	 	echo json_encode($result);
-	}
-	else
-	{
-	}
-    exit; 
 }
 if($_REQUEST['action'] == "get_quote_history")
 {
@@ -386,4 +336,91 @@ if($_REQUEST['action'] == "get_po_history")
 	else{
 		echo '<tr class="item"><td colspan="8" align="center">No Records Found</td></tr>';
 	}
+}
+
+
+
+
+
+
+
+/********  Admin AJAX Calls  *****/
+if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "updatePO") ){
+	$cust_id = $_REQUEST['cust_no'];
+	$po_id = $_REQUEST['po_id'];
+	$po_no = $_REQUEST['po_no'];
+	$ship_to = $_REQUEST['ship_to'];
+	$ship_to_id = $_REQUEST['ship_to_id'];
+	$sold_to = $_REQUEST['sold_to'];
+	$sold_to_id = $_REQUEST['sold_to_id'];
+	$cont_per = $_REQUEST['cont_per'];
+	$del_date = $_REQUEST['del_date'];
+	$f_term = $_REQUEST['f_term'];
+	$f_chrges = $_REQUEST['f_chrges'];
+	$vessal = $_REQUEST['vessal'];
+	$pay_term = $_REQUEST['pay_term'];
+	$pay_term_id = $_REQUEST['pay_term_id'];
+	$status = $_REQUEST['status'];
+	$feedback =$_REQUEST['feedback'];
+	$oldfilename = $_REQUEST['old_file_name'];
+	if($pay_term == "Choose One" && $pay_term_id == "0")
+		$pay_term = "NA"; 
+	$comments = $_REQUEST['comments'];
+	if(isset($_FILES['file']['name']))
+		$filename = $_FILES['file']['name'];
+	else
+		$filename = $oldfilename;
+ 	
+	$sql ="UPDATE customer_po SET PO_NUMBER ='".$po_no."', SOLD_TO=".$sold_to_id.", SHIP_TO=".$ship_to_id.", CONTACT_PERSON='".$cont_per."', DELIVERY_DATE='".$del_date."', FREIGHT_TERM='".$f_term."', FREIGHT_CHARGES=".$f_chrges.", VESSAL_NAME='".$vessal."', PAYMENT_TERM='".$pay_term."', PAYMENT_TERM_ID=".$pay_term_id.", COMMENT='".$comments."',FILE_NAME='".$filename."' ,STATUS='".$status."', FEEDBACK='".$feedback."' WHERE ID =".$po_id;
+	// echo $sql;
+	// exit;
+	$result=$con->data_update($sql);
+	echo "Success";
+	if(isset($_FILES['file']['name']))
+	{
+		if ( 0 < $_FILES['file']['error'] ) {
+	        echo 'Error: ' . $_FILES['file']['error'] . '<br>';
+	    }
+	    else {
+	        move_uploaded_file($_FILES['file']['tmp_name'], 'uploadedPO/' . $_FILES['file']['name']);
+	    }
+	}
+}
+/********  Logistic Management AJAX Calls  *****/
+
+if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "chkuser") ){
+	$sql = "SELECT role_id FROM user_registration WHERE email_id = ".$_SESSION['cust_id'];
+	$result=$con->data_select($sql);
+	echo $result[0]['role_id'];
+}
+
+if($_REQUEST['action'] == "showcustomerdocument")
+{
+	$query="SELECT  service_provider, shipping_document, shipping_document_update, commercial_invoice, commercial_invoice_update, india_commercial_invoice,india_commercial_invoice_update, created_date, consignment_id FROM document_detatils WHERE consignment_id=".$_REQUEST['consignment_id'];
+	$result=$con->data_select($query);
+	if($result !="no")
+	{
+	 	echo json_encode($result);
+		exit;  
+	}
+	else
+	{
+	}
+}
+if($_REQUEST['action'] == "customershippeddetails")
+{
+	$query_link="SELECT tracking_url FROM  tracking_url WHERE  id =1";
+	$result_link=$con->data_select($query_link);
+	$url_logistic=$result_link[0]['tracking_url'];
+	$query="SELECT * FROM consignment_details WHERE consignment_id=".$_REQUEST['consignment_id'];
+	$result=$con->data_select($query);
+	if($result !="no")
+	{
+		$result[0]['url_logistic'] = $url_logistic;
+	 	echo json_encode($result);
+	}
+	else
+	{
+	}
+    exit; 
 }

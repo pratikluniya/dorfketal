@@ -129,6 +129,7 @@ $(document).ready(function () {
 
 
 /********  GLobal  *****/
+
 $(document).ready(function () {
     $('.hide-nav > a').click(function() {
         $('.hide-nav').removeClass('active');
@@ -176,6 +177,9 @@ $(document).ready(function () {
     });
     $(".main_body" ).on( "click","#delivery_date", function(e) {
         $('#delivery_date').attr("min", today);
+    });
+    $(".main_body" ).on( "click","#admin_del_date", function(e) {
+        $('#admin_del_date').attr("min", today);
     });
 });
 
@@ -409,7 +413,6 @@ $(document).ready(function () {
         });
     });
 });
-
 
 /********  On Page Click Events  *****/
 $(document).ready(function () {
@@ -852,6 +855,7 @@ $(document).ready(function () {
         var f_chrges = $('#PO_freight_charges').val().trim();
         var vessal = $('#PO_vessel_name').val().trim();
         var pay_term = $('#PO_payment_term option:selected').text().trim();
+        var pay_term_id = $('#PO_payment_term option:selected').val().trim();
         var comments = $('#PO_comments').val().trim();
         var file_data = $('#uploaded_po').prop('files')[0];
         if(po_no == "" || po_no == null)
@@ -944,7 +948,7 @@ $(document).ready(function () {
         }
         if(err == 0)
         {
-            var form_data = new FormData();                  
+            var form_data = new FormData();                    
             form_data.append('file', file_data);
             form_data.append('action', 'uploadPO');
             form_data.append('po_no', po_no);
@@ -958,6 +962,7 @@ $(document).ready(function () {
             form_data.append('f_chrges', f_chrges);
             form_data.append('vessal', vessal);
             form_data.append('pay_term', pay_term);
+            form_data.append('pay_term_id', pay_term_id);
             form_data.append('comments', comments);
             $.ajax({
                 url: 'ajax.php',
@@ -1690,4 +1695,3 @@ $(document).ready(function () {
         }
     });
 });
-

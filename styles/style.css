@@ -332,22 +332,21 @@
   margin-top: 80px;
 }
 .modal-title {
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 300;
 }
-.modal-header {
-  padding: 40px 30px;
+/*.modal-header {
   background: #f7f9fa;
-}
+}*/
 .modal-body {
   padding: 20px 30px;
 }
 .modal-header small {
   color: #9d9fa2;
 }
-.modal-footer {
+/*.modal-footer {
   background: #f7f9fa;
-}
+}*/
 .hmodal-info .color-line {
   background: #3498db;
 }
