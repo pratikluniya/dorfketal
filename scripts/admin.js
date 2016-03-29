@@ -72,6 +72,11 @@ $(document).ready(function () {
     });
 });
 $(document).ready(function () {
+    $(".main_body" ).on( "click","#admin_upload_quote_doc_btn", function(e) {
+        $("#admin_change_quote").trigger("click");  
+    });
+});
+$(document).ready(function () {
     $(".main_body" ).on( "click","#admin_upload_po_doc_btn", function(e) {
         $("#admin_change_po").trigger("click");  
     });
@@ -220,6 +225,85 @@ $(document).ready(function () {
                     $('#loading').removeClass("showloading");
                 }
             });
+        }
+    });
+});
+$(document).ready(function () {
+    $(".main_body" ).on( "click","#submit_admin_quote", function(e) {
+        var err = 0;
+        var quote_id = $('#quote_id').val().trim();
+        var prod_id = $('#admin_quote_prod').val().trim();
+        var quote_qty = $('#admin_quote_qty').val().trim();
+        var quote_pkgsz = $("#admin_quote_pkgsize option:selected").text().trim();
+        var quote_avai_price = $('#admin_quote_avai_price').val().trim();
+        var quote_req_price = $('#admin_quote_req_price').val().trim();
+        var agree_price = $('#admin_quote_agree_price').val().trim();
+        var admin_feeback = $('#admin_feeback').val().trim();
+        var quote_status = $("#admin_quote_status option:selected").text().trim();
+        var old_file_name = $('#old_file_name').val();
+        var file_data = $('#admin_change_quote').prop('files')[0];
+        var form_data = new FormData(); 
+        if(quote_qty == "" || quote_qty == null)
+        {
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Fill All Required Fields!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+        }
+        else
+        {
+            if(isNaN(quote_qty))
+            {
+                $('.notify').html("<span class='close-notify'>&times;</span><strong>Quantity Must in Number!</strong> ");
+                $('.notify').removeClass('notify-success');
+                $('.notify').addClass('notify-failed');
+                $('.notify').show();
+            }
+            else if(isNaN(agree_price))
+            {
+                $('.notify').html("<span class='close-notify'>&times;</span><strong>Agreed Price Must in Number!</strong> ");
+                $('.notify').removeClass('notify-success');
+                $('.notify').addClass('notify-failed');
+                $('.notify').show();
+            }
+            else
+            {                 
+                form_data.append('file', file_data);
+                form_data.append('action', 'updatequote');
+                form_data.append('quote_id', quote_id);
+                form_data.append('prod_id', prod_id);
+                form_data.append('quote_pkgsz', quote_pkgsz);
+                form_data.append('agree_price', agree_price);
+                form_data.append('quote_qty', quote_qty);
+                form_data.append('admin_feeback', admin_feeback);
+                form_data.append('quote_status', quote_status);
+                form_data.append('old_file_name', old_file_name);
+                $.ajax({
+                    url: 'ajax.php',
+                    dataType: 'text',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: form_data,                      
+                    type: 'post',
+                    beforeSend: function(){
+                        $('#loading').addClass("showloading");
+                    },
+                    success: function( returnedData ){
+                        $('.notify').html("<span class='close-notify'>&times;</span><strong>Quotation Updated Successfully!</strong> ");
+                        $('.notify').removeClass('notify-failed');
+                        $('.notify').addClass('notify-success');
+                        $('.notify').show();
+                        // $('#uploaded_quote').replaceWith($('#uploaded_quote').val('').clone(true));
+                        $('body').removeClass();
+                        setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+                        $('.main_body').load('admin_quote.php');
+                    },
+                    complete: function(){
+                        $('#loading').removeClass("showloading");
+                    }
+                });
+            }
         }
     });
 });

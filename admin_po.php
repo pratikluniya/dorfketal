@@ -57,29 +57,27 @@ if($result_po_history != "no")
             <div class="ct">
           
             </div>
-
         </div>
     </div>
 </div>
 <script>
     $('#edit_po_Modal').on('show.bs.modal', function (event) {
-          var button = $(event.relatedTarget) // Button that triggered the modal
-          var recipient = button.data('whatever') // Extract info from data-* attributes
-          var modal = $(this);
-          var dataString = 'id=' + recipient;
-
-            $.ajax({
-                type: "POST",
-                url: "admin_po_popup.php",
-                data: dataString,
-                cache: false,
-                success: function (data) {
-                    console.log(data);
-                    modal.find('.ct').html(data);
-                },
-                error: function(err) {
-                    console.log(err);
-                }
-            });  
-    })
-    </script>
+		var button = $(event.relatedTarget) // Button that triggered the modal
+		var recipient = button.data('whatever') // Extract info from data-* attributes
+		var modal = $(this);
+		var dataString = 'id=' + recipient;
+        $.ajax({
+            type: "POST",
+            url: "admin_po_popup.php",
+            data: dataString,
+            cache: false,
+            success: function (data) {
+                console.log(data);
+                modal.find('.ct').html(data);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });  
+	})
+</script>

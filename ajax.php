@@ -386,6 +386,51 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "updatePO") ){
 	    }
 	}
 }
+
+if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "updatequote") ){
+	$cust_id = $_SESSION['cust_id'];
+	$quote_pkgsz = $_REQUEST['quote_pkgsz'];
+	$agree_price = $_REQUEST['agree_price'];
+	$quote_qty = $_REQUEST['quote_qty'];
+	$quote_id = $_REQUEST['quote_id'];
+	$quote_status = $_REQUEST['quote_status'];
+	$feedback =$_REQUEST['admin_feeback'];
+	$oldfilename = $_REQUEST['old_file_name'];
+	if($agree_price == "" || $agree_price == NULL)
+		$agree_price = 0.00000;
+	if(isset($_FILES['file']['name']))
+	{
+		$filename = $_FILES['file']['name'];
+	}
+	else
+	{
+		if ($oldfilename == 'undefined') 
+		{
+			$filename = "";		
+		}
+		else
+		{
+			$filename = $oldfilename;
+		} 	
+	}
+	$sql ="UPDATE customer_quotations SET PACKAGING_SIZE = ".$quote_pkgsz.", QUANTITY = ".$quote_qty.", AGREED_PRICE = ".$agree_price.", FEEDBACK = '".$feedback."', FILE_NAME = '".$filename."', STATUS = '".$quote_status."' WHERE ID =".$quote_id;
+	$result=$con->data_update($sql);
+	echo "Success";
+	if(isset($_FILES['file']['name']))
+	{
+		if ( 0 < $_FILES['file']['error'] ) {
+	        echo 'Error: ' . $_FILES['file']['error'] . '<br>';
+	    }
+	    else {
+	        move_uploaded_file($_FILES['file']['tmp_name'], 'uploadedPO/' . $_FILES['file']['name']);
+	    }
+	}
+}
+
+
+
+
+
 /********  Logistic Management AJAX Calls  *****/
 
 if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "chkuser") ){

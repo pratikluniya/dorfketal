@@ -740,7 +740,7 @@ $(document).ready(function () {
         var req_price = $('#q_req_price').val().trim();
         var qty = $("#q_quantity").val().trim();
         var remark = $("#q_remark").val().trim();
-        if(req_price == "" || price == null)
+        if(req_price == "" || req_price == null)
         {
             $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Fill All Required Fields!</strong> ");
             $('.notify').removeClass('notify-success');

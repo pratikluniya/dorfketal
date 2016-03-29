@@ -136,7 +136,7 @@ $result_quote_history = $con -> data_select($sql_quote);
 				            	<?php echo $value['REMARK']; ?>
 				            </td>
 				            <td>
-				            	<?php echo $value['FILE_NAME']; ?>
+				            	<a href="uploadedquotes/<?php echo $value['FILE_NAME']; ?>" target="_blank">'.$value['FILE_NAME'].'</a>
 				            </td>
 				            <td>
 				            	<?php echo $value['STATUS']; ?>
