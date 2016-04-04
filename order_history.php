@@ -6,14 +6,21 @@ $con =new functions();
 $cust_id = $_SESSION['cust_id'];
 $item_per_page = 10;
 
-if(isset($_POST) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
-//Get page number from Ajax POST
-if(isset($_POST["page"])){
-    $page_number = filter_var($_POST["page"], FILTER_SANITIZE_NUMBER_INT, FILTER_FLAG_STRIP_HIGH); //filter number
-    if(!is_numeric($page_number)){die('Invalid page number!');} //incase of invalid page number
-}else{
-    $page_number = 1; //if there's no page number, set it to 1
-}
+if(isset($_POST) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')
+{
+    //Get page number from Ajax POST
+    if(isset($_POST["page"]))
+    {
+        $page_number = filter_var($_POST["page"], FILTER_SANITIZE_NUMBER_INT, FILTER_FLAG_STRIP_HIGH); //filter number
+        if(!is_numeric($page_number))
+        {
+            die('Invalid page number!');
+        } //incase of invalid page number
+    }
+    else
+    {
+        $page_number = 1; //if there's no page number, set it to 1
+    }
 
 if(isset($_REQUEST['search_value']) && isset($_REQUEST['search_cat']))
 {

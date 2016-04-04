@@ -3,7 +3,7 @@ $(document).ready(function () {
     $(".admin_orders" ).on( "click", function() {
         $('#loading').addClass("showloading");
         $('.main_heading').html("Orders");
-        $('.main_body').load('admin_orders.php', function(data){
+        $('.main_body').load('admin_orders1.php', function(data){
             $('#loading').removeClass("showloading");
         });
     });
@@ -305,5 +305,127 @@ $(document).ready(function () {
                 });
             }
         }
+    });
+});
+
+$(document).ready(function () {
+    $(".main_body").on( "click", ".admin_order_pagination .pagination a", function (e){
+        e.preventDefault();
+        $('#loading').addClass("showloading"); //show loading element
+        var page = $(this).attr("data-page"); //get page number from link
+        $(".main_body").load("admin_orders1.php",{"page":page}, function(){ //get content from PHP page
+            $('#loading').removeClass("showloading"); //once done, hide loading element
+        });        
+    });
+});
+$(document).ready(function () {
+
+    $('.main_body').on('click','.admin_order_search .dropdown-menu a',function(e){
+        var search_cat = $(this).attr("data-category");
+        var search_cat_value = $(this).attr("data-value");
+        var search_value = $("#admin_order_search_box").val();
+
+        $('#admin_src_ord_cat').val(search_cat_value);
+        $('#admin_order_cat').html(search_cat +" <span class='caret'></span>");
+
+        if(search_value == ''){
+            $("#admin_order_search_box").attr("placeholder","Search By "+search_cat);
+        } 
+        $("#admin_order_search_box").focus();             
+    });
+
+    $(".main_body" ).on( "click",".admin_order_search .input-group-addon", function(e){        
+        var search_value = $("#admin_order_search_box").val();
+        var search_cat = $('#admin_src_ord_cat').val();
+
+        var cat;
+        if(search_cat == 1){
+            cat = "Product Code";
+        }
+        if(search_cat == 2){
+            cat = "Product Name";
+        }        
+        if(search_cat == 3){
+            cat = "Order Id";
+        }
+        if(search_cat == 4){
+            cat = "Order Web Id";
+        }
+        if(search_cat == 5){
+            cat = "PO# Number";
+        }
+        if(search_cat == 6){
+            cat = "Order Status";
+        }
+
+        if(search_cat == 0){
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Select Search Category!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+            return false;
+        }
+        if(search_value == ""){
+            $('.notify').html("<span class='close-notify'>&times;</span><strong>Please Enter Text In Search Box!</strong> ");
+            $('.notify').removeClass('notify-success');
+            $('.notify').addClass('notify-failed');
+            $('.notify').show();
+            setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
+            return false;
+        }
+        else
+        {            
+            e.preventDefault();
+            $('#loading').addClass("showloading"); //show loading element
+            $(".main_body").load("admin_orders1.php",{"search_cat":search_cat,"search_value":search_value}, function(){ //get content from PHP page
+                $('#loading').removeClass("showloading"); //once done, hide loading element
+                $('.ui-autocomplete').css("display","none");
+                $('#admin_pagtn_src_ord_histry').val(search_value);
+                $('#admin_pagtn_src_ord_histry_cat').val(search_cat);
+                $('#admin_order_search_box').val('');
+                $('#admin_src_ord_cat').val('0');
+                $("#admin_order_search_box").attr("placeholder","Search ");
+                $('#admin_order_cat').html("Select Search By <span class='caret'></span>");
+            });          
+        }    
+    });
+    $(".main_body").on( "click", ".admin_order_loc_src_pagtn .pagination a", function (e){
+        e.preventDefault();
+        var search_value = $("#admin_pagtn_src_ord_histry").val();
+        var search_cat = $('#admin_pagtn_src_ord_histry_cat').val();
+
+        var cat;
+        if(search_cat == 1){
+            cat = "Product Code";
+        }
+        if(search_cat == 2){
+            cat = "Product Name";
+        }        
+        if(search_cat == 3){
+            cat = "Order Id";
+        }
+        if(search_cat == 4){
+            cat = "Order Web Id";
+        }
+        if(search_cat == 5){
+            cat = "PO# Number";
+        }
+        if(search_cat == 6){
+            cat = "Order Status";
+        }
+
+        $('#loading').addClass("showloading"); //show loading element
+        var page = $(this).attr("data-page"); //get page number from link
+        $(".main_body").load("admin_orders.php",{"search_cat":search_cat,"search_value":search_value,"page":page}, function(){ //get content from PHP page
+            $('#loading').removeClass("showloading"); //once done, hide loading element
+            $('.ui-autocomplete').css("display","none");
+            $('#admin_order_search_box').val('');
+            $('#admin_src_ord_cat').val('0');
+            $('#admin_pagtn_src_ord_histry').val(search_value);
+            $('#admin_pagtn_src_ord_histry_cat').val(search_cat);
+            $("#admin_order_search_box").attr("placeholder","Search ");
+            $('#admin_order_cat').html("Select Search By <span class='caret'></span>");
+        });          
     });
 });
