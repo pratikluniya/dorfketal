@@ -340,7 +340,7 @@ $(document).ready(function (e) {
       
        // e.preventDefault();
               $.ajax({               
-                url: "upload.php",
+                url: "logistics/upload.php",
                 type: "POST",
                 data: form_data,
                 contentType: false,

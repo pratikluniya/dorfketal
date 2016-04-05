@@ -11,7 +11,8 @@ $date= $con->get_datetime_html();
 $date1= date('Y-m-d\T00:00:00',strtotime("-1 days"));
 
 //note:  email id = customer_num for customer login
-$customer_num= '5033';
+//$customer_num= '5033';
+$customer_num=$_SESSION['cust_id'];
 
 //Get all existing Orders
 $query="SELECT * FROM consignment_details WHERE customer_num=".$customer_num;
@@ -111,8 +112,8 @@ $result_custom=$con->data_select($query_custom);
              }
             </style>
             <hr width=100%  align=left>
-            <div class="x_content table-responsive" style="height:600px;overflow-y:auto;">
-                <table id="example1" class="table table-striped">
+            <div class="x_content table-responsive" style="height:300px;overflow-y:auto;">
+                <table id="example1" class="table table-striped" >
                     <thead>
                         <tr class="headings">
                             <th>No</th>

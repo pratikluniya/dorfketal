@@ -1,5 +1,6 @@
 <?php  
-	include('class/functions.php');
+	include('../classes/functions.php');
+
 	$con = new functions();
 	session_start();
 	if(isset($_POST['submit']))

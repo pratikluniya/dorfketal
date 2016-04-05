@@ -1,6 +1,7 @@
 <?php
 ob_start();
-include('class/functions.php');
+include('../classes/functions.php');
+$con= new functions();
 $con=new functions();
 session_start();
 $user_id=$_SESSION['user_id'];

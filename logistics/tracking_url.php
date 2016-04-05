@@ -2,7 +2,7 @@
 
 ob_start();
 include('admin_sidebar_header.php');
-include('class/functions.php');
+include('../classes/functions.php');
 $con=new functions();
 date_default_timezone_set("Asia/Kolkata"); 
 $date4=date('Y-m-d H:i:s');
@@ -46,7 +46,7 @@ exit;*/
       var tracking_url=$("#tracking_url").val();
      // alert(tracking_url);
              $.ajax({
-              url: "ajax_service.php",
+              url: "logistics/ajax_service.php",
               data : "tracking_url="+tracking_url+"&action=change_url",
               success:function(data){ 
 

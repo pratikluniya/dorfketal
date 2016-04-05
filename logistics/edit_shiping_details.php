@@ -1,7 +1,7 @@
 <?php
 ob_start();
 include('admin_sidebar_header.php');
-include('class/functions.php');
+include('../classes/functions.php');
 $con=new functions();
 session_start();
 $user_name=$_SESSION['user_name'];
@@ -70,7 +70,7 @@ function updateuser()
 		 
 		$.ajax({
 			  type:"POST",
-			  url:"ajax_service.php",
+			  url:"logistics/ajax_service.php",
 			  data:"consignment_id="+consignmentid+"&customer_name="+customername+"&account_number="+accountnumber+"&cust_po_number="+custponumber+"&order_number="+ordernumber+"&ordered_item_id="+ordereditemid+"&item_description="+itemdescription+"&unit_selling_price="+unitsellingprice+"&ordered_quantity="+orderedquantity+"&amount="+amount+"&request_date="+requestdate+"&status="+status+"&schedule_ship_date="+scheduleshipdate+"&order_date="+orderdate+"&order_quantity_uom="+orderquantityuom+"&action=updatecontainer",
 			 
 			  success: function(data)

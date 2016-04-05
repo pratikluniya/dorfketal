@@ -33,7 +33,7 @@
       
      $.ajax({
         type: "POST",
-        url:"ajax_service.php",
+        url:"logistics/ajax_service.php",
        // id, consigneement_addrss, mode_of_shipment, vessel_name, etd_date, shipped_on_board, transhipment_port, transhipment_vessel_name, eta_date, arrival_date, custom_clearance_date, custom_clearance, delivered_cutomer_loaction, remark, consignment_id
         data:"consignment_address="+consigneeaddress+"&mode_of_shipment="+modeofshipment+"&vessel_name="+vesselname+"&etd_date="+etd+"&shipped_on_board="+shippedonboard+"&container_name="+containername+"&transhipment_port="+transhipmentport+"&transhipment_vessel_name="+transhipmentvesselname+"&eta_date="+eta+"&arrival_date="+arrivaldate+"&custom_clearance_date="+customclearancedate+"&custom_clearance="+customclearance+"&delivered_cutomer_loaction="+custdelivered+"&remark="+remark+"&consignment_id="+consignmentid+"&action=insertupdateconsignment",
         success: function(data)
@@ -218,7 +218,7 @@
       {
          // alert(tracking_url);
              $.ajax({
-              url: "ajax_service.php",
+              url: "logistics/ajax_service.php",
               data : "tracking_url="+tracking_url+"&delivery_details_id="+delivery_details_id+"&action=container_url_edit",
               success:function(data){ 
 
@@ -242,12 +242,12 @@
       {
          // alert(tracking_url);
              $.ajax({
-              url: "ajax_service.php",
+              url: "logistics/ajax_service.php",
               data : "delivery_details_id="+delivery_details_id+"&action=container_Default_url",
               success:function(data){ 
 
                    alert(data);
-                   location.reload();
+               
               }
             });
       }

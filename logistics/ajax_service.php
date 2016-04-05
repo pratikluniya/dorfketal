@@ -1,10 +1,10 @@
 <?php
-include('class/functions.php');
+include('../classes/functions.php');
 $con= new functions();
 session_start();
 date_default_timezone_set("Asia/Kolkata"); 
 $date4=date('Y-m-d H:i:s');
-$role_id=$_SESSION['role_id'];
+$role_id= $_SESSION['role_id'];
 if($_REQUEST['action']=="insertupdateconsignment")
 {
 	$query="UPDATE consignment_details SET consignment_address='".$_REQUEST['consignment_address']."',mode_of_shipment='".$_REQUEST['mode_of_shipment']."',vessel_name='".$_REQUEST['vessel_name']."',etd_date='".$_REQUEST['etd_date']."',container_number='".$_REQUEST['container_name']."',shipped_on_board='".$_REQUEST['shipped_on_board']."',transhipment_port='".$_REQUEST['transhipment_port']."',transhipment_vessel_name='".$_REQUEST['transhipment_vessel_name']."',eta_date='".$_REQUEST['eta_date']."',arrival_date='".$_REQUEST['arrival_date']."',custom_clearance_date='".$_REQUEST['custom_clearance_date']."',custom_clearance='".$_REQUEST['custom_clearance']."',delivered_cutomer_loaction='".$_REQUEST['delivered_cutomer_loaction']."',remark='".$_REQUEST['remark']."' WHERE consignment_id=".$_REQUEST['consignment_id'];
@@ -149,12 +149,6 @@ if($_REQUEST['action']=="deleteDocument")
 	exit;
 }
 
-
-
-
-
-
-
 if($_REQUEST['action'] == "selectconsignmentstatus")
 {
 	
@@ -183,104 +177,78 @@ if($_REQUEST['action'] == "userdetails")
 }
 if($_REQUEST['action'] == "updateuser")
 {
-      $query="UPDATE user_registration SET first_name='".$_REQUEST['first_name']."',last_name='".$_REQUEST['last_name']."',user_name='".$_REQUEST['user_name']."',password='".$_REQUEST['password']."',address='".$_REQUEST['address']."',type=".$_REQUEST['type'].",status='".$_REQUEST['status']."',entity_id=".$_REQUEST['entity_id']." WHERE user_id=".$_REQUEST['user_id'];
-	   
-	  $result=$con->data_update($query);
-	  if($result >0)
+    $query="UPDATE user_registration SET first_name='".$_REQUEST['first_name']."',last_name='".$_REQUEST['last_name']."',user_name='".$_REQUEST['user_name']."',password='".$_REQUEST['password']."',address='".$_REQUEST['address']."',type=".$_REQUEST['type'].",status='".$_REQUEST['status']."',entity_id=".$_REQUEST['entity_id']." WHERE user_id=".$_REQUEST['user_id'];
+	$result=$con->data_update($query);
+	if($result >0)
 	  {
-		  echo "success";
+		echo "success";
 	  }
-	  exit;         
-	               
+	  exit;                    
 }
 if($_REQUEST['action'] == "deleteuser")
 {
-      $query="DELETE FROM user_registration WHERE user_id=".$_REQUEST['user_id'];
-	  $result=$con->data_delete($query);
-		if($result >0)
-		{
-			echo "success";
-		}
-		else
-		{
-			echo "fail";
-		}
-	
-	exit;       
-	               
+    $query="DELETE FROM user_registration WHERE user_id=".$_REQUEST['user_id'];
+	$result=$con->data_delete($query);
+	if($result >0)
+	{
+		echo "success";
+	}
+	else
+	{
+		echo "fail";
+	}	
+	exit;               
 }
 if($_REQUEST['action'] == "updatecontainer")
 {
       $query="UPDATE consignment_details SET customer_name='".$_REQUEST['customer_name']."',account_number='".$_REQUEST['account_number']."',cust_po_number='".$_REQUEST['cust_po_number']."',order_number='".$_REQUEST['order_number']."',ordered_item_id='".$_REQUEST['ordered_item_id']."',item_description='".$_REQUEST['item_description']."',unit_selling_price=".$_REQUEST['unit_selling_price'].",order_quantity_uom='".$_REQUEST['order_quantity_uom']."',ordered_quantity=".$_REQUEST['ordered_quantity'].",amount=".$_REQUEST['amount'].",request_date='".$_REQUEST['request_date']."',schedule_ship_date='".$_REQUEST['schedule_ship_date']."',order_date='".$_REQUEST['order_date']."',status='".$_REQUEST['status']."' WHERE consignment_id=".$_REQUEST['consignment_id'];
-	 
 	  $result=$con->data_update($query);
 	  if($result > 0)
 	  {
 		  echo "success";
 	  }
-	  exit;         
-	               
+	  exit;       
 }
 if($_REQUEST['action'] == "showcustomerdocument")
 {
-	//echo "hello";
 	$query="SELECT  service_provider, shipping_document, shipping_document_update, commercial_invoice, commercial_invoice_update, india_commercial_invoice,india_commercial_invoice_update, created_date, consignment_id FROM document_detatils WHERE consignment_id=".$_REQUEST['consignment_id'];
-
 	$result=$con->data_select($query);
-	 
-	 if($result !="no"){
-		 	echo json_encode($result);
-	         exit;  
-	  }else{
-		  
-		  }
+	if($result !="no")
+	{
+		echo json_encode($result);
+	    exit;  
+	}
+	else
+	{}
 }
 if($_REQUEST['action'] == "customershippeddetails")
 {
-	//echo "hello";
 	$query_link="SELECT tracking_url FROM  tracking_url WHERE  id =1";
 	$result_link=$con->data_select($query_link);
 	$url_logistic=$result_link[0]['tracking_url'];
-    //$url_logistic ="http://trackcontainer.com/dorfketal/container/";
-    
-	$query="SELECT * FROM consignment_details WHERE consignment_id=".$_REQUEST['consignment_id'];
-
+    $query="SELECT * FROM consignment_details WHERE consignment_id=".$_REQUEST['consignment_id'];
 	$result=$con->data_select($query);
-	 
-	 if($result !="no"){
-
-         $result[0]['url_logistic'] = $url_logistic;
-
-     /*    echo "<pre>";
-         print_r($result);
-
-         exit;*/
-     
-		 	echo json_encode($result);
-	         
+	if($result !="no"){						
+	        $result[0]['url_logistic'] = $url_logistic;
+	    	echo json_encode($result);	         
 	  }else{
 		  
-		  }
-
-		   exit; 
+		}
+		exit; 
 }
-
-
-
-if($_REQUEST['action'] == "user_role_add"){
-
+if($_REQUEST['action'] == "user_role_add")
+{
     $sql="INSERT INTO user_registration(first_name,password,email_id, role_id, entity_id) VALUES ('".$_REQUEST['name']."','".$_REQUEST['name']."','".$_REQUEST['emailAddress']."',".$_REQUEST['role'].",'".$_REQUEST['entities']."')";    
     $result=$con->data_insert($sql);
     if($result > 0)
     {
-    	echo "success";
+        echo "success";
     }
 	exit;
 
 }
-if($_REQUEST['action'] == "change_url"){
-
-
+if($_REQUEST['action'] == "change_url")
+{
     $sql="UPDATE tracking_url SET tracking_url='".$_REQUEST['tracking_url']."' WHERE id=1";    
     $result=$con->data_insert($sql);
     if($result > 0)
@@ -290,31 +258,26 @@ if($_REQUEST['action'] == "change_url"){
 	exit;
 
 }
-if($_REQUEST['action'] == "container_url_edit"){
-
-    $sql="UPDATE consignment_details SET container_url='".$_REQUEST['tracking_url']."'    WHERE delivery_details_id='".$_REQUEST['delivery_details_id']."'"; 
-       
+if($_REQUEST['action'] == "container_url_edit")
+{
+    $sql="UPDATE consignment_details SET container_url='".$_REQUEST['tracking_url']."' WHERE delivery_details_id='".$_REQUEST['delivery_details_id']."'"; 
     $result=$con->data_update($sql);
     if($result > 0)
     {
     	echo "Successfully update Url";
     }
 	exit;
-
 }
-if($_REQUEST['action'] == "container_Default_url"){
-    
-    //when we set null url on particuller container then auto forword default url
+if($_REQUEST['action'] == "container_Default_url")
+{
     $default_url="";
     $sql="UPDATE consignment_details SET container_url='".$default_url."'    WHERE delivery_details_id='".$_REQUEST['delivery_details_id']."'"; 
-       
     $result=$con->data_update($sql);
     if($result > 0)
     {
     	echo "Successfully Set Default  Url";
     }
 	exit;
-
 }
 
 ?>

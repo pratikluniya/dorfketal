@@ -1,5 +1,5 @@
 <?php
-include('class/functions.php');
+include('../classes/functions.php');
 date_default_timezone_set("Asia/Kolkata"); 
 $date4=date('Y-m-d H:i:s');
 $con=new functions();

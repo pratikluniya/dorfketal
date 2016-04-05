@@ -8,6 +8,16 @@ if(isset($_REQUEST['action']) && ($_REQUEST['action'] == "Login") ){
 	$result=$con->data_select($sql);
 	if($result != "no")
 	{
+		$sql_query="SELECT * FROM user_registration WHERE email_id='".$_REQUEST['cust_id']."'";
+		$result1=$con->data_select($sql_query);
+		if($_REQUEST['cust_id'] != 1111)
+		{
+			if($result1 != "no")
+			{
+				$_SESSION["entity_id"]=$result1[0]['entity_id'];
+			}
+		}
+		$_SESSION["role_id"]=$result1[0]['role_id'];
 		$_SESSION["cust_id"]=$_REQUEST['cust_id'];
 		$_SESSION["cust_email"]=$result[0]['EMAIL'];
 		echo "Success";

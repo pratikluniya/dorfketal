@@ -2,7 +2,7 @@
 
 ob_start();
 include('admin_sidebar_header.php');
-include('class/functions.php');
+include('../classes/functions.php');
 $con=new functions();
 date_default_timezone_set("Asia/Kolkata"); 
 $date4=date('Y-m-d H:i:s');
@@ -250,7 +250,7 @@ $(function(){
      var kk =  $("#frm_use_role").serialize();
 
      $.ajax({
-              url: "ajax_service.php",
+              url: "logistics/ajax_service.php",
               data : "data="+kk+"&action=user_role_add",
               success:function(data){    
 

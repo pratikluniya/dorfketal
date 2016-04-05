@@ -2,8 +2,9 @@
 
 ob_start();
 include('admin_sidebar_header.php');
-include('class/functions.php');
-$con=new functions();
+include('../classes/functions.php');
+$con= new functions();
+
 date_default_timezone_set("Asia/Kolkata"); 
 $date4=date('Y-m-d H:i:s');
 
@@ -297,7 +298,7 @@ $(function(){
      //alert(entities);
      $.ajax({
               type: "POST",
-              url: "ajax_service.php",
+              url: "logistics/ajax_service.php",
               data : "emailAddress="+emailAddress+"&name="+name+"&entities="+entities+"&role="+role+"&action=user_role_add",
               
               success:function(data){    

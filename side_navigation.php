@@ -29,8 +29,12 @@
             <li>
                 <a href="#"><span class="nav-label">Logistic Management</span><span class="fa arrow"></span> </a>
                 <ul class="nav nav-second-level">
-                    <li class="hide-nav track_order_btn"><a href="#">Track Order</a></li>
-                    <li class="hide-nav"><a href="#">Track URL</a></li>
+                    <?php if($_SESSION['cust_id'] == "1111") { ?>
+                        <li class="hide-nav admin_track_order_btn"><a href="#">Track Order</a></li>
+                   <!--  <li class="hide-nav"><a href="#">Track URL</a></li> -->
+                    <?php } else { ?>
+                        <li class="hide-nav track_order_btn"><a href="#">Track Order</a></li>
+                    <?php } ?>
                 </ul>
             </li>
             <li>

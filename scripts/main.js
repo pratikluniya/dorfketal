@@ -370,29 +370,7 @@ $(document).ready(function () {
         });
     });
 });
-$(document).ready(function () {
-	$(".track_order_btn" ).on( "click", function() {
-		$.ajax({
-            type: "POST",
-            url: "ajax.php",
-            data: 'action=chkuser',
-            beforeSend: function(){
-                $('#loading').addClass("showloading");
-            },
-            success: function( returnedData ){
-	    		if(returnedData == 2)
-	    		{
-	    			$('.main_heading').html("Track Order");
-	    			$('.main_body').load('logistics/customer_dashboard.php');
-	    		}
-	    		return false;        
-			},
-            complete: function(){
-                $('#loading').removeClass("showloading");
-            }
-		}); 
-    });
-});
+
 $(document).ready(function () {
 	$(".contactus_btn" ).on( "click", function() {
         $('#loading').addClass("showloading");
@@ -1693,5 +1671,38 @@ $(document).ready(function () {
             $('.notify').show();
             setTimeout(function(){ $('.close-notify').trigger('click'); }, 5000);
         }
+    });
+});
+
+/*********************************Logistics */
+$(document).ready(function () {
+    function show_option(option_val){
+    if(option_val=="Shipping Documents"){
+     $(".option_div").removeClass("hide");
+
+    }else{
+      $(".option_div").addClass("hide");
+    }
+}
+    $(".track_order_btn" ).on( "click", function() {
+        $.ajax({
+            type: "POST",
+            url: "ajax.php",
+            data: 'action=chkuser',
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
+            success: function( returnedData ){
+                if(returnedData == 2)
+                {
+                    $('.main_heading').html("Track Order");
+                    $('.main_body').load('logistics/customer_dashboard.php');
+                }
+                return false;        
+            },
+            complete: function(){
+                $('#loading').removeClass("showloading");
+            }
+        }); 
     });
 });

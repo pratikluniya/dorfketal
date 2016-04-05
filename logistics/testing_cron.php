@@ -1,6 +1,7 @@
 <?php 
  //ob_start();
- include_once('class/functions.php');
+ include('../classes/functions.php');
+
  
 /*
  $con= new functions();

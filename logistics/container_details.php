@@ -1,6 +1,7 @@
 <?php
 ob_start();
-include('class/functions.php');
+include('../classes/functions.php');
+$con= new functions();
 date_default_timezone_set("Asia/Kolkata"); 
 $date4=date('Y-m-d H:i:s');
 

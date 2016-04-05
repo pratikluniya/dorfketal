@@ -1,6 +1,6 @@
 <?php
 ob_start();
-include('class/functions.php');
+include('../classes/functions.php');
 date_default_timezone_set("Asia/Kolkata"); 
 $date4=date('Y-m-d H:i:s');
 $con=new functions();
@@ -62,7 +62,7 @@ include('admin_sidebar_header.php');
     var consinement=$("#consignmentid").val(consignmentid);
     $.ajax({
         type: "POST",
-        url:"ajax_service.php",
+        url:"logistics/ajax_service.php",
        // id, consigneement_addrss, mode_of_shipment, vessel_name, etd_date, shipped_on_board, transhipment_port, transhipment_vessel_name, eta_date, arrival_date, custom_clearance_date, custom_clearance, delivered_cutomer_loaction, remark, consignment_id
         data:"consignment_id="+consignmentid+"&action=select_update_consignment",
         dataType:"JSON",
@@ -143,7 +143,7 @@ include('admin_sidebar_header.php');
    
     $.ajax({
       type:"POST",
-      url:"ajax_service.php",
+      url:"logistics/ajax_service.php",
       data:"consigment_id="+consignment_id+"&action=showdocument",
       dataType:"JSON",
       success: function(data)
@@ -246,7 +246,7 @@ function deleteDocument(consignmentid_delete,document_delete)
      
    $.ajax({  
       type:"POST",
-      url:"ajax_service.php",
+      url:"logistics/ajax_service.php",
       data:"consignment_id="+consignmentid_delete+"&document_type="+document_delete+"&action=deleteDocument",     
       success: function(data)
       {
@@ -735,7 +735,7 @@ function deleteDocument(consignmentid_delete,document_delete)
           var to_date = $("#todate").val();
 
              $.ajax({
-              url: "dash_search.php",
+              url: "logistics/dash_search.php",
               data : "from_date="+from_date+"&to_date="+to_date+"&action=dashboard_load",
               success:function(data){    
 
@@ -764,7 +764,7 @@ function deleteDocument(consignmentid_delete,document_delete)
            //alert("&adv_status="+adv_status+"&adv_customer="+adv_customer+"&adv_entity="+adv_entity+"&adv_po="+adv_po+"&adv_product="+adv_product+"&action=advance_search_load");
 
              $.ajax({
-              url: "dash_search.php",
+              url: "logistics/dash_search.php",
               data : "&adv_status="+adv_status+"&adv_customer="+adv_customer+"&adv_entity="+adv_entity+"&adv_po="+adv_po+"&adv_product="+adv_product+"&action=advance_search_load",
               success:function(data){  
                 $(".ajax-loader").hide(); 

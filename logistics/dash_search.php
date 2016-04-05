@@ -1,10 +1,18 @@
 <?php
-include('class/functions.php');
+include('../classes/functions.php');
 date_default_timezone_set("Asia/Kolkata"); 
 $date4=date('Y-m-d H:i:s');
 $con=new functions();
 session_start();
-$entity_id=$_SESSION['entity_id'];
+
+if(isset($_SESSION['entity_id']))
+{
+  $entity_id=$_SESSION['entity_id'];
+}
+else
+{
+  $entity_id="";
+}
 
 if(isset($_REQUEST['action'])  &&  $_REQUEST['action'] =="dashboard_load" ){
    $query="";

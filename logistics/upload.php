@@ -1,5 +1,5 @@
 <?php
- include_once('class/functions.php');
+include('../classes/functions.php');
  date_default_timezone_set("Asia/Kolkata"); 
  $date=date('Y-m-d H:i:s');
  $con= new functions();
@@ -47,7 +47,7 @@
 				$result=$con->data_update($query);
 				if($result > 0)
 				{
-					$targetPath = "uploaded/".$shipping_document;
+					$targetPath = "../uploaded/".$shipping_document;
 					
 					//echo "success";
 				}
@@ -61,7 +61,7 @@
 				if($result > 0)
 				{
 					
-					$targetPath = "uploaded/".$shipping_document;
+					$targetPath = "../uploaded/".$shipping_document;
 					//echo "success";
 				}
 			}
@@ -76,7 +76,7 @@
 				$result=$con->data_update($query);
 				if($result >0)
 				{
-					$targetPath = "uploaded/".$commercial_document;
+					$targetPath = "../uploaded/".$commercial_document;
 
 					//echo "success";
 				}
@@ -88,7 +88,7 @@
 				$result=$con->data_update($query);
 				if($result >0)
 				{
-					$targetPath = "uploaded/".$commercial_document;
+					$targetPath = "../uploaded/".$commercial_document;
 					//echo "success";
 				}
 			}
@@ -103,7 +103,7 @@
 				$result=$con->data_update($query);
 				if($result >0)
 				{
-					$targetPath = "uploaded/".$india_commercial_document;
+					$targetPath = "../uploaded/".$india_commercial_document;
 					//echo "success";
 				}
 			}
@@ -114,7 +114,7 @@
 				$result=$con->data_update($query);
 				if($result >0)
 				{
-					$targetPath = "uploaded/".$india_commercial_document;
+					$targetPath = "../uploaded/".$india_commercial_document;
 					//echo "success";
 				}
 			}
@@ -154,7 +154,7 @@
 				if($result > 0)
 				{
 					
-					$targetPath = "uploaded/".$shipping_document;
+					$targetPath = "../uploaded/".$shipping_document;
 					//echo "success";
 				}
 			
@@ -168,7 +168,7 @@
 				$result=$con->data_update($query);
 				if($result >0)
 				{
-					$targetPath = "uploaded/".$commercial_document;
+					$targetPath = "../uploaded/".$commercial_document;
 					//echo "success";
 				}
 			
@@ -182,7 +182,7 @@
 				$result=$con->data_update($query);
 				if($result >0)
 				{
-					$targetPath = "uploaded/".$india_commercial_document;
+					$targetPath = "../uploaded/".$india_commercial_document;
 					//echo "success";
 				}
 			

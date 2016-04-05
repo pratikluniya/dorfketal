@@ -1,8 +1,6 @@
 <?php 
  //ob_start();
- include_once('class/functions.php');
- 
-
+include('../classes/functions.php');
  $con= new functions();
  $_SESSION['success']="no";
   $query="SELECT * FROM org_map";

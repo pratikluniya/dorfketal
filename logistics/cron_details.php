@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
-include('class/functions.php');
+include('../classes/functions.php');
 $con =new functions();
 //$getdata_mysql="SELECT id, DELIVERY_DETAIL_ID FROM logistic_view ORDER BY id ASC LIMIT 1";
 $getdata_mysql="SELECT * FROM logistic_view WHERE DELIVERY_DETAIL_ID = ( SELECT MAX( DELIVERY_DETAIL_ID ) 

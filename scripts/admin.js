@@ -3,7 +3,7 @@ $(document).ready(function () {
     $(".admin_orders" ).on( "click", function() {
         $('#loading').addClass("showloading");
         $('.main_heading').html("Orders");
-        $('.main_body').load('admin_orders1.php', function(data){
+        $('.main_body').load('admin_orders.php', function(data){
             $('#loading').removeClass("showloading");
         });
     });
@@ -313,13 +313,12 @@ $(document).ready(function () {
         e.preventDefault();
         $('#loading').addClass("showloading"); //show loading element
         var page = $(this).attr("data-page"); //get page number from link
-        $(".main_body").load("admin_orders1.php",{"page":page}, function(){ //get content from PHP page
+        $(".main_body").load("admin_orders.php",{"page":page}, function(){ //get content from PHP page
             $('#loading').removeClass("showloading"); //once done, hide loading element
         });        
     });
 });
 $(document).ready(function () {
-
     $('.main_body').on('click','.admin_order_search .dropdown-menu a',function(e){
         var search_cat = $(this).attr("data-category");
         var search_cat_value = $(this).attr("data-value");
@@ -378,7 +377,7 @@ $(document).ready(function () {
         {            
             e.preventDefault();
             $('#loading').addClass("showloading"); //show loading element
-            $(".main_body").load("admin_orders1.php",{"search_cat":search_cat,"search_value":search_value}, function(){ //get content from PHP page
+            $(".main_body").load("admin_orders.php",{"search_cat":search_cat,"search_value":search_value}, function(){ //get content from PHP page
                 $('#loading').removeClass("showloading"); //once done, hide loading element
                 $('.ui-autocomplete').css("display","none");
                 $('#admin_pagtn_src_ord_histry').val(search_value);
@@ -427,5 +426,32 @@ $(document).ready(function () {
             $("#admin_order_search_box").attr("placeholder","Search ");
             $('#admin_order_cat').html("Select Search By <span class='caret'></span>");
         });          
+    });
+});
+
+/*********************************Logistics Admin ***************************************/
+
+$(document).ready(function () {
+
+    $('.admin_track_order_btn').on('click',function(e){
+        $.ajax({
+            type: "POST",
+            url: "ajax.php",
+            data: 'action=chkuser',
+            beforeSend: function(){
+                $('#loading').addClass("showloading");
+            },
+            success: function( returnedData ){
+                if(returnedData == 1)
+                {
+                    $('.main_heading').html("Track Order");
+                    $('.main_body').load('logistics/dashboard.php');
+                }
+                return false;        
+            },
+            complete: function(){
+                $('#loading').removeClass("showloading");
+            }
+        }); 
     });
 });

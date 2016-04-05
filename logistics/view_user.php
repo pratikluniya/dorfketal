@@ -1,7 +1,7 @@
 <?php
 ob_start();
 include('admin_sidebar_header.php');
-include('class/functions.php');
+include('../classes/functions.php');
 session_start();
 $con=new functions();
 $user_name=$_SESSION['user_name'];
@@ -87,7 +87,7 @@ else
 		 
 		$.ajax({
 			  type:"POST",
-			  url:"ajax_service.php",
+			  url:"logistics/ajax_service.php",
 			  data:"user_id="+user_id+"&user_name="+user_name+"&password="+password+"&first_name="+first_name+"&last_name="+last_name+"&address="+address+
 			  "&type="+type+"&entity_id="+entity_id+"&status="+status+"&action=updateuser",
 			 
@@ -119,7 +119,7 @@ else
 		 
 		$.ajax({
 			  type:"POST",
-			  url:"ajax_service.php",
+			  url:"logistics/ajax_service.php",
 			  data:"user_id="+user_id+"&action=deleteuser",
 			 
 			  success: function(data)

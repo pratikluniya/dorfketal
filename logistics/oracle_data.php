@@ -1,5 +1,5 @@
 <?php
-include('class/functions.php');
+include('../classes/functions.php');
 $con=new functions();
 date_default_timezone_set("Asia/Kolkata");
 $conn = oci_connect('apps','apps','172.25.25.112:1531/TEST');

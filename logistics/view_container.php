@@ -1,6 +1,6 @@
 <?php
 ob_start();
-include('class/functions.php');
+include('../classes/functions.php');
 $con=new functions();
 $result=$con->data_select("SELECT dispatch_id, transaction_number, start_address, destination, status FROM dspatch_details");
 
@@ -12,7 +12,7 @@ function selectDispatch(dispatchId)
 	
 	 $.ajax({
 		type:"POST",
-		url:"action_ajax.php",
+		url:"logistics/action_ajax.php",
 		data:"dispatch_id="+dispatchId+"&action=selectDispatch",
 		dataType:"JSON",
 		success: function(data)
