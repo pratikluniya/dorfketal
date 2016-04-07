@@ -114,7 +114,7 @@ if(isset($_POST) && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SER
                             <input type="date" id="adminenddate" class="form-control" placeholder"End Date" />
                         </div>
                         <div class="form-group col-xs-12 col-sm-12 col-md-1 col-lg-1">
-                            <button type="button" class="btn btn-primary" id="datefilter_btn">Search</button>
+                            <button type="button" class="btn btn-primary middle_btn" id="datefilter_btn">Search</button>
                         </div>
                     </form>                
                     <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 local-search-div admin_order_search">

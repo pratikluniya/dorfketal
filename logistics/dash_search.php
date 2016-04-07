@@ -146,47 +146,47 @@ if(isset($_REQUEST['action'])  &&  $_REQUEST['action'] =="advance_search_load" )
       exit;*/
 
     $result=$con->data_select($query);
-
+    
       if($result!="no") {
          $i=1;
         foreach($result as $key => $val)
         {
 
-            echo "<tr class='even pointer'>";
-            echo "<td class='a-right a-right'>".$i."</td>";
-            echo "<td class='a-right a-right'>".$result[$key]['cust_po_number']."</td>";
-            echo "<td class='a-right a-right'>".$result[$key]['freight_terms_code']."</td>";
-            echo "<td class='a-right a-right'>".$result[$key]['commercial_invoice']."</td>";
-            echo "<td class='a-right a-right'>".$result[$key]['ref_inv']."</td>";
-            echo "<td class='a-right a-right'>".$result[$key]['port_of_discharge']."</td>";
-            echo "<td class='a-right a-right'>".$result[$key]['item_description']."</td>"; 
-            echo "<td class='a-right a-right'>".$result[$key]['shipped_quantity']."</td>";
-            echo "<td class='a-right a-right'>".$result[$key]['currency']."</td>";
-            echo "<td class='a-right a-right'>".$result[$key]['shipping_value_inr']."</td>";
+            echo "<tr>";
+            echo "<td>".$i."</td>";
+            echo "<td>".$result[$key]['cust_po_number']."</td>";
+            echo "<td>".$result[$key]['freight_terms_code']."</td>";
+            echo "<td>".$result[$key]['commercial_invoice']."</td>";
+            echo "<td>".$result[$key]['ref_inv']."</td>";
+            echo "<td>".$result[$key]['port_of_discharge']."</td>";
+            echo "<td>".$result[$key]['item_description']."</td>"; 
+            echo "<td>".$result[$key]['shipped_quantity']."</td>";
+            echo "<td>".$result[$key]['currency']."</td>";
+            echo "<td>".$result[$key]['shipping_value_inr']."</td>";
 
             
             if($result[$key]['shipped_on_board'] > 0)
             {
-              echo "<td class='a-right a-right'><input style='border: 0px none;background-color: #F9F9F9;' value=".$result[$key]['shipped_on_board']." required type='datetime-local' readonly='readonly'></td>";
+              echo "<td><input style='border: 0px none;background-color: #F9F9F9;' value=".$result[$key]['shipped_on_board']." required type='datetime-local' readonly='readonly'></td>";
             }
             else
             {
-              echo "<td class='a-right a-right'></td>";
+              echo "<td></td>";
             }  
             if($result[$key]['arrival_date'] > 0)
             {
-              echo "<td class='a-right a-right'><input style='border: 0px none;background-color: #F9F9F9;' value=".$result[$key]['arrival_date']." required type='datetime-local' readonly='readonly'></td>";
+              echo "<td><input style='border: 0px none;background-color: #F9F9F9;' value=".$result[$key]['arrival_date']." required type='datetime-local' readonly='readonly'></td>";
             }
             else
             {
-              echo "<td class='a-right a-right'></td>";
+              echo "<td></td>";
             }                                   
             
-            echo "<td class='a-right a-right'>".$result[$key]['require_date']."</td>";
-            echo "<td class='a-right a-right'>".$result[$key]['remark']."</td>";
-            echo "<td class='a-right a-right'>".$result[$key]['order_status']."</td>";
-            echo '<td class="a-right a-right"> <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg"onclick="return showdocument('.$result[$key]['consignment_id'].') ">Document</button> </td>';
-            echo '<td class="a-right a-right"> <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg2" onclick="return consignmentId('.$result[$key]['consignment_id'].') ">Click here</button></td>';
+            echo "<td>".$result[$key]['require_date']."</td>";
+            echo "<td>".$result[$key]['remark']."</td>";
+            echo "<td>".$result[$key]['order_status']."</td>";
+            echo '<td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg"onclick="return showdocument('.$result[$key]['consignment_id'].') ">Document</button> </td>';
+            echo '<td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg2" onclick="return consignmentId('.$result[$key]['consignment_id'].') ">Click here</button></td>';
           echo "</tr>";
           $i++;
          } 
