@@ -1,10 +1,4 @@
 <?php
-
-
-
-
-
-
 include "classes/functions.php";
 include "classes/paginate_function.php";
 session_start();
